@@ -18,9 +18,9 @@
   align-items: center;
   padding: 1rem;
 }
-.tab2 {
+/* .tab2 {
   display: none;
-}
+} */
 tabBtn--label {
   display: flex;
   width: 200%;

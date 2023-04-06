@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../static/css/common/common.css">
-<link rel="stylesheet" href="../static/css/myPage.css">
+<link rel="stylesheet" href="/static/css/common/common.css">
+<link rel="stylesheet" href="/static/css/myPage/myPage.css">
     <title>Document</title>
 </head>
-
 <body>
     
  <body>
@@ -65,9 +64,9 @@
       </nav>
       <div class="gnb-r"></div>
       <div class="post-l"></div>
-      <!-- 여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작 -->
-      <!-- 여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작여기서부터 시작 -->
+      <!-- 마이페이지 내용 시작 -->
       <main>
+        <!-- 탭1 -- 일반 사용자 GNB -->
         <div class="tab1">
           <input name="tab" id="tab1__1" type="radio" />
           <input name="tab" id="tab1__2" type="radio" />
@@ -78,17 +77,9 @@
             <label for="tab1__3">회원탈퇴</label>
           </tabBtn--label>
         </div>
-        <div class="tab2">
-          <input name="tab" id="tab2__1" type="radio" />
-          <input name="tab" id="tab2__2" type="radio" />
-          <input name="tab" id="tab2__3" type="radio" />
-          <tabBtn--label id="tab2__label">
-            <label for="tab2__1">내가 등록한 캠핑장</label>
-            <label for="tab2__2">예약 내역 관리</label>
-            <label for="tab2__3">회원 정보</label>
-          </tabBtn--label>
-        </div>
+        <!-- 탭1, 일반 이용자가 보게 될 화면 -->
         <div class="tab1__contant">
+          <!-- 탭1__1__1, 예약 현황  -->
           <div class="tab1__1__content">
             <hr />
             <!-- 상단 타이틀 -->
@@ -99,7 +90,7 @@
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
             <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
+              <div class="reserv__campName"><a href="">캠핑장 이름</a></div>
               <div class="reserv__date">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>
@@ -128,49 +119,49 @@
               <button class="reserv__pageBtn">>></button>
             </div>
           </div>
+          <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
             <div class="member__item">
               <div class="member__title">아이디</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">비밀번호</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">메일</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">주소</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">닉네임</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">등등</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
             </div>
             <div class="member__item">
               <div class="member__title">등등</div>
               <input class="member__main" type="text" />
-              <input class="member__btn" type="button" value="확인" />
+            </div>
+            <div class="member__item">
+              <input class="member__btn" type="button" value="수정하기">
             </div>
           </div>
+          <!-- 탭1__3, 회원 탈퇴 -->
           <div class="tab1__3__content">
+            <!-- 회원 탈퇴 재확인 모달 창 -->
             <div class="member__modal">
               <h2>정말 탈퇴하시겠습니까?</h2>
               <br>
               <br>
+              <!-- 회원 탈퇴 모달 창 버튼 -->
               <input type="button" value="확인" id="member__modalYBTN">
               <input type="button" value="취소" id="member__modalNBTN">
             </div>
@@ -179,112 +170,12 @@
             <br />
             <h5>탈퇴하시려면 비밀 번호를 다시 입력해주세요.</h5>
             <input class="member__wthdr" type="text" />
+            <!-- 회원 탈퇴 버튼 -->
             <input id="member__wthdrBTN" type="button" value="확인">
           </div>
         </div>
-        <div class="tab2__contant">
-          <div class="tab2__1__content">
-            <hr />
-            <!-- 내 캠핑장, 3개까지 들어감 -->
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName">캠핑장 이름</div>
-              <button class="myCamp__reserv">예약 내역</button>
-            </div>
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName">캠핑장 이름</div>
-              <button class="myCamp__reserv">예약 내역</button>
-            </div>
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName">캠핑장 이름</div>
-              <button class="myCamp__reserv">예약 내역</button>
-            </div>
-            <!-- 페이지 버튼 -->
-            <div class="myCamp__page">
-              <button class="myCamp__pageBtn"><<</button>
-              <button class="myCamp__pageBtn">1</button>
-              <button class="myCamp__pageBtn">2</button>
-              <button class="myCamp__pageBtn">3</button>
-              <button class="myCamp__pageBtn">4</button>
-              <button class="myCamp__pageBtn">>></button>
-            </div>
-          </div>
-          <div class="tab2__2__content">
-            <hr />
-            <div class="managerRev__title">
-              <p></p>
-              <p>캠핑장 이름</p>
-              <p>예약번호</p>
-              <p>예약 구역</p>
-              <p>입실일</p>
-              <p>퇴실일</p>
-              <p>상태</p>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__page">
-              <button class="managerRev__pageBtn"><<</button>
-              <button class="managerRev__pageBtn">1</button>
-              <button class="managerRev__pageBtn">2</button>
-              <button class="managerRev__pageBtn">3</button>
-              <button class="managerRev__pageBtn">4</button>
-              <button class="managerRev__pageBtn">>></button>
-            </div>
-          </div>
       </main>
       <div class="post-r">
-        <div class="zz">
-          <input type="button" value="임시 -- 일반 -- 삭제필" id="test1" />
-          <input type="button" value="임시 -- 관리 -- 삭제필" id="test2" />
-        </div>
       </div>
       <div class="ft-l"></div>
       <!-- 푸터영역(FOOTER)-->
@@ -313,74 +204,36 @@
     $tab1__1 = document.getElementById('tab1__1');
     $tab1__2 = document.getElementById('tab1__2');
     $tab1__3 = document.getElementById('tab1__3');
-    $tab2__1 = document.getElementById('tab2__1');
-    $tab2__2 = document.getElementById('tab2__2');
-    $tab2__3 = document.getElementById('tab2__3');
     $wthdrBTN=document.getElementById('member__wthdrBTN');
     $member__modalYBTN = document.getElementById('member__modalYBTN');
     $member__modalNBTN = document.getElementById('member__modalNBTN');
     $tab1__1.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
       document.querySelector('.tab1__contant').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'block';
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'none';
     };
     $tab1__2.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
       document.querySelector('.tab1__contant').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'none';
       document.querySelector('.tab1__2__content').style.display = 'block';
       document.querySelector('.tab1__3__content').style.display = 'none';
     };
     $tab1__3.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
       document.querySelector('.tab1__contant').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'none';
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
-    $tab2__1.onclick = function () {
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'flex';
-      document.querySelector('.tab2__1__content').style.display = 'block';
-      document.querySelector('.tab2__2__content').style.display = 'none';
-    };
-    $tab2__2.onclick = function () {
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'flex';
-      document.querySelector('.tab2__1__content').style.display = 'none';
-      document.querySelector('.tab2__2__content').style.display = 'block';
-    };
-    $tab2__3.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
-      document.querySelector('.tab1__contant').style.display = 'flex';
-      document.querySelector('.tab1__1__content').style.display = 'none';
-      document.querySelector('.tab1__2__content').style.display = 'block';
-      document.querySelector('.tab1__3__content').style.display = 'none';
-    };
     $wthdrBTN.addEventListener('click',()=>{
       document.querySelector(".member__modal").style.display = 'block';
-    })
-    member__modalYBTN
-
-    // 테스트용
-
-    test1 = document.getElementById('test1');
-    test2 = document.getElementById('test2');
-    $tab1 = document.querySelector('.tab1');
-    $tab2 = document.querySelector('.tab2');
-    test1.addEventListener('click', () => {
-      $tab1.style.display = 'flex';
-      $tab2.style.display = 'none';
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'none';
     });
-    test2.addEventListener('click', () => {
-      $tab1.style.display = 'none';
-      $tab2.style.display = 'flex';
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'none';
+        $member__modalYBTN.addEventListener('click',()=>{
+      document.querySelector(".member__modal").style.display = 'none';
     });
+        $member__modalNBTN.addEventListener('click',()=>{
+      document.querySelector(".member__modal").style.display = 'none';
+    });
+
   </script>
 </html>
