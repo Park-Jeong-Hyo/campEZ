@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/* hd */
+/* gnb*/
+/* nav */
+
+/*1.topTitle*/
+/*2.mnFace*/
+/*3.menuBtn*/
+/*3.1-1.intro*/
+/*3.1-2.inform*/
+/*3.1-3.campImg*/
+/*3.2-1.operation-guide*/
+/*3.2-2.caution-guide*/
+/*3.2-3.safety-guide*/
+
+/* ft */
+/**/
+
+/* 전체 레이아웃*/
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
+  grid-template-rows: 40px 100px 50px 120px 350px auto 150px;
+  grid-template-areas:
+    'up-l          up                   up-r'
+    'hd-l          hd                   hd-r'
+    'gnb-l         gnb                 gnb-r'
+    '.             topTitle                .'
+    '.             mnFace                  .'
+    '.             menuBtn                 .'
+    'ft-l          ft                   ft-r';
+}
+
+/* menuBtn아래에 intro, inform, campImg */
+
+.wrapper .menuBtn-wrapper-tab1,
+.wrapper .menuBtn-wrapper-tab2 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 레이아웃 요소 배치 */
+.up-l {
+  grid-area: up-l;
+}
+.up {
+  grid-area: up;
+}
+.up-r {
+  grid-area: up-r;
+}
+.hd-l {
+  grid-area: hd-l;
+}
+.hd {
+  grid-area: hd;
+}
+.hd-r {
+  grid-area: hd-r;
+}
+.gnb-l {
+  grid-area: gnb-l;
+}
+.gnb {
+  grid-area: gnb;
+}
+.gnb-r {
+  grid-area: gnb-r;
+}
+
+.topTitle {
+  grid-area: topTitle;
+}
+.mnFace {
+  grid-area: mnFace;
+}
+.menuBtn {
+  grid-area: menuBtn;
+}
+
+.ft-l {
+  grid-area: ft-l;
+}
+.ft {
+  grid-area: ft;
+}
+.ft-r {
+  grid-area: ft-r;
+}

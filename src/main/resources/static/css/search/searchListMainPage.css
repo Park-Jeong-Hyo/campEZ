@@ -1,0 +1,115 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+@import '/static/css/search/searchListLayout.css';
+
+/* SEARCHBOX */
+.img__searchBox {
+  background-color: var(--search-box-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 250px;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: 3px 3px 1px var(--search-box-shadow-color);
+}
+.img__searchBox-search {
+  position: absolute;
+  top: 60px;
+  left: 90px;
+  width: 80px;
+  height: 30px;
+}
+.img__searchBox-bar {
+  position: absolute;
+  top: 60px;
+  left: 200px;
+  width: 230px;
+  height: 30px;
+}
+.img__searchBox-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 50px;
+  position: absolute;
+  top: 150px;
+  left: 90px;
+}
+#img__searchBox-options-select {
+  width: 80px;
+  height: 30px;
+}
+
+/* MAIN */
+.mn {
+  display: grid;
+  margin-bottom: 50px;
+  grid-gap: 100px;
+}
+.mn__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 500px;
+}
+.mn__img::before {
+  position: absolute;
+  top: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: url(https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: hue-rotate(30deg);
+  margin-bottom: 50px;
+}
+
+.mn__title {
+  display: flex;
+  justify-content: center;
+}
+.mn__main {
+  display: grid;
+  grid-template-areas:
+    'mn__main-empty1-l mn__main-photo1 mn__main-write1 mn__main-empty1-r'
+    'mn__main-empty2-l mn__main-photo2 mn__main-write2 mn__main-empty2-r'
+    'mn__main-empty3-l mn__main-photo3 mn__main-write3 mn__main-empty3-r';
+  grid-template-columns: 1fr 250px 350px 1fr;
+  grid-template-rows: 300px 300px 300px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  gap: 50px;
+  overflow: hidden;
+  outline: solid 1px var(--bg-color-lightgray);
+}
+.mn__main-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mn__main-write {
+  display: grid;
+  grid-template-rows: 25px 25px 25px 25px;
+  align-content: space-around;
+  padding: 30px;
+}
+.mn__main-name {
+  font-size: var(--font-size-large);
+}
+.mn__main-tag {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.mn__main-tag-detail {
+  background-color: var(--mn__tag-label);
+  border-radius: 10%;
+  outline: solid 1px var(--search-box-shadow-color);
+}
+* {
+  text-decoration: none;
+  color: inherit;
+}

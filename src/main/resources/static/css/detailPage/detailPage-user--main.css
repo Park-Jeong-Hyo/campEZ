@@ -1,0 +1,440 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+@import '/static/css/detailPage/detailPage-admin--layout.css';
+
+/*순서: UPPERMOST HEADER GNB */
+/* 1.topTitle 2.mnFace 3.menuBtn 4.intro 5.inform 6.campImg */
+/*FOOTER*/
+
+/* UPPERMOST */
+.up {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--theme-color);
+  z-index: 2;
+}
+.up__link {
+  font-size: var(--font-size-tiny);
+  color: var(--main-font-color);
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+/* HEADER */
+.hd {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: sticky;
+  top: 40px;
+  background-color: var(--bg-header-color);
+  z-index: 2;
+}
+.hd__menu-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+  font-size: var(--font-size-small);
+}
+.hd__logo-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+}
+.hd__logo {
+  font-size: 3rem;
+  height: 55px;
+  width: 100px;
+  text-align: center;
+}
+
+/* GNB */
+.gnb {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: sticky;
+  top: 140px;
+  background-color: var(--theme-color);
+  color: var(--main-font-color);
+}
+.gnb__gwangjang-submenu {
+  display: none;
+}
+.gnb:hover .gnb__gwangjang-submenu {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: center;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  background-color: var(--bg-color-lightgray);
+  font-size: var(--font-size-small);
+  z-index: 1;
+  border-radius: 5px;
+}
+.gnb__depth {
+  display: block;
+  margin: 15px 0;
+}
+.gnb div a {
+  display: inline-block;
+  width: 100px;
+  line-height: 30px;
+  text-align: center;
+}
+
+/* 내가 구현한 영역 시작 */
+
+/* 1.topTitle 2.mnFace 3.menuBtn 4.intro 5.inform 6.campImg */
+
+/* 1.topTitle */
+
+.topTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2.mnFace */
+
+.mnFace {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  /* display: flex;
+  flex-direction: row;
+  flex-grow: 1; */
+}
+
+/* 2-1.mnFace-l */
+.mnFace-l {
+  /* top: 10px;
+  left: 10px; */
+  width: 90%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  z-index: -1;
+}
+.mnFace-l img {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 2-2.mnFace-r */
+.mnFace-r {
+  display: grid;
+  grid-template-rows: 4fr 1fr;
+}
+.mnFace-r table {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+  width: 100%;
+  height: 280px;
+  /* padding: 7px 7px 7px 7px; */
+  font-size: var(--font-size-little);
+  /* border-top: 1px solid #444444; */
+
+  /* border-bottom: 1px solid #444444; */
+}
+.mnFace-r td {
+  padding: 8px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--search-box-color);
+  border-bottom: 1px solid var(--search-box-color);
+  /* padding: 10px; */
+}
+.mnFace-r .title {
+  width: 100px;
+}
+.mnFace-r .content {
+  width: 300px;
+}
+
+.mnFace-r td:first-child {
+  background-color: var(--theme-color-thin);
+  /* width: 4rem; */
+  text-align: center;
+}
+.mnFace-r tr:first-child {
+  border-top: 2px solid;
+}
+
+.mnFace-r .reserv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mnFace-r .reservBtn {
+  border: 0;
+  outline: none;
+  width: 85%;
+  height: 40px;
+  box-shadow: 1px 1px 1px;
+  background-color: var(--mn__tag-label);
+}
+.mnFace-r .reservBtn:active {
+  background-color: var(--button-color-clicked);
+}
+
+/* 3.menuBtn */
+
+.menuBtn input[name='tab'] {
+  display: none;
+}
+
+.menuBtn input:nth-of-type(1) ~ div:nth-of-type(1),
+.menuBtn input:nth-of-type(2) ~ div:nth-of-type(2) {
+  display: none;
+}
+
+.menuBtn input:nth-of-type(1):checked ~ div:nth-of-type(1),
+.menuBtn input:nth-of-type(2):checked ~ div:nth-of-type(2) {
+  display: block;
+}
+
+.menuBtn input:nth-of-type(1):checked ~ header > label[for='tab1'],
+.menuBtn input:nth-of-type(2):checked ~ header > label[for='tab2'] {
+  background: var(--theme-color);
+  color: var(--main-font-color);
+}
+
+.menuBtn {
+  padding: 1rem;
+}
+
+.menuBtn > header {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.menuBtn > header > label {
+  width: 25%;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--mn__tag-label);
+  border: 1px solid #ddd;
+  margin: 2px;
+}
+
+/* 반응형 */
+/* @media (max-width: 800px) {
+  .menuBtn > header > label {
+    width: 45%;
+  }
+} */
+
+/* 3.1 */
+/* 3.1-1.intro */
+.intro p {
+  text-align: justify;
+}
+
+/* 3.1-2.inform */
+.inform {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+.inform .img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  gap: 20px;
+}
+.inform .img .item {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  margin: 5px;
+  z-index: -1;
+}
+.inform .img .item .item1 {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+}
+.inform .img .item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 3.1-3. campImg */
+.campImg {
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+}
+.campImg .img {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  height: 100%;
+}
+.campImg .img .item {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  margin: 10px 5px 20px 5px;
+  z-index: -1;
+}
+.campImg .img .item .item1 {
+  display: flex;
+  flex-direction: column;
+}
+.campImg .img .item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 3.2 */
+
+/* 3.2-1.operation-guide */
+.operation-guide table {
+  display: flex;
+  /* flex-wrap: wrap; */
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 110%;
+  /* padding: 7px 7px 7px 7px; */
+  font-size: var(--font-size-small);
+}
+
+.operation-guide td {
+  padding: 8px;
+  border-collapse: collapse;
+  border: 1px solid var(--search-box-color);
+
+  /* border-bottom: 1px solid var(--search-box-color); */
+  padding: 10px;
+}
+.operation-guide tr:nth-child(1),
+.operation-guide tr:nth-child(2) {
+  background-color: var(--theme-color-thin);
+  /* width: 4rem; */
+  text-align: center;
+  /* vertical-align: middle; */
+}
+/* 테두리 1행 진하게 */
+.operation-guide tr:first-child {
+  border-top: 2px solid;
+}
+/* 테두리 첫번째, 마지막번째 열 없앰 */
+.operation-guide td:first-child {
+  border-left: none;
+}
+.operation-guide td:last-child {
+  border-right: none;
+}
+.operation-guide__content .gubun {
+  width: 100px;
+  text-align: center;
+}
+.operation-guide__content .jujung-jumal {
+  width: 500px;
+}
+.operation-guide__content .content-text {
+  text-align: right;
+}
+
+/* 3.2-2.caution-guide */
+.caution-guide p {
+  font-size: var(--font-size-small);
+  text-align: justify;
+  /* margin: 5px 0 5px 0; */
+}
+
+/* 3.2-3.safety-guide */
+/* .safety-guide img {
+
+} */
+
+/* 내가 구현한 영역 끝 */
+
+/*  FOOTER  */
+.ft {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  background-color: var(--theme-color-thic);
+  color: var(--main-font-color);
+  font-size: var(--font-size-tiny);
+}
+.ft__logo-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ft__info-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.ft__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.ft__others {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 제목여백 */
+.intro h3,
+.inform h3,
+.campImg h3,
+.operation-guide h3,
+.caution-guide h3,
+.safety-guide h3 {
+  margin: 50px 10px 10px 10px;
+}
+/* 내용여백 */
+.intro p,
+.operation-guide .operation-guide__content,
+.caution-guide p,
+.safety-guide img {
+  margin: 20px;
+}

@@ -1,0 +1,180 @@
+<!--자유게시판 게시글 페이지-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/community/community.css" />
+    <title>캠핑EZ | 자유게시판</title>
+    <script
+      src="https://kit.fontawesome.com/4fab4e86c9.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="up-l"></div>
+
+      <!-- 최상단 메뉴(UPPERMOST) -->
+      <div class="up">
+        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
+        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
+        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
+        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
+      </div>
+
+      <div class="up-r"></div>
+
+      <div class="hd-l"></div>
+
+      <!-- 헤더 (HEADER) -->
+      <header class="hd">
+        <div class="hd__menu-item">
+          <a href="/templates/search/SearchListMain.html" class="link"
+            >검색ez</a
+          >
+          <a href="" class="link">광장ez</a>
+          <a href="" class="link">ez가이드</a>
+          <a href="" class="link">사이트맵</a>
+        </div>
+        <div class="hd__logo-item">
+          <a href="/templates/mainPage/EZMain.html" class="link">
+            <i class="hd__logo fa-solid fa-house"></i>
+            <h2>캠핑EZ</h2>
+          </a>
+        </div>
+        <div class="hd__empty-item"></div>
+      </header>
+
+      <div class="hd-r"></div>
+
+      <div class="gnb-l"></div>
+
+      <!-- gnb영역 -->
+      <nav class="gnb">
+        <div class="gnb__gwangjang-submenu">
+          <div>
+            <a href="/templates/community/notice.html" class="gnb__depth link"
+              >공지사항</a
+            >
+          </div>
+          <div>
+            <a
+              href="/templates/community/butlletinBoard.html"
+              class="gnb__depth link"
+              >자유게시판</a
+            >
+          </div>
+          <div>
+            <a href="/templates/community/question.html" class="gnb__depth link"
+              >질문게시판</a
+            >
+          </div>
+        </div>
+        <div>
+          <a href="/templates/search/SearchListMain.html" class="link"
+            >검색ez</a
+          >
+        </div>
+        <div><a href="" class="link">광장ez</a></div>
+        <div><a href="" class="link">ez가이드</a></div>
+      </nav>
+
+      <div class="gnb-r"></div>
+      <div class="commun-l"></div>
+      <main class="commun">
+        <!-- 커뮤니티 페이지 타이틀-->
+        <h3 class="commun__board-title">자유게시판</h3>
+        <!--게시판 테이블, 게시글 생성시 tr 클래스를 설정해줘야 css 적용됨-->
+        <table class="commun__post">
+          <thead>
+            <!--게시글 헤더-->
+            <tr class="commun__header">
+              <th>글번호</th>
+              <th>글제목</th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회수</th>
+            </tr>
+          </thead>
+          <tbody class="commun__">
+            <!--게시글 리스트-->
+            <tr class="commun__list">
+              <td>2</td>
+              <td><a href="posting.html" clss="link">안녕하세요</a></td>
+              <td>홍길동</td>
+              <td>23.03.23</td>
+              <td>2</td>
+            </tr>
+            <tr class="commun__list">
+              <td>1</td>
+              <td>반갑습니다</td>
+              <td>홍길남</td>
+              <td>23.03.22</td>
+              <td>3</td>
+            </tr>
+          </tbody>
+        </table>
+        <!--게시글 하단 이동 버튼, 검색창 섹션 (임시)-->
+        <section class="commun__post-search">
+          <!-- 그리드 사용, 1:2:1 세부분으로 나누기-->
+          <!--왼쪽 그리드 영역-->
+          <div class="commun__buttons-l"></div>
+          <!--중간 그리드 영역-->
+          <div class="commun__buttons">
+            <!--플렉스 사용, 상단, 하단 칸을 나눴음-->
+            <!--중간그리드 영역 내 버튼 플렉스 영역-->
+            <div class="commun__number">
+              <button>1</button>
+              <button>2</button>
+              <button>3</button>
+              <button>4</button>
+              <button>5</button>
+            </div>
+            <!--중간 그리드 영역 내 검색 플렉스 영역-->
+            <div class="commun__searchbar">
+              <select>
+                <option value="">제목/내용</option>
+                <option value="">작성자</option>
+                <option value="">댓글</option>
+              </select>
+              <input type="search" />
+              <button type="submit">검색</button>
+            </div>
+          </div>
+          <!--오룬쪽 그리드 영역-->
+          <div class="commun__buttons-r">
+            <button class="commun_posting-btn">
+              <a href="posting.html" class="link">글쓰기</a>
+            </button>
+          </div>
+        </section>
+      </main>
+      <div class="commun-r"></div>
+      <div class="ft-l"></div>
+      <!-- 푸터영역(FOOTER)-->
+      <footer class="ft">
+        <div class="ft__logo-cell">
+          <h2>캠핑EZ</h2>
+        </div>
+        <div class="ft__info-cell">
+          <div class="ft__links">
+            <a href="" class="link">개인정보취급방침</a>
+            <a href="" class="link">홈페이지이용약관</a>
+            <a href="" class="link">광고및제휴문의</a>
+          </div>
+          <div class="ft__others">
+            <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
+            <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
+            <p>E-MAIL : webmaster@testmail.com</p>
+          </div>
+        </div>
+        <div class="ft__empty-cell"></div>
+      </footer>
+
+      <div class="ft-r"></div>
+    </div>
+  </body>
+</html>

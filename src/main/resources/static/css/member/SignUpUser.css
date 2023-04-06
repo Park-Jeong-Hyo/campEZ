@@ -1,0 +1,87 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+@import '/static/css/member/memberLayout.css';
+
+/* * {
+  outline: 1px solid red;
+} */
+
+/* MAIN  */
+.mn__head-line {
+  margin-top: 80px;
+}
+.line {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.mn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mn__header {
+  height: 100px;
+}
+.form-info {
+  display: flex;
+  margin-top: 50px;
+  width: 60%;
+  justify-content: space-between;
+}
+.sign-form {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 10px;
+}
+.form-line {
+  width: 100%;
+}
+.input-form {
+  display: flex;
+  justify-content: flex-start;
+}
+.form-label {
+  width: 150px;
+}
+.input {
+  width: 300px;
+  height: 20px;
+}
+.input-caution {
+  margin-top: 10px;
+  text-align: start;
+  font-size: 0.7em;
+}
+.dup-btn {
+  margin-left: 10px;
+  height: 25px;
+}
+
+.sign-btn {
+  display: flex;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+.in-btn {
+  width: 70px;
+  height: 30px;
+  background-color: var(--theme-color);
+  border: none;
+  border-radius: 10%;
+  color: var(--main-font-color);
+}
+.cel-btn {
+  background-color: #eee;
+  border: none;
+  border-radius: 10%;
+  width: 70px;
+  height: 30px;
+}
+.in-btn,
+.cel-btn:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url(../static/css/common/Reset.css);
+      * {
+        outline: 1px solid violet;
+      }
+      /* 공백 */
+      .blank {
+        flex: 1;
+      }
+      /* 전체 포장 */
+      .wrap {
+        display: flex;
+        text-align: center;
+      }
+      /* 본문 - 일반 */
+      .mn--public {
+        flex: 6;
+        display: flex;
+        flex-direction: column;
+      }
+      /* 본문 - 관리자 */
+      .mn--manager {
+        flex: 6;
+        display: none;
+        flex-direction: column;
+      }
+      /* 본문 gnb, 본문 푸터 블록  */
+      .mn__gnb,
+      .manager__gnb {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 5vh;
+      }
+
+      /* 본문 gnb 내 버튼 */
+      .mn__gnbBtn,
+      .manager__gnbBtn {
+        flex: 1;
+        padding: 0.5vh;
+        border-radius: 10%;
+      }
+      /* 본문 내 경계줄 */
+      .line {
+        margin: 2vh 0;
+        background-color: gray;
+        height: 0.2em;
+      }
+      /* 본문 내용 */
+      .mn__content,
+      .manager__content {
+        height: 60vh;
+      }
+      /* 본문 내용 - 예약 관리 */
+      .mn__content--reserv,
+      .manager__content--myCamp {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+      }
+      /* 예약 관리 타이틀 */
+      .reserv__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 7.8vh;
+        background-color: rgb(200, 200, 200);
+      }
+      /* 예약 관리 내용물 -- 총 5개, 관리자 -- 내 캠핑장 총 3개 */
+      .reserv__item,
+      .myCamp__item {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 12vh;
+      }
+      /* 내 캠핑장 목록 */
+      .myCamp__item {
+        height: 20vh;
+      }
+      /* 예약 관리 페이지 버튼 칸 */
+      .reserv__btnBox {
+        display: flex;
+        justify-content: center;
+      }
+      /* 예약 관리 페이지 버튼들 */
+      .reserv__btnBox--pageBtn {
+        border-radius: 30%;
+        margin: 0.5vw;
+        padding: 0.5vh;
+      }
+
+      /* 본문 내용 - 회원 정보 */
+      .mn__content--memberData,
+      .manager__content--myCamp {
+        display: block;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      /* 회원 정보 칸 */
+      .memberData__item {
+        display: flex;
+        height: 6.5vh;
+        align-items: center;
+      }
+      /* 회원 정보 제목 */
+      .memberData__item--title {
+        flex: 1;
+        display: flex;
+        height: 100%;
+        background-color: gray;
+        align-items: center;
+        justify-content: center;
+      }
+      /* 회원 정보 메인 */
+      .memberData__item--content {
+        flex: 4;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+      /* 회원 정보 입력칸 */
+      .memberData__content--text {
+        width: 45%;
+        margin: 0 5%;
+      }
+      /* 회원 정보 버튼 */
+      .memberData__content--btn {
+        border-radius: 10%;
+      }
+
+      /* 회원 정보 버튼 칸 */
+      .memberData__btnBox {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 13.4%;
+      }
+      /* 회원 정보 버튼 */
+      .memberData__btnBox--YBtn,
+      .memberData__btnBox--NBtn {
+        margin: 10%;
+        height: 50%;
+        width: 10%;
+        border-radius: 10%;
+      }
+      /* 수정 확인 창 */
+      .memberData__confirm,
+      .myCampMemberData__confirm {
+        display: none;
+        height: 30%;
+        width: 50%;
+        background-color: white;
+        outline: 0.2rem solid black;
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        z-index: 99;
+      }
+      /* 본문 내용 - 회원 탈퇴 */
+      .mn__content--memberWthdr {
+        display: none;
+        flex-direction: column;
+        height: 100%;
+        position: relative;
+      }
+      /* 회원 탈퇴 상단 */
+      .memberWthdr__up {
+        display: flex;
+        flex-direction: column;
+        height: 60%;
+        align-items: center;
+        justify-content: center;
+      }
+      /* 회원 탈퇴 하단 */
+      .memberWthdr__down {
+        display: flex;
+        height: 40%;
+        align-items: start;
+        justify-content: center;
+      }
+      /* 회원 탈퇴 버튼 */
+      .memberWthdr--Ybtn,
+      .memberWthdr--Nbtn {
+        margin: 5%;
+        height: 10%;
+        width: 10%;
+        border-radius: 10%;
+      }
+      /* 탈퇴 확인 창 */
+      .memberWthdr__confirm {
+        display: none;
+        height: 30%;
+        width: 50%;
+        background-color: blanchedalmond;
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        z-index: 99;
+      }
+      /* 내 캠프장 사진 */
+      .myCamp__campPhoto {
+        object-fit: contain;
+        height: 16.5vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 전체 포장 -->
+    <div class="wrap">
+      <!-- 공백 -->
+      <div class="blank">
+        blank <br />
+        <input type="button" value="관리자 임시버튼" id="임시버튼" />
+        <br />
+        <input type="button" value="일반 임시버튼" id="임시버튼2" />
+      </div>
+      <!-- mn -->
+      <div class="mn--public">
+        <!-- mn 상단 gnb  -->
+        <div class="mn__gnb">
+          <!-- mn 상단 gnb 버튼 3개 -->
+          <button class="mn__gnbBtn" id="11">예약 관리</button>
+          <button class="mn__gnbBtn" id="22">회원 정보</button>
+          <button class="mn__gnbBtn" id="33">회원 탈퇴</button>
+        </div>
+        <!-- 밑줄 -->
+        <div class="line"></div>
+        <!-- 본문 내용 칸 -->
+        <div class="mn__content">
+          <!-- 예약 관리 버튼 누르면 나오는 칸 -->
+          <div class="mn__content--reserv">
+            <!-- 상단 타이틀 -->
+            <div class="reserv__title">
+              <p>캠핑장 이름</p>
+              <p>예약한 날짜</p>
+              <p></p>
+            </div>
+            <!-- 예약 아이템, 4개까지 들어감 -->
+            <div class="reserv__item">
+              <div class="myPage__reserv--CampName">캠핑장 이름</div>
+              <div class="myPage__reserv--Date">22.22.22~22.22.22</div>
+              <button class="myPage__reserv--btn">취소</button>
+            </div>
+            <div class="reserv__item">
+              <div class="myPage__reserv--CampName">캠핑장 이름</div>
+              <div class="myPage__reserv--Date">22.22.22~22.22.22</div>
+              <button class="myPage__reserv--btn">취소</button>
+            </div>
+            <div class="reserv__item">
+              <div class="myPage__reserv--CampName">캠핑장 이름</div>
+              <div class="myPage__reserv--Date">22.22.22~22.22.22</div>
+              <button class="myPage__reserv--btn">취소</button>
+            </div>
+            <div class="reserv__item">
+              <div class="myPage__reserv--CampName">캠핑장 이름</div>
+              <div class="myPage__reserv--Date">22.22.22~22.22.22</div>
+              <button class="myPage__reserv--btn">취소</button>
+            </div>
+            <!-- 예약 관리에서 페이지 버튼 -->
+            <div class="reserv__btnBox--pageBtnBox">
+              <button class="reserv__btnBox--pageBtn"><<</button>
+              <button class="reserv__btnBox--pageBtn">1</button>
+              <button class="reserv__btnBox--pageBtn">2</button>
+              <button class="reserv__btnBox--pageBtn">3</button>
+              <button class="reserv__btnBox--pageBtn">4</button>
+              <button class="reserv__btnBox--pageBtn">>></button>
+            </div>
+          </div>
+          <!-- 회원 정보 누르면 나오는 칸 -->
+          <div class="mn__content--memberData">
+            <!-- 회원 수정 완료 시 팝업 창 -->
+            <div class="memberData__confirm">
+              <div class="line"></div>
+              <h1>회원 정보</h1>
+              <h1>수정이 완료되었습니다</h1>
+              <div class="line"></div>
+              <!-- 회원 수정 완료 버튼 -->
+              <input
+                class="memberData__confirm--YBtn"
+                type="button"
+                value="확인"
+              />
+            </div>
+            <!-- 회원 정보 칸, 총 8번 반복, 필요 없는 요소가 갯수 뺄 것 -->
+            <div class="memberData__item">
+              <!-- 회원 정보 칸에서 앞부분 타이틀 -->
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <!-- 회원 정보 내용물 -->
+              <div class="memberData__item--content">
+                <!-- 회원 정보 내용물 속 텍스트 칸 -->
+                <input class="memberData__content--text" type="text" />
+                <!-- 회원 정보 내용물 속 버튼 -->
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <div class="memberData__item">
+              <div class="memberData__item--title">
+                <p>회원 구분</p>
+              </div>
+              <div class="memberData__item--content">
+                <input class="memberData__content--text" type="text" />
+                <input
+                  class="memberData__content--btn"
+                  type="button"
+                  value="중복확인"
+                />
+              </div>
+            </div>
+            <!-- 회원 정보 하단 버튼 -->
+            <div class="memberData__btnBox">
+              <!-- 취소 버튼 -->
+              <input
+                class="memberData__btnBox--NBtn"
+                type="button"
+                value="취소"
+              />
+              <!-- 확인 버튼 -->
+              <input
+                class="memberData__btnBox--YBtn"
+                type="button"
+                value="확인"
+              />
+            </div>
+          </div>
+          <!-- 회원 탈퇴 클릭 시 나오는 창 -->
+          <div class="mn__content--memberWthdr">
+            <!-- 탈퇴 확인 창 -->
+            <div class="memberWthdr__confirm">
+              <div class="line"></div>
+              <h1>회원 탈퇴</h1>
+              <h1>탈퇴가 완료되었습니다</h1>
+              <div class="line"></div>
+              <!-- 탈퇴 확인 창 확인 버튼 -->
+              <input
+                class="memberWthdr__confirm--btn"
+                type="button"
+                value="확인"
+              />
+            </div>
+            <!-- 회원 탈퇴 창 상단 -->
+            <div class="memberWthdr__up">
+              <h1>탈퇴하시겠습니까?</h1>
+              <br />
+              <h2>탈퇴하시려면 비밀번호를 다시 입력해주세요.</h2>
+            </div>
+            <!-- 회원 탈퇴 창 비밀번호 입력 칸 -->
+            <input class="memberWthdr--pw" type="password" />
+            <!-- 회원 탈퇴 창 하단 -->
+            <div class="memberWthdr__down">
+              <!-- 회원 탈퇴 창 취소, 탈퇴 버튼 -->
+              <input class="memberWthdr--NBtn" type="button" value="취소" />
+              <input class="memberWthdr--YBtn" type="button" value="탈퇴" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ....................매니져 ......................... -->
+
+      <!-- mn -->
+      <div class="mn--manager">
+        <!-- mn 상단 gnb  -->
+        <div class="manager__gnb">
+          <!-- mn 상단 gnb 버튼 3개 -->
+          <button class="manager__gnbBtn" id="m11">내 캠핑장</button>
+          <button class="manager__gnbBtn" id="m22">예약 관리 내역</button>
+          <button class="manager__gnbBtn" id="m33">회원 정보</button>
+        </div>
+        <div class="line"></div>
+        <div class="manager__content">
+          <div class="manager__content--myCamp">
+            <!-- 내 캠핑장, 3개까지 들어감 -->
+            <div class="myCamp__item">
+              <div class="myCamp__photo">
+                <img
+                  class="myCamp__campPhoto"
+                  src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
+                  alt="이미지 없음"
+                />
+              </div>
+              <div class="myCamp__campName">
+                <a href="/templates/detailPage/detailPage-admin.html"
+                  >캠핑장 이름</a
+                >
+              </div>
+              <button class="myCamp__reserv">예약 내역</button>
+            </div>
+            <div class="myCamp__item">
+              <div class="myCamp__photo">
+                <img
+                  class="myCamp__campPhoto"
+                  src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
+                  alt="이미지 없음"
+                />
+              </div>
+              <div class="myCamp__campName">
+                <a href="/templates/detailPage/detailPage-admin.html"
+                  >캠핑장 이름</a
+                >
+              </div>
+              <button class="myCamp__reserv">예약 내역</button>
+            </div>
+            <div class="myCamp__item">
+              <div class="myCamp__photo">
+                <img
+                  class="myCamp__campPhoto"
+                  src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
+                  alt="이미지 없음"
+                />
+              </div>
+              <div class="myCamp__campName">
+                <a href="/templates/detailPage/detailPage-admin.html"
+                  >캠핑장 이름</a
+                >
+              </div>
+              <button class="myCamp__reserv">예약 내역</button>
+            </div>
+            <!-- 페이지 버튼 -->
+            <div class="myCamp__pageBtnBox">
+              <button class="myCamp__pageBtn"><<</button>
+              <button class="myCamp__pageBtn">1</button>
+              <button class="myCamp__pageBtn">2</button>
+              <button class="myCamp__pageBtn">3</button>
+              <button class="myCamp__pageBtn">4</button>
+              <button class="myCamp__pageBtn">>></button>
+            </div>
+          </div>
+          <!-- 회원 정보 누르면 나오는 칸 -->
+          <div class="myCamp__content--memberData">
+            <!-- 회원 수정 완료 시 팝업 창 -->
+            <div class="myCampMemberData__confirm">
+              <div class="line"></div>
+              <h1>회원 정보</h1>
+              <h1>수정이 완료되었습니다</h1>
+              <div class="line"></div>
+              <!-- 회원 수정 완료 버튼 -->
+              <input
+                class="myCampMemberData__confirm__YBtn"
+                type="button"
+                value="확인"
+              />
+            </div>
+            <!-- 회원 정보 하단 버튼 -->
+            <div class="myCampMemberData__btnBox">
+              <!-- 취소 버튼 -->
+              <input
+                class="myCampMemberData__NBtn"
+                type="button"
+                value="취소"
+              />
+              <!-- 확인 버튼 -->
+              <input
+                class="myCampMemberData__YBtn"
+                type="button"
+                value="확인"
+              />
+            </div>
+          </div>
+          <div class="third"></div>
+        </div>
+      </div>
+      <!-- 공백 -->
+      <div class="blank">blank</div>
+    </div>
+
+    <script>
+      const $myCamp = document.querySelector('.manager__content--myCamp');
+      const $myCamp__YBtn = document.querySelector('.myCampMemberData__YBtn');
+      const $myCampMemberData__confirm = document.querySelector(
+        '.myCampMemberData__confirm',
+      );
+      const 임시 = document.getElementById('임시버튼');
+      임시.addEventListener('click', () => {
+        $public.style.display = 'none';
+        $manager.style.display = 'flex';
+      });
+      const 임시2 = document.getElementById('임시버튼2');
+      임시2.addEventListener('click', () => {
+        $manager.style.display = 'none';
+        $public.style.display = 'flex';
+      });
+      // 일반 고객 마이 페이지
+      const $manager = document.querySelector('.mn--manager');
+      // 판매자 마이 페이지
+      const $public = document.querySelector('.mn--public');
+      // gnb 버튼 3개
+      const $btn = document.getElementsByClassName('mn__gnbBtn');
+      const $mBtn = document.getElementsByClassName('manager__gnbBtn');
+      // 예약 관리 창
+      const $reserv = document.querySelector('.mn__content--reserv');
+      // 회원 정보 창
+      const $memberData = document.querySelector('.mn__content--memberData');
+      // 회원 탈퇴 창
+      const $memberWthdr = document.querySelector('.mn__content--memberWthdr');
+      // 회원 정보 수정 확인 버튼
+      const $memberYBtn = document.querySelector('.memberData__btnBox--YBtn');
+      // 회원 정보 수정 완료 창
+      const $confirm = document.querySelector('.memberData__confirm');
+      // 회원 탈퇴 확인 버튼
+      const $WthdrYBtn = document.querySelector('.memberWthdr--YBtn');
+      // 회원 탈퇴 완료 창
+      const $WthdrConfirm = document.querySelector('.memberWthdr__confirm');
+      // GNB 버튼 눌렀을 시, 버튼들 배경색 바꾸는 2중 반복문
+      // 모두 하얗게 만든 다음에 타켓팅 된 버튼 배경색만 royalblue 로 바꾼다
+      for (let index = 0; index < $btn.length; index++) {
+        const element = $btn[index];
+        element.addEventListener('click', e => {
+          for (let index = 0; index < $btn.length; index++) {
+            const element = $btn[index];
+            element.style.backgroundColor = 'white';
+          }
+          // 타겟의 id를 target으로 선언
+          const target = e.target.id;
+          e.target.style.backgroundColor = 'royalblue';
+          // 타겟의 아이디가 11이면 예약 관리, 22면 회원 정보, 33이면 회원 탈퇴
+          // 해당 창을 block으로 하고 나머지는 none 만든다
+          if (target == 11) {
+            $reserv.style.display = 'block';
+            $memberData.style.display = 'none';
+            $memberWthdr.style.display = 'none';
+          }
+          if (target == 22) {
+            $reserv.style.display = 'none';
+            $memberData.style.display = 'block';
+            $memberWthdr.style.display = 'none';
+          }
+          if (target == 33) {
+            $reserv.style.display = 'none';
+            $memberData.style.display = 'none';
+            $memberWthdr.style.display = 'block';
+          }
+        });
+      }
+
+      // GNB 버튼 눌렀을 시, 버튼들 배경색 바꾸는 2중 반복문
+      // 모두 하얗게 만든 다음에 타켓팅 된 버튼 배경색만 royalblue 로 바꾼다
+      // 위와 같은 사양의 관리자 탭이다
+
+      for (let index = 0; index < $mBtn.length; index++) {
+        const element = $mBtn[index];
+        element.addEventListener('click', e => {
+          for (let index = 0; index < $mBtn.length; index++) {
+            const element = $mBtn[index];
+            element.style.backgroundColor = 'white';
+          }
+          // 타겟의 id를 target으로 선언
+          const target = e.target.id;
+          e.target.style.backgroundColor = 'royalblue';
+          // 타겟의 아이디가 11이면 예약 관리, 22면 회원 정보, 33이면 회원 탈퇴
+          // 해당 창을 block으로 하고 나머지는 none 만든다
+          if (target == 'm11') {
+            $myCamp.style.display = 'block';
+          }
+          if (target == 'm22') {
+            $myCamp.style.display = 'none';
+          }
+          if (target == 'm33') {
+            alert(target);
+          }
+        });
+      }
+      $myCamp__YBtn.addEventListener('click', e => {
+        $myCampMemberData__confirm.style.display = 'block';
+      });
+      // 회원 정보에서 수정 확인 누르면, 수정 창이 block 된다
+      $memberYBtn.addEventListener('click', e => {
+        $confirm.style.display = 'block';
+      });
+      // 수정 창에서 확인 누르면, 창이 none 된다
+      document
+        .querySelector('.memberData__confirm--YBtn')
+        .addEventListener('click', () => {
+          $confirm.style.display = 'none';
+        });
+      // 회원 탈퇴에서 탈퇴 누르면, 수정 창이 block 된다
+      $WthdrYBtn.addEventListener('click', e => {
+        $WthdrConfirm.style.display = 'block';
+      });
+      // 수정 창에서 확인 누르면, 창이 none 된다
+      document
+        .querySelector('.memberWthdr__confirm--btn')
+        .addEventListener('click', () => {
+          $WthdrConfirm.style.display = 'none';
+          // 메인 페이지로 돌아가는 것 적기
+        });
+    </script>
+  </body>
+</html>

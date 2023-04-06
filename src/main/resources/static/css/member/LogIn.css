@@ -1,0 +1,102 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+@import '/static/css/member/memberLayout.css';
+
+/* * {
+  outline: 1px solid red;
+} */
+/* .tag {
+    display:inline-block;
+    padding:3px;
+    background-color:var(--bg-color-darkgray-transparent);
+    border-radius:5%
+} */
+
+/* MAIN  */
+.line-hd {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+.line-ft {
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 90px;
+}
+.mn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mn__header {
+  height: 100px;
+}
+.log-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid lightgray;
+  width: 500px;
+  height: 150px;
+}
+.log-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input-log {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.input-label {
+  display: inline-block;
+  width: 70px;
+}
+.id-input,
+.pw-input {
+  width: 200px;
+  height: 25px;
+}
+.sign-btn {
+  margin-left: 10px;
+  width: 70px;
+  height: 70px;
+  background-color: var(--theme-color);
+  color: var(--main-font-color);
+  border: 0;
+}
+.sign-btn:hover {
+  cursor: pointer;
+}
+.sub-log {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 25px;
+  width: 370px;
+  font-size: 13px;
+}
+.sub-chk {
+  display: inline-block;
+  position: relative;
+  top: -4px;
+}
+.sub-label {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  top: -6px;
+}
+.sub-label:hover {
+  cursor: pointer;
+  color: var(--theme-color);
+  text-decoration: underline;
+}
+
+.find-data:hover {
+  color: var(--theme-color);
+  text-decoration: underline;
+}

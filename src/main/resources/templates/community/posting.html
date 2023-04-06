@@ -1,0 +1,147 @@
+<!--글쓰기 페이지-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>캠핑EZ | 글쓰기</title>
+    <link rel="stylesheet" href="/static/css/community/community.css" />
+    <script
+      src="https://kit.fontawesome.com/4fab4e86c9.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="up-l"></div>
+
+      <!-- 최상단 메뉴(UPPERMOST) -->
+      <div class="up">
+        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
+        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
+        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
+        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
+      </div>
+
+      <div class="up-r"></div>
+
+      <div class="hd-l"></div>
+
+      <!-- 헤더 (HEADER) -->
+      <header class="hd">
+        <div class="hd__menu-item">
+          <a href="/templates/search/SearchListMain.html" class="link"
+            >검색ez</a
+          >
+          <a href="" class="link">광장ez</a>
+          <a href="" class="link">ez가이드</a>
+          <a href="" class="link">사이트맵</a>
+        </div>
+        <div class="hd__logo-item">
+          <a href="/templates/mainPage/EZMain.html" class="link">
+            <i class="hd__logo fa-solid fa-house"></i>
+            <h2>캠핑EZ</h2>
+          </a>
+        </div>
+        <div class="hd__empty-item"></div>
+      </header>
+
+      <div class="hd-r"></div>
+
+      <div class="gnb-l"></div>
+
+      <!-- gnb영역 -->
+      <nav class="gnb">
+        <div class="gnb__gwangjang-submenu">
+          <div>
+            <a href="/templates/community/notice.html" class="gnb__depth link"
+              >공지사항</a
+            >
+          </div>
+          <div>
+            <a
+              href="/templates/community/butlletinBoard.html"
+              class="gnb__depth link"
+              >자유게시판</a
+            >
+          </div>
+          <div>
+            <a href="/templates/community/question.html" class="gnb__depth link"
+              >질문게시판</a
+            >
+          </div>
+        </div>
+        <div>
+          <a href="/templates/search/SearchListMain.html" class="link"
+            >검색ez</a
+          >
+        </div>
+        <div><a href="" class="link">광장ez</a></div>
+        <div><a href="" class="link">ez가이드</a></div>
+      </nav>
+      <div class="gnb-r"></div>
+      <div class="posting-l"></div>
+      <main class="posting">
+        <!--폼태그 글쓰기, 상단 부분과 본문부분으로 나누어짐-->
+        <form action="">
+          <section class="posting__upper">
+            <h4 class="posting__title">글쓰기</h4>
+            <div class="posting__buttons">
+              <button><a href="post.html" class="link">작성</a></button>
+            </div>
+          </section>
+          <section class="posting__main">
+            <select class="posting__select-where" name="" id="">
+              <option value="" hidden>공지사항</option>
+              <option value="" selected>자유게시판</option>
+              <option value="">질문게시판</option>
+            </select>
+            <input
+              class="posting__input-title"
+              type="text"
+              placeholder="제목을 입력해 주시기 바랍니다."
+            />
+            <section class="posting__buttons">
+              <button type="button">글꼴</button>
+              <button type="button">글꼴 크기</button>
+              <button type="button">밑줄</button>
+              <button type="button">굵기</button>
+            </section>
+            <textarea
+              class="posting__context"
+              rows="30"
+              placeholder="여기에 본문을 입력해주시기 바랍니다."
+            ></textarea>
+            <input type="file" />
+          </section>
+        </form>
+      </main>
+      <div class="posting-r"></div>
+      <div class="ft-l"></div>
+      <!-- 푸터영역(FOOTER)-->
+      <footer class="ft">
+        <div class="ft__logo-cell">
+          <h2>캠핑EZ</h2>
+        </div>
+        <div class="ft__info-cell">
+          <div class="ft__links">
+            <a href="" class="link">개인정보취급방침</a>
+            <a href="" class="link">홈페이지이용약관</a>
+            <a href="" class="link">광고및제휴문의</a>
+          </div>
+          <div class="ft__others">
+            <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
+            <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
+            <p>E-MAIL : webmaster@testmail.com</p>
+          </div>
+        </div>
+        <div class="ft__empty-cell"></div>
+      </footer>
+
+      <div class="ft-r"></div>
+    </div>
+    <script></script>
+  </body>
+</html>

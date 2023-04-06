@@ -1,0 +1,75 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+@import '/static/css/member/memberLayout.css';
+
+/* * {
+  outline: 1px solid red;
+} */
+
+/* MAIN  */
+.mn__head-line {
+  margin-top: 80px;
+}
+.line {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.mn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mn__header {
+  height: 100px;
+}
+
+.mn__btn {
+  display: flex;
+  width: 100%;
+  margin-bottom: 100px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.text-box {
+  background-color: rgba(0, 0, 0, 0.08);
+  overflow: auto;
+  height: 150px;
+  width: 1000px;
+}
+.agree-box {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  margin-bottom: 50px;
+  align-items: center;
+}
+.agree-box__radio:hover {
+  cursor: pointer;
+}
+.btn__gen-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+.btn__camp-user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.sign-btn {
+  background-color: var(--theme-color);
+  height: 30px;
+  width: 200px;
+  line-height: 30px;
+  color: var(--main-font-color);
+}
