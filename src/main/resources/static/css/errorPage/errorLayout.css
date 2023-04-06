@@ -1,10 +1,7 @@
 @charset "UTF-8";
 
-/* .tag {
-    display:inline-block;
-    padding:3px;
-    background-color:var(--bg-color-darkgray-transparent);
-    border-radius:5%
+/* * {
+  outline: 1px solid red;
 } */
 
 html {
@@ -15,6 +12,7 @@ html {
   display: grid;
   grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
   grid-template-rows: 40px 100px 50px minmax(400px, auto) 150px;
+  height: 100vh;
 }
 
 /* UPPERMOST */
@@ -22,7 +20,6 @@ html {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: sticky;
   top: 0;
   background-color: var(--theme-color);
   z-index: 2;
@@ -38,7 +35,6 @@ html {
 .hd {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  position: sticky;
   top: 40px;
   background-color: var(--bg-header-color);
   z-index: 2;
@@ -70,7 +66,6 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: sticky;
   top: 140px;
   background-color: var(--theme-color);
   color: var(--main-font-color);
@@ -84,8 +79,8 @@ html {
   grid-template-rows: 1fr 1fr 1fr;
   justify-items: center;
   position: absolute;
-  top: 50px;
-  width: 100%;
+  top: 190px;
+  width: 60%;
   background-color: var(--bg-color-lightgray);
   font-size: var(--font-size-small);
   z-index: 1;
@@ -101,6 +96,8 @@ html {
   line-height: 30px;
   text-align: center;
 }
+
+/* MAIN  */
 
 /*  FOOTER  */
 .ft {

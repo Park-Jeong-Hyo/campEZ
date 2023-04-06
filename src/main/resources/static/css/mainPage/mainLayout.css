@@ -6,10 +6,15 @@
     background-color:var(--bg-color-darkgray-transparent);
     border-radius:5%
 } */
+
+html {
+  overflow-y: scroll;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
-  grid-template-rows: 40px 100px 50px minmax(800px, auto) 150px;
+  grid-template-rows: 40px 100px 50px minmax(400px, auto) 150px;
 }
 
 /* UPPERMOST */

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/static/css/common/common.css">
-<link rel="stylesheet" href="/static/css/myPage/myPage.css">
-    <title>Document</title>
-</head>
-<body>
-    
- <body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="" th:href="@{/css/myPage/myPage.css}" />
+    <title>$Title$</title>
+    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
     <div class="wrapper">
       <div class="up-l"></div>
 
@@ -151,7 +150,7 @@
               <input class="member__main" type="text" />
             </div>
             <div class="member__item">
-              <input class="member__btn" type="button" value="수정하기">
+              <input class="member__btn" type="button" value="수정하기" />
             </div>
           </div>
           <!-- 탭1__3, 회원 탈퇴 -->
@@ -159,11 +158,11 @@
             <!-- 회원 탈퇴 재확인 모달 창 -->
             <div class="member__modal">
               <h2>정말 탈퇴하시겠습니까?</h2>
-              <br>
-              <br>
+              <br />
+              <br />
               <!-- 회원 탈퇴 모달 창 버튼 -->
-              <input type="button" value="확인" id="member__modalYBTN">
-              <input type="button" value="취소" id="member__modalNBTN">
+              <input type="button" value="확인" id="member__modalYBTN" />
+              <input type="button" value="취소" id="member__modalNBTN" />
             </div>
             <hr />
             <h1>회원 탈퇴를 하시겠습니까?</h1>
@@ -171,12 +170,11 @@
             <h5>탈퇴하시려면 비밀 번호를 다시 입력해주세요.</h5>
             <input class="member__wthdr" type="text" />
             <!-- 회원 탈퇴 버튼 -->
-            <input id="member__wthdrBTN" type="button" value="확인">
+            <input id="member__wthdrBTN" type="button" value="확인" />
           </div>
         </div>
       </main>
-      <div class="post-r">
-      </div>
+      <div class="post-r"></div>
       <div class="ft-l"></div>
       <!-- 푸터영역(FOOTER)-->
       <footer class="ft">
@@ -204,7 +202,7 @@
     $tab1__1 = document.getElementById('tab1__1');
     $tab1__2 = document.getElementById('tab1__2');
     $tab1__3 = document.getElementById('tab1__3');
-    $wthdrBTN=document.getElementById('member__wthdrBTN');
+    $wthdrBTN = document.getElementById('member__wthdrBTN');
     $member__modalYBTN = document.getElementById('member__modalYBTN');
     $member__modalNBTN = document.getElementById('member__modalNBTN');
     $tab1__1.onclick = function () {
@@ -225,15 +223,14 @@
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
-    $wthdrBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'block';
+    $wthdrBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'block';
     });
-        $member__modalYBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'none';
+    $member__modalYBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'none';
     });
-        $member__modalNBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'none';
+    $member__modalNBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'none';
     });
-
   </script>
 </html>

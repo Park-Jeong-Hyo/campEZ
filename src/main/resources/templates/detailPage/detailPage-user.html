@@ -4,20 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="/static/css/detailPage/detailPage-user--main.css"
-    />
+    <link rel="stylesheet" href="/static/css/detailPage/detailPage-user--main.css" />
     <title>Document</title>
     <style>
       * {
         /* outline: 1px solid red; */
       }
     </style>
-    <script
-      src="https://kit.fontawesome.com/4fab4e86c9.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -26,10 +20,10 @@
       <div class="up-l"></div>
 
       <div class="up">
-        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
-        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
-        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
-        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
+        <a href="" th:href="@{/}" class="up__link">HOME</a>
+        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+        <a href="" th:href="@{/login}" class="up__link">로그인</a>
       </div>
 
       <div class="up-r"></div>
@@ -39,9 +33,7 @@
 
       <header class="hd">
         <div class="hd__menu-item">
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
+          <a href="/templates/search/SearchListMain.html" class="link">검색ez</a>
           <a href="" class="link">광장ez</a>
           <a href="" class="link">ez가이드</a>
           <a href="" class="link">사이트맵</a>
@@ -63,27 +55,17 @@
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
           <div>
-            <a href="/templates/community/notice.html" class="gnb__depth link"
-              >공지사항</a
-            >
+            <a href="/templates/community/notice.html" class="gnb__depth link">공지사항</a>
           </div>
           <div>
-            <a
-              href="/templates/community/butlletinBoard.html"
-              class="gnb__depth link"
-              >자유게시판</a
-            >
+            <a href="/templates/community/butlletinBoard.html" class="gnb__depth link">자유게시판</a>
           </div>
           <div>
-            <a href="/templates/community/question.html" class="gnb__depth link"
-              >질문게시판</a
-            >
+            <a href="/templates/community/question.html" class="gnb__depth link">질문게시판</a>
           </div>
         </div>
         <div>
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
+          <a href="/templates/search/SearchListMain.html" class="link">검색ez</a>
         </div>
         <div><a href="" class="link">광장ez</a></div>
         <div><a href="" class="link">ez가이드</a></div>
@@ -160,25 +142,11 @@
                 <hr />
               </h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod et
-                libero veritatis voluptatem ab facere, porro labore officia eos
-                atque officiis sunt obcaecati eius delectus architecto cumque
-                laborum, eveniet a. Quia neque, pariatur maxime perspiciatis ut
-                quasi, illo, tempora quos minima iste atque qui! Quas distinctio
-                impedit voluptatem, unde recusandae aspernatur facere minima
-                dolorem, ipsum consequuntur nemo dolore quia reiciendis.
-                Accusamus voluptate consequuntur, illum eos ullam asperiores
-                eaque itaque, maiores labore quibusdam velit recusandae tempora
-                assumenda cum vero aperiam autem voluptatibus enim error. Odio
-                quasi doloribus praesentium, nobis eaque sint. Ullam ea iusto
-                numquam iure quos dolorum incidunt sequi architecto, itaque
-                cupiditate, enim veritatis distinctio reprehenderit fuga
-                voluptas a, autem officiis labore blanditiis quis earum sit?
-                Ipsam aliquam necessitatibus laudantium. Quos assumenda minus
-                totam iusto quod fugiat. Qui, aspernatur sapiente! Ex corrupti,
-                necessitatibus minus, corporis quas saepe nostrum error ratione
-                porro dignissimos nulla deleniti cum accusantium dolore, omnis
-                eos velit.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod et libero veritatis voluptatem ab facere, porro labore officia eos atque officiis sunt obcaecati eius delectus architecto cumque laborum, eveniet a. Quia neque, pariatur maxime perspiciatis ut quasi, illo, tempora quos
+                minima iste atque qui! Quas distinctio impedit voluptatem, unde recusandae aspernatur facere minima dolorem, ipsum consequuntur nemo dolore quia reiciendis. Accusamus voluptate consequuntur, illum eos ullam asperiores eaque itaque, maiores labore quibusdam velit recusandae tempora
+                assumenda cum vero aperiam autem voluptatibus enim error. Odio quasi doloribus praesentium, nobis eaque sint. Ullam ea iusto numquam iure quos dolorum incidunt sequi architecto, itaque cupiditate, enim veritatis distinctio reprehenderit fuga voluptas a, autem officiis labore
+                blanditiis quis earum sit? Ipsam aliquam necessitatibus laudantium. Quos assumenda minus totam iusto quod fugiat. Qui, aspernatur sapiente! Ex corrupti, necessitatibus minus, corporis quas saepe nostrum error ratione porro dignissimos nulla deleniti cum accusantium dolore, omnis eos
+                velit.
               </p>
             </div>
 
@@ -192,50 +160,32 @@
               <section class="img">
                 <div class="item item1">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
                 <div class="item item2">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
                 <div class="item item3">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
                 <div class="item item4">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
                 <div class="item item5">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
                 <div class="item item6">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="inform img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="inform img" />
                   </a>
                 </div>
               </section>
@@ -251,26 +201,17 @@
               <section class="img">
                 <div class="item item1">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="campImg img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="campImg img" />
                   </a>
                 </div>
                 <div class="item item2">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="campImg img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="campImg img" />
                   </a>
                 </div>
                 <div class="item item3">
                   <a href="#">
-                    <img
-                      src="http://placeimg.com/640/480/nature"
-                      alt="campImg img"
-                    />
+                    <img src="http://placeimg.com/640/480/nature" alt="campImg img" />
                   </a>
                 </div>
               </section>
@@ -329,14 +270,8 @@
                 <hr />
               </h3>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Quaerat quas ducimus alias aperiam a nemo laborum est fugiat,
-                optio error quidem nostrum molestiae numquam quasi cum unde
-                ipsum enim. Minus. Soluta maiores quod dolorum cumque qui
-                commodi praesentium inventore sint, consequuntur aperiam laborum
-                sapiente, ipsa nobis totam dolore ullam deserunt animi quia!
-                Voluptatem voluptates tempora ex molestiae, provident illo
-                similique.
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat quas ducimus alias aperiam a nemo laborum est fugiat, optio error quidem nostrum molestiae numquam quasi cum unde ipsum enim. Minus. Soluta maiores quod dolorum cumque qui commodi praesentium inventore sint,
+                consequuntur aperiam laborum sapiente, ipsa nobis totam dolore ullam deserunt animi quia! Voluptatem voluptates tempora ex molestiae, provident illo similique.
               </p>
             </div>
             <!-- 3.2-3.안전시설 및 배치도 -->
@@ -346,10 +281,7 @@
                 안전시설 및 배치도
                 <hr />
               </h3>
-              <img
-                src="http://placeimg.com/640/480/nature"
-                alt="safety-guide img"
-              />
+              <img src="http://placeimg.com/640/480/nature" alt="safety-guide img" />
             </div>
             <!-- tab2 내용 끝 -->
           </div>

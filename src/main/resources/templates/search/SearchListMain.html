@@ -1,27 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/css/search/searchListMainPage.css" />
-    <title>Document</title>
-    <script
-      src="https://kit.fontawesome.com/4fab4e86c9.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" th:href="@{./css/search/searchListMainPage.css}" />
+    <title>검색EZ</title>
+    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
     <div class="wrapper">
       <div class="up-l"></div>
 
       <!-- 최상단 메뉴(UPPERMOST) -->
       <div class="up">
-        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
-        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
-        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
-        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
+        <a href="" th:href="@{/}" class="up__link">HOME</a>
+        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+        <a href="" th:href="@{/login}" class="up__link">로그인</a>
       </div>
 
       <div class="up-r"></div>
@@ -31,15 +27,13 @@
       <!-- 헤더 (HEADER) -->
       <header class="hd">
         <div class="hd__menu-item">
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
-          <a href="" class="link">광장ez</a>
-          <a href="" class="link">ez가이드</a>
-          <a href="" class="link">사이트맵</a>
+          <a href="" th:href="@{/search}" class="link">검색ez</a>
+          <a href="" th:href="@{/notice}" class="link">공지사항</a>
+          <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
-          <a href="" class="link">
+          <a href="" th:href="@{/}" class="link">
             <i class="hd__logo fa-solid fa-house"></i>
             <h2>캠핑EZ</h2>
           </a>
@@ -54,31 +48,13 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div>
-            <a href="/templates/community/notice.html" class="gnb__depth link"
-              >공지사항</a
-            >
-          </div>
-          <div>
-            <a
-              href="/templates/community/butlletinBoard.html"
-              class="gnb__depth link"
-              >자유게시판</a
-            >
-          </div>
-          <div>
-            <a href="/templates/community/question.html" class="gnb__depth link"
-              >질문게시판</a
-            >
-          </div>
+          <div><a href="" th:href="@{/notice}" class="gnb__depth link">공지사항</a></div>
+          <div><a href="" th:href="@{/butlletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
-        <div>
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
-        </div>
-        <div><a href="" class="link">광장ez</a></div>
-        <div><a href="" class="link">ez가이드</a></div>
+        <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
       </nav>
 
       <div class="gnb-r"></div>
@@ -130,16 +106,12 @@
           <div class="mn__main-empty1-l"></div>
 
           <div class="mn__main-photo">
-            <a href="" class="link"
-              ><img src="https://picsum.photos/200" alt=""
-            /></a>
+            <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
           </div>
 
           <div class="mn__main-write">
             <p class="mn__main-name link">
-              <a href="/templates/detailPage/detailPage-user.html"
-                >태화산 신선 계곡 캠핑장</a
-              >
+              <a href="/templates/detailPage/detailPage-user.html">태화산 신선 계곡 캠핑장</a>
             </p>
             <p class="mn__main-address">울산광역시 남구 dj동</p>
             <p>000-0000-0000</p>
@@ -155,16 +127,12 @@
           <div class="mn__main-empty2-l"></div>
 
           <div class="mn__main-photo">
-            <a href="" class="link"
-              ><img src="https://picsum.photos/200" alt=""
-            /></a>
+            <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
           </div>
 
           <div class="mn__main-write">
             <p class="mn__main-name link">
-              <a href="/templates/detailPage/detailPage-user.html"
-                >앞산 신선 계곡 캠핑장</a
-              >
+              <a href="/templates/detailPage/detailPage-user.html">앞산 신선 계곡 캠핑장</a>
             </p>
             <p class="mn__main-address">울산광역시 남구 dj동</p>
             <p>000-0000-0000</p>
@@ -180,16 +148,12 @@
           <div class="mn__main-empty3-l"></div>
 
           <div class="mn__main-photo">
-            <a href="" class="link"
-              ><img src="https://picsum.photos/200" alt=""
-            /></a>
+            <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
           </div>
 
           <div class="mn__main-write">
             <p class="mn__main-name link">
-              <a href="/templates/detailPage/detailPage-user.html"
-                >뒷산 신선 계곡 캠핑장</a
-              >
+              <a href="/templates/detailPage/detailPage-user.html">뒷산 신선 계곡 캠핑장</a>
             </p>
             <p class="mn__main-address">울산광역시 남구 dj동</p>
             <p>000-0000-0000</p>

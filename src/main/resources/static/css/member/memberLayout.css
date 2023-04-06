@@ -9,6 +9,11 @@
     background-color:var(--bg-color-darkgray-transparent);
     border-radius:5%
 } */
+
+html {
+  overflow-y: scroll;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr minmax(700px, 3fr) 1fr;

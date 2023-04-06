@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="" th:href="@{./css/community/community.css}" />
     <title>캠핑EZ | 공지사항</title>
-    <link rel="stylesheet" href="/static/css/community/community.css" />
-    <script
-      src="https://kit.fontawesome.com/4fab4e86c9.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
     <div class="wrapper">
       <div class="up-l"></div>
@@ -19,10 +15,10 @@
       <!-- 최상단 메뉴(UPPERMOST) -->
       <!--공지사항 게시글 상세페이지-->
       <div class="up">
-        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
-        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
-        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
-        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
+        <a href="" th:href="@{/}" class="up__link">HOME</a>
+        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+        <a href="" th:href="@{/login}" class="up__link">로그인</a>
       </div>
 
       <div class="up-r"></div>
@@ -32,15 +28,13 @@
       <!-- 헤더 (HEADER) -->
       <header class="hd">
         <div class="hd__menu-item">
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
-          <a href="" class="link">광장ez</a>
-          <a href="" class="link">ez가이드</a>
-          <a href="" class="link">사이트맵</a>
+          <a href="" th:href="@{/search}" class="link">검색ez</a>
+          <a href="" th:href="@{/notice}" class="link">공지사항</a>
+          <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
-          <a href="/templates/mainPage/EZMain.html" class="link">
+          <a href="" th:href="@{/}" class="link">
             <i class="hd__logo fa-solid fa-house"></i>
             <h2>캠핑EZ</h2>
           </a>
@@ -55,32 +49,15 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div>
-            <a href="/templates/community/notice.html" class="gnb__depth link"
-              >공지사항</a
-            >
-          </div>
-          <div>
-            <a
-              href="/templates/community/butlletinBoard.html"
-              class="gnb__depth link"
-              >자유게시판</a
-            >
-          </div>
-          <div>
-            <a href="/templates/community/question.html" class="gnb__depth link"
-              >질문게시판</a
-            >
-          </div>
+          <div><a href="" th:href="@{/notice}" class="gnb__depth link">공지사항</a></div>
+          <div><a href="" th:href="@{/butlletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
-        <div>
-          <a href="/templates/search/SearchListMain.html" class="link"
-            >검색ez</a
-          >
-        </div>
-        <div><a href="" class="link">광장ez</a></div>
-        <div><a href="" class="link">ez가이드</a></div>
+        <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
       </nav>
+
       <div class="gnb-r"></div>
       <div class="post-l"></div>
       <!--4개의 큰 구간으로 나눔 -->
@@ -104,41 +81,14 @@
         <!--게시글 섹션-->
         <section class="post__context">
           <p class="post__main-content">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo quasi
-            accusantium incidunt corporis adipisci eum, rem beatae itaque
-            aliquid eligendi odit recusandae repellendus cum labore dicta quas
-            deserunt quaerat ab! Tenetur vero quasi nobis mollitia unde, officia
-            laudantium voluptatibus at sit assumenda dolore velit exercitationem
-            illum, corporis cum soluta praesentium. Eveniet provident est non
-            corporis laboriosam repellendus praesentium explicabo nisi. Quidem
-            vel cupiditate asperiores voluptatem quasi eveniet libero unde
-            consectetur aut neque enim nostrum, doloribus provident cumque
-            repudiandae iste debitis quo iure. Dolore libero nemo ipsa excepturi
-            sint inventore unde. Impedit, nemo commodi quaerat necessitatibus
-            perspiciatis accusantium. Velit earum placeat dolor adipisci, ipsum
-            debitis? Atque, enim delectus corrupti debitis ipsam quasi dolores?
-            Itaque sequi quibusdam cum consequuntur odit. Voluptatibus, officia?
-            Modi quis quia nihil exercitationem ipsum, nobis quasi veritatis
-            voluptatum qui, minus blanditiis doloribus fugit dolorem laborum
-            nisi delectus iste. Reprehenderit error animi maxime provident aut
-            id corrupti sequi iste! Velit, earum obcaecati in beatae iste, culpa
-            quidem rem perferendis non magni adipisci omnis ut? Odio dignissimos
-            ducimus voluptates explicabo voluptatibus dolores, id omnis, modi
-            sequi itaque alias impedit neque? Sequi impedit aspernatur rem nihil
-            iure veniam suscipit, maxime consequatur quidem beatae reiciendis
-            dolor error natus. Ea sequi eligendi ipsum incidunt autem, sit rem
-            quas dicta temporibus omnis tempora aspernatur? Sequi nulla deleniti
-            qui laudantium maiores libero necessitatibus ea debitis aperiam
-            deserunt, quia reiciendis adipisci atque, aliquam dicta architecto
-            fugit officiis quis. Explicabo voluptatibus, doloremque modi
-            possimus hic fugiat consectetur! Aliquam ipsum dignissimos mollitia
-            necessitatibus architecto sapiente, aperiam atque, culpa consequatur
-            ea, dolorum ab similique temporibus odio in. Commodi quidem
-            assumenda atque modi corrupti molestias, dolorum natus dolores
-            veniam enim. Modi non ad dolor, at, mollitia voluptatem atque
-            laborum vel provident corporis soluta impedit odit facilis
-            praesentium harum eum possimus? Eos ullam laborum eum debitis, non
-            sint modi illo molestiae!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo quasi accusantium incidunt corporis adipisci eum, rem beatae itaque aliquid eligendi odit recusandae repellendus cum labore dicta quas deserunt quaerat ab! Tenetur vero quasi nobis mollitia unde, officia laudantium
+            voluptatibus at sit assumenda dolore velit exercitationem illum, corporis cum soluta praesentium. Eveniet provident est non corporis laboriosam repellendus praesentium explicabo nisi. Quidem vel cupiditate asperiores voluptatem quasi eveniet libero unde consectetur aut neque enim
+            nostrum, doloribus provident cumque repudiandae iste debitis quo iure. Dolore libero nemo ipsa excepturi sint inventore unde. Impedit, nemo commodi quaerat necessitatibus perspiciatis accusantium. Velit earum placeat dolor adipisci, ipsum debitis? Atque, enim delectus corrupti debitis
+            ipsam quasi dolores? Itaque sequi quibusdam cum consequuntur odit. Voluptatibus, officia? Modi quis quia nihil exercitationem ipsum, nobis quasi veritatis voluptatum qui, minus blanditiis doloribus fugit dolorem laborum nisi delectus iste. Reprehenderit error animi maxime provident aut
+            id corrupti sequi iste! Velit, earum obcaecati in beatae iste, culpa quidem rem perferendis non magni adipisci omnis ut? Odio dignissimos ducimus voluptates explicabo voluptatibus dolores, id omnis, modi sequi itaque alias impedit neque? Sequi impedit aspernatur rem nihil iure veniam
+            suscipit, maxime consequatur quidem beatae reiciendis dolor error natus. Ea sequi eligendi ipsum incidunt autem, sit rem quas dicta temporibus omnis tempora aspernatur? Sequi nulla deleniti qui laudantium maiores libero necessitatibus ea debitis aperiam deserunt, quia reiciendis adipisci
+            atque, aliquam dicta architecto fugit officiis quis. Explicabo voluptatibus, doloremque modi possimus hic fugiat consectetur! Aliquam ipsum dignissimos mollitia necessitatibus architecto sapiente, aperiam atque, culpa consequatur ea, dolorum ab similique temporibus odio in. Commodi
+            quidem assumenda atque modi corrupti molestias, dolorum natus dolores veniam enim. Modi non ad dolor, at, mollitia voluptatem atque laborum vel provident corporis soluta impedit odit facilis praesentium harum eum possimus? Eos ullam laborum eum debitis, non sint modi illo molestiae!
           </p>
         </section>
         <!--하단 댓글 부분-->

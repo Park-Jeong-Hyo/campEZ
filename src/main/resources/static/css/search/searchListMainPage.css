@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@import '/static/css/common/common.css';
-@import '/static/css/search/searchListLayout.css';
+@import '/css/common/common.css';
+@import 'searchListLayout.css';
 
 /* SEARCHBOX */
 .img__searchBox {

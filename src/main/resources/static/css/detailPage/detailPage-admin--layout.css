@@ -18,7 +18,9 @@
 /**/
 
 /* 전체 레이아웃*/
-
+html {
+  overflow-y: scroll;
+}
 .wrapper {
   display: grid;
   grid-template-columns: 1fr minmax(700px, 3fr) 1fr;

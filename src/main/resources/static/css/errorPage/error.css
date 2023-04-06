@@ -1,0 +1,21 @@
+@charset "UTF-8";
+@import '/css/common/common.css';
+@import 'errorLayout.css';
+
+/* MAIN */
+.mn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+}

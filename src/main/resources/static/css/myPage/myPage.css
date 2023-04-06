@@ -1,3 +1,7 @@
+@charset "UTF-8";
+@import '/css/common/common.css';
+@import 'myPageLayout.css';
+
 .tab1 input[name='tab'],
 .tab2 input[name='tab'] {
   display: none;
