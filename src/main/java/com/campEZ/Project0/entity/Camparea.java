@@ -1,5 +1,6 @@
 package com.campEZ.Project0.entity;
 
+import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
