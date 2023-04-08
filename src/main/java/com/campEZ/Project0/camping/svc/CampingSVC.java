@@ -1,5 +1,6 @@
 package com.campEZ.Project0.camping.svc;
 
+import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 
@@ -11,4 +12,5 @@ public interface CampingSVC {
   int campingUpdate(Camping camping, Camparea camparea, int cnumber);
   int campingDelete(int cnumber);
   Optional<Camping> campingDetail(int cnumber);
+  List<Camping> campingSearch(CampingFilterCondition campingFilterCondition);
 }

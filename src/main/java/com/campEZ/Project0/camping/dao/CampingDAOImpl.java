@@ -82,8 +82,8 @@ public class CampingDAOImpl implements CampingDAO{
         .addValue("mart", camping.getMart())
         .addValue("cnumber", cnumber);
 
-    //캠핑장 구역 수용인원 수정
-    //특이사항: 캠핑장 구역을 수정하는 로직은 없음.
+    //캠핑장 구역 수용인원(capaticys) 수정
+    //특이사항: 캠핑장 구역(area)을 수정하는 로직은 없음.
     StringBuffer sql2 = new StringBuffer();
     sql2.append("UPDATE CAMPAREA SET ");
     sql2.append("capacitys = :capacitys ");
@@ -123,20 +123,28 @@ public class CampingDAOImpl implements CampingDAO{
       return Optional.empty();
     }
   }
+  //캠핑장 검색
+  //매개변수: 캠핑장 검색 조건, 캠핑장 종류, 주소, 이름 (시간 되면 조건도 추가 예정)
   @Override
   public List<Camping> campingSearch(CampingFilterCondition campingFilterCondition) {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT cname, caddress, camptel");
-    sql.append("FROM CAMPING");
+    sql.append("SELECT cnumber, ctype, caddress, cname ");
+    sql.append("FROM CAMPING ");
     sql.append("WHERE ");
-
-    //분류
-
-    return null;
+    //동적 쿼리
+    sql = dynamicQuery(campingFilterCondition, sql);
+    SqlParameterSource param = new BeanPropertySqlParameterSource(campingFilterCondition);
+    //결과 리스트 반환
+    List<Camping> list = null;
+    list = template.query(sql.toString(), param, new BeanPropertyRowMapper<>(Camping.class));
+    return list;
   }
 
   //동적 쿼리 메서드
   private StringBuffer dynamicQuery(CampingFilterCondition campingFilterCondition, StringBuffer sql) {
-
+    sql.append("ctype = '" + campingFilterCondition.getCampingType() + "' AND ");
+    sql.append("caddress like '%" + campingFilterCondition.getCampingRegion() +"%' AND ");
+    sql.append("cname like '%" + campingFilterCondition.getCampingKeyword() + "%' " );
+    return sql;
   }
 }

@@ -1,6 +1,7 @@
 package com.campEZ.Project0.camping.svc;
 
 import com.campEZ.Project0.camping.dao.CampingDAO;
+import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,10 @@ public class CampingSVCImpl implements CampingSVC{
   @Override
   public Optional<Camping> campingDetail(int cnumber) {
     return campingDAO.campingDetail(cnumber);
+  }
+
+  @Override
+  public List<Camping> campingSearch(CampingFilterCondition campingFilterCondition) {
+    return campingDAO.campingSearch(campingFilterCondition);
   }
 }

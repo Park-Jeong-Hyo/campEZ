@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입</title>
+</head>
+<body>
+  <h3>회원가입</h3>
+  <hr>
+  <!--action에는 요청 url이 들어간다.-->
+  <!--*{} 객체의 멤버에 접근-->
+  <form id="frm" action="" method="post" th:object="${joinForm}">
+    <!--타임리프의 내장객체가 사용됨 #어쩌구...-->
+    <!--div의 th:if가 참일때만 생성된다.-->
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <!--each 반복문 err은 컬렉션? 변수 에러 갯수만큼 반복이 된다.-->
+      <p th:each="err:${#fields.globalErrors()}" th:text="${err}"></p>
+    </div>
+    <div>
+      <input type="email" name="email" placeholder="아이디" th:field="*{email}">
+      <span class="error"></span>
+      <span th:errors="*{email}"></span>
+    </div>
+    <div>
+      <input type="password" name="passwd" placeholder="비밀번호" th:field="*{passwd}">
+      <span class="error"></span>
+      <span th:errors="*{passwd}"></span>
+    </div>
+    <div>
+      <input type="password" name="passwdchk" placeholder="비밀번호확인" th:field="*{passwdchk}">
+      <span class="error"></span>
+      <span th:errors="*{passwdchk}"></span>
+    </div>
+    <div>
+      <input type="text" name="nickname" placeholder="별칭" th:field="*{nickname}">
+      <span th:errors="*{nickname}"></span>
+    </div>
+    <div><label for="">성별</label></div>
+    <div>
+      <label for="">남</label><input type="radio" name="gender" value="남자" th:field="*{gender}">
+      <label for="">여</label><input type="radio" name="gender" value="여자" th:field="*{gender}">
+    </div>
+    <div><label for="">취미</label></div>
+    <div>
+      <th:block th:each="hobby:${hobbies}">
+        <label for="" th:for="${#ids.next('hobby')}" th:text="${hobby.decode}">독서</label>
+        <input type="checkbox" name="hobby" value="독서" th:field="*{hobby}" th:value="${hobby.code}">
+      </th:block>
+<!--      <label for="">독서</label><input type="checkbox" name="hobby" value="독서">-->
+<!--      <label for="">수영</label><input type="checkbox" name="hobby" value="수영">-->
+<!--      <label for="">등산</label><input type="checkbox" name="hobby" value="등산">-->
+<!--      <label for="">골프</label><input type="checkbox" name="hobby" value="골프">-->
+    </div>
+    <div><label for="">지역</label></div>
+    <div>
+      <select name="region" id="" th:field="*{region}">
+        <option value="">선택</option>
+        <!--변수이름 code 변수값 codes codes는 리스트, each는 반복, codes의 값만큼 반복하겠다는 뜻-->
+        <!--codes는 code, decode라는 필드를 가지고 있음.-->
+        <th:block th:each="region:${regions}">
+          <option value="" th:value="${region.code}" th:text="${region.decode}"></option>
+        </th:block>
+<!--        <option value="서울">서울</option>-->
+<!--        <option value="부산">부산</option>-->
+<!--        <option value="대구">대구</option>-->
+<!--        <option value="울산">울산</option>-->
+
+      </select>
+    </div>
+    <div><button th:text="#{button.join}">가입</button></div>
+  </form>
+  <script type="module">
+      import { ajax } from '/js/common.js';
+
+    const $email = document.querySelector('#frm input[type=email]');
+
+    const chkEmail = res => {
+      if(res.header.rtcd == '00'){
+        if(res.data){
+          $email.nextElementSibling.textContent='사용중인 아이디 입니다.'
+          $email.focus();
+        }else{
+          $email.nextElementSibling.textContent='사용가능한 아이디 입니다.'
+        }
+      }else if(res.header.rtcd == '01'){
+          $email.nextElementSibling.textContent=`${res.header.rtmsg}`
+          $email.focus();
+      }
+    }
+
+    const chkEmail_h = e =>{
+      console.log('blur');
+      const url = `/api/members/email?email=${$email.value}`;
+      ajax.get(url)
+          .then(res=>res.json())
+          .then(chkEmail)         //res=>chkEmail(res)
+          .catch(console.error);   //err=>console.error(err)
+    }
+    $email.addEventListener('blur',chkEmail_h,false);
+
+  </script>
+</body>
+</html>

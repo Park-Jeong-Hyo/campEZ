@@ -1,5 +1,6 @@
 package com.campEZ.Project0.camping.dao;
 
+import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import org.assertj.core.api.Assertions;
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+
+import java.util.List;
 
 @SpringBootTest
 public class CampingDAOImplTest {
@@ -75,5 +78,17 @@ public class CampingDAOImplTest {
     int result = campingDAO.campingDelete(cnumber);
     System.out.println(result);
     Assertions.assertThat(result).isEqualTo(1);
+  }
+
+  //쿼리 검색결과가 나오면 성공
+  @Test
+  @DisplayName("캠핑장 검색")
+  void campingSearch() {
+    CampingFilterCondition filterCondition = new CampingFilterCondition();
+    filterCondition.setCampingType("a");
+    filterCondition.setCampingRegion("울산");
+    filterCondition.setCampingKeyword("KH");
+    List<Camping> list = campingDAO.campingSearch(filterCondition);
+    System.out.println(list);
   }
 }
