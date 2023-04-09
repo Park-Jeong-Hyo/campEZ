@@ -10,7 +10,7 @@ public interface MembersSVC {
   Members memSave(Members members);
 
   //회원수정
-  void memUpdate(String mid, Members members);
+  Members memUpdate(String mid, Members members);
 
   //회원탈퇴
   void memDelete(String mid);

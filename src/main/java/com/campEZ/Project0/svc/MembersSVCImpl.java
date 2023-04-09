@@ -22,8 +22,9 @@ public class MembersSVCImpl implements MembersSVC {
 
   //회원수정
   @Override
-  public void memUpdate(String mid, Members members){
+  public Members memUpdate(String mid, Members members){
     membersDAO.memUpdate(mid,members);
+    return members;
   }
 
   //회원탈퇴
