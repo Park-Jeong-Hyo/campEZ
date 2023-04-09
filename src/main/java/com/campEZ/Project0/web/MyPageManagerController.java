@@ -24,10 +24,10 @@ public class MyPageManagerController {
     private final CampingSVC campingSVC;
     private final MembersSVC membersSVC;
 
-//    @GetMapping("/{mid}/manager")
-//        캠핑 목록 불러오기
-//    public String Managerlist(@PathVariable String mid ,Model model,검색조건 검색조건){
-//        List<Camping> list = campingSVC.전체찾는메소드(검색조건);
+    //    @GetMapping("/{mid}/manager")
+//        내 캠핑 목록 불러오기
+//    public String camplistManager(@PathVariable String mid ,Model model){
+//        List<Camping> list = campingSVC.내 캠핑장 목록 찾는 메소드 (mid);
 //        List<Camping> allList = new ArrayList<>();
 //        for (Camping camping : list) {
 //            Camping listForm = new Camping();
@@ -35,10 +35,11 @@ public class MyPageManagerController {
 //            allList.add(listForm);
 //        }
 //    model.addAttribute("list", allList);
-//      }
+//return "mypage/myPage__manager";
+//      };
 //    회원 정보 수정하기
     @GetMapping("/{mid}/manager")
-    public String commonMemberMod(@PathVariable String mid,Model model){
+    public String commonMemberMod(@PathVariable String mid, Model model) {
         Members members = membersSVC.memFindB(mid);
         Members membersForm = new Members();
         membersForm.setPw(members.getPw());
@@ -51,10 +52,11 @@ public class MyPageManagerController {
         membersForm.setNickname(members.getNickname());
         membersForm.setPhone(members.getPhone());
 
-        model.addAttribute("members",membersForm);
+        model.addAttribute("members", membersForm);
         return "mypage/myPage__manager";
-      }
-//    회원 수정 처리
+    }
+
+    //    회원 수정 처리
     @PostMapping("/managerUpdate")
     public String managerEdit(
             @ModelAttribute Members membersForm, RedirectAttributes redirectAttributes,
@@ -71,10 +73,12 @@ public class MyPageManagerController {
         members.setNickname(membersForm.getNickname());
         members.setPhone(membersForm.getPhone());
 
-       membersSVC.memUpdate(mid, members);
-        redirectAttributes.addAttribute("mid",members.getMid());
+        membersSVC.memUpdate(mid, members);
+        redirectAttributes.addAttribute("mid", members.getMid());
         return "redirect:/mypage/{mid}/manager";
-        }
     }
+}
+
+
 
 //    회원 탈퇴, 예약 목록, 예약 취소, 타임리프로 값 받기, html에서 링크들 연결
