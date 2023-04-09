@@ -37,23 +37,6 @@ public class HomeController {
   public String mypage() {
     return "myPage/myPage__common";
   }
-  // 공지사항 맵핑
-  @GetMapping("/notice")
-  public String notice() {
-    return "community/notice";
-  }
-
-  // 자유게시판 맵핑
-  @GetMapping("/butlletinBoard")
-  public String butlletinBoard() {
-    return "community/butlletinBoard";
-  }
-
-  // 질문게시판 맵핑
-  @GetMapping("/question")
-  public String question() {
-    return "community/question";
-  }
 
   // 준비중페이지 맵핑
   @GetMapping("/preparing")

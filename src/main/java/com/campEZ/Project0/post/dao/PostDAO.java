@@ -8,7 +8,7 @@ public interface PostDAO {
   //게시글 전체 목록
   List<Post> postList();
   //게시글 작성
-  Post postSave(Post campingez);
+  int postSave(Post post);
   //게시글 수정
   int postUpdate(int pnumber, Post post);
   //게시글 삭제

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" th:href="@{./css/community/community.css}" />
+    <link rel="stylesheet" href="" th:href="@{/css/community/community.css}" />
     <title>캠핑EZ | 자유게시판</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
@@ -71,24 +71,15 @@
               <th>글제목</th>
               <th>작성자</th>
               <th>작성일</th>
-              <th>조회수</th>
             </tr>
           </thead>
-          <tbody class="commun__">
+          <tbody class="commun__" th:each="post : ${posts}">
             <!--게시글 리스트-->
-            <tr class="commun__list">
-              <td>2</td>
-              <td><a href="posting.html" clss="link">안녕하세요</a></td>
-              <td>홍길동</td>
-              <td>23.03.23</td>
-              <td>2</td>
-            </tr>
-            <tr class="commun__list">
-              <td>1</td>
-              <td>반갑습니다</td>
-              <td>홍길남</td>
-              <td>23.03.22</td>
-              <td>3</td>
+            <tr class="commun__list" th:if="${post.ptype}=='f'">
+              <td th:text="${post.pnumber}">2</td>
+              <td><a clss="link" href="" th:href="@{/community/{id}/g_read(id=${post.pnumber})}" th:text="${post.ptitle}">안녕하세요</a></td>
+              <td th:text="${post.nickname}">홍길동</td>
+              <td th:text="${post.udate}">23.03.23</td>
             </tr>
           </tbody>
         </table>
@@ -122,7 +113,7 @@
           <!--오룬쪽 그리드 영역-->
           <div class="commun__buttons-r">
             <button class="commun_posting-btn">
-              <a href="posting.html" class="link">글쓰기</a>
+              <a href="" class="link" th:href="@{/community/write}">글쓰기</a>
             </button>
           </div>
         </section>

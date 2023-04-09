@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" th:href="@{./css/community/community.css}" />
-    <title>캠핑EZ | 공지사항</title>
+    <link rel="stylesheet" href="" th:href="@{/css/community/community.css}" />
+    <title>캠핑EZ | 게시글</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -13,7 +13,6 @@
       <div class="up-l"></div>
 
       <!-- 최상단 메뉴(UPPERMOST) -->
-      <!--공지사항 게시글 상세페이지-->
       <div class="up">
         <a href="" th:href="@{/}" class="up__link">HOME</a>
         <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
@@ -61,37 +60,26 @@
       <div class="gnb-r"></div>
       <div class="post-l"></div>
       <!--4개의 큰 구간으로 나눔 -->
-      <main class="post">
+      <main class="post" th:object="${postDetailForm}">
         <!--좌/우 두개의 구간으로 나눔-->
         <section class="post__upper">
-          <h4 class="post__title">안녕하세요</h4>
-          <div class="post__buttons">
-            <button>수정</button>
-            <button>삭제</button>
-            <button>목록</button>
-          </div>
+          <h4 class="post__title" th:text="*{ptitle}"></h4>
         </section>
         <!--게시글 정보-->
         <section class="post__info">
-          <p class="post__writer">글쓴이 : 홍길동</p>
-          <p class="post__date">작성일 : 23.03.21</p>
-          <p class="post__comment-count">댓글수 : 1</p>
-          <p class="post__view-count">조회수 : 8</p>
+          <input class="post__writer hidden" name="pnumber"  th:field="*{pnumber}">
+          <p class="post__writer" th:text="*{nickname}">글쓴이 : 홍길동</p>
+          <p class="post__date" th:text="*{udate}">작성일 : 23.03.21</p>
         </section>
         <!--게시글 섹션-->
         <section class="post__context">
-          <p class="post__main-content">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo quasi accusantium incidunt corporis adipisci eum, rem beatae itaque aliquid eligendi odit recusandae repellendus cum labore dicta quas deserunt quaerat ab! Tenetur vero quasi nobis mollitia unde, officia laudantium
-            voluptatibus at sit assumenda dolore velit exercitationem illum, corporis cum soluta praesentium. Eveniet provident est non corporis laboriosam repellendus praesentium explicabo nisi. Quidem vel cupiditate asperiores voluptatem quasi eveniet libero unde consectetur aut neque enim
-            nostrum, doloribus provident cumque repudiandae iste debitis quo iure. Dolore libero nemo ipsa excepturi sint inventore unde. Impedit, nemo commodi quaerat necessitatibus perspiciatis accusantium. Velit earum placeat dolor adipisci, ipsum debitis? Atque, enim delectus corrupti debitis
-            ipsam quasi dolores? Itaque sequi quibusdam cum consequuntur odit. Voluptatibus, officia? Modi quis quia nihil exercitationem ipsum, nobis quasi veritatis voluptatum qui, minus blanditiis doloribus fugit dolorem laborum nisi delectus iste. Reprehenderit error animi maxime provident aut
-            id corrupti sequi iste! Velit, earum obcaecati in beatae iste, culpa quidem rem perferendis non magni adipisci omnis ut? Odio dignissimos ducimus voluptates explicabo voluptatibus dolores, id omnis, modi sequi itaque alias impedit neque? Sequi impedit aspernatur rem nihil iure veniam
-            suscipit, maxime consequatur quidem beatae reiciendis dolor error natus. Ea sequi eligendi ipsum incidunt autem, sit rem quas dicta temporibus omnis tempora aspernatur? Sequi nulla deleniti qui laudantium maiores libero necessitatibus ea debitis aperiam deserunt, quia reiciendis adipisci
-            atque, aliquam dicta architecto fugit officiis quis. Explicabo voluptatibus, doloremque modi possimus hic fugiat consectetur! Aliquam ipsum dignissimos mollitia necessitatibus architecto sapiente, aperiam atque, culpa consequatur ea, dolorum ab similique temporibus odio in. Commodi
-            quidem assumenda atque modi corrupti molestias, dolorum natus dolores veniam enim. Modi non ad dolor, at, mollitia voluptatem atque laborum vel provident corporis soluta impedit odit facilis praesentium harum eum possimus? Eos ullam laborum eum debitis, non sint modi illo molestiae!
-          </p>
+          <p class="post__main-content" th:text="*{ptext}" ></p>
         </section>
-        <!--하단 댓글 부분-->
+        <div class="post__buttons">
+          <button id="btnUpdate">수정</button>
+          <button id="btnDelete">삭제</button>
+          <button id="btnFindAll">목록</button>
+        </div>
       </main>
       <div class="post-r"></div>
       <div class="ft-l"></div>
@@ -117,5 +105,23 @@
 
       <div class="ft-r"></div>
     </div>
+    <script>
+  const $btnDelete = document.getElementById('btnDelete');
+  const $btnFindAll = document.getElementById('btnFindAll');
+
+  //상품 아이디
+  const $pnumber = document.getElementById('pnumber');
+
+  const btnDelete_h = e=>{
+    if(confirm('삭제 하시겠습니까?')){
+      globalThis.location.href = `/community/${$pnumber.value}/del`;
+    }
+  }
+  const btnAll_h = e => {
+    globalThis.location.href = `/community/notice`;
+  }
+  $btnFindAll.addEventListener('click',btnAll_h, false);
+  $btnDelete.addEventListener('click',btnDelete_h, false);
+    </script>
   </body>
 </html>

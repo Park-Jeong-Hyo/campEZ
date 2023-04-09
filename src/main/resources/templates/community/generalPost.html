@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="" th:href="@{/css/community/community.css}" />
-    <title>캠핑EZ | 공지사항</title>
+    <title>캠핑EZ | 게시글</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -58,61 +58,30 @@
       </nav>
 
       <div class="gnb-r"></div>
-      <div class="commun-l"></div>
-      <div class="commun">
-        <!-- 커뮤니티 페이지 타이틀-->
-        <h3 class="commun__board-title">공지사항</h3>
-        <!--게시판 테이블, 게시글 생성시 tr 클래스를 설정해줘야 css 적용됨-->
-        <table class="commun__post">
-          <thead>
-            <!--게시글 헤더-->
-            <tr class="commun__header">
-              <th>글번호</th>
-              <th>글제목</th>
-              <th>작성자</th>
-              <th>작성일</th>
-              <th>조회수</th>
-            </tr>
-          </thead>
-          <tbody class="commun__" th:each="post : ${posts}">
-            <!--게시글 리스트-->
-            <tr class="commun__list" th:if="${post.ptype}=='n'">
-              <td th:text="${post.pnumber}">2</td>
-              <td><a clss="link" href="" th:href="@{/community/{id}/n_read(id=${post.pnumber})}" th:text="${post.ptitle}">안녕하세요</a></td>
-              <td th:text="${post.nickname}">운영자</td>
-              <td th:text="${post.udate}">23.03.23</td>
-              <td>9</td>
-            </tr>
-          </tbody>
-        </table>
-        <section class="commun__post-search">
-          <div class="commun__buttons-l"></div>
-          <div class="commun__buttons">
-            <div class="commun__number">
-              <button>1</button>
-              <button>2</button>
-              <button>3</button>
-              <button>4</button>
-              <button>5</button>
-            </div>
-            <div class="commun__searchbar">
-              <select>
-                <option value="">제목/내용</option>
-                <option value="">작성자</option>
-                <option value="">댓글</option>
-              </select>
-              <input type="search" />
-              <button type="submit">검색</button>
-            </div>
-          </div>
-          <div class="commun__buttons-r">
-            <button class="commun_posting-btn">
-              <a href="posting.html" class="link">글쓰기</a>
-            </button>
-          </div>
+      <div class="post-l"></div>
+      <!--4개의 큰 구간으로 나눔 -->
+      <main class="post" th:object="${postDetailForm}">
+        <!--좌/우 두개의 구간으로 나눔-->
+        <section class="post__upper">
+          <h4 class="post__title" th:text="*{ptitle}"></h4>
         </section>
-      </div>
-      <div class="commun-r"></div>
+        <!--게시글 정보-->
+        <section class="post__info">
+          <input class="post__writer hidden" name="pnumber"  th:field="*{pnumber}">
+          <p class="post__writer" th:text="*{nickname}">글쓴이 : 홍길동</p>
+          <p class="post__date" th:text="*{udate}">작성일 : 23.03.21</p>
+        </section>
+        <!--게시글 섹션-->
+        <section class="post__context">
+          <p class="post__main-content" th:text="*{ptext}" ></p>
+        </section>
+        <div class="post__buttons">
+          <button id="btnUpdate">수정</button>
+          <button id="btnDelete">삭제</button>
+          <button id="btnFindAll">목록</button>
+        </div>
+      </main>
+      <div class="post-r"></div>
       <div class="ft-l"></div>
       <!-- 푸터영역(FOOTER)-->
       <footer class="ft">
@@ -136,5 +105,28 @@
 
       <div class="ft-r"></div>
     </div>
+    <script>
+  const $btnDelete = document.getElementById('btnDelete');
+  const $btnFindAll = document.getElementById('btnFindAll');
+  const $btnUpdate = document.getElementById('btnUpdate');
+
+  //상품 아이디
+  const $pnumber = document.getElementById('pnumber');
+
+  const btnDelete_h = e=>{
+    if(confirm('삭제 하시겠습니까?')){
+      globalThis.location.href = `/community/${$pnumber.value}/del`;
+    }
+  }
+  const btnAll_h = e => {
+    globalThis.location.href = `/community/butlletinBoard`;
+  }
+  const btnUpdate_h = e => {
+    globalThis.location.href = `/community/${$pnumber.value}/edit`;
+  }
+  $btnUpdate.addEventListener('click',btnUpdate_h, false);
+  $btnFindAll.addEventListener('click',btnAll_h, false);
+  $btnDelete.addEventListener('click',btnDelete_h, false);
+    </script>
   </body>
 </html>

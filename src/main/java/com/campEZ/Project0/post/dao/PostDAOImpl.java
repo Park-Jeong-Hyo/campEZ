@@ -29,9 +29,8 @@ public class PostDAOImpl implements PostDAO{
   @Override
   public List<Post> postList() {
     StringBuffer sql = new StringBuffer();
-    sql.append("select pnumber, nickname, ptitle, udate ");
+    sql.append("select pnumber, nickname, ptitle, udate, ptext, ptype ");
     sql.append("from post ");
-    sql.append("where ptype = 'n' ");
 
     List<Post> list = template.query(
         sql.toString(),
@@ -44,7 +43,7 @@ public class PostDAOImpl implements PostDAO{
   //게시글 작성 후 작성한 게시글로 넘어가게 하려함.
   //생성된 게시글 번호를 전달 함으로써 게시글 조회가 가능하게 하려함.
   @Override
-  public Post postSave(Post post) {
+  public int postSave(Post post) {
     StringBuffer sql = new StringBuffer();
     sql.append("INSERT INTO POST ( pnumber, nickname, ptitle, ptext, ptype) ");
     sql.append("VALUES ( pnumber_seq.nextval, :nickname, :ptitle, :ptext, :ptype) ");
@@ -54,7 +53,7 @@ public class PostDAOImpl implements PostDAO{
     template.update(sql.toString(), param, keyHolder, new String[]{"pnumber"});
     int pnumber = keyHolder.getKey().intValue();
     post.setPnumber(pnumber);
-    return post;
+    return pnumber;
   }
 
   //게시글 수정

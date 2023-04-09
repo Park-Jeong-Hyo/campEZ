@@ -14,11 +14,11 @@ public class PostSVCImpl implements PostSVC{
 
   private final PostDAO postDAO;
   @Override
-  public List<Post> postList(Post post) {
+  public List<Post> postList() {
     return postDAO.postList();
   }
   @Override
-  public Post postSave(Post post) {
+  public int postSave(Post post) {
     return postDAO.postSave(post);
   }
   @Override
