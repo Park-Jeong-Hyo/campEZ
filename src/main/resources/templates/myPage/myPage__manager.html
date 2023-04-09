@@ -133,12 +133,12 @@
             <hr />
             <form action="" th:object="${members}" th:action="@{/mypage/managerUpdate}" method="post">
             <div class="member__item">
-              <div class="member__title">아이디</div>
-              <input class="member__main" type="text" />
+              <div class="member__title" >아이디</div>
+              <input class="member__main" type="text" th:value="${members.mid}"/>
             </div>
             <div class="member__item">
               <div class="member__title">비밀번호</div>
-              <input class="member__main" type="text" />
+              <input class="member__main" type="text"  />
             </div>
             <div class="member__item">
               <div class="member__title">메일</div>
