@@ -35,7 +35,7 @@ public class HomeController {
   // 마이페이지 맵핑
   @GetMapping("/mypage")
   public String mypage() {
-    return "myPage/myPage__common";
+    return "myPage/myPage__manager";
   }
 
   // 준비중페이지 맵핑

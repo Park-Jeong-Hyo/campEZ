@@ -121,8 +121,9 @@
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
+            <form action="" th:object="${members}" th:action="@{/mypage/managerUpdate}" method="post">
             <div class="member__item">
-              <div class="member__title">아이디</div>
+              <div class="member__title" th:text="${members.mid}">아이디</div>
               <input class="member__main" type="text" />
             </div>
             <div class="member__item">
@@ -152,6 +153,7 @@
             <div class="member__item">
               <input class="member__btn" type="button" value="수정하기" />
             </div>
+            </form>>
           </div>
           <!-- 탭1__3, 회원 탈퇴 -->
           <div class="tab1__3__content">
