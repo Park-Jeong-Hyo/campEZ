@@ -77,6 +77,12 @@ public class MyPageCommonController {
         redirectAttributes.addAttribute("mid",members.getMid());
         return "redirect:/mypage/{mid}/common";
         }
+    //    회원 탈퇴
+//    @GetMapping("/{mid}/common")
+//    public String deleteCommon(@PathVariable("mid") String mid) {
+//        membersSVC.memDelete(mid);
+//        return "redirect:/";
+//    }
     }
 
 //    회원 탈퇴, 예약 목록, 예약 취소, 타임리프로 값 받기, html에서 링크들 연결

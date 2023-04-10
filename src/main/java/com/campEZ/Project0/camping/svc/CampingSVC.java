@@ -12,5 +12,6 @@ public interface CampingSVC {
   int campingUpdate(Camping camping, Camparea camparea, int cnumber);
   int campingDelete(int cnumber);
   Optional<Camping> campingDetail(int cnumber);
+ List<Camping> campingFindByManagerMid(String mid);
   List<Camping> campingSearch(CampingFilterCondition campingFilterCondition);
 }

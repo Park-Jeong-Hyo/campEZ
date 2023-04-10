@@ -1,21 +1,16 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
-import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -81,7 +76,15 @@ public class MyPageManagerController {
         redirectAttributes.addAttribute("mid", members.getMid());
         return "redirect:/mypage/{mid}/manager";
     }
+//    회원 탈퇴
+//    @GetMapping("/{mid}/manager")
+//    public String deleteManager(@PathVariable("mid") String mid) {
+//        membersSVC.memDelete(mid);
+//        return "redirect:/";
+//    }
 }
+
+
 
 
 
