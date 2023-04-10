@@ -1,14 +1,21 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
+import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -34,24 +41,27 @@ public class MyPageManagerController {
 //    회원 정보 수정하기
     @GetMapping("/{mid}/manager")
     public String commonMemberMod(@PathVariable String mid, Model model) {
-        Members members = membersSVC.memFindB(mid);
-        Members membersForm = new Members();
-        membersForm.setPw(members.getPw());
-        membersForm.setMid(members.getMid());
-        membersForm.setEmail(members.getEmail());
-        membersForm.setMaddress(members.getMaddress());
-        membersForm.setCompanyname(members.getCompanyname());
-        membersForm.setMname(members.getMname());
-        membersForm.setMtype(members.getMtype());
-        membersForm.setNickname(members.getNickname());
-        membersForm.setPhone(members.getPhone());
+        try {
+            Members members = membersSVC.memFindB(mid);
+            Members membersForm = new Members();
+            membersForm.setPw(members.getPw());
+            membersForm.setMid(members.getMid());
+            membersForm.setEmail(members.getEmail());
+            membersForm.setMaddress(members.getMaddress());
+            membersForm.setCompanyname(members.getCompanyname());
+            membersForm.setMname(members.getMname());
+            membersForm.setMtype(members.getMtype());
+            membersForm.setNickname(members.getNickname());
+            membersForm.setPhone(members.getPhone());
 
-        model.addAttribute("members", membersForm);
+            model.addAttribute("members", membersForm);
+        }catch (EmptyResultDataAccessException e){return null;}
         return "mypage/myPage__manager";
     }
 
     //    회원 수정 처리
-    @PostMapping("/managerUpdate")
+//    "/managerUpdate"
+    @PostMapping("/{mid}/manager")
     public String managerEdit(
             @ModelAttribute Members membersForm, RedirectAttributes redirectAttributes,
             @PathVariable String mid) {

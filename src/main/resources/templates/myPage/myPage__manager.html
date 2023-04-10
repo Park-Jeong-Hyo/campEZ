@@ -15,15 +15,10 @@
 
       <!-- 최상단 메뉴(UPPERMOST) -->
       <div class="up">
-        <a href="" th:href="@{/}" class="up__link">HOME</a>
-        <th:block th:if="${!session.isEmpty()}">
-          <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
-          <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
-        </th:block>
-        <th:block th:if="${session.isEmpty()}">
-          <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
-          <a href="" th:href="@{/login}" class="up__link">로그인</a>
-        </th:block>
+        <a href="/templates/mainPage/EZMain.html" class="up__link">HOME</a>
+        <a href="/templates/member/SignUp.html" class="up__link">회원가입</a>
+        <a href="/templates/myPage/myPage.html" class="up__link">마이페이지</a>
+        <a href="/templates/member/LogIn.html" class="up__link">로그인</a>
       </div>
 
       <div class="up-r"></div>
@@ -56,7 +51,7 @@
         <div class="gnb__gwangjang-submenu">
           <div><a href="notice.html" class="gnb__depth link">공지사항</a></div>
           <div>
-            <a href="bulletinBoard.html" class="gnb__depth link">자유게시판</a>
+            <a href="butlletinBoard.html" class="gnb__depth link">자유게시판</a>
           </div>
           <div>
             <a href="question.html" class="gnb__depth link">질문게시판</a>
@@ -136,38 +131,46 @@
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
-            <form action="" th:object="${members}" th:action="@{/mypage/managerUpdate}" method="post">
-            <div class="member__item">
-              <div class="member__title" >아이디</div>
-              <input class="member__main" type="text" th:value="${members.mid}"/>
-            </div>
-            <div class="member__item">
-              <div class="member__title">비밀번호</div>
-              <input class="member__main" type="text"  />
-            </div>
-            <div class="member__item">
-              <div class="member__title">메일</div>
-              <input class="member__main" type="text" />
-            </div>
-            <div class="member__item">
-              <div class="member__title">주소</div>
-              <input class="member__main" type="text" />
-            </div>
-            <div class="member__item">
-              <div class="member__title">닉네임</div>
-              <input class="member__main" type="text" />
-            </div>
-            <div class="member__item">
-              <div class="member__title">등등</div>
-              <input class="member__main" type="text" />
-            </div>
-            <div class="member__item">
-              <div class="member__title">등등</div>
-              <input class="member__main" type="text" />
-            </div>
-            <div class="member__item">
-              <input class="member__btn" type="button" value="수정하기">
-            </div>
+            <form action="" th:object="${members}" th:action="@{/mypage/${members.mid}/manager}" method="post">
+              <div class="member__item">
+                <div class="member__title" >이름</div>
+                <input class="member__main" type="text" th:value="${members.mname}"/>
+              </div>
+              <div class="member__item">
+                <div class="member__title">아이디</div>
+                <input class="member__main" type="text" th:value="${members.mid}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">메일</div>
+                <input class="member__main" type="text" th:value="${members.email}"/>
+              </div>
+              <div class="member__item">
+                <div class="member__title">주소</div>
+                <input class="member__main" type="text" th:value="${members.maddress}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">닉네임</div>
+                <input class="member__main" type="text" th:value="${members.nickname}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">폰번호</div>
+                <input class="member__main" type="text" th:value="${members.phone}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">타입</div>
+                <input class="member__main" type="text" th:value="${members.mtype}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">회사이름</div>
+                <input class="member__main" type="text" th:value="${members.companyname}" />
+              </div>
+              <div class="member__item">
+                <div class="member__title">사업자번호</div>
+                <input class="member__main" type="text" th:value="${members.businessnumber}" />
+              </div>
+              <div class="member__item">
+                <input class="member__btn" type="submit" value="수정하기">
+              </div>
             </form>
           </div>
           <!-- 탭1__3, 회원 탈퇴 -->

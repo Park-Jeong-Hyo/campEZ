@@ -5,10 +5,13 @@ import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+
 
 @Slf4j
 @Controller
@@ -19,7 +22,7 @@ public class MyPageCommonController {
     private final MembersSVC membersSVC;
 
 
-    //    @GetMapping("/{mid}/common")
+//    @GetMapping("/{mid}/common")
 // 캠핑 목록 불러오기
 //    public String Commonlist(@PathVariable String mid ,Model model,검색조건 검색조건){
 //        List<Camping> list = campingSVC.전체찾는메소드(검색조건);
@@ -34,25 +37,27 @@ public class MyPageCommonController {
 //    회원 정보 수정하기
     @GetMapping("/{mid}/common")
     public String managerMemberMod(@PathVariable String mid,Model model){
-        Members members = membersSVC.memFindN(mid);
-        Members membersForm = new Members();
+        try {
+            Members members = membersSVC.memFindN(mid);
+            Members membersForm = new Members();
 
-        membersForm.setBusinessnumber(members.getBusinessnumber());
-        membersForm.setPw(members.getPw());
-        membersForm.setMid(members.getMid());
-        membersForm.setEmail(members.getEmail());
-        membersForm.setMaddress(members.getMaddress());
-        membersForm.setCompanyname(members.getCompanyname());
-        membersForm.setMname(members.getMname());
-        membersForm.setMtype(members.getMtype());
-        membersForm.setNickname(members.getNickname());
-        membersForm.setPhone(members.getPhone());
+            membersForm.setBusinessnumber(members.getBusinessnumber());
+            membersForm.setPw(members.getPw());
+            membersForm.setMid(members.getMid());
+            membersForm.setEmail(members.getEmail());
+            membersForm.setMaddress(members.getMaddress());
+            membersForm.setCompanyname(members.getCompanyname());
+            membersForm.setMname(members.getMname());
+            membersForm.setMtype(members.getMtype());
+            membersForm.setNickname(members.getNickname());
+            membersForm.setPhone(members.getPhone());
 
-            model.addAttribute("members",membersForm);
+            model.addAttribute("members", membersForm);
+        }catch (EmptyResultDataAccessException e){return null;}
           return "/mypage/myPage__common";
       }
 //    회원 정보 수정 처리하기
-    @PostMapping("/commonUpdate")
+    @PostMapping("/{mid}/common")
     public String commonEdit(
             @ModelAttribute Members membersForm, RedirectAttributes redirectAttributes,
             @PathVariable String mid) {
