@@ -121,42 +121,46 @@
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
-            <form action="" th:object="${members}" th:action="@{/mypage/${members.mid}/common}" method="post">
+            <form action="" th:object="${members}" method="post">
               <div class="member__item">
                 <div class="member__title" >이름</div>
-                <input class="member__main" type="text" th:value="${members.mname}"/>
+                <input class="member__main" type="text" th:field="*{mname}"/>
+              </div>
+              <div class="member__item">
+                <div class="member__title" >비밀번호</div>
+                <input class="member__main" type="text" th:field="*{pw}"/>
               </div>
               <div class="member__item">
                 <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:value="${members.mid}" />
+                <input class="member__main" type="text" th:field="*{mid}" />
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
-                <input class="member__main" type="text" th:value="${members.email}"/>
+                <input class="member__main" type="text" th:field="*{email}"/>
               </div>
               <div class="member__item">
                 <div class="member__title">주소</div>
-                <input class="member__main" type="text" th:value="${members.maddress}" />
+                <input class="member__main" type="text" th:field="*{maddress}" />
               </div>
               <div class="member__item">
                 <div class="member__title">닉네임</div>
-                <input class="member__main" type="text" th:value="${members.nickname}" />
+                <input class="member__main" type="text" th:field="*{nickname}" />
               </div>
               <div class="member__item">
                 <div class="member__title">폰번호</div>
-                <input class="member__main" type="text" th:value="${members.phone}" />
+                <input class="member__main" type="text" th:field="*{phone}" />
               </div>
               <div class="member__item">
                 <div class="member__title">타입</div>
-                <input class="member__main" type="text" th:value="${members.mtype}" />
+                <input class="member__main" type="text" th:field="*{mtype}" />
               </div>
               <div class="member__item">
                 <div class="member__title">회사이름</div>
-                <input class="member__main" type="text" th:value="${members.companyname}" />
+                <input class="member__main" type="text" th:field="*{companyname}" />
               </div>
               <div class="member__item">
                 <div class="member__title">사업자번호</div>
-                <input class="member__main" type="text" th:value="${members.businessnumber}" />
+                <input class="member__main" type="text" th:field="*{businessnumber}" />
               </div>
               <div class="member__item">
                 <input class="member__btn" type="submit" value="수정하기">
