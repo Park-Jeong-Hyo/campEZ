@@ -1,9 +1,9 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.entity.Post;
-import com.campEZ.Project0.form.post.PostDetailForm;
-import com.campEZ.Project0.form.post.PostSaveForm;
-import com.campEZ.Project0.form.post.PostUpdateForm;
+import com.campEZ.Project0.web.form.post.PostDetailForm;
+import com.campEZ.Project0.web.form.post.PostSaveForm;
+import com.campEZ.Project0.web.form.post.PostUpdateForm;
 import com.campEZ.Project0.post.svc.PostSVC;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,11 +35,11 @@ public class CommunityController {
   }
 
   // 자유게시판 목록 맵핑
-  @GetMapping("/butlletinBoard")
-  public String butlletinBoard(Model model) {
+  @GetMapping("/bulletinBoard")
+  public String bulletinBoard(Model model) {
     List<Post> posts = postSVC.postList();
     model.addAttribute("posts",posts);
-    return "community/butlletinBoard";
+    return "community/bulletinBoard";
   }
 
   // 자유 게시글 작성양식
@@ -47,7 +47,7 @@ public class CommunityController {
   public String writeForm(Model model) {
     PostSaveForm postSaveForm = new PostSaveForm();
     model.addAttribute("postSaveForm",postSaveForm);
-    return "community/butlletinBoardPosting";
+    return "community/bulletinBoardPosting";
   }
 
   // 자유 게시글 작성처리
@@ -121,7 +121,7 @@ public class CommunityController {
 
     postSVC.postDelete(pnumber);
 
-    return "redirect:/community/butlletinBoard";
+    return "redirect:/community/bulletinBoard";
   }
   // 자유 게시글 조회
   @GetMapping("/{id}/g_read")

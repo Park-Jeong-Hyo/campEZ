@@ -1,4 +1,4 @@
-package com.campEZ.Project0.dao;
+package com.campEZ.Project0.members.dao;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class MembersDAOImpl implements MembersDAO{
+public class MembersDAOImpl implements MembersDAO {
 
   private final NamedParameterJdbcTemplate template;
 

@@ -1,6 +1,6 @@
-package com.campEZ.Project0.svc;
+package com.campEZ.Project0.orders.svc;
 
-import com.campEZ.Project0.dao.OrdersDAO;
+import com.campEZ.Project0.orders.dao.OrdersDAO;
 import com.campEZ.Project0.entity.Orders;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

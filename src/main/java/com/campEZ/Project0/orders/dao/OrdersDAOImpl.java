@@ -1,4 +1,4 @@
-package com.campEZ.Project0.dao;
+package com.campEZ.Project0.orders.dao;
 
 import com.campEZ.Project0.entity.Orders;
 import lombok.RequiredArgsConstructor;

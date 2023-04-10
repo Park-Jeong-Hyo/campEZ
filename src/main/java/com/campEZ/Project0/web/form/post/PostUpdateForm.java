@@ -1,4 +1,4 @@
-package com.campEZ.Project0.form.post;
+package com.campEZ.Project0.web.form.post;
 
 import lombok.Data;
 

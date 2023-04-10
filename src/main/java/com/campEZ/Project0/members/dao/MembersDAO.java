@@ -1,4 +1,4 @@
-package com.campEZ.Project0.dao;
+package com.campEZ.Project0.members.dao;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;

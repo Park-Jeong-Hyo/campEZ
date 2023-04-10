@@ -1,7 +1,7 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.entity.Members;
-import com.campEZ.Project0.svc.MembersSVC;
+import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.web.form.login.LoginForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -69,7 +69,7 @@ public class LoginController {
     return "redirect:"+redirectUrl;
   }
   //로그아웃
-  @GetMapping("logout")
+  @GetMapping("/logout")
   public String logout(HttpServletRequest httpServletRequest) {
     HttpSession session = httpServletRequest.getSession(false);
     //세션이 있으면 세션 제거

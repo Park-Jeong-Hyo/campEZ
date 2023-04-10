@@ -1,10 +1,12 @@
-package com.campEZ.Project0.form.post;
+package com.campEZ.Project0.web.form.post;
 
 import lombok.Data;
 
 @Data
-public class PostSaveForm {
+public class PostDetailForm {
 
+  // 글번호
+  private int pnumber; // PNUMBER	NUMBER(4,0)
   // 회원 닉네임
   private String nickname; //NICKNAME	VARCHAR2(20 BYTE)
   // 글 제목

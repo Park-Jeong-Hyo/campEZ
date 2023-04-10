@@ -1,4 +1,4 @@
-package com.campEZ.Project0.svc;
+package com.campEZ.Project0.orders.svc;
 
 import com.campEZ.Project0.entity.Orders;
 
