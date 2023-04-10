@@ -21,10 +21,10 @@ public class HomeController {
   }
 
   // 로그인페이지 맵핑
-  @GetMapping("/login")
-  public String login() {
-    return "member/logIn";
-  }
+//  @GetMapping("/login")
+//  public String login() {
+//    return "member/logIn";
+//  }
 
   // 검색페이지 맵핑
   @GetMapping("/search")
