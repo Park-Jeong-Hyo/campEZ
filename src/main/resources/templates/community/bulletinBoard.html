@@ -33,7 +33,6 @@
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="" th:href="@{/notice}" class="link">공지사항</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
           <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
@@ -53,9 +52,8 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/notice}" class="gnb__depth link">공지사항</a></div>
-          <div><a href="" th:href="@{/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
         <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
@@ -82,7 +80,7 @@
             <!--게시글 리스트-->
             <tr class="commun__list" th:if="${post.ptype}=='f'">
               <td th:text="${post.pnumber}">2</td>
-              <td><a clss="link" href="" th:href="@{/community/{id}/g_read(id=${post.pnumber})}" th:text="${post.ptitle}">안녕하세요</a></td>
+              <td><a clss="link" href="" th:href="@{/community/{id}/b_read(id=${post.pnumber})}" th:text="${post.ptitle}">안녕하세요</a></td>
               <td th:text="${post.nickname}">홍길동</td>
               <td th:text="${post.udate}">23.03.23</td>
             </tr>
@@ -118,7 +116,7 @@
           <!--오룬쪽 그리드 영역-->
           <div class="commun__buttons-r">
             <button class="commun_posting-btn">
-              <a href="" class="link" th:href="@{/community/write}">글쓰기</a>
+              <a href="" class="link" th:href="@{/community/write/bb}">글쓰기</a>
             </button>
           </div>
         </section>
@@ -144,7 +142,6 @@
         </div>
         <div class="ft__empty-cell"></div>
       </footer>
-
       <div class="ft-r"></div>
     </div>
   </body>

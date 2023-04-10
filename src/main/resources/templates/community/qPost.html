@@ -4,11 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" th:href="@{./css/errorPage/error.css}" />
-    <title>준비 중</title>
+    <link rel="stylesheet" href="" th:href="@{/css/community/community.css}" />
+    <title>캠핑EZ | 게시글</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
     <div class="wrapper">
       <div class="up-l"></div>
@@ -62,21 +61,31 @@
       </nav>
 
       <div class="gnb-r"></div>
-
-      <div class="mn-l"></div>
-
-      <!-- 메인영역(MAIN) -->
-      <main class="mn">
-        <div class="wrap">
-          <i class="fa-solid fa-screwdriver-wrench fa-10x"></i>
-          <h1>해당 페이지는 현재 준비 중 입니다</h1>
+      <div class="post-l"></div>
+      <!--4개의 큰 구간으로 나눔 -->
+      <main class="post" th:object="${postDetailForm}">
+        <!--좌/우 두개의 구간으로 나눔-->
+        <section class="post__upper">
+          <h4 class="post__title" th:text="*{ptitle}"></h4>
+        </section>
+        <!--게시글 정보-->
+        <section class="post__info">
+          <input class="post__writer hidden" name="pnumber"  th:field="*{pnumber}">
+          <p class="post__writer" th:text="*{nickname}">글쓴이 : 홍길동</p>
+          <p class="post__date" th:text="*{udate}">작성일 : 23.03.21</p>
+        </section>
+        <!--게시글 섹션-->
+        <section class="post__context">
+          <p class="post__main-content" th:text="*{ptext}" ></p>
+        </section>
+        <div class="post__buttons">
+          <button id="btnUpdate">수정</button>
+          <button id="btnDelete">삭제</button>
+          <button id="btnFindAll">목록</button>
         </div>
       </main>
-
-      <div class="mn-r"></div>
-
+      <div class="post-r"></div>
       <div class="ft-l"></div>
-
       <!-- 푸터영역(FOOTER)-->
       <footer class="ft">
         <div class="ft__logo-cell">
@@ -99,5 +108,28 @@
 
       <div class="ft-r"></div>
     </div>
+    <script>
+  const $btnDelete = document.getElementById('btnDelete');
+  const $btnFindAll = document.getElementById('btnFindAll');
+  const $btnUpdate = document.getElementById('btnUpdate');
+
+  //상품 아이디
+  const $pnumber = document.getElementById('pnumber');
+
+  const btnDelete_h = e=>{
+    if(confirm('삭제 하시겠습니까?')){
+      globalThis.location.href = `/community/${$pnumber.value}/q_del`;
+    }
+  }
+  const btnAll_h = e => {
+    globalThis.location.href = `/community/question`;
+  }
+  const btnUpdate_h = e => {
+    globalThis.location.href = `/community/${$pnumber.value}/q_edit`;
+  }
+  $btnUpdate.addEventListener('click',btnUpdate_h, false);
+  $btnFindAll.addEventListener('click',btnAll_h, false);
+  $btnDelete.addEventListener('click',btnDelete_h, false);
+    </script>
   </body>
 </html>
