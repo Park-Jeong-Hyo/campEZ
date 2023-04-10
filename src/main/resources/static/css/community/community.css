@@ -3,6 +3,9 @@
 @import 'community-layout.css';
 
 /*게시판*/
+.hidden {
+  display:none;
+}
 .commun__board-title {
   display: flex;
   justify-content: flex-start;

@@ -33,7 +33,6 @@
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="" th:href="@{/notice}" class="link">공지사항</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
           <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
@@ -53,9 +52,8 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/notice}" class="gnb__depth link">공지사항</a></div>
-          <div><a href="" th:href="@{/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
         <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
@@ -66,15 +64,15 @@
       <div class="posting-l"></div>
       <main class="posting">
         <!--폼태그 글쓰기, 상단 부분과 본문부분으로 나누어짐-->
-        <form action="" method="post" th:object="${postUpdateForm}">
+        <form action="" method="post" th:object="${postSaveForm}">
           <section class="posting__upper">
             <h4 class="posting__title">글쓰기</h4>
           </section>
           <section class="posting__main">
             <select class="posting__select-where" name="" id="">
-              <option value="" selected>자유게시판</option>
+              <option value="" selected>질문게시판</option>
             </select>
-            <input type="text" th:field="*{nickname}"/>
+            <input type="text" class="hidden" th:field="*{nickname}"/>
             <input class="posting__input-title" type="text" th:field="*{ptitle}" placeholder="제목을 입력해 주시기 바랍니다." />
             <section class="posting__buttons">
               <button type="button">글꼴</button>
@@ -86,7 +84,7 @@
             <input type="file" />
           </section>
           <div class="posting__buttons">
-            <button id="btnModify">수정</button>
+            <button id="btnAdd">작성</button>
           </div>
         </form>
       </main>
@@ -115,28 +113,11 @@
       <div class="ft-r"></div>
     </div>
     <script>
-  const $btnDelete = document.getElementById('btnDelete');
-  const $btnFindAll = document.getElementById('btnFindAll');
-  const $btnUpdate = document.getElementById('btnUpdate');
-
-  //상품 아이디
-  const $pnumber = document.getElementById('pnumber');
-
-  const btnDelete_h = e=>{
-    if(confirm('삭제 하시겠습니까?')){
-      globalThis.location.href = `/community/${$pnumber.value}/del`;
-    }
-  }
-  const btnAll_h = e => {
-    globalThis.location.href = `/community/butlletinBoard`;
-  }
-  const btnUpdate_h = e => {
-    globalThis.location.href = `/community/${$pnumber.value}/edit`;
-  }
-  $btnUpdate.addEventListener('click',btnUpdate_h, false);
-  $btnFindAll.addEventListener('click',btnAll_h, false);
-  $btnDelete.addEventListener('click',btnDelete_h, false);
-    </script>
+    const $btnAdd = document.getElementById('btnAdd');
+      const add_h = e => {
+        frm.submit();
+      }
+      btnAdd.addEventListener('click',add_h,false);
     </script>
   </body>
 </html>

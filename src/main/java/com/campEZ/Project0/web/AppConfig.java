@@ -1,8 +1,6 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.web.interceptor.LoginCheckInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +15,9 @@ public class AppConfig implements WebMvcConfigurer {
             .excludePathPatterns(
                     "/",      //초기화면
                     "/community/bulletinBoard", //자유게시판
-                    "/community/notice",  //공지사항
+                    "/community/question",  //질문게시판
+                    "/community/{id}/b_read",  //조회
+                    "/community/{id}/q_read",  //조회
                     "/search",     // 검색
                     "/signup/**",  //회원가입
                     "/login/**",  //로그인
