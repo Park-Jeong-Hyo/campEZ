@@ -24,7 +24,19 @@ public class MyPageCommonController {
 
 //    회원 정보 수정하기
     @GetMapping("/{mid}/common")
-    public String managerMemberMod(@PathVariable String mid,Model model){
+    public String myPageCommon(@PathVariable String mid,Model model){
+//        Members member = membersSVC.memFindN(mid);
+//        log.info("member={}",members);
+//        String type = String.valueOf(member.getMtype());
+//        System.out.println(type);
+//
+//        if ( type.equals("b")) {
+//            System.out.println("타입이 맞음");
+//            return "mypage/myPage__manager";
+//        } else {
+//            System.out.println("타입이 아님");
+//            return "mypage/myPage__common";
+//        }
         try {
             Members members = membersSVC.memFindN(mid);
             Members membersForm = new Members();

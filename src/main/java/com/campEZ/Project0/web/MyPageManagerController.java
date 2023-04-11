@@ -27,7 +27,19 @@ public class MyPageManagerController {
 
 //    회원 정보 수정하기
     @GetMapping("/{mid}/manager")
-    public String commonMemberMod(@PathVariable String mid, Model model) {
+    public String myPageManager(@PathVariable String mid, Model model) {
+//        Members member = membersSVC.memFindB(mid);
+//        log.info("member={}",member);
+//        String type = String.valueOf(member.getMtype());
+//        System.out.println(type);
+//
+//        if ( type.equals("b")) {
+//            System.out.println("타입이 맞음");
+//            return "mypage/myPage__manager";
+//        } else {
+//            System.out.println("타입이 아님");
+//            return "mypage/myPage__common";
+//        }
         try {
             Members members = membersSVC.memFindB(mid);
             Members membersForm = new Members();
@@ -54,6 +66,7 @@ public class MyPageManagerController {
             allList.add(listForm);
             model.addAttribute("myList", allList);
         }
+
         return "mypage/myPage__manager";
     }
 
