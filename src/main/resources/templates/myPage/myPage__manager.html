@@ -312,6 +312,7 @@
     </div>
   </body>
   <script>
+      const $mid = document.getElementById('mid');
     $tab1__1 = document.getElementById('tab1__1');
     $tab1__2 = document.getElementById('tab1__2');
     $tab1__3 = document.getElementById('tab1__3');
@@ -354,7 +355,7 @@
       document.querySelector('.tab2__2__content').style.display = 'block';
     };
     $wthdrBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'block';
+      globalThis.location.href = `/mypage/${$mid.value}/camp/del`;
     });
         $member__modalYBTN.addEventListener('click',()=>{
       document.querySelector(".member__modal").style.display = 'none';

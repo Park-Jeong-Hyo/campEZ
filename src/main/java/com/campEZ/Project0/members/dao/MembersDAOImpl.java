@@ -89,7 +89,7 @@ public class MembersDAOImpl implements MembersDAO {
   @Override
   public Members memFindB(String mid){
     StringBuffer sb = new StringBuffer();
-    sb.append("select mname, mid, phone, email, nickname, maddress, companyname, businessnumber ");
+    sb.append("select mname, mid, phone, email, nickname, maddress, mtype, companyname, businessnumber ");
     sb.append(" from members ");
     sb.append(" where mid = :mid ");
 
@@ -102,7 +102,7 @@ public class MembersDAOImpl implements MembersDAO {
   @Override
   public Members memFindN(String mid){
     StringBuffer sb = new StringBuffer();
-    sb.append("select mname, mid, phone, email, nickname, maddress ");
+    sb.append("select mname, mid, phone, email, nickname, mtype, maddress ");
     sb.append(" from members ");
     sb.append(" where mid = :mid ");
 

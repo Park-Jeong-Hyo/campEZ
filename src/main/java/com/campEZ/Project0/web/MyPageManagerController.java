@@ -1,20 +1,16 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
-import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.members.svc.MembersSVC;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Slf4j
@@ -25,49 +21,44 @@ public class MyPageManagerController {
     private final CampingSVC campingSVC;
     private final MembersSVC membersSVC;
 
-//    회원 정보 수정하기
+    //   캠핑장회원 정보조회 및 수정
     @GetMapping("/{mid}/manager")
-    public String myPageManager(@PathVariable String mid, Model model) {
-//        Members member = membersSVC.memFindB(mid);
-//        log.info("member={}",member);
-//        String type = String.valueOf(member.getMtype());
-//        System.out.println(type);
-//
-//        if ( type.equals("b")) {
-//            System.out.println("타입이 맞음");
-//            return "mypage/myPage__manager";
-//        } else {
-//            System.out.println("타입이 아님");
-//            return "mypage/myPage__common";
-//        }
-        try {
-            Members members = membersSVC.memFindB(mid);
-            Members membersForm = new Members();
-            membersForm.setPw(members.getPw());
-            membersForm.setMid(members.getMid());
-            membersForm.setEmail(members.getEmail());
-            membersForm.setMaddress(members.getMaddress());
-            membersForm.setCompanyname(members.getCompanyname());
-            membersForm.setMname(members.getMname());
-            membersForm.setMtype(members.getMtype());
-            membersForm.setNickname(members.getNickname());
-            membersForm.setPhone(members.getPhone());
+    public String myPageManager(
+        @PathVariable String mid,
+        Model model,
+        HttpSession session
+        ) {
+        LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        Members members = membersSVC.memFindN(mid);
+        log.info("members={}", members);
+        String type = String.valueOf(members.getMtype());
+        System.out.println(type);
+        String memberId = String.valueOf(members.getMid());
+        String loginId = String.valueOf(loginMembers.getMid());
+        System.out.println(memberId);
+        System.out.println(loginId);
+        if (type.equals("b") && memberId.equals(loginId)) {
+            try {
+                Members membersForm = new Members();
 
-            model.addAttribute("members", membersForm);
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-//        내 캠핑장 목록
-        List<Camping> list = campingSVC.campingFindByManagerMid(mid);
-        List<Camping> allList = new ArrayList<>();
-        for (Camping camping : list) {
-            Camping listForm = new Camping();
-            BeanUtils.copyProperties(camping, listForm);
-            allList.add(listForm);
-            model.addAttribute("myList", allList);
-        }
+                membersForm.setBusinessnumber(members.getBusinessnumber());
+                membersForm.setPw(members.getPw());
+                membersForm.setMid(members.getMid());
+                membersForm.setEmail(members.getEmail());
+                membersForm.setMaddress(members.getMaddress());
+                membersForm.setCompanyname(members.getCompanyname());
+                membersForm.setMname(members.getMname());
+                membersForm.setMtype(members.getMtype());
+                membersForm.setNickname(members.getNickname());
+                membersForm.setPhone(members.getPhone());
 
-        return "mypage/myPage__manager";
+                model.addAttribute("members", membersForm);
+            }catch (EmptyResultDataAccessException e){return null;}
+            return "/mypage/myPage__manager";
+        } else {
+            System.out.println("타입이 아님");
+            return "errorPage/preparing";
+        }
     }
 
     //    회원 수정 처리
@@ -90,6 +81,29 @@ public class MyPageManagerController {
         membersSVC.memUpdate(mid, members);
         redirectAttributes.addAttribute("mid", members.getMid());
         return "redirect:/mypage/{mid}/manager";
+    }
+
+    // 사업자 회원 탈퇴
+    @GetMapping("/{id}/camp/del")
+    public String CampDelete(
+        @PathVariable("id") String mid,
+        Model model,
+        HttpSession session
+    ) {
+        Members members = membersSVC.memFindB(mid);
+        LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        String membersId = String.valueOf(members.getMid());
+        String loginId = String.valueOf(loginMembers.getMid());
+        log.info("membersId={}",membersId);
+        log.info("loginId={}",loginId);
+        if ( membersId.equals(loginId) ) {
+            membersSVC.memDelete(mid);
+
+            return "mainPage/mainPage";
+        } else {
+            return "community/question";
+        }
     }
 }
 

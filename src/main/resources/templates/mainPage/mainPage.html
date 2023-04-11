@@ -16,7 +16,7 @@
       <div class="up">
         <a href="" th:href="@{/}" class="up__link">HOME</a>
         <th:block th:if="${!session.isEmpty()}">
-          <a href="" th:href="@{/mypage/test123/manager}" class="up__link">마이페이지</a>
+          <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
           <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
         </th:block>
         <th:block th:if="${session.isEmpty()}">
