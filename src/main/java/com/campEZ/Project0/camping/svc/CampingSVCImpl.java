@@ -37,6 +37,8 @@ public class CampingSVCImpl implements CampingSVC{
   public Optional<Camping> campingDetail(int cnumber) {
     return campingDAO.campingDetail(cnumber);
   }
+  @Override
+  public List<Camping> campingFindByManagerMid(String mid){return campingDAO.campingFindByManagerMid(mid);}
 
   @Override
   public List<Camping> campingSearch(CampingFilterCondition campingFilterCondition) {

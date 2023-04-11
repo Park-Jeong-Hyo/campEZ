@@ -16,6 +16,8 @@ public interface CampingDAO {
   int campingDelete(int cnumber);
   //캠핑장 조회
   Optional<Camping> campingDetail(int cnumber);
+  //  내 캠핑장 조회
+  List<Camping> campingFindByManagerMid(String mid);
   //캠핑장 검색
   List<Camping> campingSearch(CampingFilterCondition campingFilterCondition);
 }

@@ -22,18 +22,6 @@ public class MyPageCommonController {
     private final MembersSVC membersSVC;
 
 
-//    @GetMapping("/{mid}/common")
-// 캠핑 목록 불러오기
-//    public String Commonlist(@PathVariable String mid ,Model model,검색조건 검색조건){
-//        List<Camping> list = campingSVC.전체찾는메소드(검색조건);
-//        List<Camping> allList = new ArrayList<>();
-//        for (Camping camping : list) {
-//            Camping listForm = new Camping();
-//            BeanUtils.copyProperties(camping, listForm);
-//            allList.add(listForm);
-//        }
-//        model.addAttribute("list", allList);
-//          }
 //    회원 정보 수정하기
     @GetMapping("/{mid}/common")
     public String managerMemberMod(@PathVariable String mid,Model model){
@@ -77,12 +65,6 @@ public class MyPageCommonController {
         redirectAttributes.addAttribute("mid",members.getMid());
         return "redirect:/mypage/{mid}/common";
         }
-    //    회원 탈퇴
-//    @GetMapping("/{mid}/common")
-//    public String deleteCommon(@PathVariable("mid") String mid) {
-//        membersSVC.memDelete(mid);
-//        return "redirect:/";
-//    }
     }
 
 //    회원 탈퇴, 예약 목록, 예약 취소, 타임리프로 값 받기, html에서 링크들 연결

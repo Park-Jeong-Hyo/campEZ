@@ -200,7 +200,7 @@
         <!-- 탭2, 관리자 계정이 보게 될 화면 -->
         <div class="tab2__contant">
           <!-- 탭2__1, 내가 관리 중인 캠핑장 -->
-          <div class="tab2__1__content">
+          <div class="tab2__1__content" th:each="list : ${myList}">
             <hr />
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <div class="myCamp__item">
@@ -210,26 +210,8 @@
                 alt="이미지 없음"
               />
               <div class="myCamp__campName">
-                <a href="">캠핑장 이름</a>
+                <a href="" th:text="${list.cname}">캠핑장 이름</a>
                 </div>
-              <button class="myCamp__reserv">예약 내역</button>
-            </div>
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName">캠핑장 이름</div>
-              <button class="myCamp__reserv">예약 내역</button>
-            </div>
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName">캠핑장 이름</div>
               <button class="myCamp__reserv">예약 내역</button>
             </div>
             <!-- 페이지 버튼 -->

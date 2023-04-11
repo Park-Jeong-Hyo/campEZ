@@ -4,7 +4,6 @@ import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.validator.internal.util.privilegedactions.NewInstance;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -123,12 +122,23 @@ public class CampingDAOImpl implements CampingDAO{
       return Optional.empty();
     }
   }
+
+    //  내 캠핑장 조회
+      public List<Camping> campingFindByManagerMid(String mid){
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT * FROM CAMPING ");
+        sql.append("WHERE mid = :mid ");
+          Map<String, String> param = Map.of("mid", mid);
+          List<Camping> MyCampingList = template.query(sql.toString(), param, BeanPropertyRowMapper.newInstance(Camping.class));
+          return MyCampingList;
+      }
+
   //캠핑장 검색
   //매개변수: 캠핑장 검색 조건, 캠핑장 종류, 주소, 이름 (시간 되면 조건도 추가 예정)
   @Override
   public List<Camping> campingSearch(CampingFilterCondition campingFilterCondition) {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT cnumber, ctype, caddress, cname, camptel ");
+    sql.append("SELECT cnumber, ctype, caddress, cname ");
     sql.append("FROM CAMPING ");
     sql.append("WHERE ");
     //동적 쿼리

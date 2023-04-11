@@ -22,9 +22,6 @@
   align-items: center;
   padding: 1rem;
 }
-/* .tab2 {
-  display: none;
-} */
 tabBtn--label {
   display: flex;
   width: 200%;
@@ -163,4 +160,8 @@ tabBtn--label {
   border-radius: 15%;
   margin: 0.5vw;
   padding: 0.5vh;
+}
+/* 첫 시작 화면 */
+.tab1__2__content{
+  display: block;
 }
