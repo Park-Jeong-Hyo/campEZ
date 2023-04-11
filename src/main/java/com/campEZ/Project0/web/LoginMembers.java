@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LoginMembers {
-    private String mid;
-    private String email;
-    private String nickname;
+    private String mid;         //아이디
+    private String nickname;    //닉네임
+    private String mtype;       //회원 타입
 }

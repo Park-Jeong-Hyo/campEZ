@@ -1,4 +1,4 @@
-package com.campEZ.Project0.entity;
+package com.campEZ.Project0.web.form.camping;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Camping {
+public class CampingDetailForm {
   private int cnumber;
   private String mid;
   private String cname;

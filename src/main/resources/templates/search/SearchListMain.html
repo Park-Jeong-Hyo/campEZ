@@ -32,7 +32,6 @@
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="" th:href="@{/notice}" class="link">공지사항</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
           <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
@@ -52,7 +51,6 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/notice}" class="gnb__depth link">공지사항</a></div>
           <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
           <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
@@ -71,7 +69,7 @@
           <!-- 검색영역(SEARCHBOX) -->
           <form class="img__searchBox" th:method="post" th:object="${campingSearchForm}">
             <button class="img__searchBox-search" type="submit">검색</button>
-            <input type="search" class="img__searchBox-bar" th:field="${campingSearchForm.cname}"/>
+            <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력해주세요." th:field="${campingSearchForm.cname}"/>
             <div class="img__searchBox-options">
               <select th:field="${campingSearchForm.ctype}" id="img__searchBox-options-select" required>
                 <option th:value='g'>글램핑</option>
@@ -116,19 +114,14 @@
           </div>
           <div class="mn__main-write">
             <p class="mn__main-name link">
-              <a href="/templates/detailPage/detailPage-user.html" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
+              <a href="" th:href="@{/search/{cnumber}/detail(cnumber=${item.getCnumber})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
             </p>
             <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
             <p th:text="${item.getCamptel}">000-0000-0000</p>
-            <span class="mn__main-tag">
-              <!--작동이 안됨. 아예 빼버리는 방법도 있다.-->
-<!--              <th:block th:if="${item.getCtype() == 'a'}">-->
-<!--                <div class="mn__main-tag-detail" th:text="${item.getCtype()}">#오토캠핑</div>-->
-<!--              </th:block>-->
-<!--              <th:block th:if="${item.getCtype() == 'g'}">-->
-<!--                <div class="mn__main-tag-detail" th:text="${item.getCtype()}">#글램핑</div>-->
-<!--              </th:block>-->
-            </span>
+            <p class="mn__main-tag">
+                <div class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</div>
+                <div class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</div>
+            </p>
           </div>
           <div class="mn__main-empty1-r"></div>
           </th:block>

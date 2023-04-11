@@ -59,11 +59,12 @@ public class LoginController {
     HttpSession session = httpServletRequest.getSession(true);
     LoginMembers loginMembers = new LoginMembers(
             members.get().getMid(),
-            members.get().getEmail(),
-            members.get().getNickname()
+            members.get().getNickname(),
+            members.get().getMtype()
     );
     //SessionID가 중복 사용되므로 상수로 정의함.
     session.setAttribute(SessionConst.LOGIN_MEMBER, loginMembers);
+    log.info("mtype={}", members.get().getMtype());
     log.info("loginMembers={}", loginMembers);
     log.info("Session ID: {}", session.getId());
     return "redirect:"+redirectUrl;

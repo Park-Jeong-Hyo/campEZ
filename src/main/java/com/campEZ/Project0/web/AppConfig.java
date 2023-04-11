@@ -18,11 +18,11 @@ public class AppConfig implements WebMvcConfigurer {
                     "/community/question",  //질문게시판
                     "/community/{id}/b_read",  //조회
                     "/community/{id}/q_read",  //조회
-                    "/search",     // 검색
+                    "/search/**",     // 검색
                     "/signup/**",  //회원가입
                     "/login/**",  //로그인
                     "/logout/**", //로그아웃
-                    "/members/**", //멤버 이하 모든 페이지
+                    "/member/**", //멤버 이하 모든 페이지
                     "/css/**",
                     "/js/**",
                     "/img/**",

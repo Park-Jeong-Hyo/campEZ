@@ -3,6 +3,7 @@ package com.campEZ.Project0.web;
 import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camping;
+import com.campEZ.Project0.web.form.camping.CampingDetailForm;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,14 +12,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -70,5 +69,35 @@ public class CampingController {
     model.addAttribute("completeList", completeList);
     log.info("completelist={}", completeList);
     return "search/SearchListMain";
+  }
+  //캠핑장 조회
+  @GetMapping("{id}/detail")
+  public String campingDetail(
+      @PathVariable("id") int cnumber,
+      Model model
+  ) {
+    CampingDetailForm detailForm = new CampingDetailForm();
+    Optional<Camping> detail = campingSVC.campingDetail(cnumber);
+    Camping camping = detail.orElseThrow();
+    detailForm.setCnumber(camping.getCnumber());
+    detailForm.setMid(camping.getMid());
+    detailForm.setCname(camping.getCname());
+    detailForm.setCaddress(camping.getCaddress());
+    detailForm.setCamptel(camping.getCamptel());
+    detailForm.setCtype(camping.getCtype());
+    detailForm.setOperdate(camping.getOperdate());
+    detailForm.setHomepage(camping.getHomepage());
+    detailForm.setCtitle(camping.getCtitle());
+    detailForm.setCtext(camping.getCtext());
+    detailForm.setPriceweekday(camping.getPriceweekday());
+    detailForm.setPriceweekend(camping.getPriceweekend());
+    detailForm.setToilet(camping.getToilet());
+    detailForm.setMart(camping.getMart());
+    detailForm.setUdate(camping.getUdate());
+    log.info("detailForm={}",detailForm);
+
+    model.addAttribute("detailForm", detailForm);
+    return "detailPage/detailPage-user";
+
   }
 }
