@@ -187,20 +187,19 @@ public class MembersDAOImpl implements MembersDAO {
   //로그인
   @Override
   public Optional<Members> login(String mid, String pw){
-    StringBuffer sql = new StringBuffer();
-    sql.append("select nickname");
-    sql.append(" from members");
-    sql.append(" where mid = :mid and pw = :pw ");
+    StringBuffer sb = new StringBuffer();
+    sb.append("select nickname");
+    sb.append(" from members");
+    sb.append(" where mid = :mid and pw = :pw ");
 
     Map<String, String> param = Map.of("mid", mid,"pw",pw);
     List<Members> list = template.query(
-        sql.toString(),
+        sb.toString(),
         param,
-        BeanPropertyRowMapper.newInstance(Members.class)
+        new BeanPropertyRowMapper(Members.class)
     );
 
     return list.size() == 1 ? Optional.of(list.get(0)) : Optional.empty();
   }
-
 
 }
