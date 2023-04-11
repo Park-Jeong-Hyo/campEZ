@@ -2,6 +2,7 @@ package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Members;
+import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,9 @@ public class MyPageCommonController {
                 membersForm.setPhone(members.getPhone());
 
                 model.addAttribute("members", membersForm);
+            //            예약 현황 보기
+            Orders myOrders = membersSVC.orderFindN(mid);
+            model.addAttribute("myOrders", myOrders);
             }catch (EmptyResultDataAccessException e){return null;}
             return "/mypage/myPage__common";
         } else {

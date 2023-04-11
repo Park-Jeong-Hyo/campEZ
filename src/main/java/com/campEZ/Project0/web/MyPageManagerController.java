@@ -1,7 +1,9 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
+import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
+import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 
 @Slf4j
@@ -53,7 +57,14 @@ public class MyPageManagerController {
                 membersForm.setPhone(members.getPhone());
 
                 model.addAttribute("members", membersForm);
-            }catch (EmptyResultDataAccessException e){return null;}
+//            내 캠핑장 보기
+            List<Camping> myCamp = campingSVC.campingFindByManagerMid(mid);
+            model.addAttribute("myCamp", myCamp);
+
+//            예약 현황 보기
+            Orders myOrders = membersSVC.orderFindN(mid);
+            model.addAttribute("myOrders", myOrders);
+            }catch (EmptyResultDataAccessException e){return "mypage/myPage__manager";}
             return "/mypage/myPage__manager";
         } else {
             System.out.println("타입이 아님");
