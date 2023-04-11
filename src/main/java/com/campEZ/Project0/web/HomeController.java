@@ -26,11 +26,11 @@ public class HomeController {
 //    return "member/logIn";
 //  }
 
-  // 검색페이지 맵핑
-  @GetMapping("/search")
-  public String search() {
-    return "search/searchListMain";
-  }
+//  // 검색페이지 맵핑
+//  @GetMapping("/search")
+//  public String search() {
+//    return "search/searchListMain";
+//  }
 
   // 마이페이지 맵핑
   @GetMapping("/mypage")

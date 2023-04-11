@@ -73,12 +73,8 @@
 }
 .mn__main {
   display: grid;
-  grid-template-areas:
-    'mn__main-empty1-l mn__main-photo1 mn__main-write1 mn__main-empty1-r'
-    'mn__main-empty2-l mn__main-photo2 mn__main-write2 mn__main-empty2-r'
-    'mn__main-empty3-l mn__main-photo3 mn__main-write3 mn__main-empty3-r';
   grid-template-columns: 1fr 250px 350px 1fr;
-  grid-template-rows: 300px 300px 300px;
+  grid-auto-rows: 300px;
   padding-bottom: 50px;
   padding-top: 50px;
   gap: 50px;
