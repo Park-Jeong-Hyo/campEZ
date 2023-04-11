@@ -89,18 +89,21 @@ public class MyPageCommonController {
         Model model,
         HttpSession session
     ) {
-        Members members = membersSVC.memFindB(mid);
         LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-        String membersId = String.valueOf(members.getMid());
+        Members members = membersSVC.memFindN(mid);
+        log.info("members={}", members);
+        String type = String.valueOf(members.getMtype());
+        System.out.println(type);
+        String memberId = String.valueOf(members.getMid());
         String loginId = String.valueOf(loginMembers.getMid());
-        log.info("membersId={}",membersId);
-        log.info("loginId={}",loginId);
-        if ( membersId.equals(loginId) ) {
+        System.out.println(memberId);
+        System.out.println(loginId);
+        if ( type.equals("n") && memberId.equals(loginId) ) {
             membersSVC.memDelete(mid);
-            return "mainPage/mainPage";
+            session.invalidate();
+            return "redirect:/";
         } else {
-            return "community/question";
+            return "redirect:/preparing";
         }
     }
 
