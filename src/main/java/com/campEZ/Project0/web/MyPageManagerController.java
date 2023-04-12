@@ -58,7 +58,7 @@ public class MyPageManagerController {
             log.info("myCamp={}",myCamp);
             model.addAttribute("myCamp", myCamp);
 //            예약 현황 보기
-            Orders myOrders = membersSVC.orderFindN(mid);
+            List<Orders> myOrders = membersSVC.orderFind(mid);
                 log.info("myOrders={}",myOrders);
             model.addAttribute("myOrders", myOrders);
             }catch (EmptyResultDataAccessException e){return "/mypage/myPage__manager";}

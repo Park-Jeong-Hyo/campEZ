@@ -98,8 +98,8 @@
               <p></p>
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" th:object="${myOrders}" >
-              <div class="reserv__campName"><a href="" th:text="${myOrders.mid}" >캠핑장 이름</a></div>
+            <div class="reserv__item" th:each=" item : ${myOrders}" >
+              <div class="reserv__campName"><a href="" th:text="${item.mid}" >캠핑장 이름</a></div>
               <div class="reserv__date">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>
@@ -119,15 +119,15 @@
             <form action="" th:object="${members}" method="post">
               <div class="member__item">
                 <div class="member__title" >이름</div>
-                <input class="member__main" type="text" th:field="*{mname}"/>
+                <input class="member__main" type="text" th:field="*{mname}" readonly />
+              </div>
+              <div class="member__item">
+                <div class="member__title">아이디</div>
+                <input class="member__main" type="text" th:field="*{mid}" readonly />
               </div>
               <div class="member__item">
                 <div class="member__title" >비밀번호</div>
                 <input class="member__main" type="text" th:field="*{pw}"/>
-              </div>
-              <div class="member__item">
-                <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:field="*{mid}" />
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
@@ -147,15 +147,15 @@
               </div>
               <div class="member__item">
                 <div class="member__title">타입</div>
-                <input class="member__main" type="text" th:field="*{mtype}" />
+                <input class="member__main" type="text" th:field="*{mtype}" readonly />
               </div>
               <div class="member__item">
                 <div class="member__title">회사이름</div>
-                <input class="member__main" type="text" th:field="*{companyname}" />
+                <input class="member__main" type="text" th:field="*{companyname}" readonly />
               </div>
               <div class="member__item">
                 <div class="member__title">사업자번호</div>
-                <input class="member__main" type="text" th:field="*{businessnumber}" />
+                <input class="member__main" type="text" th:field="*{businessnumber}" readonly />
               </div>
               <div class="member__item">
                 <input class="member__btn" type="submit" value="수정하기">
@@ -340,6 +340,15 @@
       document.querySelector('.tab2__1__content').style.display = 'none';
       document.querySelector('.tab2__2__content').style.display = 'block';
     };
+
+  document.querySelector('.myCamp__reserv').addEventListener('click', function() {
+  document.querySelector('#tab2__2').checked = true;
+  document.querySelector('.tab1__contant').style.display = 'none';
+  document.querySelector('.tab2__contant').style.display = 'flex';
+  document.querySelector('.tab2__1__content').style.display = 'none';
+  document.querySelector('.tab2__2__content').style.display = 'block';
+});
+
     $wthdrBTN.addEventListener('click',()=>{
       document.querySelector('.member__modal').style.display = 'block';
     });

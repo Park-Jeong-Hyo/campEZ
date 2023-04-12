@@ -1,6 +1,7 @@
 package com.campEZ.Project0.uploadfile.svc;
 
 import com.campEZ.Project0.entity.UploadFile;
+import com.campEZ.Project0.web.AttachFileType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

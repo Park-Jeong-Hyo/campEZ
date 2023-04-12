@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -55,7 +57,7 @@ public class MyPageCommonController {
 
                 model.addAttribute("members", membersForm);
             //            예약 현황 보기
-            Orders myOrders = membersSVC.orderFindN(mid);
+            List<Orders> myOrders = membersSVC.orderFind(mid);
             model.addAttribute("myOrders", myOrders);
             }catch (EmptyResultDataAccessException e){return "/mypage/myPage__common";}
             return "/mypage/myPage__common";
