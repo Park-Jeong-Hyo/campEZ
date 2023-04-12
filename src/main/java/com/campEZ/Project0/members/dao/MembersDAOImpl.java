@@ -39,10 +39,8 @@ public class MembersDAOImpl implements MembersDAO {
     sb.append(":companyname, ");
     sb.append(":businessnumber) ");
 
-
     SqlParameterSource param = new BeanPropertySqlParameterSource(members);
     template.update(sb.toString(),param);
-
 
     return members;
   }
@@ -113,23 +111,23 @@ public class MembersDAOImpl implements MembersDAO {
 
   //예약조회(사업자)
   @Override
-  public Orders orderFindB(int cnumber){
+  public List<Orders> orderFindB(int cnumber){
     StringBuffer sb = new StringBuffer();
     sb.append("select * from orders where cnumber = :cnumber ");
 
     Map<String, Integer> param = Map.of("cnumber", cnumber);
-    Orders orders = template.queryForObject(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));
+    List<Orders> orders = template.query(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));
     return orders;
   }
 
   //예약조회(일반회원)
   @Override
-  public Orders orderFindN(String mid){
+  public List<Orders> orderFind(String mid){
     StringBuffer sb = new StringBuffer();
     sb.append("select * from orders where mid = :mid ");
 
     Map<String, String> param = Map.of("mid",mid);
-    Orders orders = template.queryForObject(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));
+    List<Orders> orders = template.query(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));
     return orders;
   }
 

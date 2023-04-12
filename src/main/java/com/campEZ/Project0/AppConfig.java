@@ -1,4 +1,4 @@
-package com.campEZ.Project0.web;
+package com.campEZ.Project0;
 
 import com.campEZ.Project0.web.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;

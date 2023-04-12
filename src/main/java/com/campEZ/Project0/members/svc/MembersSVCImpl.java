@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -47,14 +48,14 @@ public class MembersSVCImpl implements MembersSVC {
 
   //예약조회(사업자)
   @Override
-  public Orders orderFindB(int cnumber){
+  public List<Orders> orderFindB(int cnumber){
     return membersDAO.orderFindB(cnumber);
   }
 
   //예약조회(일반회원)
   @Override
-  public Orders orderFindN(String mid){
-    return membersDAO.orderFindN(mid);
+  public List<Orders> orderFind(String mid){
+    return membersDAO.orderFind(mid);
   }
 
   //아이디찾기

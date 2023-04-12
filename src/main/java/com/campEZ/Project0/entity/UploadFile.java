@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadFile{
-  private int upnumber;
-  private char position;
-  private int reference;
+  private Long upnumber;   // upnumber	NUMBER(4)
+  private String code;     // CODE	VARCHAR2(5 BYTE)
+  private Long rid;
   private String storename;
   private String uploadname;
   private String fsize;

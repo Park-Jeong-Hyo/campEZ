@@ -3,6 +3,7 @@ package com.campEZ.Project0.members.dao;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface MembersDAO {
@@ -23,10 +24,10 @@ public interface MembersDAO {
   Members memFindN(String mid);
 
   //예약조회(사업자)
-  Orders orderFindB(int cnumber);
+  List<Orders> orderFindB(int cnumber);
 
   //예약조회(일반회원)
-  Orders orderFindN(String mid);
+  List<Orders> orderFind(String mid);
 
   //아이디찾기
   Optional<String> idFind(String mname,String phone,String email);

@@ -22,15 +22,15 @@ public class MemberController {
 
   private final MembersSVC membersSVC;
 
-  //회원가입양식
-  @GetMapping("/add")
+  //회원가입양식(일반)
+  @GetMapping("/addn")
   public String joinForm(Model model){
     model.addAttribute("joinForm", new JoinForm());
     return "member/SignUpUserCamp";
   }
 
-  //회원가입처리
-  @PostMapping("/add")
+  //회원가입처리(일반)
+  @PostMapping("/addn")
   public String join(@Valid @ModelAttribute JoinForm joinForm, BindingResult bindingResult){
     log.info("joinForm={}",joinForm);
     if(bindingResult.hasErrors()){

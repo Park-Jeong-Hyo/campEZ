@@ -20,10 +20,11 @@ public class OrdersDAOImpl implements OrdersDAO{
   private final NamedParameterJdbcTemplate template;
 
   //예약
+  //예약
   @Override
   public Orders order(Orders orders) {
     StringBuffer sb = new StringBuffer();
-    sb.append("insert into ORDERS onumber,cnumber,area,mid,phone,headcount,checkin,checkout) ");
+    sb.append("insert into ORDERS (onumber,cnumber,area,mid,phone,headcount,checkin,checkout) ");
     sb.append("values(onumber_seq.nextval, :cnumber, :area, :mid, :phone, :headcount, :checkin, :checkout) ");
 
     SqlParameterSource param = new BeanPropertySqlParameterSource(orders);
