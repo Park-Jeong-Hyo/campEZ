@@ -223,11 +223,12 @@
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
-    $wthdrBTN.addEventListener('click', () => {
-      globalThis.location.href = `/mypage/${$mid.value}/gen/del`;
+    $wthdrBTN.addEventListener('click',()=>{
+      document.querySelector('.member__modal').style.display = 'block';
     });
-    $member__modalYBTN.addEventListener('click', () => {
-      document.querySelector('.member__modal').style.display = 'none';
+        $member__modalYBTN.addEventListener('click',()=>{
+      document.querySelector(".member__modal").style.display = 'none';
+      globalThis.location.href = `/mypage/${$mid.value}/gen/del`;
     });
     $member__modalNBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';

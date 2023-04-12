@@ -103,7 +103,14 @@ public class MyPageCommonController {
         System.out.println(memberId);
         System.out.println(loginId);
         if ( type.equals("n") && memberId.equals(loginId) ) {
-            membersSVC.memDelete(mid);
+            System.out.println("발동됨");
+            try {
+                membersSVC.memDelete(mid);
+            }catch (org.springframework.dao.DataIntegrityViolationException e){
+                return "redirect:/remain";
+            }catch (Exception e){
+                return "redirect:/unknown";
+            }
             session.invalidate();
             return "redirect:/";
         } else {
@@ -112,5 +119,3 @@ public class MyPageCommonController {
     }
 
     }
-
-//    회원 탈퇴, 예약 목록, 예약 취소, 타임리프로 값 받기, html에서 링크들 연결

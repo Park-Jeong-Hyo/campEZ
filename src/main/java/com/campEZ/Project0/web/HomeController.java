@@ -52,10 +52,20 @@ public class HomeController {
     }
   }
 
-  // 준비중페이지 맵핑
+  // 준비 중 페이지 맵핑
   @GetMapping("/preparing")
   public String error() {
     return "errorPage/preparing";
+  }
+  // 데이터 남아있음 페이지 맵핑
+  @GetMapping("/remain")
+  public String remain() {
+    return "errorPage/remain";
+  }
+  // 알 수 없는 에러 맵핑
+  @GetMapping("/unknown")
+  public String unknown() {
+    return "errorPage/unknown";
   }
 }
 

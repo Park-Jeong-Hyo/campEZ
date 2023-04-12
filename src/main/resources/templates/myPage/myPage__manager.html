@@ -341,12 +341,13 @@
       document.querySelector('.tab2__2__content').style.display = 'block';
     };
     $wthdrBTN.addEventListener('click',()=>{
-      globalThis.location.href = `/mypage/${$mid.value}/camp/del`;
+      document.querySelector('.member__modal').style.display = 'block';
     });
         $member__modalYBTN.addEventListener('click',()=>{
       document.querySelector(".member__modal").style.display = 'none';
+      globalThis.location.href = `/mypage/${$mid.value}/camp/del`;
     });
-        $member__modalNBTN.addEventListener('click',()=>{
+    $member__modalNBTN.addEventListener('click',()=>{
       document.querySelector(".member__modal").style.display = 'none';
     });
 
