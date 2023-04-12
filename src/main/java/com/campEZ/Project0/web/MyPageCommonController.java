@@ -57,7 +57,7 @@ public class MyPageCommonController {
             //            예약 현황 보기
             Orders myOrders = membersSVC.orderFindN(mid);
             model.addAttribute("myOrders", myOrders);
-            }catch (EmptyResultDataAccessException e){return null;}
+            }catch (EmptyResultDataAccessException e){return "/mypage/myPage__common";}
             return "/mypage/myPage__common";
         } else {
             System.out.println("타입이 아님");

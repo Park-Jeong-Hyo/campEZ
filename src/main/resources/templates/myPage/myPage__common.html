@@ -88,23 +88,8 @@
               <p></p>
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item">
-              <div class="reserv__campName"><a href="">캠핑장 이름</a></div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
+            <div class="reserv__item" th:object="${myOrders}" >
+              <div class="reserv__campName"><a href="" th:text="${myOrders.mid}" >캠핑장 이름</a></div>
               <div class="reserv__date">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>

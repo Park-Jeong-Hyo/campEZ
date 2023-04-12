@@ -34,13 +34,9 @@ public class MyPageManagerController {
         ) {
         LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Members members = membersSVC.memFindN(mid);
-        log.info("members={}", members);
         String type = String.valueOf(members.getMtype());
-        System.out.println(type);
         String memberId = String.valueOf(members.getMid());
         String loginId = String.valueOf(loginMembers.getMid());
-        System.out.println(memberId);
-        System.out.println(loginId);
         if (type.equals("b") && memberId.equals(loginId)) {
             try {
                 Members membersForm = new Members();
@@ -59,12 +55,13 @@ public class MyPageManagerController {
                 model.addAttribute("members", membersForm);
 //            내 캠핑장 보기
             List<Camping> myCamp = campingSVC.campingFindByManagerMid(mid);
+            log.info("myCamp={}",myCamp);
             model.addAttribute("myCamp", myCamp);
-
 //            예약 현황 보기
             Orders myOrders = membersSVC.orderFindN(mid);
+                log.info("myOrders={}",myOrders);
             model.addAttribute("myOrders", myOrders);
-            }catch (EmptyResultDataAccessException e){return "mypage/myPage__manager";}
+            }catch (EmptyResultDataAccessException e){return "/mypage/myPage__manager";}
             return "/mypage/myPage__manager";
         } else {
             System.out.println("타입이 아님");

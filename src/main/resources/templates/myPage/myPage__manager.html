@@ -98,29 +98,8 @@
               <p></p>
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" >
-
-<!--            th:object="${myOrders}"-->
-
-              <div class="reserv__campName"><a href="" >캠핑장 이름</a></div>
-
-<!--              th:text="${myOrders.mid}"-->
-
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
-            </div>
-            <div class="reserv__item">
-              <div class="reserv__campName">캠핑장 이름</div>
+            <div class="reserv__item" th:object="${myOrders}" >
+              <div class="reserv__campName"><a href="" th:text="${myOrders.mid}" >캠핑장 이름</a></div>
               <div class="reserv__date">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>
@@ -210,15 +189,14 @@
             <hr />
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <div class="myCamp__item" >
-<!--      th:object="${myCamp}"        -->
               <img
                 class="myCamp__Photo"
                 src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
                 alt="이미지 없음"
               />
-              <div class="myCamp__campName">
-                <a href=""  >캠핑장 이름</a>
-<!--      th:text="${myCamp.cname}"          -->
+              <div class="myCamp__campName" th:each="item : ${myCamp}">
+                <a href="" th:text="${item.cname}">캠핑장 이름</a>
+
                 </div>
               <button class="myCamp__reserv">예약 내역</button>
             </div>
