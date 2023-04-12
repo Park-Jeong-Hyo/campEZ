@@ -1,5 +1,6 @@
 package com.campEZ.Project0.members.svc;
 
+import com.campEZ.Project0.entity.OrdersAndCName;
 import com.campEZ.Project0.members.dao.MembersDAO;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
@@ -48,8 +49,8 @@ public class MembersSVCImpl implements MembersSVC {
 
   //예약조회(사업자)
   @Override
-  public List<Orders> orderFindB(int cnumber){
-    return membersDAO.orderFindB(cnumber);
+  public List<OrdersAndCName> orderFindB(String mid){
+    return membersDAO.orderFindB(mid);
   }
 
   //예약조회(일반회원)

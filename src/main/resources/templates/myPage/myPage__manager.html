@@ -223,38 +223,11 @@
               <p>퇴실일</p>
               <p>상태</p>
             </div>
-            <div class="managerRev__item">
+            <div class="managerRev__item" th:each="item : ${OrdersAndCName}">
               <div class="managerRev__num">01</div>
               <div class="managerRev__campName">
-                <a href="">캠핑장 이름</a>
+                <a href="" th:text="${item.cname}">캠핑장 이름</a>
                 </div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
-              <div class="managerRev__state">대기</div>
-            </div>
-            <div class="managerRev__item">
-              <div class="managerRev__num">01</div>
-              <div class="managerRev__campName">캠핑장 이름</div>
               <div class="managerRev__revNum">2832753</div>
               <div class="managerRev__zone">2-9d</div>
               <div class="managerRev__inDate">22.22</div>

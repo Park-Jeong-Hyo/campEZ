@@ -4,6 +4,7 @@ import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.entity.OrdersAndCName;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +62,10 @@ public class MyPageManagerController {
             List<Orders> myOrders = membersSVC.orderFind(mid);
                 log.info("myOrders={}",myOrders);
             model.addAttribute("myOrders", myOrders);
+//            내 캠핑장 예약 관리
+                List<OrdersAndCName> OrdersAndCName = membersSVC.orderFindB(mid);
+                log.info("OrdersAndCName={}",OrdersAndCName);
+                model.addAttribute("OrdersAndCName", OrdersAndCName);
             }catch (EmptyResultDataAccessException e){return "/mypage/myPage__manager";}
             return "/mypage/myPage__manager";
         } else {

@@ -2,6 +2,7 @@ package com.campEZ.Project0.members.svc;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.entity.OrdersAndCName;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public interface MembersSVC {
   Members memFindN(String mid);
 
   //예약조회(사업자)
-  List<Orders> orderFindB(int cnumber);
+  List<OrdersAndCName> orderFindB(String mid);
 
   //예약조회(일반회원)
   List<Orders> orderFind(String mid);

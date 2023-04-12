@@ -36,3 +36,6 @@
 0412/이민기/회원 탈퇴 / 오류 페이지 2개 (remain, unknown) 추가
 
 0412/최민승
+
+0413/이민기/mypage 예약, ordersAndCName 엔티티 임시 추가, 오류 수정,
+오류 페이지 맵핑(return "/remain",/unknown) - try catch로 필요할 때 쓰기
