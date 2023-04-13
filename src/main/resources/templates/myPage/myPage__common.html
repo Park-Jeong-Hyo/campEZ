@@ -89,8 +89,8 @@
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
             <div class="reserv__item" th:each=" item : ${myOrders}" >
-              <div class="reserv__campName"><a href="" th:text="${item.mid}" >캠핑장 이름</a></div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
+              <div class="reserv__campName"><a href="" th:text="${item.onumber}" >캠핑장 이름</a></div>
+              <div class="reserv__date" th:text="|${item.checkin} ~ ${item.checkout}|">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>
             <!-- 예약 관리에서 페이지 버튼 -->

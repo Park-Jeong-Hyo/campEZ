@@ -99,8 +99,8 @@
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
             <div class="reserv__item" th:each=" item : ${myOrders}" >
-              <div class="reserv__campName"><a href="" th:text="${item.mid}" >캠핑장 이름</a></div>
-              <div class="reserv__date">22.22.22~22.22.22</div>
+              <div class="reserv__campName"><a href="" th:text="${item.onumber}" >캠핑장 이름</a></div>
+              <div class="reserv__date" th:text="|${item.checkin} ~ ${item.checkout}|">22.22.22~22.22.22</div>
               <button class="reserv__btn">취소</button>
             </div>
             <!-- 예약 관리에서 페이지 버튼 -->
@@ -215,23 +215,23 @@
             <hr />
             <!-- 내 캠핑장 예약 내역 타이틀 -->
             <div class="managerRev__title">
-              <p></p>
-              <p>캠핑장 이름</p>
-              <p>예약번호</p>
-              <p>예약 구역</p>
-              <p>입실일</p>
-              <p>퇴실일</p>
+              <p>캠프번호</p>
+              <p>이름</p>
+              <p>인원</p>
+              <p>구역 </p>
+              <p>입실일 &nbsp &nbsp &nbsp &nbsp &nbsp </p>
+              <p>퇴실일 &nbsp &nbsp &nbsp &nbsp &nbsp </p>
               <p>상태</p>
             </div>
-            <div class="managerRev__item" th:each="item : ${OrdersAndCName}">
-              <div class="managerRev__num">01</div>
+            <div class="managerRev__item" >
+              <div class="managerRev__num" >01</div>
               <div class="managerRev__campName">
-                <a href="" th:text="${item.cname}">캠핑장 이름</a>
+                <a href="" >캠핑장 이름</a>
                 </div>
-              <div class="managerRev__revNum">2832753</div>
-              <div class="managerRev__zone">2-9d</div>
-              <div class="managerRev__inDate">22.22</div>
-              <div class="managerRev__outDate">22.22</div>
+              <div class="managerRev__revNum"  >2832753</div>
+              <div class="managerRev__zone" >2-9d</div>
+              <div class="managerRev__inDate" >22.22</div>
+              <div class="managerRev__outDate" >22.22</div>
               <div class="managerRev__state">대기</div>
             </div>
             <div class="managerRev__page">

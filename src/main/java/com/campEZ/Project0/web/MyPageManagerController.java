@@ -4,8 +4,8 @@ import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
-import com.campEZ.Project0.entity.OrdersAndCName;
 import com.campEZ.Project0.members.svc.MembersSVC;
+import com.campEZ.Project0.orders.svc.OrdersSVC;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,11 +25,13 @@ import java.util.List;
 public class MyPageManagerController {
     private final CampingSVC campingSVC;
     private final MembersSVC membersSVC;
+    private final OrdersSVC ordersSVC;
 
     //   캠핑장회원 정보조회 및 수정
     @GetMapping("/{mid}/manager")
     public String myPageManager(
         @PathVariable String mid,
+//        @PathVariable Integer cnumber,
         Model model,
         HttpSession session
         ) {
@@ -62,10 +64,10 @@ public class MyPageManagerController {
             List<Orders> myOrders = membersSVC.orderFind(mid);
                 log.info("myOrders={}",myOrders);
             model.addAttribute("myOrders", myOrders);
-//            내 캠핑장 예약 관리
-                List<OrdersAndCName> OrdersAndCName = membersSVC.orderFindB(mid);
-                log.info("OrdersAndCName={}",OrdersAndCName);
-                model.addAttribute("OrdersAndCName", OrdersAndCName);
+////            내 캠핑장 예약 관리
+//                List<Orders> Orders = membersSVC.orderFindB(cnumber);
+//                log.info("Orders={}",Orders);
+//                model.addAttribute("Orders", Orders);
             }catch (EmptyResultDataAccessException e){return "/mypage/myPage__manager";}
             return "/mypage/myPage__manager";
         } else {
@@ -95,7 +97,14 @@ public class MyPageManagerController {
         redirectAttributes.addAttribute("mid", members.getMid());
         return "redirect:/mypage/{mid}/manager";
     }
-
+//     예약 취소
+    @GetMapping("/{onumber}/camp/del")
+    public String OrderDelete(
+        @PathVariable("onumber") Integer onumber,
+        Model model){
+        ordersSVC.orDelete(onumber);
+        return "redirect:/";
+    };
     // 사업자 회원 탈퇴
     @GetMapping("/{id}/camp/del")
     public String CampDelete(
