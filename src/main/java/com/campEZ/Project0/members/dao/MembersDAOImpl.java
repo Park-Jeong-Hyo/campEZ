@@ -113,9 +113,8 @@ public class MembersDAOImpl implements MembersDAO {
   @Override
   public List<Orders> orderFindB(Integer cnumber){
     StringBuffer sb = new StringBuffer();
-    sb.append("select * from orders t1, camping t2 ");
-    sb.append(" where t1.cnumber = t2.cnumber and ");
-    sb.append(" t2.mid = :mid ");
+    sb.append("select * from orders ");
+    sb.append(" where cnumber = :cnumber ");
 
     Map<String, Integer> param = Map.of("cnumber", cnumber);
     List<Orders> Orders = template.query(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));

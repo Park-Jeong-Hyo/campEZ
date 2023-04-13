@@ -31,7 +31,6 @@ public class MyPageManagerController {
     @GetMapping("/{mid}/manager")
     public String myPageManager(
         @PathVariable String mid,
-//        @PathVariable Integer cnumber,
         Model model,
         HttpSession session
         ) {
