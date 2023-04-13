@@ -1,4 +1,4 @@
-package com.campEZ.Project0.uploadfile.svc;
+package com.campEZ.Project0.uploadfile;
 
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.web.AttachFileType;
@@ -17,20 +17,22 @@ public interface UploadFileSVC {
    */
   void addFiles(List<UploadFile> uploadFiles);
 
+  List<UploadFile> findFileByCode(AttachFileType attachFileType);
+
   /**
    * 업로드파일조회
    * @param attachFileType
    * @param rid
    * @return
    */
-  List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, Long rid);
+  List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, int rid);
 
   /**
    * 첨부파일조회
    * @param uploadfileId
    * @return
    */
-  Optional<UploadFile> findFileByUploadFileId(Long uploadfileId);
+  Optional<UploadFile> findFileByUploadFileId(int uploadfileId);
 
 
   /**
@@ -38,7 +40,7 @@ public interface UploadFileSVC {
    * @param uploadfileId 첨부파일아이디
    * @return 삭제한 레코드수
    */
-  int deleteFileByUploadFildId(Long uploadfileId);
+  int deleteFileByUploadFileId(int uploadfileId);
 
   /**
    * 첨부파일 삭제 By code, rid

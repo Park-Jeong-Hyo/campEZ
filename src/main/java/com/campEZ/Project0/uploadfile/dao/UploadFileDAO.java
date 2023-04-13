@@ -1,4 +1,4 @@
-package com.campEZ.Project0.uploadfile.dao;
+package com.campEZ.Project0.uploadfile;
 
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.web.AttachFileType;
@@ -11,11 +11,13 @@ public interface UploadFileDAO {
 
   void addFiles(List<UploadFile> uploadFiles);
 
-  List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, Long rid);
+  List<UploadFile> findFileByCode(AttachFileType attachFileType);
 
-  Optional<UploadFile> findFileByUploadFileId(Long uploadfileId);
+  List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, int rid);
 
-  int deleteFileByUploadFildId(Long uploadfileId);
+  Optional<UploadFile> findFileByUploadFileId(int uploadfileId);
+
+  int deleteFileByUploadFileId(int uploadfileId);
 
   int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid);
 }

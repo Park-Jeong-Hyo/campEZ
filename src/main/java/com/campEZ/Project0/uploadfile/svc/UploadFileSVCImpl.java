@@ -1,7 +1,6 @@
-package com.campEZ.Project0.uploadfile.svc;
+package com.campEZ.Project0.uploadfile;
 
 import com.campEZ.Project0.entity.UploadFile;
-import com.campEZ.Project0.uploadfile.dao.UploadFileDAO;
 import com.campEZ.Project0.web.AttachFileType;
 import com.campEZ.Project0.web.exception.BizException;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +21,12 @@ import java.util.UUID;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UploadFileSVCImpl implements UploadFileSVC{
+public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadFileSVC {
 
   @Value("${attach.root_dir}") // d:/attach/
   private String ROOT_DIR;
 
-  private final UploadFileDAO uploadFileDAO;
+  private final com.campEZ.Project0.uploadfile.UploadFileDAO uploadFileDAO;
 
   @Override
   public Long addFile(UploadFile uploadFile) {
@@ -40,22 +39,27 @@ public class UploadFileSVCImpl implements UploadFileSVC{
   }
 
   @Override
-  public List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, Long rid) {
+  public List<UploadFile> findFileByCode(AttachFileType attachFileType){
+    return uploadFileDAO.findFileByCode(attachFileType);
+  }
+
+  @Override
+  public List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, int rid) {
     return uploadFileDAO.findFilesByCodeWithRid(attachFileType, rid);
   }
 
   @Override
-  public Optional<UploadFile> findFileByUploadFileId(Long uploadfileId) {
+  public Optional<UploadFile> findFileByUploadFileId(int uploadfileId) {
     return uploadFileDAO.findFileByUploadFileId(uploadfileId);
   }
 
   @Override
-  public int deleteFileByUploadFildId(Long uploadfileId) {
+  public int deleteFileByUploadFileId(int uploadfileId) {
     Optional<UploadFile> findedFile = uploadFileDAO.findFileByUploadFileId(uploadfileId);
     UploadFile file = findedFile.orElseThrow(() -> new BizException("첨부파일없음!"));
 
     //1)첨부파일 메타정보삭제
-    int cnt = uploadFileDAO.deleteFileByUploadFildId(uploadfileId);
+    int cnt = uploadFileDAO.deleteFileByUploadFileId(uploadfileId);
     //2)물리파일삭제
     deleteFile(AttachFileType.valueOf(file.getCode()), file.getStorename());
 

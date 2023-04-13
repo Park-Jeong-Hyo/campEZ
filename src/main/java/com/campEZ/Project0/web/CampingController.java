@@ -3,6 +3,8 @@ package com.campEZ.Project0.web;
 import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camping;
+import com.campEZ.Project0.entity.UploadFile;
+import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.form.camping.CampingDetailForm;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
 import jakarta.validation.Valid;
@@ -25,6 +27,8 @@ import java.util.Optional;
 @RequestMapping("/search")
 public class CampingController {
   private final CampingSVC campingSVC;
+
+  private final UploadFileSVC uploadFileSVC;
 
   // 캠핑장 화면 연결
   @GetMapping
@@ -95,6 +99,17 @@ public class CampingController {
     detailForm.setMart(camping.getMart());
     detailForm.setUdate(camping.getUdate());
     log.info("detailForm={}",detailForm);
+
+    //파일첨부조회
+    List<UploadFile> imagedFile1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
+    List<UploadFile> imagedFile2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
+    List<UploadFile> imagedFiles1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A03, cnumber);
+    List<UploadFile> imagedFiles2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A04, cnumber);
+
+    detailForm.setImagedFile1(imagedFile1.get(0));
+    detailForm.setImagedFile2(imagedFile2.get(0));
+    detailForm.setImagedFiles1(imagedFiles1);
+    detailForm.setImagedFiles2(imagedFiles2);
 
     model.addAttribute("detailForm", detailForm);
     return "detailPage/detailPage-user";

@@ -1,13 +1,19 @@
 package com.campEZ.Project0.web;
 
+import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.members.svc.MembersSVC;
+import com.campEZ.Project0.uploadfile.UploadFileSVC;
+import com.campEZ.Project0.web.form.uploadfile.HomeUpload;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -16,9 +22,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class HomeController {
 
   private final MembersSVC membersSVC;
+
+  private final UploadFileSVC uploadFileSVC;
+
   // 메인페이지 맵핑
   @GetMapping
-  public String Home() {
+  public String Home(Model model) {
+    HomeUpload homeUpload = new HomeUpload();
+    List<UploadFile> imagedFiles = uploadFileSVC.findFileByCode(AttachFileType.A01);
+
+    homeUpload.setImagedFile1(imagedFiles.get(0));
+    homeUpload.setImagedFile2(imagedFiles.get(1));
+    homeUpload.setImagedFile3(imagedFiles.get(2));
+//    log.info("imagedFile1={}",imagedFiles);
+    model.addAttribute("homeUpload",homeUpload);
     return "mainPage/mainPage";
   }
 

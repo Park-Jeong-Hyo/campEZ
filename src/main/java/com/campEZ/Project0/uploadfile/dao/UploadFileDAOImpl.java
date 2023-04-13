@@ -1,4 +1,4 @@
-package com.campEZ.Project0.uploadfile.dao;
+package com.campEZ.Project0.uploadfile;
 
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.web.AttachFileType;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class UploadFileDAOImpl implements UploadFileDAO{
+public class UploadFileDAOImpl implements com.campEZ.Project0.uploadfile.UploadFileDAO {
 
   private final NamedParameterJdbcTemplate template;
 
@@ -75,9 +75,35 @@ public class UploadFileDAOImpl implements UploadFileDAO{
     return sb;
   }
 
-  //조회
   @Override
-  public List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, Long rid) {
+  //메인페이지 이미지 조회
+  public List<UploadFile> findFileByCode(AttachFileType attachFileType){
+    StringBuffer sb = new StringBuffer();
+
+    sb.append("SELECT  ");
+    sb.append("   upnumber, ");
+    sb.append("   code, ");
+    sb.append("   rid,  ");
+    sb.append("   storename, ");
+    sb.append("   uploadname,  ");
+    sb.append("   fsize,  ");
+    sb.append("   ftype,  ");
+    sb.append("   cdate,  ");
+    sb.append("   udate   ");
+    sb.append("  FROM uploadfile  ");
+    sb.append(" WHERE CODE = :code  ");
+    sb.append(" order by upnumber desc  ");
+
+    return template.query(
+        sb.toString(),
+        Map.of("code",attachFileType.name()),
+        BeanPropertyRowMapper.newInstance(UploadFile.class));
+  }
+
+
+  //캠핑장 페이지 이미지 조회
+  @Override
+  public List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, int rid) {
     StringBuffer sb = new StringBuffer();
 
     sb.append("SELECT  ");
@@ -102,7 +128,7 @@ public class UploadFileDAOImpl implements UploadFileDAO{
 
   //첨부파일 조회
   @Override
-  public Optional<UploadFile> findFileByUploadFileId(Long upnumber) {
+  public Optional<UploadFile> findFileByUploadFileId(int upnumber) {
     StringBuffer sql = new StringBuffer();
     sql.append(" select * ");
     sql.append("  from uploadfile ");
@@ -110,7 +136,7 @@ public class UploadFileDAOImpl implements UploadFileDAO{
 
     UploadFile uploadFile = null;
     try {
-      Map<String, Long> param = Map.of("upnumber", upnumber);
+      Map<String, Integer> param = Map.of("upnumber", upnumber);
       uploadFile = template.queryForObject(sql.toString(),param,BeanPropertyRowMapper.newInstance(UploadFile.class));
       return Optional.of(uploadFile);
     }catch (EmptyResultDataAccessException e){
@@ -120,7 +146,7 @@ public class UploadFileDAOImpl implements UploadFileDAO{
 
   // 첨부파일 삭제 by uplaodfileId
   @Override
-  public int deleteFileByUploadFildId(Long upnumber) {
+  public int deleteFileByUploadFileId(int upnumber) {
     StringBuffer sb = new StringBuffer();
     sb.append("delete from uploadfile ");
     sb.append(" where upnumber = :upnumber ");
