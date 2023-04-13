@@ -4,6 +4,7 @@ import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
+import com.campEZ.Project0.orders.svc.OrdersSVC;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/mypage")
 public class MyPageCommonController {
-
-    private final CampingSVC campingSVC;
     private final MembersSVC membersSVC;
+    private final OrdersSVC ordersSVC;
 
     //    일반회원 정보조회 및 수정
     @GetMapping("/{mid}/common")
@@ -87,7 +87,14 @@ public class MyPageCommonController {
         redirectAttributes.addAttribute("mid",members.getMid());
         return "redirect:/mypage/{mid}/common";
         }
-
+    //     예약 취소
+    @GetMapping("/{onumber}/common/del")
+    public String OrderDelete(
+        @PathVariable("onumber") Integer onumber,
+        Model model){
+        ordersSVC.orDelete(onumber);
+        return "redirect:/";
+    };
     // 일반회원 탈퇴
     @GetMapping("/{id}/gen/del")
     public String genDelete(

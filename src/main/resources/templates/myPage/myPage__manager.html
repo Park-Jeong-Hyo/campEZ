@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="" th:href="@{/css/myPage/myPage.css}" />
     <title>$Title$</title>
-    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
-</head>
- <body>
+    <script
+      src="https://kit.fontawesome.com/4fab4e86c9.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div class="wrapper">
       <div class="up-l"></div>
 
@@ -65,7 +67,7 @@
       <div class="post-l"></div>
       <!-- 마이페이지 내용 시작 -->
       <main>
-                <!-- 탭2 -- 관리자 사용자 GNB -->
+        <!-- 탭2 -- 관리자 사용자 GNB -->
         <div class="tab2">
           <input name="tab" id="tab2__1" type="radio" />
           <input name="tab" id="tab2__2" type="radio" />
@@ -93,15 +95,26 @@
             <hr />
             <!-- 상단 타이틀 -->
             <div class="reserv__title">
-              <p>캠핑장 이름</p>
-              <p>예약한 날짜</p>
+              <p>예약번호</p>
+              <p>입실일</p>
+              <p>퇴실일</p>
               <p></p>
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" th:each=" item : ${myOrders}" >
-              <div class="reserv__campName"><a href="" th:text="${item.onumber}" >캠핑장 이름</a></div>
-              <div class="reserv__date" th:text="|${item.checkin} ~ ${item.checkout}|">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
+            <div class="reserv__item" th:each=" item : ${myOrders}">
+              <div class="reserv__campName">
+                <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+              </div>
+              <div class="reserv__inDate" th:text="${item.checkin}">
+                22.22.22~22.22.22
+              </div>
+              <div class="reserv__outDate" th:text="${item.checkout}">
+                22.22.22~22.22.22
+              </div>
+
+              <button class="reserv__btn" th:attr="data-onumber=${item.onumber}"
+                      th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
+
             </div>
             <!-- 예약 관리에서 페이지 버튼 -->
             <div class="reserv__page">
@@ -118,28 +131,46 @@
             <hr />
             <form action="" th:object="${members}" method="post">
               <div class="member__item">
-                <div class="member__title" >이름</div>
-                <input class="member__main" type="text" th:field="*{mname}" readonly />
+                <div class="member__title">이름</div>
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{mname}"
+                  readonly
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:field="*{mid}" readonly />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{mid}"
+                  readonly
+                />
               </div>
               <div class="member__item">
-                <div class="member__title" >비밀번호</div>
-                <input class="member__main" type="text" th:field="*{pw}"/>
+                <div class="member__title">비밀번호</div>
+                <input class="member__main" type="text" th:field="*{pw}" />
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
-                <input class="member__main" type="text" th:field="*{email}"/>
+                <input class="member__main" type="text" th:field="*{email}" />
               </div>
               <div class="member__item">
                 <div class="member__title">주소</div>
-                <input class="member__main" type="text" th:field="*{maddress}" />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{maddress}"
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">닉네임</div>
-                <input class="member__main" type="text" th:field="*{nickname}" />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{nickname}"
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">폰번호</div>
@@ -147,18 +178,33 @@
               </div>
               <div class="member__item">
                 <div class="member__title">타입</div>
-                <input class="member__main" type="text" th:field="*{mtype}" readonly />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{mtype}"
+                  readonly
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">회사이름</div>
-                <input class="member__main" type="text" th:field="*{companyname}" readonly />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{companyname}"
+                  readonly
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">사업자번호</div>
-                <input class="member__main" type="text" th:field="*{businessnumber}" readonly />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{businessnumber}"
+                  readonly
+                />
               </div>
               <div class="member__item">
-                <input class="member__btn" type="submit" value="수정하기">
+                <input class="member__btn" type="submit" value="수정하기" />
               </div>
             </form>
           </div>
@@ -167,11 +213,11 @@
             <!-- 회원 탈퇴 재확인 모달 창 -->
             <div class="member__modal">
               <h2>정말 탈퇴하시겠습니까?</h2>
-              <br>
-              <br>
+              <br />
+              <br />
               <!-- 회원 탈퇴 모달 창 버튼 -->
-              <input type="button" value="확인" id="member__modalYBTN">
-              <input type="button" value="취소" id="member__modalNBTN">
+              <input type="button" value="확인" id="member__modalYBTN" />
+              <input type="button" value="취소" id="member__modalNBTN" />
             </div>
             <hr />
             <h1>회원 탈퇴를 하시겠습니까?</h1>
@@ -179,16 +225,16 @@
             <h5>탈퇴하시려면 비밀 번호를 다시 입력해주세요.</h5>
             <input class="member__wthdr" type="text" />
             <!-- 회원 탈퇴 버튼 -->
-            <input id="member__wthdrBTN" type="button" value="확인">
+            <input id="member__wthdrBTN" type="button" value="확인" />
           </div>
         </div>
         <!-- 탭2, 관리자 계정이 보게 될 화면 -->
         <div class="tab2__contant">
           <!-- 탭2__1, 내가 관리 중인 캠핑장 -->
-          <div class="tab2__1__content" >
+          <div class="tab2__1__content">
             <hr />
             <!-- 내 캠핑장, 3개까지 들어감 -->
-            <div class="myCamp__item" >
+            <div class="myCamp__item">
               <img
                 class="myCamp__Photo"
                 src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
@@ -196,8 +242,7 @@
               />
               <div class="myCamp__campName" th:each="item : ${myCamp}">
                 <a href="" th:text="${item.cname}">캠핑장 이름</a>
-
-                </div>
+              </div>
               <button class="myCamp__reserv">예약 내역</button>
             </div>
             <!-- 페이지 버튼 -->
@@ -217,22 +262,28 @@
             <div class="managerRev__title">
               <p>캠프번호</p>
               <p>이름</p>
+              <p>예약인ID</p>
               <p>인원</p>
-              <p>구역 </p>
-              <p>입실일 &nbsp &nbsp &nbsp &nbsp &nbsp </p>
-              <p>퇴실일 &nbsp &nbsp &nbsp &nbsp &nbsp </p>
-              <p>상태</p>
+              <p>구역</p>
+              <p>입실일 &nbsp &nbsp &nbsp &nbsp &nbsp</p>
+              <p>퇴실일 &nbsp &nbsp &nbsp &nbsp &nbsp</p>
             </div>
-            <div class="managerRev__item" >
-              <div class="managerRev__num" >01</div>
+            <div class="managerRev__item" th:each="item : ${OrdersNameForm}">
+              <div class="managerRev__num" th:text="${item.cnumber}">01</div>
               <div class="managerRev__campName">
-                <a href="" >캠핑장 이름</a>
-                </div>
-              <div class="managerRev__revNum"  >2832753</div>
-              <div class="managerRev__zone" >2-9d</div>
-              <div class="managerRev__inDate" >22.22</div>
-              <div class="managerRev__outDate" >22.22</div>
-              <div class="managerRev__state">대기</div>
+                <a href="" th:text="${item.cname}">캠핑장 이름</a>
+              </div>
+              <div class="managerRev__revID" th:text="${item.mid}">2832753</div>
+              <div class="managerRev__revNum" th:text="${item.headcount}">
+                2832753
+              </div>
+              <div class="managerRev__zone" th:text="${item.area}">2-9d</div>
+              <div class="managerRev__inDate" th:text="${item.checkin}">
+                22.22
+              </div>
+              <div class="managerRev__outDate" th:text="${item.checkout}">
+                22.22
+              </div>
             </div>
             <div class="managerRev__page">
               <button class="managerRev__pageBtn"><<</button>
@@ -245,8 +296,7 @@
           </div>
         </div>
       </main>
-      <div class="post-r">
-      </div>
+      <div class="post-r"></div>
       <div class="ft-l"></div>
       <!-- 푸터영역(FOOTER)-->
       <footer class="ft">
@@ -271,13 +321,13 @@
     </div>
   </body>
   <script>
-      const $mid = document.getElementById('mid');
+    const $mid = document.getElementById('mid');
     $tab1__1 = document.getElementById('tab1__1');
     $tab1__2 = document.getElementById('tab1__2');
     $tab1__3 = document.getElementById('tab1__3');
     $tab2__1 = document.getElementById('tab2__1');
     $tab2__2 = document.getElementById('tab2__2');
-    $wthdrBTN=document.getElementById('member__wthdrBTN');
+    $wthdrBTN = document.getElementById('member__wthdrBTN');
     $member__modalYBTN = document.getElementById('member__modalYBTN');
     $member__modalNBTN = document.getElementById('member__modalNBTN');
     $tab1__1.onclick = function () {
@@ -314,24 +364,26 @@
       document.querySelector('.tab2__2__content').style.display = 'block';
     };
 
-  document.querySelector('.myCamp__reserv').addEventListener('click', function() {
-  document.querySelector('#tab2__2').checked = true;
-  document.querySelector('.tab1__contant').style.display = 'none';
-  document.querySelector('.tab2__contant').style.display = 'flex';
-  document.querySelector('.tab2__1__content').style.display = 'none';
-  document.querySelector('.tab2__2__content').style.display = 'block';
-});
+    document
+      .querySelector('.myCamp__reserv')
+      .addEventListener('click', function () {
+        document.querySelector('#tab2__2').checked = true;
+        document.querySelector('.tab1__contant').style.display = 'none';
+        document.querySelector('.tab2__contant').style.display = 'flex';
+        document.querySelector('.tab2__1__content').style.display = 'none';
+        document.querySelector('.tab2__2__content').style.display = 'block';
+      });
 
-    $wthdrBTN.addEventListener('click',()=>{
+    $wthdrBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'block';
     });
-        $member__modalYBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'none';
+    $member__modalYBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'none';
       globalThis.location.href = `/mypage/${$mid.value}/camp/del`;
     });
-    $member__modalNBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'none';
+    $member__modalNBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'none';
     });
 
-  </script>
+</script>
 </html>

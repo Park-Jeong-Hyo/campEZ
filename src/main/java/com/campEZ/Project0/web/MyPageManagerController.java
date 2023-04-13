@@ -6,6 +6,7 @@ import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.orders.svc.OrdersSVC;
+import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class MyPageManagerController {
         ) {
         LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Members members = membersSVC.memFindN(mid);
+
         String type = String.valueOf(members.getMtype());
         String memberId = String.valueOf(members.getMid());
         String loginId = String.valueOf(loginMembers.getMid());
@@ -63,10 +65,10 @@ public class MyPageManagerController {
             List<Orders> myOrders = membersSVC.orderFind(mid);
                 log.info("myOrders={}",myOrders);
             model.addAttribute("myOrders", myOrders);
-////            내 캠핑장 예약 관리
-//                List<Orders> Orders = membersSVC.orderFindB(cnumber);
-//                log.info("Orders={}",Orders);
-//                model.addAttribute("Orders", Orders);
+//            내 캠핑장 예약 관리
+                List<OrdersNameForm> OrdersNameForm = membersSVC.orderFindB(mid);
+                log.info("OrdersNameForm={}",OrdersNameForm);
+                model.addAttribute("OrdersNameForm", OrdersNameForm);
             }catch (EmptyResultDataAccessException e){return "/mypage/myPage__manager";}
             return "/mypage/myPage__manager";
         } else {
@@ -97,7 +99,7 @@ public class MyPageManagerController {
         return "redirect:/mypage/{mid}/manager";
     }
 //     예약 취소
-    @GetMapping("/{onumber}/camp/del")
+    @GetMapping("/{onumber}/manager/del")
     public String OrderDelete(
         @PathVariable("onumber") Integer onumber,
         Model model){

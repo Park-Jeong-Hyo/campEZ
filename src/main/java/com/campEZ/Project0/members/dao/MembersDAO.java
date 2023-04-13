@@ -2,6 +2,7 @@ package com.campEZ.Project0.members.dao;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ public interface MembersDAO {
   Members memFindN(String mid);
 
   //예약조회(사업자)
-  List<Orders> orderFindB(Integer cnumber);
+  List<OrdersNameForm> orderFindB(String mid);
 
   //예약조회(일반회원)
   List<Orders> orderFind(String mid);

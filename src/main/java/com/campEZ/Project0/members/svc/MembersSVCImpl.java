@@ -3,6 +3,7 @@ package com.campEZ.Project0.members.svc;
 import com.campEZ.Project0.members.dao.MembersDAO;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,8 @@ public class MembersSVCImpl implements MembersSVC {
 
   //예약조회(사업자)
   @Override
-  public List<Orders> orderFindB(Integer cnumber){
-    return membersDAO.orderFindB(cnumber);
+  public List<OrdersNameForm> orderFindB(String mid){
+    return membersDAO.orderFindB(mid);
   }
 
   //예약조회(일반회원)

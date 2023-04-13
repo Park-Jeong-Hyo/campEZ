@@ -2,6 +2,7 @@ package com.campEZ.Project0.members.dao;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -111,14 +112,16 @@ public class MembersDAOImpl implements MembersDAO {
 
   //예약조회(사업자)
   @Override
-  public List<Orders> orderFindB(Integer cnumber){
+  public List<OrdersNameForm> orderFindB(String mid){
     StringBuffer sb = new StringBuffer();
-    sb.append("select * from orders ");
-    sb.append(" where cnumber = :cnumber ");
+    sb.append("select t2.cname, onumber, t1.cnumber, area, t1.mid, phone, headcount, checkin, checkout ");
+    sb.append(" from orders t1, camping t2 ");
+    sb.append(" where t1.cnumber = t2.cnumber and ");
+    sb.append(" t2.mid = :mid ");
 
-    Map<String, Integer> param = Map.of("cnumber", cnumber);
-    List<Orders> Orders = template.query(sb.toString(),param,new BeanPropertyRowMapper<>(Orders.class));
-    return Orders;
+    Map<String, String> param = Map.of("mid", mid);
+    List<OrdersNameForm> OrdersNameForm = template.query(sb.toString(),param,new BeanPropertyRowMapper<>(OrdersNameForm.class));
+    return OrdersNameForm;
   }
 
   //예약조회(일반회원)

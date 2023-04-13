@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="" th:href="@{/css/myPage/myPage.css}" />
     <title>$Title$</title>
-    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/4fab4e86c9.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
@@ -83,15 +86,24 @@
             <hr />
             <!-- 상단 타이틀 -->
             <div class="reserv__title">
-              <p>캠핑장 이름</p>
-              <p>예약한 날짜</p>
+              <p>예약번호</p>
+              <p>입실일</p>
+              <p>퇴실일</p>
               <p></p>
             </div>
             <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" th:each=" item : ${myOrders}" >
-              <div class="reserv__campName"><a href="" th:text="${item.onumber}" >캠핑장 이름</a></div>
-              <div class="reserv__date" th:text="|${item.checkin} ~ ${item.checkout}|">22.22.22~22.22.22</div>
-              <button class="reserv__btn">취소</button>
+            <div class="reserv__item" th:each=" item : ${myOrders}">
+              <div class="reserv__campName">
+                <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+              </div>
+              <div class="reserv__inDate" th:text="${item.checkin}">
+                22.22.22~22.22.22
+              </div>
+              <div class="reserv__outDate" th:text="${item.checkout}">
+                22.22.22~22.22.22
+              </div>
+              <button class="reserv__btn" th:attr="data-onumber=${item.onumber}"
+                      th:onclick="|location.href='@{/mypage/{onumber}/common/del(onumber=${item.onumber})}'|">취소</button>
             </div>
             <!-- 예약 관리에서 페이지 버튼 -->
             <div class="reserv__page">
@@ -108,37 +120,56 @@
             <hr />
             <form action="" th:object="${members}" method="post">
               <div class="member__item">
-                <div class="member__title" >이름</div>
-                <input class="member__main" type="text" th:field="*{mname}" readonly />
+                <div class="member__title">이름</div>
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{mname}"
+                  readonly
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:field="*{mid}" readonly />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{mid}"
+                  readonly
+                />
               </div>
               <div class="member__item">
-                <div class="member__title" >비밀번호</div>
-                <input class="member__main" type="text" th:field="*{pw}"/>
+                <div class="member__title">비밀번호</div>
+                <input class="member__main" type="text" th:field="*{pw}" />
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
-                <input class="member__main" type="text" th:field="*{email}"/>
+                <input class="member__main" type="text" th:field="*{email}" />
               </div>
               <div class="member__item">
                 <div class="member__title">주소</div>
-                <input class="member__main" type="text" th:field="*{maddress}" />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{maddress}"
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">닉네임</div>
-                <input class="member__main" type="text" th:field="*{nickname}" />
+                <input
+                  class="member__main"
+                  type="text"
+                  th:field="*{nickname}"
+                />
               </div>
               <div class="member__item">
                 <div class="member__title">폰번호</div>
                 <input class="member__main" type="text" th:field="*{phone}" />
               </div>
               <div class="member__item">
-                <input class="member__btn" type="submit" value="수정하기">
+                <input class="member__btn" type="submit" value="수정하기" />
               </div>
-            </form>>
+            </form>
+            >
           </div>
           <!-- 탭1__3, 회원 탈퇴 -->
           <div class="tab1__3__content">
@@ -186,7 +217,7 @@
     </div>
   </body>
   <script>
-      const $mid = document.getElementById('mid');
+    const $mid = document.getElementById('mid');
     $tab1__1 = document.getElementById('tab1__1');
     $tab1__2 = document.getElementById('tab1__2');
     $tab1__3 = document.getElementById('tab1__3');
@@ -211,11 +242,11 @@
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
-    $wthdrBTN.addEventListener('click',()=>{
+    $wthdrBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'block';
     });
-        $member__modalYBTN.addEventListener('click',()=>{
-      document.querySelector(".member__modal").style.display = 'none';
+    $member__modalYBTN.addEventListener('click', () => {
+      document.querySelector('.member__modal').style.display = 'none';
       globalThis.location.href = `/mypage/${$mid.value}/gen/del`;
     });
     $member__modalNBTN.addEventListener('click', () => {
