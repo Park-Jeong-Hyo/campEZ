@@ -5,6 +5,7 @@ import com.campEZ.Project0.entity.Comments;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,7 +15,7 @@ public class CommentsSVCImpl implements CommentsSVC {
   private final CommentsDAO commentsDAO;
 
   @Override
-  public Comments commentsSave(Comments comments) {
+  public int commentsSave(Comments comments) {
     return commentsDAO.commentsSave(comments);
   }
 
@@ -36,5 +37,10 @@ public class CommentsSVCImpl implements CommentsSVC {
   @Override
   public Optional<Comments> commentsDetail(int conumber) {
     return commentsDAO.commentsDetail(conumber);
+  }
+
+  @Override
+  public List<Comments> commentsAll(int pnumber) {
+    return commentsDAO.commentsAll(pnumber);
   }
 }

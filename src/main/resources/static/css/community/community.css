@@ -2,6 +2,9 @@
 @import '/css/common/common.css';
 @import 'community-layout.css';
 
+/* * {
+  outline: 1px solid red;
+} */
 /*게시판*/
 .hidden {
   display:none;
@@ -145,3 +148,30 @@
   line-height: 20px;
   resize: none;
 }
+
+/* 댓글 */
+.reply-box {
+  display: flex;
+  flex-direction: column;
+}
+.reply {
+  display: flex;
+  flex-direction: column;
+  outline: 1px solid lightgray;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.del-btn {
+  font-size: 10px;
+  padding: 5px 10px;
+}
+.reply-name {
+  padding: 5px 10px;
+  background-color: lightgray;
+}
+
+.reply-text {
+  padding: 5px 10px;
+  font-size: 15px;
+}
+

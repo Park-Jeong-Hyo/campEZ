@@ -1,7 +1,10 @@
 package com.campEZ.Project0.web;
 
+import com.campEZ.Project0.comments.svc.CommentsSVC;
+import com.campEZ.Project0.entity.Comments;
 import com.campEZ.Project0.entity.Post;
 import com.campEZ.Project0.post.svc.PostSVC;
+import com.campEZ.Project0.web.form.comments.CommentForm;
 import com.campEZ.Project0.web.form.post.PostDetailForm;
 import com.campEZ.Project0.web.form.post.PostSaveForm;
 import com.campEZ.Project0.web.form.post.PostUpdateForm;
@@ -26,6 +29,7 @@ import java.util.Optional;
 public class CommunityController {
 
   private final PostSVC postSVC;
+  private final CommentsSVC commentsSVC;
 
   // 자유게시판 목록 맵핑
   @GetMapping("/bulletinBoard")
@@ -79,7 +83,7 @@ public class CommunityController {
   }
 
   // 자유 게시글 수정양식
-  @GetMapping("/{id}/edit")
+  @GetMapping("/{id}/b_edit")
   public String b_updateForm(
       @PathVariable("id") int pnumber,
       Model model,
@@ -116,7 +120,7 @@ public class CommunityController {
   }
 
   // 자유 게시글 수정
-  @PostMapping("/{id}/edit")
+  @PostMapping("/{id}/b_edit")
   public String b_update(
       @PathVariable("id") int pnumber,
       @Valid @ModelAttribute PostUpdateForm postUpdateForm,
@@ -166,7 +170,9 @@ public class CommunityController {
   // 자유 게시글 조회
   @GetMapping("/{id}/b_read")
   public String b_read(
-      @PathVariable("id") int id, Model model
+      @PathVariable("id") int id,
+      Model model,
+      HttpSession session
   ) {
     Optional<Post> readPost = postSVC.postDetail(id);
     Post post = readPost.orElseThrow();
@@ -180,6 +186,16 @@ public class CommunityController {
     postDetailForm.setUdate(post.getUdate());
 
     model.addAttribute("postDetailForm",postDetailForm);
+
+    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    model.addAttribute("login",loginMembers);
+
+    CommentForm commentForm = new CommentForm();
+    List<Comments> readComments = commentsSVC.commentsAll(id);
+    log.info("readComments={}",readComments);
+    model.addAttribute("commentForm",commentForm);
+    model.addAttribute("replys",readComments);
+    log.info("model={}",model);
     return "community/bPost";
   }
 
@@ -322,7 +338,7 @@ public class CommunityController {
   // 질문 게시글 조회
   @GetMapping("/{id}/q_read")
   public String q_read(
-      @PathVariable("id") int id, Model model
+      @PathVariable("id") int id, Model model, HttpSession session
   ) {
     Optional<Post> readPost = postSVC.postDetail(id);
     Post post = readPost.orElseThrow();
@@ -336,14 +352,109 @@ public class CommunityController {
     postDetailForm.setUdate(post.getUdate());
 
     model.addAttribute("postDetailForm",postDetailForm);
+
+    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+    model.addAttribute("login",loginMembers);
+
+    CommentForm commentForm = new CommentForm();
+    List<Comments> readComments = commentsSVC.commentsAll(id);
+    log.info("readComments={}",readComments);
+    model.addAttribute("commentForm",commentForm);
+    model.addAttribute("replys",readComments);
+    log.info("model={}",model);
+
     return "community/qPost";
   }
 
   // 댓글 작성
+  @PostMapping("/{id}/b_read")
+  public String BcommentAdd(
+      @PathVariable("id") int pnumber,
+      @Valid @ModelAttribute CommentForm commentForm,
+      Model model,
+      HttpSession session
+  ) {
+    Optional<Post> findedPost = postSVC.postDetail(pnumber);
+    Post post = findedPost.orElseThrow();
+    log.info("포스트={}",post);
+    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-  // 댓글 수정
+    Comments comments = new Comments();
+    comments.setCotext(commentForm.getCotext());
+    comments.setNickname(loginMembers.getNickname());
+    comments.setPnumber(post.getPnumber());
+
+    int conumber = commentsSVC.commentsSave(comments);
+    comments.setConumber(conumber);
+    log.info("conumber={}",conumber);
+    log.info("conumber={}",conumber);
+
+    return "redirect:/community/{id}/b_read";
+  }
+
+  // 댓글 작성
+  @PostMapping("/{id}/q_read")
+  public String QcommentAdd(
+      @PathVariable("id") int pnumber,
+      @Valid @ModelAttribute CommentForm commentForm,
+      Model model,
+      HttpSession session
+  ) {
+    Optional<Post> findedPost = postSVC.postDetail(pnumber);
+    Post post = findedPost.orElseThrow();
+    log.info("포스트={}",post);
+    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+    Comments comments = new Comments();
+    comments.setCotext(commentForm.getCotext());
+    comments.setNickname(loginMembers.getNickname());
+    comments.setPnumber(post.getPnumber());
+
+    int conumber = commentsSVC.commentsSave(comments);
+    comments.setConumber(conumber);
+    log.info("conumber={}",conumber);
+    log.info("conumber={}",conumber);
+
+    return "redirect:/community/{id}/q_read";
+  }
 
   // 댓글 삭제
+  @GetMapping("/{id}/comment/del")
+  public String commentDelete(
+      @PathVariable("id") int conumber,
+      HttpSession session,
+      Model model,
+      RedirectAttributes redirectAttributes
+  ) {
 
-  // 댓글 조회
+    // 데이터 객체에 담기
+    Optional<Comments> findedComments = commentsSVC.commentsDetail(conumber);
+    Comments comments = findedComments.orElseThrow();
+
+    // 로그인 객체
+    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+    // 객체 닉네임 String 타입 변수로 저장
+    String coNickname = String.valueOf(comments.getNickname());
+    String loginNickname = String.valueOf(loginMembers.getNickname());
+
+    int pnumber = comments.getPnumber();
+    Optional<Post> findedpost = postSVC.postDetail(pnumber);
+    Post post = findedpost.orElseThrow();
+    String postType = String.valueOf(post.getPtype());
+    log.info("postType={}",postType);
+    redirectAttributes.addAttribute("pid",pnumber);
+
+    if ( coNickname.equals(loginNickname) && postType.equals("f") ) {
+      commentsSVC.commentsDeleteActive(conumber);
+      System.out.println("f로 탐");
+      return "redirect:/community/{pid}/b_read";
+    } else if ( coNickname.equals(loginNickname) && postType.equals("n") ){
+      commentsSVC.commentsDeleteActive(conumber);
+      System.out.println("n으로 탐");
+      return "redirect:/community/{pid}/q_read";
+    } else {
+      return "errorPage/unknown";
+    }
+  }
 }

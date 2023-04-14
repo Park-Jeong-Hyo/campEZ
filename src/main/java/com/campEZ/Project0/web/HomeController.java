@@ -34,7 +34,7 @@ public class HomeController {
     homeUpload.setImagedFile1(imagedFiles.get(0));
     homeUpload.setImagedFile2(imagedFiles.get(1));
     homeUpload.setImagedFile3(imagedFiles.get(2));
-//    log.info("imagedFile1={}",imagedFiles);
+    log.info("imagedFile1={}",imagedFiles);
     model.addAttribute("homeUpload",homeUpload);
     return "mainPage/mainPage";
   }

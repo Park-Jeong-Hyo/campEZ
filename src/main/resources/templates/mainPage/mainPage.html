@@ -16,7 +16,7 @@
   <div class="up">
     <a href="" th:href="@{/}" class="up__link">HOME</a>
     <th:block th:if="${!session.isEmpty()}">
-      <a href="" th:href="@{/mypage/test123/manager}" class="up__link">마이페이지</a>
+      <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
       <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
     </th:block>
     <th:block th:if="${session.isEmpty()}">
@@ -67,12 +67,12 @@
   <!-- 메인영역(MAIN) -->
   <main class="mn">
     <div class="nav"></div>
-    <section class="mn__newly-updated">
+    <section class="mn__newly-updated" >
       <h3 class="mn__title1">
         <i class="fa-solid fa-thumbtack"></i>
         NEW & UPDATE
       </h3>
-      <div class="mn__camping-image">
+      <div class="mn__camping-image" >
         <img th:src="@{|/attach/view/${homeUpload.imagedFile1.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
         <a href="" class="link">
           <p class="mn__camping-name">푸른 초원 캠핑장</p>

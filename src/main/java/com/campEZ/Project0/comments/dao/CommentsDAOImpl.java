@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class CommentsDAOImpl implements CommentsDAO{
 
   //댓글 작성
   @Override
-  public Comments commentsSave(Comments comments) {
+  public int commentsSave(Comments comments) {
     //sql구문 작성
     StringBuffer sql = new StringBuffer();
     sql.append("INSERT INTO COMMENTS ");
@@ -38,8 +39,7 @@ public class CommentsDAOImpl implements CommentsDAO{
     // db 업데이트, id값을 dto에 추가한 후 리턴
     template.update(sql.toString(), param, keyholder, new String[]{"conumber"});
     int conumber = keyholder.getKey().intValue();
-    comments.setConumber(conumber);
-    return comments;
+    return conumber;
   }
 
   //댓글 수정
@@ -80,12 +80,14 @@ public class CommentsDAOImpl implements CommentsDAO{
     return template.update(sql.toString(), param);
   }
 
+
+
   //댓글 조회
   @Override
   public Optional<Comments> commentsDetail(int conumber) {
     StringBuffer sql = new StringBuffer();
     //쿼리가 conumber, pnumber을 묻고 있지 않기 때문에 결과값이 conumber, pnumber가 0이 됨.
-    sql.append("SELECT nickname, cotext, udate ");
+    sql.append("SELECT * ");
     sql.append("FROM COMMENTS ");
     sql.append("WHERE conumber = :conumber");
 
@@ -97,4 +99,27 @@ public class CommentsDAOImpl implements CommentsDAO{
       return Optional.empty();
     }
   }
+
+  //댓글 목록
+  @Override
+  public List<Comments> commentsAll(int pnumber) {
+    StringBuffer sql = new StringBuffer();
+    //쿼리가 conumber, pnumber을 묻고 있지 않기 때문에 결과값이 conumber, pnumber가 0이 됨.
+    sql.append(" SELECT * ");
+    sql.append(" FROM COMMENTS ");
+    sql.append(" WHERE pnumber = :pnumber ");
+    sql.append(" ORDER BY conumber desc ");
+    log.info("sql={}",sql);
+    log.info("pnumber={}",pnumber);
+    Map<String, Integer> param = Map.of("pnumber", pnumber);
+    log.info("param={}",param);
+    List<Comments> list = template.query(
+        sql.toString(),
+        param,
+        BeanPropertyRowMapper.newInstance(Comments.class)
+    );
+    log.info("list={}",list);
+    return list;
+  }
+
 }

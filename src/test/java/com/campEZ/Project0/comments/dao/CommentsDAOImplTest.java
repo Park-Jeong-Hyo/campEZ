@@ -22,11 +22,10 @@ public class CommentsDAOImplTest {
     comments.setPnumber(1);
     comments.setNickname("장길동");
     comments.setCotext("댓글삭제가능");
-    Comments result = commentsDAO.commentsSave(comments);
-    int conumber = result.getConumber();
+    int result = commentsDAO.commentsSave(comments);
     System.out.println(comments);
-    System.out.println(conumber);
-    Assertions.assertThat(conumber).isPositive();
+    System.out.println(result);
+    Assertions.assertThat(result).isPositive();
   }
   //댓글 수정
   //결과값으로 1이 리턴되면 성공, conumber 값은 db에 존재하는 conumber 설정
