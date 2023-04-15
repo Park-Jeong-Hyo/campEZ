@@ -19,8 +19,13 @@ public class CampingSVCImpl implements CampingSVC{
   private final CampingDAO campingDAO;
 
   @Override
-  public List<Object> campingSave(Camping camping, Camparea camparea) {
-    return campingDAO.campingSave(camping, camparea);
+  public Camping campingSave(Camping camping) {
+    return campingDAO.campingSave(camping);
+  }
+
+  @Override
+  public Camparea campareaSave(Camparea camparea) {
+    return campingDAO.campareaSave(camparea);
   }
 
   @Override
@@ -37,6 +42,12 @@ public class CampingSVCImpl implements CampingSVC{
   public Optional<Camping> campingDetail(int cnumber) {
     return campingDAO.campingDetail(cnumber);
   }
+
+  @Override
+  public Optional<List<Camparea>> campareaDetail(int cnumber) {
+    return campingDAO.campareaDetail(cnumber);
+  }
+
   @Override
   public List<Camping> campingFindByManagerMid(String mid){return campingDAO.campingFindByManagerMid(mid);}
 

@@ -8,10 +8,20 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CampingSVC {
-  List<Object> campingSave(Camping camping, Camparea camparea);
+  //캠핑장 등록
+  Camping campingSave(Camping camping);
+  //캠핑장 구역 등록
+  Camparea campareaSave(Camparea camparea);
+  //캠핑장 수정, 캠핑 구역 수정
   int campingUpdate(Camping camping, Camparea camparea, int cnumber);
+  //캠핑장 삭제
   int campingDelete(int cnumber);
+  //캠핑장 조회
   Optional<Camping> campingDetail(int cnumber);
- List<Camping> campingFindByManagerMid(String mid);
+  //캠핑장 구역 조회
+  Optional<List<Camparea>> campareaDetail(int cnumber);
+  //  내 캠핑장 조회
+  List<Camping> campingFindByManagerMid(String mid);
+  //캠핑장 검색
   List<Camping> campingSearch(CampingFilterCondition campingFilterCondition);
 }

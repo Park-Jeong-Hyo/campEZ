@@ -4,6 +4,7 @@ import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -24,9 +25,9 @@ import java.util.Optional;
 public class CampingDAOImpl implements CampingDAO{
   private final NamedParameterJdbcTemplate template;
 
-  //캠핑장 등록, 캠핑장 구역 등록
+  //캠핑장 등록
   @Override
-  public List<Object> campingSave(Camping camping, Camparea camparea) {
+  public Camping campingSave(Camping camping) {
     //캠핑장 등록 로직
     StringBuffer sql = new StringBuffer();
     sql.append("INSERT INTO CAMPING ");
@@ -41,21 +42,22 @@ public class CampingDAOImpl implements CampingDAO{
     template.update(sql.toString(), param, keyHolder, new String[]{"cnumber"});
     int cnumber = keyHolder.getKey().intValue();
     camping.setCnumber(cnumber);
-
-    //캠핑장 구역 등록 로직
-    StringBuffer sql2 = new StringBuffer();
-    sql2.append("INSERT INTO CAMPAREA ");
-    sql2.append("(cnumber, area, capacitys) ");
-    sql2.append("VALUES ");
-    sql2.append("(:cnumber, :area, :capacitys) ");
-
-    SqlParameterSource param2 = new BeanPropertySqlParameterSource(camparea);
-    //camping의 키 cnumber(외래키)를 가져와서 camparea에 삽입
-    camparea.setCnumber(camping.getCnumber());
-    template.update(sql2.toString(), param2);
-    List<Object> list = List.of(camping, camparea);
-    return list;
+    return camping;
   }
+
+    //캠핑장 구역 등록
+    @Override
+    public Camparea campareaSave(Camparea camparea) {
+      StringBuffer sql = new StringBuffer();
+      sql.append("INSERT INTO CAMPAREA ");
+      sql.append("(cnumber, area, capacitys ) ");
+      sql.append("VALUES ");
+      sql.append("(:cnumber, :area, :capacitys ) ");
+
+      SqlParameterSource param = new BeanPropertySqlParameterSource(camparea);
+      template.update(sql.toString(), param);
+      return camparea;
+    }
   //캠핑장 수정
   // 리턴값으로 수정된 row의 갯수 1이 반환됨.
   @Override
@@ -92,7 +94,11 @@ public class CampingDAOImpl implements CampingDAO{
         .addValue("capacitys", camparea.getCapacitys())
         .addValue("area", camparea.getArea())
         .addValue("cnumber", cnumber);
-    template.update(sql2.toString(), param2);
+    try {
+      template.update(sql2.toString(), param2);
+    } catch (DuplicateKeyException e) {
+      log.info("error={}", e);
+    }
     //반환은 camping의 수정 결과만
     return template.update(sql.toString(), param);
   }
@@ -123,7 +129,24 @@ public class CampingDAOImpl implements CampingDAO{
     }
   }
 
+  //캠핑장 구역 조회
+  @Override
+  public Optional<List<Camparea>> campareaDetail(int cnumber) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("SELECT * FROM CAMPAREA ");
+    sql.append("WHERE cnumber = :cnumber");
+
+    try{
+      Map<String, Integer> param = Map.of("cnumber", cnumber);
+      List<Camparea> campareaList= template.query(sql.toString(), param, BeanPropertyRowMapper.newInstance(Camparea.class));
+      return Optional.of(campareaList);
+    } catch (EmptyResultDataAccessException e) {
+      return Optional.empty();
+    }
+  }
+
     //  내 캠핑장 조회
+  @Override
       public List<Camping> campingFindByManagerMid(String mid){
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT * FROM CAMPING ");
