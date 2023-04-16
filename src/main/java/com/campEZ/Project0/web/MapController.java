@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MapController {
   @GetMapping
   public String Map(){
-    return "/mypage/map";
+    return "/map/map";
   }
 }

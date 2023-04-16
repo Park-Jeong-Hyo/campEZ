@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>키워드로 장소검색하기</title>
+
+</head>
+<body>
+<div id="map" style="width:100%;height:350px;"></div>
+<!--  appkey = 다음에 본인 카카오 개발자 인증키 넣을 것! 뒤에 &libraries=services 지우면 안 됨 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45c54444ce4272ce2301991cbfe78b24&libraries=services"></script>
+
+<!--  스크립트에서 ${} 값 받을 때 오류 줄여줌  -->
+<script th:inline="javascript">
+
+let itemId = 0;
+let itemName = '';
+var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+var mapContainer = document.getElementById('map'),
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567)
+    };
+var map = new kakao.maps.Map(mapContainer, mapOption);
+var ps = new kakao.maps.services.Places();
+
+<!--  여기에 키워드 받을 것! {지역} + 캠핑장이름, 띄어쓰기 주의! 뒤에 placesSearchCB는 지우지 말 것  -->
+ps.keywordSearch('울산 오션캠프', placesSearchCB);
+
+function placesSearchCB (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+        var bounds = new kakao.maps.LatLngBounds();
+        for (var i=0; i<data.length; i++) {
+              if(i==0){itemId = data[0].id;
+              itemName = data[0].place_name;
+              }
+            displayMarker(data[i]);
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+        map.setBounds(bounds);
+    }
+}
+function displayMarker(place) {
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x)
+    });
+
+    // 마커에 클릭이벤트
+    kakao.maps.event.addListener(marker, 'click', function() {
+ window.location.href = "https://map.kakao.com/link/to/"+itemId;
+    });
+
+    // 마커에 마우스 올렸을 때 뜰 내용
+var iwContent =
+  '<div style="padding:5px;">'+itemName+'</div>';
+
+var infowindow = new kakao.maps.InfoWindow({
+    content : iwContent
+});
+// 마커에 마우스오버 이벤트 인
+kakao.maps.event.addListener(marker, 'mouseover', function() {
+    infowindow.open(map, marker);
+});
+
+// 마커에 마우스아웃 이벤트 아웃
+kakao.maps.event.addListener(marker, 'mouseout', function() {
+    infowindow.close();
+});
+}
+</script>
+</body>
+</html>
