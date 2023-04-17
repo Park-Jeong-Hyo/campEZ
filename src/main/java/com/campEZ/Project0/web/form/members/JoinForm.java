@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class JoinForm {
-  @NotBlank
   private String mname;
   @NotBlank
   private String mid;
@@ -21,9 +20,8 @@ public class JoinForm {
   private String email;
   @Size(max=10)
   private String nickname;
-
+  private String phone;
   private String maddress;
-  @NotBlank
   private String mtype;
   private String companyname;
   private String businessnumber;

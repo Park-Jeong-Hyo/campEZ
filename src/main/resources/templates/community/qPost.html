@@ -34,7 +34,7 @@
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
           <a href="" th:href="@{/}" class="link">
@@ -70,13 +70,13 @@
         </section>
         <!--게시글 정보-->
         <section class="post__info">
-          <input class="post__writer hidden" name="pnumber"  th:field="*{pnumber}">
+          <input class="post__writer hidden" name="pnumber" th:field="*{pnumber}" />
           <p class="post__writer" th:text="*{nickname}">글쓴이 : 홍길동</p>
           <p class="post__date" th:text="*{udate}">작성일 : 23.03.21</p>
         </section>
         <!--게시글 섹션-->
         <section class="post__context">
-          <p class="post__main-content" th:text="*{ptext}" ></p>
+          <p class="post__main-content" th:text="*{ptext}"></p>
         </section>
         <div class="post__buttons">
           <button id="btnUpdate">수정</button>
@@ -95,7 +95,7 @@
         </div>
         <div>
           <th:block th:if="${!session.isEmpty()}">
-            <form action="" method="post" th:object="${commentForm}" >
+            <form action="" method="post" th:object="${commentForm}">
               <p th:object="${login}" th:text="${login.mid}"></p>
               <input class="comment-text" type="text" th:field="*{cotext}" />
               <p><button type="submit" id="addCommnet">댓글 작성</button></p>

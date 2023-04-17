@@ -90,6 +90,12 @@ public class HomeController {
   public String unknown() {
     return "errorPage/unknown";
   }
+
+  // 사이트맵 맵핑
+  @GetMapping("/sitemap")
+  public String siteMap() {
+    return "siteMap/SiteMap";
+  }
 }
 
 // 로그인페이지 맵핑

@@ -1,4 +1,4 @@
-package com.campEZ.Project0.web;
+package com.campEZ.Project0.web.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

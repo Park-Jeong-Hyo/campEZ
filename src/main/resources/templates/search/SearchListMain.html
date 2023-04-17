@@ -33,7 +33,7 @@
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
           <a href="" th:href="@{/}" class="link">
@@ -69,12 +69,12 @@
           <!-- 검색영역(SEARCHBOX) -->
           <form class="img__searchBox" th:method="post" th:object="${campingSearchForm}">
             <button class="img__searchBox-search" type="submit">검색</button>
-            <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력해주세요." th:field="${campingSearchForm.cname}"/>
+            <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력해주세요." th:field="${campingSearchForm.cname}" />
             <div class="img__searchBox-options">
               <select th:field="${campingSearchForm.ctype}" id="img__searchBox-options-select" required>
-                <option th:value='g'>글램핑</option>
-                <option th:value='a'>오토캠핑</option>
-<!--                <option th:value="">카라반</option>-->
+                <option th:value="g">글램핑</option>
+                <option th:value="a">오토캠핑</option>
+                <!--                <option th:value="">카라반</option>-->
               </select>
               <select th:field="${campingSearchForm.caddress}" id="" required>
                 <option th:value="서울">서울</option>
@@ -108,22 +108,22 @@
         <!-- 메인 캠핑장 등록 -->
         <section class="mn__main" th:if="${completeList} != null">
           <th:block th:each="item : ${completeList}">
-          <div class="mn__main-empty1-l"></div>
-          <div class="mn__main-photo">
-            <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
-          </div>
-          <div class="mn__main-write">
-            <p class="mn__main-name link">
-              <a href="" th:href="@{/search/{cnumber}/detail(cnumber=${item.getCnumber})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
-            </p>
-            <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
-            <p th:text="${item.getCamptel}">000-0000-0000</p>
-            <p class="mn__main-tag">
+            <div class="mn__main-empty1-l"></div>
+            <div class="mn__main-photo">
+              <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
+            </div>
+            <div class="mn__main-write">
+              <p class="mn__main-name link">
+                <a href="" th:href="@{/search/{cnumber}/detail(cnumber=${item.getCnumber})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
+              </p>
+              <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
+              <p th:text="${item.getCamptel}">000-0000-0000</p>
+              <p class="mn__main-tag">
                 <div class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</div>
                 <div class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</div>
-            </p>
-          </div>
-          <div class="mn__main-empty1-r"></div>
+              </p>
+            </div>
+            <div class="mn__main-empty1-r"></div>
           </th:block>
         </section>
       </main>

@@ -34,7 +34,7 @@
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
           <a href="" th:href="@{/}" class="link">
@@ -72,7 +72,7 @@
             <select class="posting__select-where" name="" id="">
               <option value="" selected>질문게시판</option>
             </select>
-            <input type="text" class="hidden" th:field="*{nickname}"/>
+            <input type="text" class="hidden" th:field="*{nickname}" />
             <input class="posting__input-title" type="text" th:field="*{ptitle}" placeholder="제목을 입력해 주시기 바랍니다." />
             <section class="posting__buttons">
               <button type="button">글꼴</button>
@@ -113,11 +113,11 @@
       <div class="ft-r"></div>
     </div>
     <script>
-    const $btnAdd = document.getElementById('btnAdd');
+      const $btnAdd = document.getElementById('btnAdd');
       const add_h = e => {
         frm.submit();
-      }
-      btnAdd.addEventListener('click',add_h,false);
+      };
+      btnAdd.addEventListener('click', add_h, false);
     </script>
   </body>
 </html>

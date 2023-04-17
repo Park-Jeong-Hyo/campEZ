@@ -178,12 +178,40 @@ public class MembersDAOImpl implements MembersDAO {
   //회원유무
   @Override
   public boolean isExist(String mid){
+    boolean isExist = false;
     String sql = "select count(mid) from members where mid = :mid ";
 
     Map<String, String> param = Map.of("mid", mid);
-
+    log.info("param={}",param);
     Integer cnt = template.queryForObject(sql, param, Integer.class);
-    return cnt == 1 ? true : false;
+    isExist = (cnt > 0) ? true : false;
+    return isExist;
+  }
+
+  // 닉네임 중복체크
+  @Override
+  public boolean nnIsExist(String nickname) {
+    boolean isExist = false;
+    String sql = "select count(nickname) from members where nickname = :nickname ";
+
+    Map<String, String> param = Map.of("nickname", nickname);
+    log.info("param={}",param);
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+    isExist = (cnt > 0) ? true : false;
+    return isExist;
+  }
+
+  // 사업자 중복체크
+  @Override
+  public boolean bizIsExist(String businessnumber) {
+    boolean isExist = false;
+    String sql = "select count(nickname) from members where businessnumber = :businessnumber ";
+
+    Map<String, String> param = Map.of("businessnumber", businessnumber);
+    log.info("param={}",param);
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+    isExist = (cnt > 0) ? true : false;
+    return isExist;
   }
 
   //로그인

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" th:href="@{./css/member/SignUp.css}" />
+    <link rel="stylesheet" href="" th:href="@{/css/member/SignUp.css}" />
     <title>캠핑이지 회원가입</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
@@ -34,7 +34,7 @@
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
           <a href="" th:href="@{/}" class="link">
@@ -123,13 +123,13 @@
         <div class="mn__btn">
           <div class="btn__gen-user">
             <i class="fa-solid fa-user fa-4x"></i>
-            <a href="/templates/member/SignUpUserGen.html">
+            <a href="" th:href="@{/members/signup/gen}">
               <p class="sign-btn">일반 회원가입 선택</p>
             </a>
           </div>
           <di class="btn__camp-user">
             <i class="fa-solid fa-tent fa-4x"></i>
-            <a href="/templates/member/SignUpUserCamp.html">
+            <a href="" th:href="@{/members/signup/camp}">
               <p class="sign-btn">캠핑장 회원가입 선택</p>
             </a>
           </di>

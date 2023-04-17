@@ -22,12 +22,13 @@ public class AppConfig implements WebMvcConfigurer {
                     "/signup/**",  //회원가입
                     "/login/**",  //로그인
                     "/logout/**", //로그아웃
-                    "/member/**", //멤버 이하 모든 페이지
+                    "/members/**", //멤버 이하 모든 페이지
                     "/css/**",
                     "/js/**",
                     "/img/**",
                     "/error/**",
-                    "/errorPage/**"
+                    "/errorPage/**",
+                    "/api/members/**"
             );
   }
 }

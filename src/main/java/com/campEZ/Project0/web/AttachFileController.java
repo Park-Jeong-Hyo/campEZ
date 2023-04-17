@@ -3,6 +3,7 @@ package com.campEZ.Project0.web;
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.exception.BizException;
+import com.campEZ.Project0.web.rest.RestResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;

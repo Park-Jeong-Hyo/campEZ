@@ -38,6 +38,11 @@ public interface MembersSVC {
   //회원유무
   boolean isExist(String mid);
 
+  // 닉네임 중복체크
+  boolean nnIsExist(String nickname);
+
+  // 사업자 중복체크
+  boolean bizIsExist(String businessnumber);
   //로그인
   Optional<Members> login(String mid, String pw);
 }

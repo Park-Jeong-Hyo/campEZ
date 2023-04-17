@@ -4,20 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="" th:href="@{./css/member/LogIn.css}" />
-    <title>캠핑이지 로그인</title>
-    <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
-    <style>
-      .error {
-        font-size: 0.8rem;
-      }
-    </style>
+    <link rel="stylesheet" href="" th:href="@{/css/siteMap/siteMap.css}" />
+    <title>사이트맵</title>
+      <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="wrapper">
-      <div class="up-l"></div>
-
       <!-- 최상단 메뉴(UPPERMOST) -->
+      <div class="up-l"></div>
       <div class="up">
         <a href="" th:href="@{/}" class="up__link">HOME</a>
         <th:block th:if="${!session.isEmpty()}">
@@ -29,12 +23,10 @@
           <a href="" th:href="@{/login}" class="up__link">로그인</a>
         </th:block>
       </div>
-
       <div class="up-r"></div>
 
-      <div class="hd-l"></div>
-
       <!-- 헤더 (HEADER) -->
+      <div class="hd-l"></div>
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
@@ -49,12 +41,10 @@
         </div>
         <div class="hd__empty-item"></div>
       </header>
-
       <div class="hd-r"></div>
 
-      <div class="gnb-l"></div>
-
       <!-- gnb영역 -->
+      <div class="gnb-l"></div>
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
           <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
@@ -64,55 +54,30 @@
         <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
         <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
       </nav>
-
       <div class="gnb-r"></div>
 
-      <div class="mn-l"></div>
-
       <!-- 메인영역(MAIN) -->
-      <main class="mn">
-        <h2 class="head-line">캠핑이지 로그인</h2>
+      <div class="mn-l"></div>
+      <main>
+        <h3 class="head-line">사이트맵</h3>
         <hr class="line-hd" />
-        <p style="margin-bottom: 20px">
-          가입하신 캠핑이지의 아이디와 비밀번호를 입력해주세요.
-          <br />비밀번호는 영문자 대소문자를 구분합니다.
-        </p>
-        <form action="" class="log-box" th:object="${loginForm}" th:method="post">
-          <div class="log-in">
-            <div class="input-log">
-              <div class="input-form">
-                <label for="" class="input-label" th:for="${#ids.next('mid')}">아이디</label>
-                <input type="text" class="id-input" th:field="*{mid}" maxlength="50" />
-                <p th:errors="*{mid}" class="error"></p>
-              </div>
-              <div class="input-form">
-                <label for="" class="input-label" th:for="${#ids.next('passwd')}">비밀번호</label>
-                <input type="password" class="pw-input" th:field="*{passwd}" maxlength="12" />
-                <p th:errors="*{passwd}" class="error"></p>
-              </div>
-            </div>
-            <button class="sign-btn">로그인</button>
-          </div>
-          <div class="sub-log">
-            <div>
-              <input type="checkbox" name="" id="idSaveChk" class="sub-chk" />
-              <label for="idSaveChk" class="sub-label">아이디 저장</label>
-            </div>
-            <div class="sub-link">
-              <a class="find-data" href="/templates/member/FindByIdPw.html"> 아이디 / 비밀번호 찾기 </a>
-              <span>|</span>
-              <a class="find-data" href="/templates/member/SignUp.html">회원가입</a>
-            </div>
-          </div>
-        </form>
+        <ul class="site-map">
+          <li class="depth-01"><a class="depth-title" href="" th:href="@{/search}"> 검색ez</a></li>
+          <li class="depth-01">
+            <p class="depth-title">광장ez</p>
+            <ul>
+              <li class="depth-data"><a href="" th:href="@{/community/bulletinBoard}"> 자유게시판</a></li>
+              <li class="depth-data"><a href=""th:href=@{/community/question}> 질문게시판</a></li>
+            </ul>
+          </li>
+          <li class="depth-01"><a class="depth-title" href="" th:href="@{/preparing}"> 가이드ez</a></li>
+        </ul>
         <hr class="line-ft" />
       </main>
-
       <div class="mn-r"></div>
 
-      <div class="ft-l"></div>
-
       <!-- 푸터영역(FOOTER)-->
+      <div class="ft-l"></div>
       <footer class="ft">
         <div class="ft__logo-cell">
           <h2>캠핑EZ</h2>
@@ -131,7 +96,6 @@
         </div>
         <div class="ft__empty-cell"></div>
       </footer>
-
       <div class="ft-r"></div>
     </div>
   </body>

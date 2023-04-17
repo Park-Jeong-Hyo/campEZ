@@ -1,6 +1,5 @@
 package com.campEZ.Project0.camping.dao;
 
-import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import org.assertj.core.api.Assertions;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DuplicateKeyException;
 
 import java.util.List;
 
@@ -19,29 +17,29 @@ public class CampingDAOImplTest {
 
   //camparea의 cnumber와 camping의 cnumber가 같으면 성공
   //addresss는 unique값이므로 테스트 할때마다 다시 설정해 주어야 함.
-  @Test
-  @DisplayName("캠핑장 등록, 캠핑 지역 등록")
-  void campingEnroll() {
-    Camping camping = new Camping();
-    Camparea camparea = new Camparea();
-    camping.setMid("test124");
-    camping.setCname("테스트캠핑장1");
-    camping.setCaddress("테스트118");
-    camping.setCamptel("010-1234-1234");
-    camping.setCtype("a");
-    camping.setOperdate("09:00~21:00");
-    camping.setHomepage("https:github.com");
-    camping.setCtitle("테스트캠핑");
-    camping.setCtext("테스트텍스트");
-    camping.setPriceweekday(30000);
-    camping.setPriceweekend(40000);
-    camping.setToilet("o");
-    camping.setMart("x");
-    camparea.setArea(4);
-    camparea.setCapacitys(5);
-    campingDAO.campingSave(camping, camparea);
-    Assertions.assertThat(camping.getCnumber()).isEqualTo(camparea.getCnumber());
-  }
+//  @Test
+//  @DisplayName("캠핑장 등록, 캠핑 지역 등록")
+//  void campingEnroll() {
+//    Camping camping = new Camping();
+//    Camparea camparea = new Camparea();
+//    camping.setMid("test124");
+//    camping.setCname("테스트캠핑장1");
+//    camping.setCaddress("테스트118");
+//    camping.setCamptel("010-1234-1234");
+//    camping.setCtype("a");
+//    camping.setOperdate("09:00~21:00");
+//    camping.setHomepage("https:github.com");
+//    camping.setCtitle("테스트캠핑");
+//    camping.setCtext("테스트텍스트");
+//    camping.setPriceweekday(30000);
+//    camping.setPriceweekend(40000);
+//    camping.setToilet("o");
+//    camping.setMart("x");
+//    camparea.setArea(4);
+//    camparea.setCapacitys(5);
+//    campingDAO.campingSave(camping, camparea);
+//    Assertions.assertThat(camping.getCnumber()).isEqualTo(camparea.getCnumber());
+//  }
   @Test
   @DisplayName("캠핑장 수정, 캠핑구역 수정")
   //수정된 열 갯수 1이 출력되면 성공

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/css/member/SignUPSuccess.css" />
+    <link rel="stylesheet" href="" th:href="@{/css/member/SignUPSuccess.css}" />
     <title>Document</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
@@ -34,9 +34,8 @@
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="" th:href="@{/notice}" class="link">공지사항</a>
           <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
           <a href="" th:href="@{/}" class="link">
