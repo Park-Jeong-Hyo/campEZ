@@ -149,22 +149,14 @@ public class CampingController {
     log.info("campingSaveForm={}",campingSaveForm);
 
     //파일첨부조회
-    List<UploadFile> imagedFile1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
-    List<UploadFile> imagedFile2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
-    List<UploadFile> imagedFiles1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A03, cnumber);
-    List<UploadFile> imagedFiles2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A04, cnumber);
+    List<UploadFile> imagedFile = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
+    List<UploadFile> imagedFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
 
-    if(!imagedFile1.isEmpty()){
-      campingSaveForm.setImagedFile1(imagedFile1.get(0));
+    if(!imagedFile.isEmpty()){
+      campingSaveForm.setImagedFile(imagedFile.get(0));
     }
-    if(!imagedFile2.isEmpty()){
-      campingSaveForm.setImagedFile2(imagedFile2.get(0));
-    }
-    if(!imagedFiles1.isEmpty()){
-      campingSaveForm.setImagedFiles1(imagedFiles1);
-    }
-    if(!imagedFiles2.isEmpty()){
-      campingSaveForm.setImagedFiles2(imagedFiles2);
+    if(!imagedFiles.isEmpty()){
+      campingSaveForm.setImagedFiles(imagedFiles);
     }
 
     model.addAttribute("campingSaveForm", campingSaveForm);
