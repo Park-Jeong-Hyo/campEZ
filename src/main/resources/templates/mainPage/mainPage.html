@@ -67,28 +67,33 @@
   <!-- 메인영역(MAIN) -->
   <main class="mn">
     <div class="nav"></div>
-    <section class="mn__newly-updated" >
+    <section class="mn__newly-updated">
       <h3 class="mn__title1">
         <i class="fa-solid fa-thumbtack"></i>
         NEW & UPDATE
       </h3>
-      <div class="mn__camping-image" >
-        <img th:src="@{|/attach/view/${homeUpload.imagedFile1.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
+      <div class="mn__camping-image">
+        <th:block th:if="${homeUpload.imagedFiles.size() >= 1}">
+          <img th:src="@{|/attach/view/${homeUpload.imagedFile1.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
+        </th:block>
         <a href="" class="link">
           <p class="mn__camping-name">푸른 초원 캠핑장</p>
         </a>
         <p class="mn__camping-address">인천 여수구 서성동</p>
       </div>
       <div class="mn__camping-image">
-        <img th:src="@{|/attach/view/${homeUpload.imagedFile1.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
-
+        <th:block th:if="${homeUpload.imagedFiles.size() >= 2}" >
+          <img th:src="@{|/attach/view/${homeUpload.imagedFile2.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
+        </th:block>
         <a href="" class="link">
           <p class="mn__camping-name">바다 풍경 캠핑장</p>
         </a>
         <p class="mn__camping-address">경기 안산시 도동동</p>
       </div>
       <div class="mn__camping-image">
-        <img th:src="@{|/attach/view/${homeUpload.imagedFile1.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
+        <th:block th:if="${homeUpload.imagedFiles.size() >= 3}">
+          <img th:src="@{|/attach/view/${homeUpload.imagedFile3.upnumber}|}" alt ="파일이미지" th:width ="200px" th:height="200px">
+        </th:block>
         <a href="" class="link">
           <p class="mn__camping-name">별자리 캠핑장</p>
         </a>

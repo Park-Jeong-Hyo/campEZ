@@ -30,11 +30,17 @@ public class HomeController {
   public String Home(Model model) {
     HomeUpload homeUpload = new HomeUpload();
     List<UploadFile> imagedFiles = uploadFileSVC.findFileByCode(AttachFileType.A01);
+    homeUpload.setImagedFiles(imagedFiles);
+    if(imagedFiles.size() >= 1) {
+      homeUpload.setImagedFile1(imagedFiles.get(0));
+    }
+    if(imagedFiles.size() >= 2) {
+      homeUpload.setImagedFile2(imagedFiles.get(1));
+    }
+    if(imagedFiles.size() >= 3) {
+      homeUpload.setImagedFile3(imagedFiles.get(2));
+    }
 
-    homeUpload.setImagedFile1(imagedFiles.get(0));
-    homeUpload.setImagedFile2(imagedFiles.get(1));
-    homeUpload.setImagedFile3(imagedFiles.get(2));
-    log.info("imagedFile1={}",imagedFiles);
     model.addAttribute("homeUpload",homeUpload);
     return "mainPage/mainPage";
   }

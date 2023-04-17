@@ -4,6 +4,7 @@ import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
+import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.form.camping.CampingSaveForm;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
@@ -148,15 +149,23 @@ public class CampingController {
     log.info("campingSaveForm={}",campingSaveForm);
 
     //파일첨부조회
-//    List<UploadFile> imagedFile1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
-//    List<UploadFile> imagedFile2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
-//    List<UploadFile> imagedFiles1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A03, cnumber);
-//    List<UploadFile> imagedFiles2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A04, cnumber);
+    List<UploadFile> imagedFile1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
+    List<UploadFile> imagedFile2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
+    List<UploadFile> imagedFiles1 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A03, cnumber);
+    List<UploadFile> imagedFiles2 = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A04, cnumber);
 
-//    campingSaveForm.setImagedFile1(imagedFile1.get(0));
-//    campingSaveForm.setImagedFile2(imagedFile2.get(0));
-//    campingSaveForm.setImagedFiles1(imagedFiles1);
-//    campingSaveForm.setImagedFiles2(imagedFiles2);
+    if(!imagedFile1.isEmpty()){
+      campingSaveForm.setImagedFile1(imagedFile1.get(0));
+    }
+    if(!imagedFile2.isEmpty()){
+      campingSaveForm.setImagedFile2(imagedFile2.get(0));
+    }
+    if(!imagedFiles1.isEmpty()){
+      campingSaveForm.setImagedFiles1(imagedFiles1);
+    }
+    if(!imagedFiles2.isEmpty()){
+      campingSaveForm.setImagedFiles2(imagedFiles2);
+    }
 
     model.addAttribute("campingSaveForm", campingSaveForm);
     return "detailPage/detailPage-user";
