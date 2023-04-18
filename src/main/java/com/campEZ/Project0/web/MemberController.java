@@ -25,7 +25,7 @@ public class MemberController {
 
   //회원가입양식(일반)
   @GetMapping("/signup/gen")
-  public String GenJoinForm(
+  public String genJoinForm(
       Model model,
       HttpSession session
   ){
@@ -40,7 +40,11 @@ public class MemberController {
 
   //회원가입처리(일반)
   @PostMapping("/signup/gen")
-  public String GenJoin(@Valid @ModelAttribute JoinForm joinForm, BindingResult bindingResult){
+  public String genJoin(
+      @Valid @ModelAttribute JoinForm joinForm,
+      BindingResult bindingResult
+  ){
+
     log.info("joinForm={}",joinForm);
     if(bindingResult.hasErrors()){
       log.info("bindingResult={}",bindingResult);
@@ -49,12 +53,14 @@ public class MemberController {
 
     log.info("joinForm.getPw()={}",joinForm.getPw());
     log.info("joinForm.getPwchk()={}",joinForm.getPwchk());
+
     //비밀번호 체크
     if(!joinForm.getPw().equals(joinForm.getPwchk())) {
       bindingResult.reject("pw","비밀번호가 동일하지 않습니다.");
       log.info("bindingResult={}",bindingResult);
       return "member/SignUpUserGen";
     }
+
     Members members = new Members();
     members.setMname(joinForm.getMname());
     members.setMid(joinForm.getMid());
@@ -73,6 +79,7 @@ public class MemberController {
     return "member/SignUpSuccess";
   }
 
+  //회원가입양식(사업자)
   @GetMapping("/signup/camp")
   public String campJoinForm(
       Model model,
@@ -87,4 +94,44 @@ public class MemberController {
     return "member/SignUpUserCamp";
   }
 
+  //회원가입처리(사업자)
+  @PostMapping("/signup/camp")
+  public String campJoin(
+      @Valid @ModelAttribute JoinForm joinForm,
+      BindingResult bindingResult
+  ){
+
+    log.info("joinForm={}",joinForm);
+    if(bindingResult.hasErrors()){
+      log.info("bindingResult={}",bindingResult);
+      return "member/SignUpUserCamp";
+    }
+
+    log.info("joinForm.getPw()={}",joinForm.getPw());
+    log.info("joinForm.getPwchk()={}",joinForm.getPwchk());
+
+    //비밀번호 체크
+    if(!joinForm.getPw().equals(joinForm.getPwchk())) {
+      bindingResult.reject("pw","비밀번호가 동일하지 않습니다.");
+      log.info("bindingResult={}",bindingResult);
+      return "member/SignUpUserCamp";
+    }
+
+    Members members = new Members();
+    members.setMname(joinForm.getMname());
+    members.setMid(joinForm.getMid());
+    members.setMname(joinForm.getMname());
+    members.setPw(joinForm.getPw());
+    members.setEmail(joinForm.getEmail());
+    members.setNickname(joinForm.getNickname());
+    members.setPhone(joinForm.getPhone());
+    members.setMaddress(joinForm.getMaddress());
+    members.setMtype("b");
+    members.setCompanyname(joinForm.getCompanyname());
+    members.setBusinessnumber(joinForm.getBusinessnumber());
+
+    log.info("members={}",members);
+    membersSVC.memSave(members);
+    return "member/SignUpSuccess";
+  }
 }

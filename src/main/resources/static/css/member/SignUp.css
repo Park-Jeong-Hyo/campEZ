@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import '/css/common/common.css';
-@import 'memberLayout.css';
+@import 'memberLayout2.css';
 
 /* * {
   outline: 1px solid red;
@@ -37,7 +37,7 @@
   background-color: rgba(0, 0, 0, 0.08);
   overflow: auto;
   height: 150px;
-  width: 1000px;
+  width: 100%;
 }
 .agree-box {
   display: flex;

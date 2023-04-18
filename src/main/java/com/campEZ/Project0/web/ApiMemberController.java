@@ -49,6 +49,7 @@ public class ApiMemberController {
     return res;
   }
 
+  // 사업자 중복 체크
   @PostMapping("/bizchk/{biznum}")
   public RestResponse<Object> bizChk(
       @PathVariable("biznum") String businessnumber
