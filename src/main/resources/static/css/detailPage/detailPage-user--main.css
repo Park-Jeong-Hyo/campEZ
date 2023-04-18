@@ -97,6 +97,10 @@
 
 /* 1.topTitle */
 
+.warning {
+  font-size: 0.7rem;
+}
+
 .topTitle {
   display: flex;
   flex-direction: row;
@@ -354,6 +358,10 @@
   align-items: center;
   padding: 10px;
   margin: 15px;
+}
+
+.camparea-input {
+    width: 50px;
 }
 
 /* 3.2-3.safety-guide */

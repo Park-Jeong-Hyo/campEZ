@@ -4,6 +4,8 @@ import com.campEZ.Project0.camping.dao.CampingDAO;
 import com.campEZ.Project0.camping.dao.CampingFilterCondition;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
+import com.campEZ.Project0.entity.UploadFile;
+import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,25 +19,45 @@ import java.util.Optional;
 public class CampingSVCImpl implements CampingSVC{
 
   private final CampingDAO campingDAO;
-
+  private final UploadFileSVC uploadFileSVC;
   @Override
   public Camping campingSave(Camping camping) {
     return campingDAO.campingSave(camping);
   }
 
   @Override
-  public Camparea campareaSave(Camparea camparea) {
-    return campingDAO.campareaSave(camparea);
+  public Camping campingSave(Camping camping, List<UploadFile> uploadFiles) {
+    int cnumber = campingSave(camping).getCnumber();
+    if (uploadFiles.size() > 0) {
+      uploadFiles.stream().forEach(file->file.setRid(cnumber));
+      uploadFileSVC.addFiles(uploadFiles);
+    }
+
+    return camping;
   }
 
   @Override
-  public int campingUpdate(Camping camping, Camparea camparea, int cnumber) {
-    return campingDAO.campingUpdate(camping, camparea, cnumber);
+  public Camparea campareaSave(Camparea camparea) {
+    return campingDAO.campareaSave(camparea);
+  }
+  @Override
+  public int campingUpdate(Camping camping, int cnumber) {
+    return campingDAO.campingUpdate(camping, cnumber);
+  }
+
+  @Override
+  public int campareaUpdate(Camparea camparea) {
+    return campingDAO.campareaUpdate(camparea);
   }
 
   @Override
   public int campingDelete(int cnumber) {
     return campingDAO.campingDelete(cnumber);
+  }
+
+  @Override
+  public int campareaDelete(int area) {
+    return campingDAO.campareaDelete(area);
   }
 
   @Override

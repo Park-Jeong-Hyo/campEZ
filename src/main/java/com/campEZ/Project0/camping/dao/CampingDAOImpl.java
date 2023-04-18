@@ -61,7 +61,7 @@ public class CampingDAOImpl implements CampingDAO{
   //캠핑장 수정
   // 리턴값으로 수정된 row의 갯수 1이 반환됨.
   @Override
-  public int campingUpdate(Camping camping, Camparea camparea, int cnumber) {
+  public int campingUpdate(Camping camping, int cnumber) {
     StringBuffer sql = new StringBuffer();
     sql.append("UPDATE CAMPING ");
     sql.append("SET cname = :cname, caddress = :caddress, camptel = :camptel, ctype = :ctype, operdate = :operdate, homepage = :homepage, ");
@@ -81,27 +81,33 @@ public class CampingDAOImpl implements CampingDAO{
         .addValue("priceweekend", camping.getPriceweekend())
         .addValue("toilet", camping.getToilet())
         .addValue("mart", camping.getMart())
-        .addValue("cnumber", cnumber);
-
-    //캠핑장 구역 수용인원(capaticys) 수정
-    //특이사항: 캠핑장 구역(area)을 수정하는 로직은 없음.
-    StringBuffer sql2 = new StringBuffer();
-    sql2.append("UPDATE CAMPAREA SET ");
-    sql2.append("capacitys = :capacitys ");
-    sql2.append("WHERE cnumber = :cnumber AND area = :area ");
-
-    SqlParameterSource param2 = new MapSqlParameterSource()
-        .addValue("capacitys", camparea.getCapacitys())
-        .addValue("area", camparea.getArea())
-        .addValue("cnumber", cnumber);
-    try {
-      template.update(sql2.toString(), param2);
-    } catch (DuplicateKeyException e) {
-      log.info("error={}", e);
-    }
+        .addValue("cnumber", cnumber );
     //반환은 camping의 수정 결과만
     return template.update(sql.toString(), param);
   }
+  //캠핑장 구역 수정
+  //성공시 리턴 값으로 1이 반환됨.
+  @Override
+  public int campareaUpdate(Camparea camparea) {
+    //캠핑장 구역 수용인원(capaticys) 수정
+    StringBuffer sql = new StringBuffer();
+    sql.append("UPDATE CAMPAREA SET ");
+    sql.append("capacitys = :capacitys ");
+    sql.append("WHERE cnumber = :cnumber ");
+
+    SqlParameterSource param = new MapSqlParameterSource()
+        .addValue("capacitys", camparea.getCapacitys())
+        .addValue("cnumber", camparea.getCnumber());
+//        .addValue("area", camparea.getArea());
+    try {
+      int result = template.update(sql.toString(), param);
+      return result;
+    } catch (DuplicateKeyException e) {
+      log.info("error={}", e);
+      return 0;
+    }
+  }
+
   //캠핑장 삭제
   @Override
   public int campingDelete(int cnumber) {
@@ -110,6 +116,16 @@ public class CampingDAOImpl implements CampingDAO{
     sql.append("WHERE cnumber = :cnumber ");
 
     Map<String, Integer> param = Map.of("cnumber", cnumber);
+    return template.update(sql.toString(), param);
+  }
+
+  //캠핑장 구역 삭제
+  @Override
+  public int campareaDelete(int area) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("DELETE FROM CAMPAREA ");
+    sql.append("WHERE area = :area ");
+    Map<String, Integer> param = Map.of("area", area);
     return template.update(sql.toString(), param);
   }
   //캠핑장 조회

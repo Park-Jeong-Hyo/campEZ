@@ -12,10 +12,14 @@ public interface CampingDAO {
   Camping campingSave(Camping camping);
   //캠핑장 구역 등록
   Camparea campareaSave(Camparea camparea);
-  //캠핑장 수정, 캠핑 구역 수정
-  int campingUpdate(Camping camping, Camparea camparea, int cnumber);
+  //캠핑장 수정
+  int campingUpdate(Camping camping, int cnumber);
+  //캠핑장 구역 수정
+  int campareaUpdate(Camparea camparea);
   //캠핑장 삭제
   int campingDelete(int cnumber);
+  //캠핑장구역 삭제
+  int campareaDelete(int area);
   //캠핑장 조회
   Optional<Camping> campingDetail(int cnumber);
   //캠핑장 구역 조회

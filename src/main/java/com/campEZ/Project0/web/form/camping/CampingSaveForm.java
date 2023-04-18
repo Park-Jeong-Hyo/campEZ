@@ -38,6 +38,7 @@ public class CampingSaveForm {
   private String udate;
 
   private int area;
+  private int areaNumber;
 
   private Integer capacitys1;
   private Integer capacitys2;
@@ -49,6 +50,11 @@ public class CampingSaveForm {
   private Integer capacitys8;
   private Integer capacitys9;
   private Integer capacitys10;
+
+  private MultipartFile imageFile1; //캠핑장 대표 이미지 다운로드
+  private MultipartFile imageFile2; //안전시설 및 배치도 다운로드
+  private List<MultipartFile> imageFiles1; //캠핑장 주요 시설 다운로드
+  private List<MultipartFile> imageFiles2; //캠핑장 이미지 다운로드
 
   private MultipartFile imageFile; //캠핑장 대표 이미지 다운로드
   private List<MultipartFile> imageFiles; //캠핑장 이미지 다운로드

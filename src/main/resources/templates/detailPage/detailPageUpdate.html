@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <form class="wrapper" th:method="POST" th:action="@{/search/save}">
+  <form class="wrapper" th:method="POST" th:action="@{/search/update}">
     <!-- 최상단 메뉴(UPPERMOST) -->
     <div class="up-l"></div>
 
@@ -87,6 +87,7 @@
           <tr>
             <td class="title">주소</td>
             <td class="content">
+              <input type="hidden" th:field="${campingSaveForm.cnumber}" readonly>
               <input type="text" th:field="${campingSaveForm.caddress}" required>
             </td>
           </tr>
@@ -132,7 +133,7 @@
           </tr>
         </table>
         <div class="reserv">
-          <button class="reservBtn">등록</button>
+          <button class="reservBtn">수정</button>
         </div>
       </section>
     </div>
@@ -203,6 +204,7 @@
               <div class="camparea-btn-view">
                 <input type="number" min="0" max="9" id="camparea-count" th:field="${campingSaveForm.area}"
                   oninput="changeValue(this)">
+                <input type="hidden" min="0" max="9" th:field="${campingSaveForm.areaNumber}">
               </div>
             </div>
             <div></div>

@@ -1,4 +1,4 @@
-package com.campEZ.Project0.uploadfile;
+package com.campEZ.Project0.uploadfile.svc;
 
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.web.AttachFileType;
@@ -106,14 +106,14 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
 //    uploadFile.setRid(rid);
     uploadFile.setUploadname(mf.getOriginalFilename());
 
-    String storeFilename = createStoreFilename(mf.getOriginalFilename());
-    uploadFile.setStorename(storeFilename);
+    String storeName = createStoreName(mf.getOriginalFilename());
+    uploadFile.setStorename(storeName);
 
     uploadFile.setFsize(String.valueOf(mf.getSize()));
     uploadFile.setFtype(mf.getContentType());
 
     //물리 파일 저장
-    storeFile(mf,attachFileType,storeFilename);
+    storeFile(mf,attachFileType,storeName);
 
     return uploadFile;
   }
@@ -169,6 +169,7 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
     if(!folder.exists()) folder.mkdir();
   }
 
+  //물리파일저장
   private void storeFile(MultipartFile mf, AttachFileType attachFileType, String storeFilename) {
     String fullPath = getFullPath(attachFileType);
     File file = new File(fullPath+storeFilename);
@@ -181,7 +182,7 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
   }
 
   //임의파일명 생성
-  private String createStoreFilename(String originalFile) {
+  private String createStoreName(String originalFile) {
     StringBuffer storeFileName = new StringBuffer();
     storeFileName.append(UUID.randomUUID().toString()) // xxx-yyy-zzz-ttt..
         .append(".")
@@ -196,3 +197,4 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
     return ext;
   }
 }
+
