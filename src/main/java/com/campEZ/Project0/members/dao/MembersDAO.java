@@ -46,4 +46,7 @@ public interface MembersDAO {
   boolean bizIsExist(String businessnumber);
   //로그인
   Optional<Members> login(String mid, String pw);
+
+  //비밀번호변경
+  void changePasswd(String mid, String pw);
 }

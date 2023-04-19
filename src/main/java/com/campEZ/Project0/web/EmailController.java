@@ -20,6 +20,7 @@ public class EmailController {
     model.addAttribute("MailForm",new com.campEZ.Project0.email.MailForm());
     return "email/mail";
   }
+
   @PostMapping("/email")
   public String sendEmail(@ModelAttribute("MailForm") com.campEZ.Project0.email.MailForm mailForm, Model model){
 //    암호 만들기

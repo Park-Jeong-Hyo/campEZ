@@ -205,6 +205,9 @@
       // 아이디 체크
       const chk = res => {
         if (res.header.rtcd == '00') {
+          console.log(res);
+          const abc = res.data;
+          console.log(abc);
           alert('사용 가능한 아이디 입니다.');
           chk_id = true;
         } else {

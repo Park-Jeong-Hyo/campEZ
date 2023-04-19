@@ -232,5 +232,15 @@ public class MembersDAOImpl implements MembersDAO {
     return list.size() == 1 ? Optional.of(list.get(0)) : Optional.empty();
   }
 
+  @Override
+  public void changePasswd(String mid, String pw) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("update members ");
+    sql.append("   set pw = :pw ");
+    sql.append(" where mid = :mid ");
+
+    Map<String, String> param = Map.of("mid",mid,"pw",pw);
+    template.update(sql.toString(),param);
+  }
 
 }

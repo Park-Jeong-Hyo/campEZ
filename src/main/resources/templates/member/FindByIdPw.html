@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="" th:href="@{/css/member/FindByIdPw.css}"/>
   <title>$Title$</title>
   <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
+      <script type="module" src="./common.js" th:src="@{/js/common.js}"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -85,25 +86,25 @@
         입력정보가 기억나지 않는 경우 고객센터(Tel.0000-0000)로 문의해주시기
         바랍니다.
       </p>
-      <form action="" class="log-box">
+      <form action="" class="log-box" id="idFrm" th:object="${findIdForm}">
         <div class="find-id">
           <div class="input-find">
             <div class="input-form">
               <label for="" class="input-label">이름</label>
-              <input type="text" class="id-input" />
+              <input type="text" class="id-input" th:field="*{imname}"/>
             </div>
             <div class="input-form">
               <label for="" class="input-label">이메일</label>
-              <input type="password" class="pw-input" />
+              <input type="email" class="pw-input" th:field="*{iemail}" />
             </div>
             <div class="input-form">
               <label for="" class="input-label">휴대전화</label>
-              <input type="password" class="pw-input" />
+              <input type="text" class="pw-input" th:field="*{iphone}" />
             </div>
           </div>
         </div>
       </form>
-      <button class="find-btn">아이디 찾기</button>
+      <button class="find-btn" type="button" id="btnFindId">아이디 찾기</button>
     </div>
     <div class="tab hidden" id="tab02">
       <p style="height: 50px; margin-bottom: 20px">
@@ -111,25 +112,25 @@
         아이디가 기억나지 않는 경우 ‘아이디 찾기’를 먼저 진행해주시기 바랍니다.<br>
         입력정보가 기억나지 않는 경우 고객센터(Tel.0000-0000)로 문의해주시기 바랍니다.
       </p>
-      <form action="" class="log-box">
+      <form action="" class="log-box" th:object="${findPwForm}">
         <div class="find-id">
           <div class="input-find">
             <div class="input-form">
               <label for="" class="input-label">아이디</label>
-              <input type="text" class="id-input" />
+              <input type="text" class="id-input" th:field="*{pmid}"/>
             </div>
             <div class="input-form">
               <label for="" class="input-label">이메일</label>
-              <input type="password" class="pw-input" />
+              <input type="text" class="pw-input" th:field="*{pemail}" />
             </div>
             <div class="input-form">
               <label for="" class="input-label">휴대전화</label>
-              <input type="password" class="pw-input" />
+              <input type="text" class="pw-input" th:field="*{pphone}" />
             </div>
           </div>
         </div>
       </form>
-      <button class="find-btn">비밀번호 찾기</button>
+      <button class="find-btn" id="btnFindPw">비밀번호 찾기</button>
     </div>
     <hr class="line-ft" />
   </main>
@@ -159,13 +160,21 @@
   </footer>
   <div class="ft-r"></div>
 </div>
-<script>
+    <script type="module">
+      import { ajax } from '/js/common.js';
       const $tabMenu = document.querySelector('.tab-menu');
       const $tapBtn1 = document.querySelector('.tab-btn1');
       const $tapBtn2 = document.querySelector('.tab-btn2');
       const $tab01 = document.getElementById('tab01');
       const $tab02 = document.getElementById('tab02');
-
+            const $btnFindId = document.getElementById('btnFindId');
+      const $btnFindPw = document.getElementById('btnFindPw');
+      const $imname = document.getElementById('imname');
+      const $iphone = document.getElementById('iphone');
+      const $iemail = document.getElementById('iemail');
+      const $pmid = document.getElementById('pmid');
+      const $pemail = document.getElementById('pemail');
+      const $pphone = document.getElementById('pphone');
       function tab_handler(e) {
         const v1 = e.target.textContent;
         if (v1 == '아이디 찾기') {
@@ -185,7 +194,54 @@
           $tapBtn2.classList.remove('btn-off');
         }
       }
+
+ // 아이디 찾기
+      const id_read = res => {
+        console.log(res);
+        if (res.header.rtcd == '00') {
+          const data = res.data;
+          console.log(data);
+                    globalThis.location.href = `/members/findedid/${data}`;
+        } else {
+          throw new Error(`${res.header.rtmsg}`);
+        }
+      };
+      const id_read_h = e => {
+        const url = `http://localhost:9080/api/members/findid/${$imname.value}/${$iemail.value}/${$iphone.value}`;
+        
+        //유효성체크
+        ajax
+          .get(url)
+          .then(res => res.json())
+          .then(id_read) //.then(res => add(res))
+      };
+
+       // 비밀번호 찾기
+      const pw_read = res => {
+      console.log(res);
+        if (res.header.rtcd == '00') {
+          console.log(res);
+          const data = res.data.mid;
+          console.log(data);
+                    globalThis.location.href = `/members/changepw/${data}`;
+        } else {
+          throw new Error(`${res.header.rtmsg}`);
+        }
+      };
+      const pw_read_h = e => {
+        const url = `http://localhost:9080/api/members/findpw/${$pmid.value}/${$pemail.value}/${$pphone.value}`;
+        
+        //유효성체크
+        ajax
+          .get(url)
+          .then(res => res.json())
+          .then(pw_read) //.then(res => add(res))
+      };
+
       $tabMenu.addEventListener('click', tab_handler, false);
+      $btnFindId.addEventListener('click', id_read_h, false);
+      $btnFindPw.addEventListener('click', pw_read_h, false);
+      
     </script>
 </body>
 </html>

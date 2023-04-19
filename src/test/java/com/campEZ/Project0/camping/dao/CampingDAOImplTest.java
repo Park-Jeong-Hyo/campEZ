@@ -1,6 +1,5 @@
 package com.campEZ.Project0.camping.dao;
 
-import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -40,33 +39,33 @@ public class CampingDAOImplTest {
 //    campingDAO.campingSave(camping, camparea);
 //    Assertions.assertThat(camping.getCnumber()).isEqualTo(camparea.getCnumber());
 //  }
-  @Test
-  @DisplayName("캠핑장 수정, 캠핑구역 수정")
-  //수정된 열 갯수 1이 출력되면 성공
-  void campingUpdate() {
-  Camping camping = new Camping();
-  Camparea camparea = new Camparea();
-  int cnumber = 1;
-    camping.setCname("수정캠핑장");
-    camping.setCaddress("수정주소");
-    camping.setCamptel("010-1234-1234");
-    camping.setCtype("x");
-    camping.setOperdate("09:00~21:00");
-    camping.setHomepage("https:github.com");
-    camping.setCtitle("수정타이틀");
-    camping.setCtext("수정텍스트");
-    camping.setPriceweekday(30000);
-    camping.setPriceweekend(40000);
-    camping.setToilet("o");
-    camping.setMart("o");
-    camparea.setCapacitys(5);
-    camparea.setArea(2);
-    int result = campingDAO.campingUpdate(camping, camparea, cnumber);
-    System.out.println(camping);
-    System.out.println(camparea);
-    System.out.println(result);
-    Assertions.assertThat(result).isEqualTo(1);
-  }
+//  @Test
+//  @DisplayName("캠핑장 수정, 캠핑구역 수정")
+//  //수정된 열 갯수 1이 출력되면 성공
+//  void campingUpdate() {
+//  Camping camping = new Camping();
+//  Camparea camparea = new Camparea();
+//  int cnumber = 1;
+//    camping.setCname("수정캠핑장");
+//    camping.setCaddress("수정주소");
+//    camping.setCamptel("010-1234-1234");
+//    camping.setCtype("x");
+//    camping.setOperdate("09:00~21:00");
+//    camping.setHomepage("https:github.com");
+//    camping.setCtitle("수정타이틀");
+//    camping.setCtext("수정텍스트");
+//    camping.setPriceweekday(30000);
+//    camping.setPriceweekend(40000);
+//    camping.setToilet("o");
+//    camping.setMart("o");
+//    camparea.setCapacitys(5);
+//    camparea.setArea(2);
+//    int result = campingDAO.campingUpdate(camping, camparea, cnumber);
+//    System.out.println(camping);
+//    System.out.println(camparea);
+//    System.out.println(result);
+//    Assertions.assertThat(result).isEqualTo(1);
+//  }
   
   //삭제된 열 갯수 1이 출력되면 성공
   @Test

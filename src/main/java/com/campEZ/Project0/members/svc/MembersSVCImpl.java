@@ -1,8 +1,8 @@
 package com.campEZ.Project0.members.svc;
 
-import com.campEZ.Project0.members.dao.MembersDAO;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.members.dao.MembersDAO;
 import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -93,5 +93,11 @@ public class MembersSVCImpl implements MembersSVC {
   @Override
   public Optional<Members> login(String mid, String pw){
     return membersDAO.login(mid,pw);
+  }
+
+  // 비밀번호 변경
+  @Override
+  public void changePasswd(String mid, String pw) {
+    membersDAO.changePasswd(mid,pw);
   }
 }

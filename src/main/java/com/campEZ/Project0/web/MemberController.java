@@ -2,6 +2,9 @@ package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.members.svc.MembersSVC;
+import com.campEZ.Project0.pwGenerator.PasswordGenerator;
+import com.campEZ.Project0.web.form.members.FindIdForm;
+import com.campEZ.Project0.web.form.members.FindPwForm;
 import com.campEZ.Project0.web.form.members.JoinForm;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -10,10 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -133,5 +133,53 @@ public class MemberController {
     log.info("members={}",members);
     membersSVC.memSave(members);
     return "member/SignUpSuccess";
+  }
+
+  // 아이디 비밀번호 찾기
+  @GetMapping("/findbyidpw")
+  public String findByIdPw(
+      Model model,
+      FindIdForm findIdForm,
+      FindPwForm findPwForm
+  ) {
+    model.addAttribute("findIdForm",findIdForm);
+    model.addAttribute("findPwForm",findPwForm);
+    return "member/findByIdPw";
+  }
+
+  // 아이디 찾기 완료
+  @GetMapping("findedid/{id}")
+  public String findedId(
+      @PathVariable("id") String id,
+      Model model
+  ) {
+    log.info("id={}",id);
+    Members member = new Members();
+    member.setMid(id);
+    log.info("model={}",model);
+    model.addAttribute("id",id);
+    model.getAttribute(id);
+    log.info("model={}",model);
+    return "member/FindIdSuccess";
+  }
+
+  // 비밀번호 변경
+  @GetMapping("/changepw/{id}")
+  public String findedpw(
+      @PathVariable("id") String id
+  ) {
+
+    Members members = membersSVC.memFindB(id);
+    PasswordGenerator.PasswordGeneratorBuilder passwordGeneratorBuilder = new PasswordGenerator.PasswordGeneratorBuilder();
+    String pwd = passwordGeneratorBuilder
+        .useDigits(true)  //숫자포함여부
+        .useLower(true)   //소문자포함
+        .useUpper(true)   //대문자포함
+        .usePunctuation(true) //특수문자포함
+        .build()
+        .generate(10); //비밀번호 자리수
+
+    membersSVC.changePasswd(members.getMid(), pwd);
+    return "member/FindpwSuccess";
   }
 }
