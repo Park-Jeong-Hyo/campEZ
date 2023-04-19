@@ -16,7 +16,7 @@ public class EmailSVC {
                         String body){
     SimpleMailMessage message = new SimpleMailMessage();
 //    보내는 사람 주소
-    message.setFrom("dlalsrl234@gmail.com");
+    message.setFrom("내 네이버 메일 주소");
     message.setTo(toEmail);
     message.setSubject(subject);
     message.setText(body);
