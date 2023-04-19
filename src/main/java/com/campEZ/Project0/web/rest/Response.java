@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RestResponse<T> {
+public class Response<T> {
   private Header header;
   private T data;
 
@@ -16,7 +16,7 @@ public class RestResponse<T> {
     private String rtmsg;
   }
 
-  public static <T> RestResponse<T> createRestResponse(String rtcd,String rtmsg, T data){
-    return new RestResponse<>(new Header(rtcd,rtmsg),data);
+  public static <T> Response<T> createRestResponse(String rtcd, String rtmsg, T data){
+    return new Response<>(new Header(rtcd,rtmsg),data);
   }
 }

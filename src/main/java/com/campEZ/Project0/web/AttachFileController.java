@@ -3,7 +3,7 @@ package com.campEZ.Project0.web;
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.exception.BizException;
-import com.campEZ.Project0.web.rest.RestResponse;
+import com.campEZ.Project0.web.rest.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
@@ -76,15 +76,15 @@ public class AttachFileController {
   //첨부파일 삭제-단건
   @ResponseBody
   @DeleteMapping("/{fid}")
-  public RestResponse<Object> deleteFileByFid(
+  public Response<Object> deleteFileByFid(
       @PathVariable int fid) {
     int affectedRow = uploadFileSVC.deleteFileByUploadFileId(fid);
 
-    RestResponse<Object> result = null;
+    Response<Object> result = null;
     if(affectedRow == 1){
-      result = RestResponse.createRestResponse("00", "성공", null);
+      result = Response.createRestResponse("00", "성공", null);
     }else{
-      result = RestResponse.createRestResponse("99", "fail", null);
+      result = Response.createRestResponse("99", "fail", null);
     }
     return result;
   }

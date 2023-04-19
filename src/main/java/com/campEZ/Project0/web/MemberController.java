@@ -1,11 +1,13 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.entity.Members;
+import com.campEZ.Project0.members.svc.BusinessApiSVC;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.pwGenerator.PasswordGenerator;
 import com.campEZ.Project0.web.form.members.FindIdForm;
 import com.campEZ.Project0.web.form.members.FindPwForm;
 import com.campEZ.Project0.web.form.members.JoinForm;
+import com.campEZ.Project0.web.rest.Response;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
   private final MembersSVC membersSVC;
+
+  private final BusinessApiSVC businessApiSVC;
 
   //회원가입양식(일반)
   @GetMapping("/signup/gen")
@@ -92,6 +98,20 @@ public class MemberController {
     model.addAttribute("joinForm", joinForm);
     log.info("joinForm={}",joinForm);
     return "member/SignUpUserCamp";
+  }
+
+  //사업자 상태확인
+  @ResponseBody
+  @PostMapping("/businesschk")
+  public Response<Object> businessNumberChk(@RequestBody String businessNo){
+
+    log.info("businessNo={}",businessNo);
+    Map<String, String> businessChk = businessApiSVC.getPublicData(businessNo);
+
+    Response<Object> response = Response.createRestResponse("00","성공",businessChk);
+    log.info("businessChk",businessChk.toString());
+    log.info("response",response.toString());
+    return response;
   }
 
   //회원가입처리(사업자)
