@@ -237,18 +237,23 @@
           <!-- 탭2__1, 내가 관리 중인 캠핑장 -->
           <div class="tab2__1__content">
             <hr />
-            <!-- 내 캠핑장, 3개까지 들어감 -->
-            <div class="myCamp__item">
-              <img
-                class="myCamp__Photo"
-                src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg"
-                alt="이미지 없음"
-              />
-              <div class="myCamp__campName" th:each="item : ${myCamp}">
-                <a href="" th:text="${item.cname}">캠핑장 이름</a>
-              </div>
-              <button class="myCamp__reserv">예약 내역</button>
+            <div class="myCamp__saveBtnItem">
+              <button class="myCamp__saveBtn"><a href="link" th:href="@{/search/save}">캠핑장 등록</a></button>
             </div>
+            <!-- 내 캠핑장, 3개까지 들어감 -->
+            <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item"
+                  th:each="item : ${myCamp}">
+              <img class="myCamp__Photo"
+                   src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg" alt="이미지 없음" />
+              <div class="myCamp__campName">
+                <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
+              </div>
+              <div>
+                <button type="button" class="myCamp__reserv btns">예약 내역</button>
+                <button type="submit" id="myCamp__delBtn" class="myCamp__del btns">삭제</button>
+                <input type="hidden" th:name="cnumber" th:value="${item.getCnumber()}" readonly>
+              </div>
+            </form>
             <!-- 페이지 버튼 -->
             <div class="myCamp__page">
               <button class="myCamp__pageBtn"><<</button>
@@ -387,6 +392,13 @@
     });
     $member__modalNBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
+    });
+
+    const deleteBtn = document.getElementById('myCamp__delBtn');
+      deleteBtn.addEventListener('click', e => {
+      if (confirm("삭제하시겠습니까?") == false) {
+        e.preventDefault();
+      }
     });
 
 </script>

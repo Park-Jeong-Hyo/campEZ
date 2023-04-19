@@ -15,4 +15,6 @@ public class CampingSearchForm {
   @NotBlank
   private String cname;     //캠핑검색어
   private String camptel;   //캠핑장 전화번호
+
+  private int area; //캠핑장 구역의 최대값
 }

@@ -42,10 +42,10 @@ public class CampingController {
   //캠핑장 검색
   @PostMapping
   public String campingSearch(
-      @Valid @ModelAttribute CampingSearchForm campingSearchForm,
-      BindingResult bindingResult,
-      RedirectAttributes redirectAttributes,
-      Model model
+          @Valid @ModelAttribute CampingSearchForm campingSearchForm,
+          BindingResult bindingResult,
+          RedirectAttributes redirectAttributes,
+          Model model
   ) {
     List<Camping> list = null;
     // valid 검사
@@ -64,6 +64,19 @@ public class CampingController {
 
     List<CampingSearchForm> completeList = new ArrayList<>();
 
+    //최대 구역 값을 구하기 위한 로직 (손대지 말 것)
+    CampingSearchForm areaForm = new CampingSearchForm();
+    int maxNumber = 0;
+    for(int i = 0; i < list.size() ; i++) {
+      List<Camparea> compareList = campingSVC.campareaDetail(list.get(i).getCnumber()).orElseThrow();
+      for(int j = 0; j < compareList.size() ; j++ ) {
+        if(maxNumber < compareList.get(j).getArea()) {
+          maxNumber = compareList.get(j).getArea();
+          areaForm.setArea(maxNumber);
+        };
+      };
+    };
+
     //list 내부의 Camping객체를 순환하는 for
     for (Camping camping : list) {
       //list내부의 정보를 담을 CampingSearchform생성
@@ -73,7 +86,9 @@ public class CampingController {
       //List<CampSearchForm>에 저장
       completeList.add(campingSearchForm1);
     }
+
     model.addAttribute("completeList", completeList);
+    model.addAttribute("areaForm", areaForm);
     log.info("completelist={}", completeList);
     return "search/SearchListMain";
   }
@@ -81,11 +96,11 @@ public class CampingController {
   //캠핑장 조회
   @GetMapping("{id}/{areaNumber}/detail")
   public String campingDetail(
-      @PathVariable("id") int cnumber,
-      @PathVariable("areaNumber") int areaNumber,
-      Model model,
-      HttpSession session,
-      RedirectAttributes redirectAttributes
+          @PathVariable("id") int cnumber,
+          @PathVariable("areaNumber") int areaNumber,
+          Model model,
+          HttpSession session,
+          RedirectAttributes redirectAttributes
   ) {
     LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
     CampingSaveForm campingSaveForm = new CampingSaveForm();
@@ -127,41 +142,75 @@ public class CampingController {
 
     //리스트에서 구해온 capacitys의 값을 하나씩 넣어주는 작업
     // 이 부분에 값이 없을 경우 오류 발생, get(숫자).getCapacity()를 했을 때 해당하는 값이 있어야 한다.
+    int isAreaNumberTrue = 0;
     for (int i = 0; i < 10; i++) {
       if (i < campareaList.size()) {
         switch (i) {
           case 0:
             campingSaveForm.setCapacitys1(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 1:
             campingSaveForm.setCapacitys2(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 2:
             campingSaveForm.setCapacitys3(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 3:
             campingSaveForm.setCapacitys4(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 4:
             campingSaveForm.setCapacitys5(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 5:
             campingSaveForm.setCapacitys6(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 6:
             campingSaveForm.setCapacitys7(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 7:
             campingSaveForm.setCapacitys8(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 8:
             campingSaveForm.setCapacitys9(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
           case 9:
             campingSaveForm.setCapacitys10(campareaList.get(i).getCapacitys());
+            if(campareaList.get(i).getArea() > isAreaNumberTrue) {
+              isAreaNumberTrue = campareaList.get(i).getArea();
+            }
             break;
         }
       }
+    }
+    if(isAreaNumberTrue != areaNumber) {
+      return "error/404";
     }
 
     log.info("campingSaveForm={}", campingSaveForm);
@@ -203,10 +252,10 @@ public class CampingController {
   //캠핑장 등록
   @PostMapping("/save")
   public String campingSave(
-      @Valid @ModelAttribute CampingSaveForm campingSaveForm,
-      BindingResult bindingResult,
-      HttpSession session,
-      RedirectAttributes redirectAttributes
+          @Valid @ModelAttribute CampingSaveForm campingSaveForm,
+          BindingResult bindingResult,
+          HttpSession session,
+          RedirectAttributes redirectAttributes
   ) {
     //유효성 검사
     if(bindingResult.hasErrors()) {
@@ -297,29 +346,26 @@ public class CampingController {
           break;
       }
     }
-      log.info("capacitys={}",capacitysList);
-      // area와 capacitys를 인서트
-      for (int i = 0 ; i < maxListNumber ; i++) {
-        if(capacitysList.get(i) != null) {
-          camparea.setArea(areaList.get(i));
-          camparea.setCapacitys(capacitysList.get(i));
-          campingSVC.campareaSave(camparea);
-        }
+    log.info("capacitys={}",capacitysList);
+    // area와 capacitys를 인서트
+    for (int i = 0 ; i < maxListNumber ; i++) {
+      if(capacitysList.get(i) != null) {
+        camparea.setArea(areaList.get(i));
+        camparea.setCapacitys(capacitysList.get(i));
+        campingSVC.campareaSave(camparea);
       }
-    //완료후 리다이렉트 하기 위함.
-    int id = result.getCnumber();
-    redirectAttributes.addAttribute("id", id);
-    redirectAttributes.addAttribute("areaNumber", areaNumber);
-    return "redirect:/search/{id}/{areaNumber}/detail";
+    }
+    redirectAttributes.addAttribute("mid", mid);
+    return "redirect:/mypage/{mid}/manager";
   }
 
   //캠핑장 수정화면
   @GetMapping("/{id}/{areaNumber}/update")
   public String campingUpdateForm(
-      Model model,
-      @PathVariable("id") int cnumber,
-      @PathVariable("areaNumber") int areaNumber,
-      HttpSession session) {
+          Model model,
+          @PathVariable("id") int cnumber,
+          @PathVariable("areaNumber") int areaNumber,
+          HttpSession session) {
     LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
     Optional<Camping> detail = campingSVC.campingDetail(cnumber);
     Camping camping = detail.orElseThrow();
@@ -429,7 +475,7 @@ public class CampingController {
       }
     }
     if(isAreaNumberTrue != areaNumber) {
-     return "error/404";
+      return "error/404";
     }
     model.addAttribute("campingSaveForm", campingSaveForm);
     return ("detailPage/detailPageUpdate");
@@ -438,10 +484,15 @@ public class CampingController {
   //캠핑장 수정
   @PostMapping("/update")
   public String campingUpdate(
-      @Valid @ModelAttribute CampingSaveForm campingSaveForm,
-      BindingResult bindingResult,
-      RedirectAttributes redirectAttributes
+          @Valid @ModelAttribute CampingSaveForm campingSaveForm,
+          BindingResult bindingResult,
+          RedirectAttributes redirectAttributes,
+          HttpSession session
   ) {
+    //마이페이지로 redirect하기 위함
+    LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
+    String mid = loginMembers.getMid();
+
     int cnumber = campingSaveForm.getCnumber();
     if(bindingResult.hasErrors()) {
       log.info("bindingResult={}", bindingResult);
@@ -556,8 +607,7 @@ public class CampingController {
     int id = cnumber;
     //완료후 리다이렉트
     //areaNumber을 수정된 값(maxListNumber)로 업데이트
-    redirectAttributes.addAttribute("id", id);
-    redirectAttributes.addAttribute("areaNumber", maxListNumber);
-    return "redirect:/search/{id}/{areaNumber}/detail";
+    redirectAttributes.addAttribute("mid", mid);
+    return "redirect:/mypage/{mid}/manager";
   }
 }

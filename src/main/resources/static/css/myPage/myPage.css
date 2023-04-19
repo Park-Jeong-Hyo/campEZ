@@ -110,6 +110,15 @@ tabBtn--label {
 .tab2__1__content {
   flex-direction: column;
 }
+/*캠핑장 등록 버튼 칸*/
+.myCamp__saveBtnItem {
+  display: flex;
+  justify-content: flex-end;
+}
+/*캠핑장 등록 버튼*/
+.myCamp__saveBtn {
+  padding:5px;
+}
 /* 내 캠핑장 내용 */
 .myCamp__item {
   display: flex;
