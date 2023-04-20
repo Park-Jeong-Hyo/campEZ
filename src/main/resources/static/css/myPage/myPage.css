@@ -73,15 +73,20 @@ tabBtn--label {
 /* 회원 정보 칸 */
 .member__item {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   height: 2.03vh;
   margin: 1rem;
   padding: 1rem;
   outline: 3px solid rgb(218, 218, 218);
 }
+/* 회원 정보 제목 */
+.member__title {
+  width: 16%;
+}
 /* 회원 정보 내용 */
 .member__main {
-  margin: 0 2%;
+  width: 50%;
+  margin: 0 6%;
 }
 /* 회원 탈퇴 */
 .tab1__3__content {
@@ -117,7 +122,7 @@ tabBtn--label {
 }
 /*캠핑장 등록 버튼*/
 .myCamp__saveBtn {
-  padding:5px;
+  padding: 5px;
 }
 /* 내 캠핑장 내용 */
 .myCamp__item {
@@ -171,6 +176,6 @@ tabBtn--label {
   padding: 0.5vh;
 }
 /* 첫 시작 화면 */
-.tab1__2__content{
+.tab1__2__content {
   display: block;
 }

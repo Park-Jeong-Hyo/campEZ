@@ -1,4 +1,4 @@
---ë©¤ë²„í…Œì´ë¸”ìƒì„±
+--¸â¹öÅ×ÀÌºí»ı¼º
 drop table members;
 create table members(
     mname varchar2(20) not null,
@@ -13,18 +13,18 @@ create table members(
     businessnumber varchar2(20) check(businessnumber like '%-%-%')
 );
 
---ì œì•½ì¡°ê±´ ë³€ê²½ ì–‘ì‹
+--Á¦¾àÁ¶°Ç º¯°æ ¾ç½Ä
 alter table members add check (businessnumber like '%-%-%');
  ALTER TABLE members DROP CONSTRAINT SYS_C007329;
 
---ì œì•½ì¡°ê±´
+--Á¦¾àÁ¶°Ç
 alter table members add check(length(pw) >= 8);
 alter table members add check(mtype in('n','b'));
-alter table members add check(regexp_like(pw,'[!-/]') or regexp_like(pw,'[:-@]')
+alter table members add check(regexp_like(pw,'[!-/]') or regexp_like(pw,'[:-@]') 
 or regexp_like(pw,'[{-~]') or regexp_like(pw,'[[-`]'));
 alter table members add unique(businessnumber);
 
---ìº í•‘í…Œì´ë¸”ìƒì„±
+--Ä·ÇÎÅ×ÀÌºí»ı¼º
 drop table camping;
 create table camping(
     cnumber number(4) primary key,
@@ -35,7 +35,6 @@ create table camping(
     ctype char(1) check(ctype in('g','a')),
     operdate varchar2(20),
     homepage  varchar2(50),
-    ctitle varchar2(30),
     ctext clob,
     priceweekday number(6),
     priceweekend number(6),
@@ -45,7 +44,7 @@ create table camping(
     foreign key (mid) REFERENCES members(mid)
 );
 
---ìº í”„ì—ì´ë¦¬ì–´í…Œì´ë¸”ìƒì„±
+--Ä·ÇÁ¿¡ÀÌ¸®¾îÅ×ÀÌºí»ı¼º
 drop table camparea;
 create table camparea(
     cnumber number(4),
@@ -55,7 +54,7 @@ create table camparea(
     foreign key (cnumber) REFERENCES camping(cnumber) ON DELETE CASCADE
 );
 
---ì˜¤ë”í…Œì´ë¸”ìƒì„±
+--¿À´õÅ×ÀÌºí»ı¼º
 drop table orders;
 create table orders(
     onumber number(4),
@@ -73,7 +72,7 @@ create table orders(
     foreign key (mid) REFERENCES members(mid)
 );
 
---í¬ìŠ¤íŠ¸í…Œì´ë¸”ìƒì„±
+--Æ÷½ºÆ®Å×ÀÌºí»ı¼º
 drop table post;
 create table post(
     pnumber number(4) primary key,
@@ -84,7 +83,7 @@ create table post(
     udate date DEFAULT TO_DATE(sysdate,'yyyy-mm-dd hh24:mi:ss')
 );
 
---ì½”ë©˜íŠ¸í…Œì´ë¸”ìƒì„±
+--ÄÚ¸àÆ®Å×ÀÌºí»ı¼º
 drop table comments;
 create table comments(
     conumber number(4) primary key,
@@ -95,21 +94,21 @@ create table comments(
     foreign key (pnumber) REFERENCES post(pnumber) ON DELETE CASCADE
 );
 
---ì—…ë¡œë“œí…Œì´ë¸”ìƒì„±
+--¾÷·ÎµåÅ×ÀÌºí»ı¼º
 drop table uploadfile;
 create table uploadfile(
-    upnumber  number(4) primary key,
+    upnumber  number(4) primary key, 
     code            varchar2(5) not null,
-    rid             varchar2(10) not null,
-    storename  varchar2(50) not null,
-    uploadname varchar2(100) not null,
-    fsize           varchar2(45) not null,
-    ftype           varchar2(50) not null,
+    rid             number(4) not null, 
+    storename  varchar2(50) not null,  
+    uploadname varchar2(100) not null,   
+    fsize           varchar2(45) not null,  
+    ftype           varchar2(50) not null,   
     cdate      date DEFAULT TO_DATE(sysdate,'yyyy-mm-dd hh24:mi:ss'),
     udate      date DEFAULT TO_DATE(sysdate,'yyyy-mm-dd hh24:mi:ss')
 );
 
---ì‹œí€€ìŠ¤ìƒì„±
+--½ÃÄö½º»ı¼º
 drop sequence cnumber_seq;
 drop sequence onumber_seq;
 drop sequence pnumber_seq;
@@ -122,46 +121,46 @@ create sequence pnumber_seq;
 create sequence conumber_seq;
 create sequence upnumber_seq;
 
---member ìƒì„±--
+--member »ı¼º--
 insert into members(mname,mid,pw,phone,email,nickname,mtype,businessnumber)
-     values('í™ê¸¸ë™','test123', 'test[123899','010-1234-5678','test1@naver.com','ë³„ëª…1','n','010-1234-5678');
+     values('È«±æµ¿','test123', 'test[123899','010-1234-5678','test1@naver.com','º°¸í1','n','010-1234-5678');
 
 insert into members(mname,mid,pw,phone,email,nickname,mtype,businessnumber)
-     values('í™ê¸¸ë™','test124', 'test[123899','010-1234-5678','test2@naver.com','ë³„ëª…2','n',null);
+     values('È«±æµ¿','test124', 'test[123899','010-1234-5678','test2@naver.com','º°¸í2','n',null);
 
 insert into members(mname,mid,pw,phone,email,nickname,mtype,businessnumber)
-     values('í™ê¸¸ë™','test125', 'test[123899','010-1234-5678','test3@naver.com','ë³„ëª…3','n',null);
+     values('È«±æµ¿','test125', 'test[123899','010-1234-5678','test3@naver.com','º°¸í3','n',null);
 
---camping ìƒì„±--
+--camping »ı¼º--
 insert into CAMPING
-(cnumber,mid,cname,caddress,camptel,ctype,operdate,homepage,ctitle,ctext,priceweekday,priceweekend,toilet,mart)
-values (cnumber_seq.nextval,'test123','KHìº í•‘ì¥','ìš¸ì‚° ë‚¨êµ¬ ì‹ ì •ë™','0000-1234-5678','a','09:00~21:00',
-'https://www.khcamping.com','ìº í•‘','testtesttest',30000,40000,'o','x');
+(cnumber,mid,cname,caddress,camptel,ctype,operdate,homepage,ctext,priceweekday,priceweekend,toilet,mart)
+values (cnumber_seq.nextval,'test123','KHÄ·ÇÎÀå','¿ï»ê ³²±¸ ½ÅÁ¤µ¿','0000-1234-5678','a','09:00~21:00',
+'https://www.khcamping.com','testtesttest',30000,40000,'o','x');
 
---camparea ìƒì„±--
+--camparea »ı¼º--
 insert into CAMPAREA
 (cnumber,area,capacitys)
 values((select max(cnumber) from camping),2,3);
 
---orders ìƒì„±--
+--orders »ı¼º--
 insert into ORDERS
 (onumber,cnumber,area,mid,phone,headcount,checkin,checkout)
 values(onumber_seq.nextval,1,2,'test123','010-1234-5678',3,
 2023011110,2023011209);
 
---post ìƒì„±--
+--post »ı¼º--
 insert into POST
 (pnumber,nickname,ptitle,ptext,ptype)
-values(pnumber_seq.nextval,'ë³„ëª…1','ê²Œì‹œê¸€1','testtesttest','n');
+values(pnumber_seq.nextval,'º°¸í1','°Ô½Ã±Û1','testtesttest','n');
 
---comments ìƒì„±--
+--comments »ı¼º--
 insert into COMMENTs
 (conumber,pnumber,nickname,cotext)
-values(conumber_seq.nextval,1,'ë³„ëª…1','ëŒ“ê¸€ì…ë‹ˆë‹¤');
+values(conumber_seq.nextval,1,'º°¸í1','´ñ±ÛÀÔ´Ï´Ù');
 
---uploadfile ìƒì„±--
+--uploadfile »ı¼º--
 INSERT INTO uploadfile (upnumber, code, rid, storename, uploadname, fsize, ftype)
-VALUES (upnumber_seq.nextval, 'A01',1,'sdfs','sadf','100','image/png');
+VALUES (upnumber_seq.nextval, 'A01',1,'1','sadf','100','image/png');
 
 ALTER SESSION SET NLS_DATE_FORMAT='YYYY/MM/DD HH:MI:SS';
 
