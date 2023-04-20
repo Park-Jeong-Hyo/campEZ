@@ -114,7 +114,7 @@
             </div>
             <div class="mn__main-write">
               <p class="mn__main-name link">
-                <a href="" th:href="@{/search/{cnumber}/detail(cnumber=${item.getCnumber})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
+                <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
               </p>
               <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
               <p th:text="${item.getCamptel}">000-0000-0000</p>

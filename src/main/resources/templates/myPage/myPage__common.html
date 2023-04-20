@@ -36,13 +36,12 @@
       <!-- 헤더 (HEADER) -->
       <header class="hd">
         <div class="hd__menu-item">
-          <a href="" class="link">검색ez</a>
-          <a href="" class="link">광장ez</a>
-          <a href="" class="link">ez가이드</a>
-          <a href="" class="link">사이트맵</a>
+          <a href="" th:href="@{/search}" class="link">검색ez</a>
+          <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+          <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
-          <a href="/templates/mainPage/EZMain.html" class="link">
+          <a href="" th:href="@{/}" class="link">
             <i class="hd__logo fa-solid fa-house"></i>
             <h2>캠핑EZ</h2>
           </a>
@@ -57,17 +56,12 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="notice.html" class="gnb__depth link">공지사항</a></div>
-          <div>
-            <a href="butlletinBoard.html" class="gnb__depth link">자유게시판</a>
-          </div>
-          <div>
-            <a href="question.html" class="gnb__depth link">질문게시판</a>
-          </div>
+          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
-        <div><a href="" class="link">검색ez</a></div>
-        <div><a href="" class="link">광장ez</a></div>
-        <div><a href="" class="link">ez가이드</a></div>
+        <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
       </nav>
       <div class="gnb-r"></div>
       <div class="post-l"></div>
