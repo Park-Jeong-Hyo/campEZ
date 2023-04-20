@@ -58,8 +58,8 @@
           <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
-        <div><a href="" th:href="@{/sitemap}" class="link">ez가이드</a></div>
+        <div><p class="gnb__search">광장ez</p></div>
+        <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
       </nav>
       <div class="gnb-r"></div>
       <div class="post-l"></div>
@@ -115,14 +115,14 @@
 
             </div>
             <!-- 예약 관리에서 페이지 버튼 -->
-            <div class="reserv__page">
-              <button class="reserv__pageBtn"><<</button>
-              <button class="reserv__pageBtn">1</button>
-              <button class="reserv__pageBtn">2</button>
-              <button class="reserv__pageBtn">3</button>
-              <button class="reserv__pageBtn">4</button>
-              <button class="reserv__pageBtn">>></button>
-            </div>
+<!--            <div class="reserv__page">-->
+<!--              <button class="reserv__pageBtn"><<</button>-->
+<!--              <button class="reserv__pageBtn">1</button>-->
+<!--              <button class="reserv__pageBtn">2</button>-->
+<!--              <button class="reserv__pageBtn">3</button>-->
+<!--              <button class="reserv__pageBtn">4</button>-->
+<!--              <button class="reserv__pageBtn">>></button>-->
+<!--            </div>-->
           </div>
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
@@ -233,6 +233,7 @@
             <hr />
             <div class="myCamp__saveBtnItem">
               <button class="myCamp__saveBtn"><a href="link" th:href="@{/search/save}">캠핑장 등록</a></button>
+              <button type="button" class="myCamp__reserv btns">예약 내역</button>
             </div>
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item"
@@ -243,20 +244,19 @@
                 <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
               </div>
               <div>
-                <button type="button" class="myCamp__reserv btns">예약 내역</button>
                 <button type="submit" id="myCamp__delBtn" class="myCamp__del btns">삭제</button>
                 <input type="hidden" th:name="cnumber" th:value="${item.getCnumber()}" readonly>
               </div>
             </form>
             <!-- 페이지 버튼 -->
-            <div class="myCamp__page">
-              <button class="myCamp__pageBtn"><<</button>
-              <button class="myCamp__pageBtn">1</button>
-              <button class="myCamp__pageBtn">2</button>
-              <button class="myCamp__pageBtn">3</button>
-              <button class="myCamp__pageBtn">4</button>
-              <button class="myCamp__pageBtn">>></button>
-            </div>
+<!--            <div class="myCamp__page">-->
+<!--              <button class="myCamp__pageBtn"><<</button>-->
+<!--              <button class="myCamp__pageBtn">1</button>-->
+<!--              <button class="myCamp__pageBtn">2</button>-->
+<!--              <button class="myCamp__pageBtn">3</button>-->
+<!--              <button class="myCamp__pageBtn">4</button>-->
+<!--              <button class="myCamp__pageBtn">>></button>-->
+<!--            </div>-->
           </div>
           <!-- 탭2__2, 내 캠핑장 예약 내역 -->
           <div class="tab2__2__content">
@@ -288,14 +288,14 @@
                 22.22
               </div>
             </div>
-            <div class="managerRev__page">
-              <button class="managerRev__pageBtn"><<</button>
-              <button class="managerRev__pageBtn">1</button>
-              <button class="managerRev__pageBtn">2</button>
-              <button class="managerRev__pageBtn">3</button>
-              <button class="managerRev__pageBtn">4</button>
-              <button class="managerRev__pageBtn">>></button>
-            </div>
+<!--            <div class="managerRev__page">-->
+<!--              <button class="managerRev__pageBtn"><<</button>-->
+<!--              <button class="managerRev__pageBtn">1</button>-->
+<!--              <button class="managerRev__pageBtn">2</button>-->
+<!--              <button class="managerRev__pageBtn">3</button>-->
+<!--              <button class="managerRev__pageBtn">4</button>-->
+<!--              <button class="managerRev__pageBtn">>></button>-->
+<!--            </div>-->
           </div>
         </div>
       </main>
@@ -388,7 +388,7 @@
       document.querySelector('.member__modal').style.display = 'none';
     });
 
-    const deleteBtn = document.getElementById('myCamp__delBtn');
+    const deleteBtn = document.querySelectorAll('.myCamp__delBtn');
       deleteBtn.addEventListener('click', e => {
       if (confirm("삭제하시겠습니까?") == false) {
         e.preventDefault();

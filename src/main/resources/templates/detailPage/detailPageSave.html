@@ -62,7 +62,7 @@
         <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
       </div>
       <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-      <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+      <div><p class="gnb__search">광장ez</p></div>
       <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
     </nav>
 
@@ -87,8 +87,8 @@
           <tr>
             <td class="title">* 주소</td>
             <td class="content">
-              <input type="text" th:field="${campingSaveForm.caddress}" pattern="^[가-힣]{2,4}\s[가-힣]{2,4}$" required>
-              <span class="warning">* 예시: 서울 종로구, 경기도 평택시</span>
+              <input type="text" th:field="${campingSaveForm.caddress}" pattern="^[가-힣]{2,4}\s[가-힣]{2,4}\s[가-힣]{2,6}$" required>
+              <span class="warning">* 예시: 울산 남구 신정동</span>
             </td>
           </tr>
           <tr>

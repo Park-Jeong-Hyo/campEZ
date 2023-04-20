@@ -29,7 +29,7 @@ drop table camping;
 create table camping(
     cnumber number(4) primary key,
     mid varchar2(20) not null,
-    cname varchar2(20),
+    cname varchar2(30),
     caddress varchar2(50) unique not null,
     camptel varchar2(20) check(camptel like '%-%'),
     ctype char(1) check(ctype in('g','a')),
