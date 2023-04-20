@@ -1,0 +1,34 @@
+@charset "UTF-8";
+@import 'color.css';
+@import 'font.css';
+
+/* MAIN */
+
+.mn__layout{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 90px;
+}
+.mn__check img{
+  width: 400px;
+  height: 400px;
+  object-fit:cover;
+}
+.mn__button{
+  width: 100px;
+  height: 30px;
+  background-color: var(--theme-color-thin);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mn__button:active{
+  background-color: var(--theme-color);
+}
+*{
+  text-decoration: none;
+  color: inherit;
+}

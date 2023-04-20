@@ -71,9 +71,8 @@
   <div class="topTitle">
     <h2 th:text="${campingSaveForm.cname}">입화산 참살이 숲 야영장</h2>
   </div>
-
   <!-- 2.mnFace -->
-  <div class="mnFace">
+  <div class="mnFace" id="cnumber" th:data-cnumber="${campingSaveForm.cnumber}">
     <section class="mnFace-l">
       <img src="http://placeimg.com/640/480/nature" alt="mnFace-l img" />
     </section>
@@ -99,6 +98,7 @@
         <tr>
           <td class="title">홈페이지</td>
           <td class="content" th:text="${campingSaveForm.homepage}"><a href="#">홈페이지</a></td>
+
         </tr>
         <tr>
           <td class="title">주변이용<br />가능시설</td>
@@ -108,7 +108,7 @@
         </tr>
       </table>
       <div class="reserv">
-        <button type="button" class="reservBtn">예약</button>
+        <button type="button" class="reservBtn" id="reserBtn">예약</button>
       </div>
     </section>
   </div>
@@ -247,5 +247,14 @@
 
   <div class="ft-r"></div>
 </div>
+  <script>
+  const $reserBtn = document.getElementById('reserBtn');
+
+  const $cnumber = document.getElementById('cnumber');
+  const cnumber = $cnumber.dataset.cnumber;
+
+  const reserBtn_h = e => location.href = `/orders/${cnumber}`;
+  $reserBtn.addEventListener('click',reserBtn_h,false);
+</script>
 </body>
 </html>

@@ -1,0 +1,215 @@
+@charset "UTF-8";
+@import '/static/css/common/common.css';
+
+/* UPPERMOST */
+.up {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--theme-color);
+  z-index: 2;
+}
+.up__link {
+  font-size: var(--font-size-tiny);
+  color: var(--main-font-color);
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+/* HEADER */
+.hd {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: sticky;
+  top: 40px;
+  background-color: var(--bg-header-color);
+  z-index: 2;
+}
+.hd__menu-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  justify-items: center;
+  align-items: center;
+  font-size: var(--font-size-small);
+}
+.hd__logo-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+}
+.hd__logo {
+  font-size: 3rem;
+  height: 55px;
+  width: 100px;
+  text-align: center;
+}
+
+/* GNB */
+.gnb {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: sticky;
+  top: 140px;
+  background-color: var(--theme-color);
+  color: var(--main-font-color);
+}
+.gnb__gwangjang-submenu {
+  display: none;
+}
+.gnb:hover .gnb__gwangjang-submenu {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: center;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  background-color: var(--bg-color-lightgray);
+  font-size: var(--font-size-small);
+  z-index: 1;
+  border-radius: 5px;
+}
+.gnb__depth {
+  display: block;
+  margin: 15px 0;
+}
+.gnb div a {
+  display: inline-block;
+  width: 100px;
+  line-height: 30px;
+  text-align: center;
+}
+
+/* 내가 구현한 영역 시작 */
+
+/* topTitle */
+.topTitle {
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+  z-index: -1;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* resesvTable */
+.reservTable table {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size-little);
+}
+.reservTable td {
+  padding: 12px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--search-box-color);
+  border-bottom: 1px solid var(--search-box-color);
+}
+.reservTable .title {
+  width: 150px;
+}
+.reservTable .content {
+  width: 450px;
+}
+
+.reservTable td:first-child {
+  background-color: var(--theme-color-thin);
+  text-align: center;
+}
+.reservTable tr:first-child {
+  border-top: 2px solid;
+}
+
+/* caution */
+
+/* reservBtn */
+.reservBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reservBtn .submitBtn,
+.reservBtn .cancelBtn {
+  border: 0;
+  outline: none;
+  top: 0;
+  width: 150px;
+  height: 40px;
+  box-shadow: 1px 1px 1px;
+  background-color: var(--mn__tag-label);
+  margin: 10px;
+}
+.reservBtn .submitBtn:active,
+.reservBtn .cancelBtn:active {
+  background-color: var(--button-color-clicked);
+}
+
+/* 내가 구현한 영역 끝 */
+
+/* MAIN */
+
+/*  FOOTER  */
+.ft {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  background-color: var(--theme-color-thic);
+  color: var(--main-font-color);
+  font-size: var(--font-size-tiny);
+}
+.ft__logo-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ft__info-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.ft__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.ft__others {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* link */
+.link {
+  color: inherit;
+  text-decoration: none;
+  transition: all, 1s, ease, 0.15s;
+}
+
+.link:hover {
+  transform: scale(1.1);
+}
+
+/* 제목 여백 */
+.topTitle h3,
+.area h3 {
+  margin: 20px 20px 20px 20px;
+}
+/* 내용 여백 */
+.area .area_select {
+  margin: 20px;
+}
