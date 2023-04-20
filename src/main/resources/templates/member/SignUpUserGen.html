@@ -170,21 +170,26 @@
     </div>
     <script type="module">
       import { ajax } from '/js/common.js';
-      let chk_id = false;
-      let chk_nn = false;
+      let chk_id = null;
+      let chk_nn = null;
       const $mid = document.getElementById('mid');
       const $nickname = document.getElementById('nickname');
       const $chkIdBtn = document.getElementById('chkIdBtn');
       const $chkNnBtn = document.getElementById('chkNnBtn');
+      const $btnAdd = document.getElementById('btnAdd');
+      const $pw = document.getElementById('pw');
+      const $pwchk = document.getElementById('pwchk');
+      const $mname = document.getElementById('mname');
+      const $email = document.getElementById('email');
+      const $phone = document.getElementById('phone');
 
       // 아이디 체크
       const chk = res => {
         if (res.header.rtcd == '00') {
           alert('사용 가능한 아이디 입니다.');
-          chk_id = true;
+          chk_id = $mid.value;
         } else {
           alert('이미 사용 중인 아이디 입니다.');
-          chk_id = false;
           throw new Error(`${res.header.rtmsg}`);
         }
       };
@@ -204,15 +209,14 @@
       const nnchk = res => {
         if (res.header.rtcd == '00') {
           alert('사용 가능한 닉네임 입니다.');
-          chk_nn = true;
+          chk_nn = $nickname.value;
         } else {
           alert('이미 사용 중인 닉네임 입니다.');
-          chk_nn = false;
           throw new Error(`${res.header.rtmsg}`);
         }
       };
       const nnchk_h = e => {
-        const url = `http://localhost:9080/api/members/idchk/${$nickname.value}`;
+        const url = `http://localhost:9080/api/members/nnchk/${$nickname.value}`;
         const payload = {
           nickname: $nickname.value,
         };
@@ -223,17 +227,23 @@
           .then(nnchk); //.then(res => add(res))
       };
 
-      const $btnAdd = document.getElementById('btnAdd');
       const add_h = e => {
-        console.log(chk_id);
-        console.log(chk_nn);
-        if (chk_id == true && chk_nn == true) {
-          chk_h();
-          nnchk_h();
-          frm.submit();
-          console.log('클릭');
+        const chk1 = $mid.value;
+        const chk2 = $nickname.value;
+        const chk_pw = $pw.value;
+        const chk_pwchk = $pwchk.value;
+        if (chk_id == chk1 && chk_nn == chk2) {
+          if (chk_pw == chk_pwchk) {
+            if ($email.value != '' && $mname.value != '' && $phone.value != '') {
+              frm.submit();
+            } else {
+              alert('필수 항목을 입력 해주십시오.');
+            }
+          } else {
+            alert('비밀번호가 일치하지 않습니다.');
+          }
         } else {
-          alert('중복 확인을 하지 않으셨습니다');
+          alert('중복확인을 해주십시오.');
         }
       };
 

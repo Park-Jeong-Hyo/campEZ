@@ -231,7 +231,8 @@ public class MembersDAOImpl implements MembersDAO {
 
     return list.size() == 1 ? Optional.of(list.get(0)) : Optional.empty();
   }
-
+  
+  // 비밀번호 찾기
   @Override
   public void changePasswd(String mid, String pw) {
     StringBuffer sql = new StringBuffer();

@@ -47,6 +47,21 @@ public class ApiMemberController {
     return res;
   }
 
+  // 사업자 중복 체크
+  @PostMapping("/bizchk/{biznum}")
+  public Response<Object> bizChk(
+      @PathVariable("biznum") String businessnumber
+  ) {
+    Response<Object> res = null;
+    boolean bizchk = membersSVC.bizIsExist(businessnumber);
+    if (bizchk == false) {
+      res =  Response.createRestResponse  ("00", "등록 가능한 사업자", bizchk);
+    } else {
+      res =  Response.createRestResponse("99", "이미 등록된 사업자", bizchk);
+    }
+    return res;
+  }
+
   // 아이디 찾기
   @GetMapping("/findid/{name}/{email}/{phone}")
   public Response<Object> findbyid(
