@@ -32,10 +32,10 @@ public class CampingDAOImpl implements CampingDAO{
     StringBuffer sql = new StringBuffer();
     sql.append("INSERT INTO CAMPING ");
     sql.append("( cnumber, mid, cname, caddress, camptel, ctype, operdate, ");
-    sql.append("homepage, ctitle, ctext, priceweekday, priceweekend, toilet, mart ) ");
+    sql.append("homepage, ctext, priceweekday, priceweekend, toilet, mart ) ");
     sql.append("VALUES ");
     sql.append("( cnumber_seq.nextval, :mid, :cname, :caddress, :camptel, :ctype, :operdate, ");
-    sql.append(":homepage, :ctitle, :ctext, :priceweekday, :priceweekend, :toilet, :mart ) ");
+    sql.append(":homepage, :ctext, :priceweekday, :priceweekend, :toilet, :mart ) ");
 
     KeyHolder keyHolder = new GeneratedKeyHolder();
     SqlParameterSource param = new BeanPropertySqlParameterSource(camping);
@@ -65,7 +65,7 @@ public class CampingDAOImpl implements CampingDAO{
     StringBuffer sql = new StringBuffer();
     sql.append("UPDATE CAMPING ");
     sql.append("SET cname = :cname, caddress = :caddress, camptel = :camptel, ctype = :ctype, operdate = :operdate, homepage = :homepage, ");
-    sql.append("ctitle = :ctitle, ctext = :ctext, priceweekday= :priceweekday, priceweekend = :priceweekend, toilet = :toilet, mart = :mart ");
+    sql.append(" ctext = :ctext, priceweekday= :priceweekday, priceweekend = :priceweekend, toilet = :toilet, mart = :mart ");
     sql.append("WHERE cnumber = :cnumber ");
 
     SqlParameterSource param = new MapSqlParameterSource()
@@ -75,7 +75,6 @@ public class CampingDAOImpl implements CampingDAO{
         .addValue("ctype", camping.getCtype())
         .addValue("operdate", camping.getOperdate())
         .addValue("homepage", camping.getHomepage())
-        .addValue("ctitle", camping.getCtitle())
         .addValue("ctext", camping.getCtext())
         .addValue("priceweekday", camping.getPriceweekday())
         .addValue("priceweekend", camping.getPriceweekend())

@@ -16,7 +16,6 @@ public class Camping {
   private String ctype;
   private String operdate;
   private String homepage;
-  private String ctitle;
   private String ctext;
   private int priceweekend;
   private int priceweekday;

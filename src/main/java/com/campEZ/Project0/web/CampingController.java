@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -126,7 +125,6 @@ public class CampingController {
     campingSaveForm.setCtype(camping.getCtype());
     campingSaveForm.setOperdate(camping.getOperdate());
     campingSaveForm.setHomepage(camping.getHomepage());
-    campingSaveForm.setCtitle(camping.getCtitle());
     campingSaveForm.setCtext(camping.getCtext());
     campingSaveForm.setPriceweekday(camping.getPriceweekday());
     campingSaveForm.setPriceweekend(camping.getPriceweekend());
@@ -275,7 +273,6 @@ public class CampingController {
     camping.setCtype(campingSaveForm.getCtype());
     camping.setOperdate(campingSaveForm.getOperdate());
     camping.setHomepage(campingSaveForm.getHomepage());
-    camping.setCtitle(campingSaveForm.getCtitle());
     camping.setCtext(campingSaveForm.getCtext());
     camping.setPriceweekday(campingSaveForm.getPriceweekday());
     camping.setPriceweekend(campingSaveForm.getPriceweekend());
@@ -388,7 +385,6 @@ public class CampingController {
     campingSaveForm.setCtype(camping.getCtype());
     campingSaveForm.setOperdate(camping.getOperdate());
     campingSaveForm.setHomepage(camping.getHomepage());
-    campingSaveForm.setCtitle(camping.getCtitle());
     campingSaveForm.setCtext(camping.getCtext());
     campingSaveForm.setPriceweekday(camping.getPriceweekday());
     campingSaveForm.setPriceweekend(camping.getPriceweekend());
@@ -505,7 +501,6 @@ public class CampingController {
     camping.setCtype(campingSaveForm.getCtype());
     camping.setOperdate(campingSaveForm.getOperdate());
     camping.setHomepage(campingSaveForm.getHomepage());
-    camping.setCtitle(campingSaveForm.getCtitle());
     camping.setCtext(campingSaveForm.getCtext());
     camping.setPriceweekday(campingSaveForm.getPriceweekday());
     camping.setPriceweekend(campingSaveForm.getPriceweekend());
