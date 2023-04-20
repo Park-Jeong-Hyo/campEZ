@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/*  */
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
+  grid-template-rows: 40px 100px 50px auto minmax(350px, auto) auto 100px 0px 150px;
+  grid-template-areas:
+    'up-l          up                   up-r'
+    'hd-l          hd                   hd-r'
+    'gnb-l         gnb                 gnb-r'
+    '.             topTitle                .'
+    '.             reservTable             .'
+    '.             area                   .'
+    '.             reservBtn               .'
+    '.             emptySpace              .'
+    'ft-l          ft                   ft-r';
+}
+
+/* 레이아웃 요소 배치 */
+.up-l {
+  grid-area: up-l;
+}
+.up {
+  grid-area: up;
+}
+.up-r {
+  grid-area: up-r;
+}
+.hd-l {
+  grid-area: hd-l;
+}
+.hd {
+  grid-area: hd;
+}
+.hd-r {
+  grid-area: hd-r;
+}
+.gnb-l {
+  grid-area: gnb-l;
+}
+.gnb {
+  grid-area: gnb;
+}
+.gnb-r {
+  grid-area: gnb-r;
+}
+
+.topTitle {
+  grid-area: topTitle;
+}
+.reservTable {
+  grid-area: reservTable;
+}
+.area {
+  grid-area: area;
+}
+.reservBtn {
+  grid-area: reservBtn;
+}
+.emptySpace {
+  grid-area: emptySpace;
+}
+.ft-l {
+  grid-area: ft-l;
+}
+.ft {
+  grid-area: ft;
+}
+.ft-r {
+  grid-area: ft-r;
+}

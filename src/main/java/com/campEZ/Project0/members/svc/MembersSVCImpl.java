@@ -81,6 +81,12 @@ public class MembersSVCImpl implements MembersSVC {
     return membersDAO.nnIsExist(nickname);
   }
 
+  // 사업자 중복확인
+  @Override
+  public boolean bizIsExist(String businessnumber) {
+    return membersDAO.bizIsExist(businessnumber);
+  }
+
   //로그인
   @Override
   public Optional<Members> login(String mid, String pw){

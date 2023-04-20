@@ -131,27 +131,32 @@
           </div>
           <hr class="form-line" />
           <div class="input-form">
-            <label for="" class="form-label"><span style="color: red">*</span> 사업자등록번호</label>
-            <input type="text" class="input" th:field="*{businessnumber}" placeholder=" - 포함 숫자 입력" />
-            <button type="button" id="chkBizBtn" class="dup-btn">중복확인</button>
+            <label for="" class="form-label">사업자등록번호</label>
+            <input type="text" placeholder="-제외한 숫자값만 입력" class="input" th:field="*{businessnumber}" />
+            <button type="button" id="chkBizBtn" class="dup-btn">
+              상태조회
+            </button>
+            <div id="bizmsg"></div>
           </div>
           <div class="input-form">
-            <label for="" class="form-label"><span style="color: red">*</span> 상호명</label>
+            <label for="" class="form-label">상호명</label>
             <input type="text" class="input" th:field="*{companyname}" />
           </div>
           <hr class="form-line" />
           <div class="input-form">
             <label for="" class="form-label">사업자등록번호</label>
-            <input type="text" class="input" id="bno" placeholder=" - , 공백을 제외한 숫자만 입력" />
-            <button type="button" class="dup-btn" id="chkBtn2">진위확인</button>
+            <input type="text" class="input" th:field="*{businessnumber}" />
+            <button type="button" id="chkBizBtn2" class="dup-btn">
+              진위확인
+            </button>
           </div>
           <div class="input-form">
             <label for="" class="form-label">대표자명</label>
-            <input type="text" class="input" id="p_nm" />
+            <input type="text" class="input" />
           </div>
           <div class="input-form">
             <label for="" class="form-label">개업일자</label>
-            <input type="text" placeholder="yyyymmdd" class="input" id="startDt" />
+            <input type="date" class="input" />
           </div>
           <hr class="form-line" />
         </form>
@@ -192,162 +197,183 @@
     </div>
     <script type="module">
       import { ajax } from '/js/common.js';
-      let chk_id = null;
-      let chk_nn = null;
-      let chk_biz = null;
-      let chk_biz2 = null;
+      let chk_id = false;
+      let chk_nn = false;
+      let chk_biz = false;
       const $mid = document.getElementById('mid');
       const $biznum = document.getElementById('businessnumber');
       const $nickname = document.getElementById('nickname');
       const $chkIdBtn = document.getElementById('chkIdBtn');
       const $chkNnBtn = document.getElementById('chkNnBtn');
+      const $bizmsg = document.getElementById('bizmsg');
       const $chkBizBtn = document.getElementById('chkBizBtn');
+      const $chkBizBtn2 = document.getElementById('chkBizBtn2');
       const $btnAdd = document.getElementById('btnAdd');
-      const $pw = document.getElementById('pw');
-      const $pwchk = document.getElementById('pwchk');
-      const $mname = document.getElementById('mname');
-      const $email = document.getElementById('email');
-      const $phone = document.getElementById('phone');
-      const $cname = document.getElementById('companyname');
-
-      const $chkBtn2 = document.getElementById('chkBtn2');
-      const businessTrulyRequestParm = {};
-
-      const $bno = document.getElementById('bno');
-      const $p_nm = document.getElementById('p_nm');
-      const $startDt = document.getElementById('startDt');
 
       // 아이디 체크
       const chk = res => {
-        if (res.header.rtcd == '00') {
-          alert('사용 가능한 아이디 입니다.');
-          chk_id = $mid.value;
-        } else {
-          alert('이미 사용 중인 아이디 입니다.');
-          throw new Error(`${res.header.rtmsg}`);
-        }
+      if (res.header.rtcd == '00') {
+      alert('사용 가능한 아이디 입니다.');
+      chk_id = true;
+      } else {
+      alert('이미 사용 중인 아이디 입니다.');
+      chk_id = false;
+      throw new Error(`${res.header.rtmsg}`);
+      }
       };
       const chk_h = e => {
-        const url = `http://localhost:9080/api/members/idchk/${$mid.value}`;
-        const payload = {
-          mid: $mid.value,
-        };
-        //유효성체크
-        ajax
-          .post(url, payload)
-          .then(res => res.json())
-          .then(chk); //.then(res => add(res))
+      const url = `http://localhost:9080/api/members/idchk/${$mid.value}`;
+      const payload = {
+      mid: $mid.value,
+      };
+      //유효성체크
+      ajax
+      .post(url, payload)
+      .then(res => res.json())
+      .then(chk); //.then(res => add(res))
       };
 
       // 닉네임 체크
       const nnchk = res => {
-        if (res.header.rtcd == '00') {
-          alert('사용 가능한 닉네임 입니다.');
-          chk_nn = $nickname.value;
-        } else {
-          alert('이미 사용 중인 닉네임 입니다.');
-          throw new Error(`${res.header.rtmsg}`);
-        }
+      if (res.header.rtcd == '00') {
+      alert('사용 가능한 닉네임 입니다.');
+      chk_nn = true;
+      } else {
+      alert('이미 사용 중인 닉네임 입니다.');
+      chk_nn = false;
+      throw new Error(`${res.header.rtmsg}`);
+      }
       };
       const nnchk_h = e => {
-        const url = `http://localhost:9080/api/members/nnchk/${$nickname.value}`;
-        const payload = {
-          nickname: $nickname.value,
-        };
-        //유효성체크
-        ajax
-          .post(url, payload)
-          .then(res => res.json())
-          .then(nnchk); //.then(res => add(res))
+      const url = `http://localhost:9080/api/members/nnchk/${$nickname.value}`;
+      const payload = {
+      nickname: $nickname.value,
+      };
+      //유효성체크
+      ajax
+      .post(url, payload)
+      .then(res => res.json())
+      .then(nnchk); //.then(res => add(res))
       };
 
-      // 사업자 체크
-      const bizchk = res => {
-        if (res.header.rtcd == '00') {
-          alert('등록 가능한 사업자입니다.');
-          chk_biz = $biznum.value;
-        } else {
-          alert('이미 등록된 사업자입니다.');
-          throw new Error(`${res.header.rtmsg}`);
-        }
-      };
-      const bizchk_h = e => {
-        const url = `http://localhost:9080/api/members/bizchk/${$biznum.value}`;
-        const payload = {
-          businessnumber: $biznum.value,
-        };
-        //유효성체크
-        ajax
-          .post(url, payload)
-          .then(res => res.json())
-          .then(bizchk); //.then(res => add(res))
-      };
-
-      //사업자 진위확인
-      function businessTrulyChk_h(e) {
-        const key = 'bJ0AcEWnYARdHMe24EsPd77ralP%2BiRWLuhIeWgoIBgM%2F4dqlAgbS%2FilwgSiZkbkL9ojCBQHuEZI2TtoMqYzRhA%3D%3D';
-        const returnType = 'JSON';
-        const url = `http://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=${key}&returnType=${returnType}`;
-        const payLoad = {
-          businesses: [{ ...businessTrulyRequestParm, b_no: $bno.value, start_dt: $startDt.value, p_nm: $p_nm.value }],
-        };
-        console.log(payLoad);
-
-        const businessStatusChk = res => {
-          console.log(res);
-          if (res.status_code == 'OK') {
-            switch (res.data[0].valid) {
-              case '01': //Valid  유효
-                if (chk_biz2 == true) {
-                  return;
-                }
-                console.log('유효한 사업자');
-                alert('유효한 사업자입니다.');
-                chk_biz2 = $bno.value;
-                break;
-              case '02': //Invalid
-                alert('유효하지 않은 사업자입니다.');
-                throw new Error(`${res.data[0].valid_msg}`);
-                break;
-            }
-          } else {
-            throw new Error(`${res.description}`);
-          }
-        };
-        ajax
-          .post(url, payLoad)
-          .then(res => res.json())
-          .then(res => businessStatusChk(res))
-          .catch(err => console.log(err.message));
+      //사업자 등록상태조회
+      const chkBtn = res => {
+      if (res.header.rtcd == '00') {
+      if ('01' in res.data) {
+      //계속사업자
+      console.log(res.data['01']);
+      document.getElementById('businessnumber').disabled = true;
+      $chkBizBtn.disabled = true;
+      chk_biz = true;
+      $bizmsg.remove();
+      return;
       }
+      if ('02' in res.data) {
+      //휴업자
+      $bizmsg.textContent = '휴업자';
+      return;
+      }
+      if ('03' in res.data) {
+      //폐업자
+      $bizmsg.textContent = '폐업자';
+      return;
+      }
+      if ('00' in res.data) {
+      //기타
+      $bizmsg.textContent = '사업자를 찾을 수 없습니다.';
+      document.getElementById('businessnumber').focus();
+      return;
+      }
+      } else {
+      new Error(`${res.header.rtmsg}`);
+      }
+      };
+
+      const chkBtn_h = e => {
+      console.log(e);
+      e.preventDefault(); // form.submit() 기본 이벤트 막기
+
+      const businessNo = document.getElementById('businessnumber').value;
+      const url = '/members/businesschk';
+      const payLoad = { b_no: [businessNo] }; // { "businessNo" : ["1111111"] }
+      //요청 헤더에 데이터 포함
+      ajax
+      .post(url, payLoad)
+      .then(res => res.json())
+      .then(res => chkBtn(res))
+      .catch(err => console.log(err));
+      };
 
       const add_h = e => {
-        const chk1 = $mid.value;
-        const chk2 = $nickname.value;
-        const chk3 = $biznum.value;
-        const chk4 = $bno.value;
-        const chk_pw = $pw.value;
-        const chk_pwchk = $pwchk.value;
-        if (chk_id == chk1 && chk_nn == chk2 && chk_biz == chk3 && chk_biz2 == chk4) {
-          if (chk_pw == chk_pwchk) {
-            if ($email.value != '' && $mname.value != '' && $phone.value != '' && $cname.value != '') {
-              frm.submit();
-            } else {
-              alert('필수 항목을 입력 해주십시오.');
-            }
-          } else {
-            alert('비밀번호가 일치하지 않습니다.');
-          }
-        } else {
-          alert('중복확인이나 진위확인을 해주십시오.');
-        }
+      console.log(chk_id);
+      console.log(chk_nn);
+      console.log(chk_biz);
+
+      if (chk_id == true && chk_nn == true && chk_biz == true) {
+      frm.submit();
+      } else {
+      alert('중복 확인을 하지 않으셨습니다');
+      }
       };
 
-      $chkBtn2.addEventListener('click', businessTrulyChk_h, false);
-      $btnAdd.addEventListener('click', add_h, false);
       $chkIdBtn.addEventListener('click', chk_h, false);
       $chkNnBtn.addEventListener('click', nnchk_h, false);
-      $chkBizBtn.addEventListener('click', bizchk_h, false);
+      $chkBizBtn.addEventListener('click', chkBtn_h, false);
+      $btnAdd.addEventListener('click', add_h, false);
+
+      // //사업자 진위 확인
+      // const chkBtn2 = res => {
+      //   console.log(res);
+      //   if (res.status_code == 'OK') {
+      //     if (res.data[0].valid == '01') {
+      //       //유효한 사업자
+      //       console.log('유효한사업자');
+      //     } else {
+      //       //무효한 사업자
+      //       console.log('무효한사업자');
+      //       $msg.textContent = res.data[0].valid_msg; //확인할 수 없습니다.
+      //     }
+      //   } else {
+      //     throw new Error('서버확인후 재요청!!');
+      //   }
+      // };
+
+      // const chkBtn2_h = e => {
+      //   e.preventDefault();
+
+      //   //유효성 체크
+      //   const $start_dt = document.getElementById('start_dt'); //개업일
+      //   const $p_nm = document.getElementById('p_nm'); //대표자명
+
+      //   if ($start_dt.value.trim().length < 1) {
+      //     $msg.textContent = '개업일자가 누락되었습니다.';
+      //     $start_dt.focus();
+      //     return;
+      //   }
+      //   if ($p_nm.value.trim().length < 1) {
+      //     $msg.textContent = '대표자명이 누락되었습니다.';
+      //     $p_nm.focus();
+      //     return;
+      //   }
+
+      //   const url = `/pubData2/bn11`;
+      //   const payLoad = {
+      //     businesses: [
+      //       {
+      //         b_no: document.getElementById('businessNo').value,
+      //         start_dt: $start_dt.value,
+      //         p_nm: $p_nm.value,
+      //       },
+      //     ],
+      //   };
+
+      //   ajax
+      //     .post(url, payLoad)
+      //     .then(res => res.json())
+      //     .then(res => chkBtn2(res))
+      //     .catch(err => console.log(err));
+      // };
+      // $chkBtn2.addEventListener('click', chkBtn2_h, false);
     </script>
   </body>
 </html>

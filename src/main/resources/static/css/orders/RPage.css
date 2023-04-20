@@ -1,21 +1,5 @@
 @charset "UTF-8";
-
-/* .tag {
-    display:inline-block;
-    padding:3px;
-    background-color:var(--bg-color-darkgray-transparent);
-    border-radius:5%
-} */
-
-html {
-  overflow-y: scroll;
-}
-
-.wrapper {
-  display: grid;
-  grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
-  grid-template-rows: 40px 100px 50px minmax(400px, auto) 150px;
-}
+@import '/static/css/common/common.css';
 
 /* UPPERMOST */
 .up {
@@ -81,17 +65,15 @@ html {
 .gnb:hover .gnb__gwangjang-submenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   justify-items: center;
   position: absolute;
   top: 50px;
-  width: 15vw;
+  width: 100%;
   background-color: var(--bg-color-lightgray);
   font-size: var(--font-size-small);
+  z-index: 1;
   border-radius: 5px;
-}
-.gnb__search:hover {
-  cursor: pointer;
 }
 .gnb__depth {
   display: block;
@@ -103,6 +85,80 @@ html {
   line-height: 30px;
   text-align: center;
 }
+
+/* 내가 구현한 영역 시작 */
+
+/* topTitle */
+.topTitle {
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+  z-index: -1;
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* resesvTable */
+.reservTable table {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size-little);
+}
+.reservTable td {
+  padding: 12px;
+  border-collapse: collapse;
+  border-top: 1px solid var(--search-box-color);
+  border-bottom: 1px solid var(--search-box-color);
+}
+.reservTable .title {
+  width: 150px;
+}
+.reservTable .content {
+  width: 450px;
+}
+
+.reservTable td:first-child {
+  background-color: var(--theme-color-thin);
+  text-align: center;
+}
+.reservTable tr:first-child {
+  border-top: 2px solid;
+}
+
+/* caution */
+
+/* reservBtn */
+.reservBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reservBtn .submitBtn,
+.reservBtn .cancelBtn {
+  border: 0;
+  outline: none;
+  top: 0;
+  width: 150px;
+  height: 40px;
+  box-shadow: 1px 1px 1px;
+  background-color: var(--mn__tag-label);
+  margin: 10px;
+}
+.reservBtn .submitBtn:active,
+.reservBtn .cancelBtn:active {
+  background-color: var(--button-color-clicked);
+}
+
+/* 내가 구현한 영역 끝 */
+
+/* MAIN */
 
 /*  FOOTER  */
 .ft {
@@ -146,4 +202,14 @@ html {
 
 .link:hover {
   transform: scale(1.1);
+}
+
+/* 제목 여백 */
+.topTitle h3,
+.area h3 {
+  margin: 20px 20px 20px 20px;
+}
+/* 내용 여백 */
+.area .area_select {
+  margin: 20px;
 }

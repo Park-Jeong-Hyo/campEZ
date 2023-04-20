@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="" th:href="@{/css/orders/RPage.css}"/>
+    <link rel="stylesheet" href="" th:href="@{/css/orders/RLayout.css}"/>
+    <link rel="stylesheet" href="" th:href="@{/css/common/common.css}"/>
+    <title>Document</title>
+
+    <script
+      src="https://kit.fontawesome.com/4fab4e86c9.js"
+      crossorigin="anonymous"></script>
+<!--      type="module" src="./common.js" th:src="@{/js/common.js}"-->
+<!--    ></script>-->
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="up-l"></div>
+
+      <!-- 최상단 메뉴(UPPERMOST) -->
+      <div class="up">
+        <a href="/EZMain.html" class="up__link">HOME</a>
+        <a href="/SignUp.html" class="up__link">회원가입</a>
+        <a href="/LogIn.html" class="up__link">로그인</a>
+      </div>
+
+      <div class="up-r"></div>
+
+      <div class="hd-l"></div>
+
+      <!-- 헤더 (HEADER) -->
+      <header class="hd">
+        <div class="hd__menu-item">
+          <a href="" class="link">검색ez</a>
+          <a href="" class="link">광장ez</a>
+          <a href="" class="link">ez가이드</a>
+          <a href="" class="link">사이트맵</a>
+        </div>
+        <div class="hd__logo-item">
+          <a href="" class="link">
+            <i class="hd__logo fa-solid fa-house"></i>
+            <h2>캠핑EZ</h2>
+          </a>
+        </div>
+        <div class="hd__empty-item"></div>
+      </header>
+
+      <div class="hd-r"></div>
+
+      <div class="gnb-l"></div>
+
+      <!-- gnb영역 -->
+      <nav class="gnb">
+        <div class="gnb__gwangjang-submenu">
+          <div><a href="" class="gnb__depth link">공지사항</a></div>
+          <div><a href="" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" class="gnb__depth link">질문게시판</a></div>
+        </div>
+        <div><a href="" class="link">검색ez</a></div>
+        <div><a href="" class="link">광장ez</a></div>
+        <div><a href="" class="link">ez가이드</a></div>
+      </nav>
+
+      <div class="gnb-r"></div>
+
+      <div class="mn-l"></div>
+
+      <!-- 메인영역(MAIN) -->
+      <main class="mn"></main>
+
+      <div class="mn-r"></div>
+
+      <div class="ft-l"></div>
+
+      <!-- 내가 구현한 영역 시작 -->
+      
+      <!-- topTitle -->
+      <div class="topTitle">
+        <h2>
+          <i class="fa-solid fa-thumbtack"></i>  
+          예약하기
+          
+        </h2>
+      </div>
+
+      <!-- reservTable -->
+      
+      <form action=""  method="post" th:object="${ordersForm}">
+
+        <div class="reservTable">
+
+        <table>
+            <tr>
+              <td class="title">캠핑장 번호</td>
+              <td class="content">
+                <input type="text" th:field="*{cnumber}" readonly>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">아이디</td>
+              <td class="content">
+                <input type="text" th:value="*{mid}" th:field="*{mid}" readonly>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">연락처</td>
+              <td class="content">
+                <input type="text" th:field="*{phone}" placeholder="-포함">
+              </td>
+            </tr>
+            <tr>
+              <td class="title">예약일자</td>
+              <td class="content">
+                <input name="reservDate" type="date" th:field="*{checkin}">
+              </td>
+            </tr>
+            <tr>
+              <td class="title">나갈날짜</td>
+              <td class="content">
+                <input name="reservDate" type="date" th:field="*{checkout}">
+              </td>
+            </tr>
+            <tr>
+              <td class="title">구역</td>
+              <td class="content">
+                <select name="area" id="dropdown1">
+                  <option value="">=====선택=====</option>
+                  <option value="" th:each="reserArea:${reserAreas}" th:value="${reserArea}" th:text="${reserArea}"></option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td class="title">인원</td>
+              <td class="content">
+                <select name="headcount" id="dropdown2">
+                  <option value="">=====선택=====</option>
+                </select>
+              </td>
+            </tr>
+          </tr>
+        </table>
+
+        </div>
+
+      <!-- caution -->
+      <div class="area">
+        <h3>
+          <i class="fa-solid fa-thumbtack"></i>  
+          소개글
+          
+        </h3>
+        <div class="area_select" th:text="${campingCtext}">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti, corrupti sed ad sapiente recusandae dignissimos accusamus nihil adipisci dolor inventore quaerat eaque error odio, accusantium aut! Laborum, id! Quibusdam, cum!
+          Facere incidunt accusantium distinctio aliquam sequi, doloremque fugit sint tempore repudiandae ratione, dignissimos dolores ducimus! Iusto nam ipsum, nostrum ad similique provident placeat consequatur blanditiis ducimus a laudantium consequuntur reprehenderit?
+          Atque consequatur laudantium alias enim vero tempora ea nulla, blanditiis minima dicta dolorum a eaque inventore quasi, voluptatem pariatur quis minus similique quibusdam ex! Consequuntur cumque quam reiciendis officiis animi!
+          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        </div>
+      </div>
+        
+      <!-- reservBtn -->
+      <div class="reservBtn">
+        <div><button class="submitBtn">예약</button></div>
+        <div><button type="button" class="cancelBtn" onclick="history.back(-1)">취소</button></div>
+      </div>
+
+      </form>
+
+      <!-- emptySpace -->
+      <div class="emptySpace"></div>
+
+      
+      <!-- 내가 구현한 영역 끝 -->
+
+      <!-- 푸터영역(FOOTER)-->
+      <footer class="ft">
+        <div class="ft__logo-cell">
+          <h2>캠핑EZ</h2>
+        </div>
+        <div class="ft__info-cell">
+          <div class="ft__links">
+            <a href="" class="link">개인정보취급방침</a>
+            <a href="" class="link">홈페이지이용약관</a>
+            <a href="" class="link">광고및제휴문의</a>
+          </div>
+          <div class="ft__others">
+            <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
+            <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
+            <p>E-MAIL : webmaster@testmail.com</p>
+          </div>
+        </div>
+        <div class="ft__empty-cell"></div>
+      </footer>
+
+      <div class="ft-r"></div>
+    </div>
+    <script type="module">
+        import { ajax } from '/js/common.js';
+
+        const $dropdown1 = document.getElementById('dropdown1');
+
+        const dropdown1 = res => {
+          if (res.header.rtcd == '00') {
+            const capacity = res.data;
+            let html = `<option value="">=====선택=====</option>`;
+            for(let i=1; i<=capacity; i++) {
+              html += `<option value='${i}'>${i}</option>`
+            }
+            document.getElementById('dropdown2').innerHTML = html;
+          } else {
+            throw new Error(`${res.header.rtmsg}`);
+          }
+        }
+
+        const dropdown1_h = e => {
+          //console.log(`변경됨:${e.target.value}`);
+          const area = e.target.value;
+          const cnumber = document.getElementById('cnumber').value;
+          const url = `/api/orders/${cnumber}/${area}`;
+          ajax
+            .get(url)
+            .then(res => res.json())
+            .then(dropdown1)
+            .catch(console.log);
+        }
+
+        $dropdown1.addEventListener('change',dropdown1_h,false);
+    </script>
+  </body>
+</html>

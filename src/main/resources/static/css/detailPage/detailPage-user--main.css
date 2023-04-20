@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import '/css/common/common.css';
-@import 'detailPage-admin--layout.css';
 
 /*순서: UPPERMOST HEADER GNB */
 /* 1.topTitle 2.mnFace 3.menuBtn 4.intro 5.inform 6.campImg */
@@ -70,15 +69,17 @@
 .gnb:hover .gnb__gwangjang-submenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-items: center;
   position: absolute;
   top: 50px;
-  width: 100%;
+  width: 15vw;
   background-color: var(--bg-color-lightgray);
   font-size: var(--font-size-small);
-  z-index: 1;
   border-radius: 5px;
+}
+.gnb__search:hover {
+  cursor: pointer;
 }
 .gnb__depth {
   display: block;
@@ -361,7 +362,7 @@
 }
 
 .camparea-input {
-    width: 50px;
+  width: 50px;
 }
 
 /* 3.2-3.safety-guide */

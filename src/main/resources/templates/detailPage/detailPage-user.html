@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,244 +9,322 @@
   <link rel="stylesheet" href="" th:href="@{/css/detailPage/detailPage-admin--layout.css}" />
   <title>Document</title>
   <style>
-      * {
-        /* outline: 1px solid red; */
-      }
-    </style>
+    * {
+      /* outline: 1px solid red; */
+    }
+  </style>
   <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-<div class="wrapper">
-  <!-- 최상단 메뉴(UPPERMOST) -->
-  <div class="up-l"></div>
+  <div class="wrapper">
+    <!-- 최상단 메뉴(UPPERMOST) -->
+    <div class="up-l"></div>
 
-  <div class="up">
-    <a href="" th:href="@{/}" class="up__link">HOME</a>
-    <th:block th:if="${!session.isEmpty()}">
-      <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
-      <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
-    </th:block>
-    <th:block th:if="${session.isEmpty()}">
-      <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
-      <a href="" th:href="@{/login}" class="up__link">로그인</a>
-    </th:block>
-  </div>
-
-  <div class="up-r"></div>
-
-  <!-- 헤더 (HEADER) -->
-  <div class="hd-l"></div>
-
-  <header class="hd">
-    <div class="hd__menu-item">
-      <a href="" th:href="@{/search}" class="link">검색ez</a>
-      <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-      <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+    <div class="up">
+      <a href="" th:href="@{/}" class="up__link">HOME</a>
+      <th:block th:if="${!session.isEmpty()}">
+        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+        <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
+      </th:block>
+      <th:block th:if="${session.isEmpty()}">
+        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+        <a href="" th:href="@{/login}" class="up__link">로그인</a>
+      </th:block>
     </div>
-    <div class="hd__logo-item">
-      <a href="" th:href="@{/}" class="link">
-        <i class="hd__logo fa-solid fa-house"></i>
+
+    <div class="up-r"></div>
+
+    <!-- 헤더 (HEADER) -->
+    <div class="hd-l"></div>
+
+    <header class="hd">
+      <div class="hd__menu-item">
+        <a href="" th:href="@{/search}" class="link">검색ez</a>
+        <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+        <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+      </div>
+      <div class="hd__logo-item">
+        <a href="" th:href="@{/}" class="link">
+          <i class="hd__logo fa-solid fa-house"></i>
+          <h2>캠핑EZ</h2>
+        </a>
+      </div>
+      <div class="hd__empty-item"></div>
+    </header>
+
+    <div class="hd-r"></div>
+
+    <!-- gnb영역 -->
+    <nav class="gnb">
+      <div class="gnb__gwangjang-submenu">
+        <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+        <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
+      </div>
+      <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+      <div><p class="gnb__search">광장ez</p></div>
+      <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
+    </nav>
+
+    <!-- 내가 구현한 영역 시작 -->
+
+    <!-- 1.topTitle -->
+    <div class="topTitle">
+      <h2 id="camping-title" th:text="${campingSaveForm.cname}">입화산 참살이 숲 야영장</h2>
+    </div>
+
+    <!-- 2.mnFace -->
+    <div class="mnFace">
+      <section class="mnFace-l">
+        <img src="http://placeimg.com/640/480/nature" alt="mnFace-l img" />
+      </section>
+      <section class="mnFace-r">
+        <table>
+          <tr>
+            <td class="title">주소</td>
+            <td id="camping-address" class="content" th:text="${campingSaveForm.caddress}">울산광역시 중구 다운동 8번지</td>
+          </tr>
+          <tr>
+            <td class="title">문의처</td>
+            <td th:text="${campingSaveForm.camptel}">052-1234-5678</td>
+          </tr>
+          <tr>
+            <td class="title">캠핑장 유형</td>
+            <td class="content" th:if="${campingSaveForm.ctype == 'a'}">오토캠핑</td>
+            <td class="content" th:if="${campingSaveForm.ctype == 'g'}">글램핑</td>
+          </tr>
+          <tr>
+            <td class="title">운영시간</td>
+            <td class="content" th:text="${campingSaveForm.operdate}"></td>
+          </tr>
+          <tr>
+            <td class="title">홈페이지</td>
+            <td class="content" th:text="${campingSaveForm.homepage}"><a href="#">홈페이지</a></td>
+          </tr>
+          <tr>
+            <td class="title">주변이용<br />가능시설</td>
+            <td class="content" th:if="${campingSaveForm.toilet == 'o' and campingSaveForm.mart == 'x' }"
+              th:text="'화장실'"></td>
+            <td class="content" th:if="${campingSaveForm.toilet == 'x' and campingSaveForm.mart == 'o' }"
+              th:text="'마켓'"></td>
+            <td class="content" th:if="${campingSaveForm.toilet == 'o' and campingSaveForm.mart == 'o' }"
+              th:text="'화장실, 마켓'"></td>
+          </tr>
+        </table>
+        <div class="reserv">
+          <button type="button" class="reservBtn">예약</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3.menuBtn -->
+    <div class="menuBtn">
+      <div class="tab1_content tc">
+        <!-- tab1 내용 시작 -->
+        <div class="menuBtn-wrapper-tab1">
+          <hr />
+          <!-- 3.1-1.intro -->
+          <div class="intro">
+            <h3>
+              <i class="fa-solid fa-thumbtack"></i>
+              캠핑장 소개
+              <hr />
+            </h3>
+            <p th:text="${campingSaveForm.ctext}">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod et libero veritatis voluptatem ab facere,
+              porro labore officia eos atque officiis sunt obcaecati eius delectus architecto cumque laborum, eveniet a.
+              Quia neque, pariatur maxime perspiciatis ut quasi, illo, tempora quos
+              minima iste atque qui! Quas distinctio impedit voluptatem, unde recusandae aspernatur facere minima
+              dolorem, ipsum consequuntur nemo dolore quia reiciendis. Accusamus voluptate consequuntur, illum eos ullam
+              asperiores eaque itaque, maiores labore quibusdam velit recusandae tempora
+              assumenda cum vero aperiam autem voluptatibus enim error. Odio quasi doloribus praesentium, nobis eaque
+              sint. Ullam ea iusto numquam iure quos dolorum incidunt sequi architecto, itaque cupiditate, enim
+              veritatis distinctio reprehenderit fuga voluptas a, autem officiis labore
+              blanditiis quis earum sit? Ipsam aliquam necessitatibus laudantium. Quos assumenda minus totam iusto quod
+              fugiat. Qui, aspernatur sapiente! Ex corrupti, necessitatibus minus, corporis quas saepe nostrum error
+              ratione porro dignissimos nulla deleniti cum accusantium dolore, omnis eos
+              velit.
+            </p>
+          </div>
+        </div>
+        <div class="operation-guide">
+          <section class="operation-guide__title">
+            <h3>
+              <i class="fa-solid fa-thumbtack"></i>
+              이용안내
+              <hr />
+            </h3>
+          </section>
+          <section class="operation-guide__content">
+            <table>
+              <tr>
+                <td class="jujung-jumal" colspan="2">가격</td>
+              </tr>
+              <tr>
+                <td>주중</td>
+                <td>주말</td>
+              </tr>
+              <tr>
+                <td class="content-text" th:text="${campingSaveForm.priceweekday}">45,000~85,000</td>
+                <td class="content-text" th:text="${campingSaveForm.priceweekend}">55,000~95,000</td>
+              </tr>
+            </table>
+          </section>
+        </div>
+        <div action="" th:action="@{/search/save}" th:method="POST">
+          <h3>
+            <i class="fa-solid fa-thumbtack"></i>
+            캠핑장 구역 및 인원
+            <hr />
+          </h3>
+          <div class="camparea-set">
+            <th:block th:if="${campingSaveForm.capacitys1}" id="camparea-room1" class="hide">
+              <p>1번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys1} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys2 != null}" id="camparea-room2" class="hide">
+              <p>2번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys2} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys3 != null}" id="camparea-room3" class="hide">
+              <p>3번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys3} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys4 != null}" id="camparea-room4" class="hide">
+              <p>4번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys4} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys5 != null}" id="camparea-room5" class="hide">
+              <p>5번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys5} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys6 != null}" id="camparea-room6" class="hide">
+              <p>6번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys6} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys7 != null}" id="camparea-room7" class="hide">
+              <p>7번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys7} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys8 != null}" id="camparea-room8" class="hide">
+              <p>8번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys8} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys9 != null}" id="camparea-room9" class="hide">
+              <p>9번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys9} 명|"></p>
+            </th:block>
+            <th:block th:if="${campingSaveForm.capacitys10 != null}" id="camparea-room10" class="hide">
+              <p>10번 구역</p>
+              <p th:text="|${campingSaveForm.capacitys10} 명|"></p>
+            </th:block>
+          </div>
+        </div>
+        <!-- 3.2-3.오시는 길 -->
+        <div class="safety-guide">
+          <h3>
+            <i class="fa-solid fa-thumbtack"></i>
+            오시는 길
+            <hr />
+          </h3>
+          <div id="map" style="width:100%; height:45vh; outline:1px dotted #bbb;"></div>
+          <img src="http://placeimg.com/640/480/nature" alt="safety-guide img" />
+        </div>
+        <!-- tab1 내용 끝 -->
+      </div>
+    </div>
+
+    <!-- 내가 구현한 영역 끝 -->
+
+    <!-- 푸터영역(FOOTER)-->
+    <footer class="ft">
+      <div class="ft__logo-cell">
         <h2>캠핑EZ</h2>
-      </a>
-    </div>
-    <div class="hd__empty-item"></div>
-  </header>
-
-  <div class="hd-r"></div>
-
-  <!-- gnb영역 -->
-  <nav class="gnb">
-    <div class="gnb__gwangjang-submenu">
-      <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-      <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
-    </div>
-    <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-    <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
-    <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
-  </nav>
-
-  <!-- 내가 구현한 영역 시작 -->
-
-  <!-- 1.topTitle -->
-  <div class="topTitle">
-    <h2 th:text="${campingSaveForm.cname}">입화산 참살이 숲 야영장</h2>
-  </div>
-
-  <!-- 2.mnFace -->
-  <div class="mnFace">
-    <section class="mnFace-l">
-      <img src="http://placeimg.com/640/480/nature" alt="mnFace-l img" />
-    </section>
-    <section class="mnFace-r">
-      <table>
-        <tr>
-          <td class="title">주소</td>
-          <td class="content" th:text="${campingSaveForm.caddress}">울산광역시 중구 다운동 8번지</td>
-        </tr>
-        <tr>
-          <td class="title">문의처</td>
-          <td th:text="${campingSaveForm.camptel}">052-1234-5678</td>
-        </tr>
-        <tr>
-          <td class="title">캠핑장 유형</td>
-          <td class="content" th:if="${campingSaveForm.ctype == 'a'}">오토캠핑</td>
-          <td class="content" th:if="${campingSaveForm.ctype == 'g'}">글램핑</td>
-        </tr>
-        <tr>
-          <td class="title">운영시간</td>
-          <td class="content" th:text="${campingSaveForm.operdate}"></td>
-        </tr>
-        <tr>
-          <td class="title">홈페이지</td>
-          <td class="content" th:text="${campingSaveForm.homepage}"><a href="#">홈페이지</a></td>
-        </tr>
-        <tr>
-          <td class="title">주변이용<br />가능시설</td>
-          <td class="content" th:if="${campingSaveForm.toilet == 'o' and campingSaveFormmart == 'x' }" th:text="'화장실'"></td>
-          <td class="content" th:if="${campingSaveForm.toilet == 'x' and campingSaveForm.mart == 'o' }" th:text="'마켓'"></td>
-          <td class="content" th:if="${campingSaveForm.toilet == 'o' and campingSaveForm.mart == 'o' }" th:text="'화장실, 마켓'"></td>
-        </tr>
-      </table>
-      <div class="reserv">
-        <button type="button" class="reservBtn">예약</button>
       </div>
-    </section>
-  </div>
-
-  <!-- 3.menuBtn -->
-  <div class="menuBtn">
-    <div class="tab1_content tc">
-      <!-- tab1 내용 시작 -->
-      <div class="menuBtn-wrapper-tab1">
-        <hr />
-        <!-- 3.1-1.intro -->
-        <div class="intro">
-          <h3>
-            <i class="fa-solid fa-thumbtack"></i>
-            캠핑장 소개
-            <hr />
-          </h3>
-          <p th:text="${campingSaveForm.ctext}">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod et libero veritatis voluptatem ab facere, porro labore officia eos atque officiis sunt obcaecati eius delectus architecto cumque laborum, eveniet a. Quia neque, pariatur maxime perspiciatis ut quasi, illo, tempora quos
-            minima iste atque qui! Quas distinctio impedit voluptatem, unde recusandae aspernatur facere minima dolorem, ipsum consequuntur nemo dolore quia reiciendis. Accusamus voluptate consequuntur, illum eos ullam asperiores eaque itaque, maiores labore quibusdam velit recusandae tempora
-            assumenda cum vero aperiam autem voluptatibus enim error. Odio quasi doloribus praesentium, nobis eaque sint. Ullam ea iusto numquam iure quos dolorum incidunt sequi architecto, itaque cupiditate, enim veritatis distinctio reprehenderit fuga voluptas a, autem officiis labore
-            blanditiis quis earum sit? Ipsam aliquam necessitatibus laudantium. Quos assumenda minus totam iusto quod fugiat. Qui, aspernatur sapiente! Ex corrupti, necessitatibus minus, corporis quas saepe nostrum error ratione porro dignissimos nulla deleniti cum accusantium dolore, omnis eos
-            velit.
-          </p>
+      <div class="ft__info-cell">
+        <div class="ft__links">
+          <a href="" class="link">개인정보취급방침</a>
+          <a href="" class="link">홈페이지이용약관</a>
+          <a href="" class="link">광고및제휴문의</a>
+        </div>
+        <div class="ft__others">
+          <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
+          <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
+          <p>E-MAIL : webmaster@testmail.com</p>
         </div>
       </div>
-      <div class="operation-guide">
-        <section class="operation-guide__title">
-          <h3>
-            <i class="fa-solid fa-thumbtack"></i>
-            이용안내
-            <hr />
-          </h3>
-        </section>
-        <section class="operation-guide__content">
-          <table>
-            <tr>
-              <td class="jujung-jumal" colspan="2">가격</td>
-            </tr>
-            <tr>
-              <td>주중</td>
-              <td>주말</td>
-            </tr>
-            <tr>
-              <td class="gubun" th:if="${campingSaveForm.ctype == 'a'}">오토캠핑</td>
-              <td class="gubun" th:if="${campingSaveForm.ctype == 'g'}">글램핑</td>
-              <td class="content-text" th:text="${campingSaveForm.priceweekday}">45,000~85,000</td>
-              <td class="content-text" th:text="${campingSaveForm.priceweekend}">55,000~95,000</td>
-            </tr>
-          </table>
-        </section>
-      </div>
-      <div action="" th:action="@{/search/save}" th:method="POST">
-        <h3>
-          <i class="fa-solid fa-thumbtack"></i>
-          캠핑장 구역 및 인원
-          <hr />
-        </h3>
-        <div class="camparea-set">
-          <th:block th:if="${campingSaveForm.capacitys1}" id="camparea-room1" class="hide">
-            <p>1번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys1} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys2 != null}" id="camparea-room2" class="hide">
-            <p>2번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys2} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys3 != null}" id="camparea-room3" class="hide">
-            <p>3번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys3} 명|" ></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys4 != null}" id="camparea-room4" class="hide">
-            <p>4번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys4} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys5 != null}" id="camparea-room5" class="hide">
-            <p>5번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys5} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys6 != null}" id="camparea-room6" class="hide">
-            <p>6번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys6} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys7 != null}" id="camparea-room7" class="hide">
-            <p>7번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys7} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys8 != null}" id="camparea-room8" class="hide">
-            <p>8번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys8} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys9 != null}" id="camparea-room9" class="hide">
-            <p>9번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys9} 명|"></p>
-          </th:block>
-          <th:block th:if="${campingSaveForm.capacitys10 != null}" id="camparea-room10" class="hide">
-            <p>10번 구역</p>
-            <p th:text="|${campingSaveForm.capacitys10} 명|"></p>
-          </th:block>
-        </div>
-      </div>
-      <!-- 3.2-3.안전시설 및 배치도 -->
-      <div class="safety-guide">
-        <h3>
-          <i class="fa-solid fa-thumbtack"></i>
-          안전시설 및 배치도
-          <hr />
-        </h3>
-        <img src="http://placeimg.com/640/480/nature" alt="safety-guide img" />
-      </div>
-      <!-- tab1 내용 끝 -->
-    </div>
+      <div class="ft__empty-cell"></div>
+    </footer>
+
+    <div class="ft-r"></div>
   </div>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45c54444ce4272ce2301991cbfe78b24&libraries=services"></script>
 
-  <!-- 내가 구현한 영역 끝 -->
+  <!--  스크립트에서 ${} 값 받을 때 오류 줄여줌  -->
+  <script th:inline="javascript">
+    const $campingTitle = document.getElementById('camping-title');
+    const $campingAddress = document.getElementById('camping-address');
 
-  <!-- 푸터영역(FOOTER)-->
-  <footer class="ft">
-    <div class="ft__logo-cell">
-      <h2>캠핑EZ</h2>
-    </div>
-    <div class="ft__info-cell">
-      <div class="ft__links">
-        <a href="" class="link">개인정보취급방침</a>
-        <a href="" class="link">홈페이지이용약관</a>
-        <a href="" class="link">광고및제휴문의</a>
-      </div>
-      <div class="ft__others">
-        <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
-        <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
-        <p>E-MAIL : webmaster@testmail.com</p>
-      </div>
-    </div>
-    <div class="ft__empty-cell"></div>
-  </footer>
+    let campingTitleText = $campingTitle.innerText;
+    let campingAddressText = $campingAddress.innerText;
 
-  <div class="ft-r"></div>
-</div>
+    let itemId = 0;
+    let itemName = '';
+    var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+    var mapContainer = document.getElementById('map'),
+      mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567)
+      };
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+    var ps = new kakao.maps.services.Places();
+
+    <!--  여기에 키워드 받을 것! {지역} + 캠핑장이름, 띄어쓰기 주의! 뒤에 placesSearchCB는 지우지 말 것  -->
+    ps.keywordSearch(campingAddressText + campingTitleText, placesSearchCB);
+
+    function placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        var bounds = new kakao.maps.LatLngBounds();
+        for (var i = 0; i < data.length; i++) {
+          if (i == 0) {
+            itemId = data[0].id;
+            itemName = data[0].place_name;
+          }
+          displayMarker(data[i]);
+          bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+        }
+        map.setBounds(bounds);
+      }
+    }
+    function displayMarker(place) {
+      var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(place.y, place.x)
+      });
+
+      // 마커에 클릭이벤트
+      kakao.maps.event.addListener(marker, 'click', function () {
+        window.location.href = "https://map.kakao.com/link/to/" + itemId;
+      });
+
+      // 마커에 마우스 올렸을 때 뜰 내용
+      var iwContent =
+        '<div style="padding:5px;">' + itemName + '</div>';
+
+      var infowindow = new kakao.maps.InfoWindow({
+        content: iwContent
+      });
+      // 마커에 마우스오버 이벤트 인
+      kakao.maps.event.addListener(marker, 'mouseover', function () {
+        infowindow.open(map, marker);
+      });
+
+      // 마커에 마우스아웃 이벤트 아웃
+      kakao.maps.event.addListener(marker, 'mouseout', function () {
+        infowindow.close();
+      });
+    }
+  </script>
 </body>
+
 </html>
