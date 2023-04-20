@@ -11,9 +11,9 @@
 
     <script
       src="https://kit.fontawesome.com/4fab4e86c9.js"
-      crossorigin="anonymous"></script>
-<!--      type="module" src="./common.js" th:src="@{/js/common.js}"-->
-<!--    ></script>-->
+      crossorigin="anonymous"
+    ></script>
+
   </head>
 
   <body>
@@ -108,25 +108,25 @@
             <tr>
               <td class="title">연락처</td>
               <td class="content">
-                <input type="text" th:field="*{phone}" placeholder="-포함">
+                <input type="text" th:field="*{phone}" placeholder="-포함" required>
               </td>
             </tr>
             <tr>
               <td class="title">예약일자</td>
               <td class="content">
-                <input name="reservDate" type="date" th:field="*{checkin}">
+                <input name="reservDate" type="date" th:field="*{checkin}" required>
               </td>
             </tr>
             <tr>
               <td class="title">나갈날짜</td>
               <td class="content">
-                <input name="reservDate" type="date" th:field="*{checkout}">
+                <input name="reservDate" type="date" th:field="*{checkout}" required>
               </td>
             </tr>
             <tr>
               <td class="title">구역</td>
               <td class="content">
-                <select name="area" id="dropdown1">
+                <select name="area" id="dropdown1" required>
                   <option value="">=====선택=====</option>
                   <option value="" th:each="reserArea:${reserAreas}" th:value="${reserArea}" th:text="${reserArea}"></option>
                 </select>
@@ -135,7 +135,7 @@
             <tr>
               <td class="title">인원</td>
               <td class="content">
-                <select name="headcount" id="dropdown2">
+                <select name="headcount" id="dropdown2" required>
                   <option value="">=====선택=====</option>
                 </select>
               </td>
