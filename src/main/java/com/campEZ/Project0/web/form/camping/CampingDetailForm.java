@@ -1,18 +1,18 @@
 package com.campEZ.Project0.web.form.camping;
 
+import com.campEZ.Project0.entity.UploadFile;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CampingSaveForm {
+public class CampingDetailForm {
   private int cnumber;
   private String mid;
   //  @NotBlank
@@ -50,7 +50,8 @@ public class CampingSaveForm {
   private Integer capacitys9;
   private Integer capacitys10;
 
-  private MultipartFile imageFile; //캠핑장 대표 이미지 다운로드, 대표이미지
-  private List<MultipartFile> imageFiles; //캠핑장 이미지 다운로드, 시설이미지
+  private UploadFile imagedFile;  //캠핑장 대표 이미지 불러오기
+  private List<UploadFile> imagedFiles;  //캠핑장 이미지 불러오기
 
 }
+

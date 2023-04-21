@@ -7,8 +7,10 @@ import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.uploadfile.UploadFileDAO;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
+import com.campEZ.Project0.web.form.camping.CampingDetailForm;
 import com.campEZ.Project0.web.form.camping.CampingSaveForm;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
+import com.campEZ.Project0.web.form.camping.CampingUpdateForm;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -106,7 +108,7 @@ public class CampingController {
       RedirectAttributes redirectAttributes
   ) {
     LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
-    CampingSaveForm campingSaveForm = new CampingSaveForm();
+    CampingDetailForm campingDetailForm = new CampingDetailForm();
     Optional<Camping> detail = campingSVC.campingDetail(cnumber);
     Camping camping = detail.orElseThrow();
 
@@ -121,26 +123,26 @@ public class CampingController {
     } catch (NullPointerException e) {
       log.info("비회원 조회페이지에 접속");
     }
-    campingSaveForm.setCnumber(camping.getCnumber());
-    campingSaveForm.setMid(camping.getMid());
-    campingSaveForm.setCname(camping.getCname());
-    campingSaveForm.setCaddress(camping.getCaddress());
-    campingSaveForm.setCamptel(camping.getCamptel());
-    campingSaveForm.setCtype(camping.getCtype());
-    campingSaveForm.setOperdate(camping.getOperdate());
-    campingSaveForm.setHomepage(camping.getHomepage());
-    campingSaveForm.setCtext(camping.getCtext());
-    campingSaveForm.setPriceweekday(camping.getPriceweekday());
-    campingSaveForm.setPriceweekend(camping.getPriceweekend());
-    campingSaveForm.setToilet(camping.getToilet());
-    campingSaveForm.setMart(camping.getMart());
-    campingSaveForm.setUdate(camping.getUdate());
+    campingDetailForm.setCnumber(camping.getCnumber());
+    campingDetailForm.setMid(camping.getMid());
+    campingDetailForm.setCname(camping.getCname());
+    campingDetailForm.setCaddress(camping.getCaddress());
+    campingDetailForm.setCamptel(camping.getCamptel());
+    campingDetailForm.setCtype(camping.getCtype());
+    campingDetailForm.setOperdate(camping.getOperdate());
+    campingDetailForm.setHomepage(camping.getHomepage());
+    campingDetailForm.setCtext(camping.getCtext());
+    campingDetailForm.setPriceweekday(camping.getPriceweekday());
+    campingDetailForm.setPriceweekend(camping.getPriceweekend());
+    campingDetailForm.setToilet(camping.getToilet());
+    campingDetailForm.setMart(camping.getMart());
+    campingDetailForm.setUdate(camping.getUdate());
     Optional<List<Camparea>> list = campingSVC.campareaDetail(camping.getCnumber());
     List<Camparea> campareaList = list.orElseThrow();
 
     // area 값은 해당 캠핑장이 가진 구역의 갯수를 뜻하고, 같은 cnumber를 공유하는 list객체의 경우 area의 값은 동일함.
     //따라서 임의의 값인 0~10사이의 아무 값이나 넣어 줘도 된다.
-    campingSaveForm.setArea(campareaList.get(0).getArea());
+    campingDetailForm.setArea(campareaList.get(0).getArea());
 
     //리스트에서 구해온 capacitys의 값을 하나씩 넣어주는 작업
     // 이 부분에 값이 없을 경우 오류 발생, get(숫자).getCapacity()를 했을 때 해당하는 값이 있어야 한다.
@@ -149,61 +151,61 @@ public class CampingController {
       if (i < campareaList.size()) {
         switch (i) {
           case 0:
-            campingSaveForm.setCapacitys1(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys1(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 1:
-            campingSaveForm.setCapacitys2(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys2(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 2:
-            campingSaveForm.setCapacitys3(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys3(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 3:
-            campingSaveForm.setCapacitys4(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys4(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 4:
-            campingSaveForm.setCapacitys5(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys5(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 5:
-            campingSaveForm.setCapacitys6(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys6(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 6:
-            campingSaveForm.setCapacitys7(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys7(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 7:
-            campingSaveForm.setCapacitys8(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys8(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 8:
-            campingSaveForm.setCapacitys9(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys9(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 9:
-            campingSaveForm.setCapacitys10(campareaList.get(i).getCapacitys());
+            campingDetailForm.setCapacitys10(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
@@ -215,19 +217,19 @@ public class CampingController {
       return "error/404";
     }
 
-    log.info("campingSaveForm={}", campingSaveForm);
+    log.info("campingDetailForm={}", campingDetailForm);
     //파일첨부조회
     List<UploadFile> imagedFile = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
     List<UploadFile> imagedFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
 
     if(!imagedFile.isEmpty()){
-      campingSaveForm.setImagedFile(imagedFile.get(0));
+      campingDetailForm.setImagedFile(imagedFile.get(0));
     }
     if(!imagedFiles.isEmpty()){
-      campingSaveForm.setImagedFiles(imagedFiles);
+      campingDetailForm.setImagedFiles(imagedFiles);
     }
 
-    model.addAttribute("campingSaveForm", campingSaveForm);
+    model.addAttribute("campingDetailForm", campingDetailForm);
     return "detailPage/detailPage-user";
 
   }
@@ -378,23 +380,23 @@ public class CampingController {
       log.info("잘못된 접근");
       return "redirect:/";
     }
-    CampingSaveForm campingSaveForm = new CampingSaveForm();
-    campingSaveForm.setCnumber(camping.getCnumber());
-    campingSaveForm.setMid(camping.getMid());
-    campingSaveForm.setCname(camping.getCname());
-    campingSaveForm.setCaddress(camping.getCaddress());
-    campingSaveForm.setCamptel(camping.getCamptel());
-    campingSaveForm.setCtype(camping.getCtype());
-    campingSaveForm.setOperdate(camping.getOperdate());
-    campingSaveForm.setHomepage(camping.getHomepage());
-    campingSaveForm.setCtext(camping.getCtext());
-    campingSaveForm.setPriceweekday(camping.getPriceweekday());
-    campingSaveForm.setPriceweekend(camping.getPriceweekend());
-    campingSaveForm.setToilet(camping.getToilet());
-    campingSaveForm.setMart(camping.getMart());
-    campingSaveForm.setUdate(camping.getUdate());
-    campingSaveForm.setCnumber(cnumber);
-    campingSaveForm.setAreaNumber(areaNumber);
+    CampingUpdateForm campingUpdateForm = new CampingUpdateForm();
+    campingUpdateForm.setCnumber(camping.getCnumber());
+    campingUpdateForm.setMid(camping.getMid());
+    campingUpdateForm.setCname(camping.getCname());
+    campingUpdateForm.setCaddress(camping.getCaddress());
+    campingUpdateForm.setCamptel(camping.getCamptel());
+    campingUpdateForm.setCtype(camping.getCtype());
+    campingUpdateForm.setOperdate(camping.getOperdate());
+    campingUpdateForm.setHomepage(camping.getHomepage());
+    campingUpdateForm.setCtext(camping.getCtext());
+    campingUpdateForm.setPriceweekday(camping.getPriceweekday());
+    campingUpdateForm.setPriceweekend(camping.getPriceweekend());
+    campingUpdateForm.setToilet(camping.getToilet());
+    campingUpdateForm.setMart(camping.getMart());
+    campingUpdateForm.setUdate(camping.getUdate());
+    campingUpdateForm.setCnumber(cnumber);
+    campingUpdateForm.setAreaNumber(areaNumber);
     Optional<List<Camparea>> list = campingSVC.campareaDetail(camping.getCnumber());
     List<Camparea> campareaList = list.orElseThrow();
 
@@ -403,15 +405,15 @@ public class CampingController {
     List<UploadFile> imagedFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
 
     if(!imagedFile.isEmpty()){
-      campingSaveForm.setImagedFile(imagedFile.get(0));
+      campingUpdateForm.setImagedFile(imagedFile.get(0));
     }
     if(!imagedFiles.isEmpty()){
-      campingSaveForm.setImagedFiles(imagedFiles);
+      campingUpdateForm.setImagedFiles(imagedFiles);
     }
 
     // area 값은 해당 캠핑장이 가진 구역의 갯수를 뜻하고, 같은 cnumber를 공유하는 list객체의 경우 area의 값은 동일함.
     //따라서 임의의 값인 0~10사이의 아무 값이나 넣어 줘도 된다.
-    campingSaveForm.setArea(campareaList.get(0).getArea());
+    campingUpdateForm.setArea(campareaList.get(0).getArea());
 
     //리스트에서 구해온 capacitys의 값을 하나씩 넣어주는 작업
     // 이 부분에 값이 없을 경우 오류 발생, get(숫자).getCapacity()를 했을 때 해당하는 값이 있어야 한다.
@@ -421,61 +423,61 @@ public class CampingController {
       if (i < campareaList.size()) {
         switch (i) {
           case 0:
-            campingSaveForm.setCapacitys1(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys1(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 1:
-            campingSaveForm.setCapacitys2(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys2(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 2:
-            campingSaveForm.setCapacitys3(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys3(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 3:
-            campingSaveForm.setCapacitys4(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys4(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 4:
-            campingSaveForm.setCapacitys5(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys5(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 5:
-            campingSaveForm.setCapacitys6(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys6(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 6:
-            campingSaveForm.setCapacitys7(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys7(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 7:
-            campingSaveForm.setCapacitys8(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys8(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 8:
-            campingSaveForm.setCapacitys9(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys9(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
             break;
           case 9:
-            campingSaveForm.setCapacitys10(campareaList.get(i).getCapacitys());
+            campingUpdateForm.setCapacitys10(campareaList.get(i).getCapacitys());
             if(campareaList.get(i).getArea() > isAreaNumberTrue) {
               isAreaNumberTrue = campareaList.get(i).getArea();
             }
@@ -486,7 +488,7 @@ public class CampingController {
     if(isAreaNumberTrue != areaNumber) {
       return "error/404";
     }
-    model.addAttribute("campingSaveForm", campingSaveForm);
+    model.addAttribute("campingUpdateForm", campingUpdateForm);
     return ("detailPage/detailPageUpdate");
   }
 
