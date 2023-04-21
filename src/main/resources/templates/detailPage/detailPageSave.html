@@ -62,8 +62,8 @@
         <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
       </div>
       <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-      <div><p class="gnb__search">광장ez</p></div>
-      <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
+      <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+      <div><a href="" th:href="@{/sitemap}" class="link">ez가이드</a></div>
     </nav>
 
     <!-- 내가 구현한 영역 시작 -->
@@ -71,16 +71,20 @@
     <!-- 1.topTitle -->
     <div class="topTitle">
       <div>
-        <input style="font-size: 1.4rem;" type="text" th:field="${campingSaveForm.cname}" placeholder="캠핑장 이름을 입력해주세요"
+        <input style="font-size: 1.6rem;" type="text" th:field="${campingSaveForm.cname}" placeholder="캠핑장 이름을 입력하시오"
           required>
       </div>
     </div>
 
     <!-- 2.mnFace -->
-    <!--  <div class="mnFace">-->
     <div class="mnFace">
       <section class="mnFace-l">
-        <img src="http://placeimg.com/640/480/nature" alt="mnFace-l img" />
+        <div class="title-image">
+          <p class="title-image-text">대표 이미지를 하나 업로드 해 주시기 바랍니다.</p>
+        </div>
+        <div class="attach-title-image">
+          <input class="attach-title-image-upload" type="file" th:field="${campingSaveForm.imageFile}" required>
+        </div>
       </section>
       <section class="mnFace-r">
         <table>
@@ -263,16 +267,18 @@
             </div>
           </div>
         </div>
-        <!-- 3.2-3.안전시설 및 배치도 -->
-        <div class="safety-guide">
+        <!-- 3.2-3.이미지 업로드 -->
+        <div class="facility-image">
           <h3>
             <i class="fa-solid fa-thumbtack"></i>
-            오시는 길
+            캠핑장 시설 이미지
             <hr />
           </h3>
-          <img src="http://placeimg.com/640/480/nature" alt="safety-guide img" />
+          <div class="facility-image-text"><p>캠핑장 이미지를 여러장 업로드 해 주시기 바랍니다.</p></div>
+          <div class="facility-image-upload">
+            <input type="file" th:field="${campingSaveForm.imageFiles}" multiple required>
+          </div>
         </div>
-        <!-- tab1 내용 끝 -->
       </div>
 
       <div class="tab2_content tc">
