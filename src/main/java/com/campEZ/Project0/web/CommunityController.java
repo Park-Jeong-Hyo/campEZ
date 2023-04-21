@@ -45,13 +45,16 @@ public class CommunityController {
       Model model,
       HttpSession session
   ) {
+    try {
+      LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-    PostSaveForm postSaveForm = new PostSaveForm();
-    postSaveForm.setNickname(loginMembers.getNickname());
-    model.addAttribute("postSaveForm",postSaveForm);
-    return "community/bulletinBoardPosting";
+      PostSaveForm postSaveForm = new PostSaveForm();
+      postSaveForm.setNickname(loginMembers.getNickname());
+      model.addAttribute("postSaveForm",postSaveForm);
+      return "community/bulletinBoardPosting";
+    } catch (Exception e) {
+      return "error/404";
+    }
   }
 
   // 자유 게시글 작성처리
