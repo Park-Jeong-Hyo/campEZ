@@ -27,6 +27,7 @@ public interface UploadFileSVC {
    */
   List<UploadFile> findFilesByCodeWithRid(AttachFileType attachFileType, int rid);
 
+  List<UploadFile> findFilesByRid(int rid);
   /**
    * 첨부파일조회
    * @param uploadfileId
@@ -77,6 +78,9 @@ public interface UploadFileSVC {
    */
   public boolean deleteFile(AttachFileType attachFileType ,String sfname);
 
+  // 해당 캠핑장 관련 파일 삭제 -단건
+  public boolean deleteCampFile(String sfname);
+
   /**
    * 물리파일 삭제-여러건
    * @param attachFileType
@@ -84,4 +88,7 @@ public interface UploadFileSVC {
    * @return
    */
   public boolean deleteFiles(AttachFileType attachFileType, List<String> sfnames );
+
+  // 해당 캠핑장 관련 파일 삭제
+  public boolean deleteCampFiles(List<String> sfnames);
 }

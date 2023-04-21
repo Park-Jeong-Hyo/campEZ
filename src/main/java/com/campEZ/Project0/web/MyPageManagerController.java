@@ -7,6 +7,7 @@ import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.orders.svc.OrdersSVC;
+import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
 import com.campEZ.Project0.web.form.myPage.OrdersNameForm;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +31,8 @@ public class MyPageManagerController {
     private final CampingSVC campingSVC;
     private final MembersSVC membersSVC;
     private final OrdersSVC ordersSVC;
+
+    private final UploadFileSVC uploadFileSVC;
 
     //   캠핑장회원 정보조회 및 수정
     @GetMapping("/{mid}/manager")
@@ -116,10 +119,10 @@ public class MyPageManagerController {
     //캠핑장 삭제
     @GetMapping("/{mid}/manager/campingDelete")
     public String campingDelete(
-            @ModelAttribute Camping item,
-            BindingResult bindingResult,
-            @PathVariable("mid") String mid,
-            RedirectAttributes redirectAttributes
+        @ModelAttribute Camping item,
+        BindingResult bindingResult,
+        @PathVariable("mid") String mid,
+        RedirectAttributes redirectAttributes
     ) {
         if(bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
@@ -132,6 +135,7 @@ public class MyPageManagerController {
         redirectAttributes.addAttribute("mid", mid);
         return "redirect:/mypage/{mid}/manager";
     }
+
 //     예약 취소
     @GetMapping("/{onumber}/manager/del")
     public String OrderDelete(
