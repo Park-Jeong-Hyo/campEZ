@@ -33,7 +33,7 @@
       <header class="hd">
         <div class="hd__menu-item">
           <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+          <a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a>
           <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
@@ -57,7 +57,7 @@
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
         <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">ez가이드</a></div>
+        <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
 
       <div class="gnb-r"></div>
@@ -86,7 +86,7 @@
         <hr />
         <div class="reply-box">
           <div class="reply" th:each="reply : ${replys}">
-            <p class="reply-name" th:text="${reply.nickname}">세번째 댓글 작성자</p>
+            <p class="reply-name" th:text="${reply.nickname}">세번째 댓글 작성자</p><span th:text="${reply.udate}"></span>
             <p class="reply-text" th:text="${reply.cotext}">세번째 댓글</p>
             <div class="del-btn">
               <a href="" th:href="@{/community/{id}/comment/del(id=${reply.conumber})}">삭제</a>
@@ -95,8 +95,8 @@
         </div>
         <div>
           <th:block th:if="${!session.isEmpty()}">
-            <form action="" method="post" th:object="${commentForm}">
-              <p th:object="${login}" th:text="${login.mid}"></p>
+            <form action="" method="post" class="comment-form" th:object="${commentForm}">
+              <p class="comment-name" th:object="${login}" th:text="${login.nickname}"></p>
               <input class="comment-text" type="text" th:field="*{cotext}" />
               <p><button type="submit" id="addCommnet">댓글 작성</button></p>
             </form>
