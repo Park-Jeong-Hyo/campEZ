@@ -96,11 +96,7 @@
             <!--플렉스 사용, 상단, 하단 칸을 나눴음-->
             <!--중간그리드 영역 내 버튼 플렉스 영역-->
             <div class="commun__number">
-              <button>1</button>
-              <button>2</button>
-              <button>3</button>
-              <button>4</button>
-              <button>5</button>
+              <input id="maxPage" type="hidden" th:value="${maxPage}">
             </div>
             <!--중간 그리드 영역 내 검색 플렉스 영역-->
             <div class="commun__searchbar">
@@ -144,5 +140,20 @@
       </footer>
       <div class="ft-r"></div>
     </div>
+  <script>
+const $communNumber = document.querySelector('.commun__number');
+const $maxPage = document.getElementById('maxPage');
+const maxPage = $maxPage.value;
+for (var i = 1; i <= maxPage; i++) {
+  const button = document.createElement('button');
+  button.textContent = i;
+  $communNumber.appendChild(button);
+}
+$communNumber.addEventListener('click', function(event) {
+  if (event.target.tagName === 'BUTTON') {
+    globalThis.location.href = `/community/question/` + event.target.textContent;
+  }
+});
+  </script>
   </body>
 </html>

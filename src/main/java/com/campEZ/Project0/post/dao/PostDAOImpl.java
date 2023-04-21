@@ -26,18 +26,30 @@ public class PostDAOImpl implements PostDAO{
   //게시글 목록
   // 현재 공지사항(ptype = 'n')일 경우만 구현했으나
   // 컨트롤러에서 where ptype 부분이 입력이 가능한가 아닌가 따라서 추후 수정 혹은 추가 예정
+
   @Override
-  public List<Post> postList() {
+  public List<Post> postList(int Page, char ptype) {
     StringBuffer sql = new StringBuffer();
-    sql.append("select pnumber, nickname, ptitle, udate, ptext, ptype ");
-    sql.append("from post ");
+    sql.append("select * from (select rownum num, allpost.* ");
+    sql.append(" from (select * from post where ptype = :ptype ");
+    sql.append(" order by pnumber desc) allpost) where num BETWEEN :start and :end");
+
+    int start = 1 + (Page-1)*10;
+    int end = 10*Page;
+
+    SqlParameterSource param = new MapSqlParameterSource()
+        .addValue("start", start)
+        .addValue("end", end)
+        .addValue("ptype", ptype);
 
     List<Post> list = template.query(
         sql.toString(),
+        param,
         BeanPropertyRowMapper.newInstance(Post.class)
     );
     return list;
   }
+
 
   //게시글 작성
   //게시글 작성 후 작성한 게시글로 넘어가게 하려함.
@@ -112,5 +124,15 @@ public class PostDAOImpl implements PostDAO{
       //Optional.of(value)빈 optional객체 생성
       return Optional.empty();
     }
+  }
+  //총 페이지 수
+  @Override
+  public int Count(char ptype) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("select count(*) ");
+    sql.append(" from post where ptype = :ptype ");
+
+    Map<String, Character> param = Map.of("ptype", ptype);
+    return template.queryForObject(sql.toString(), param, Integer.class);
   }
 }

@@ -14,8 +14,8 @@ public class PostSVCImpl implements PostSVC{
 
   private final PostDAO postDAO;
   @Override
-  public List<Post> postList() {
-    return postDAO.postList();
+  public List<Post> postList(int Page, char ptype) {
+    return postDAO.postList(Page,ptype);
   }
   @Override
   public int postSave(Post post) {
@@ -33,4 +33,6 @@ public class PostSVCImpl implements PostSVC{
   public Optional<Post> postDetail(int pnumber) {
     return postDAO.postDetail(pnumber);
   }
+  @Override
+  public int Count(char ptype) { return  postDAO.Count(ptype);}
 }

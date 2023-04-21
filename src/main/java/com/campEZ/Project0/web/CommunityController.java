@@ -13,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,10 +33,16 @@ public class CommunityController {
   private final CommentsSVC commentsSVC;
 
   // 자유게시판 목록 맵핑
-  @GetMapping("/bulletinBoard")
-  public String bulletinBoard(Model model) {
-    List<Post> posts = postSVC.postList();
+  @GetMapping("/bulletinBoard/{Page}")
+  public String bulletinBoard(Model model, @PathVariable(name = "Page",required = false) Optional<Integer> page) {
+    page.orElse(1);
+    char ptype = 'f';
+    int Count = postSVC.Count(ptype);
+    int maxPage = (int) Math.ceil((double) Count / 10);
+    log.info("maxPage={}",maxPage);
+    List<Post> posts = postSVC.postList(page.get(),ptype);
     model.addAttribute("posts",posts);
+    model.addAttribute("maxPage",maxPage);
     return "community/bulletinBoard";
   }
 
@@ -200,11 +207,16 @@ public class CommunityController {
   }
 
   // 질문게시판 목록 맵핑
-  @GetMapping("/question")
-  public String notice(Model model) {
-
-    List<Post> posts = postSVC.postList();
+  @GetMapping("/question/{Page}")
+  public String notice(Model model, @PathVariable(name = "Page",required = false) Optional<Integer> page) {
+    page.orElse(1);
+    char ptype = 'n';
+    int Count = postSVC.Count(ptype);
+    int maxPage = (int) Math.ceil((double) Count / 10);
+    log.info("maxPage={}",maxPage);
+    List<Post> posts = postSVC.postList(page.get(),ptype);
     model.addAttribute("posts",posts);
+    model.addAttribute("maxPage",maxPage);
     return "community/question";
   }
 

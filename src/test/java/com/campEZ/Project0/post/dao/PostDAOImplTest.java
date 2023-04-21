@@ -15,16 +15,16 @@ public class PostDAOImplTest {
   @Autowired
   PostDAO postDAO;
   //게시글 목록
-  @Test
-  @DisplayName("게시글 목록")
-  void PostList() {
-    Post post = new Post();
-    post.setPtype('n');
-
-    List<Post> list = postDAO.postList();
-    System.out.println(list);
-    Assertions.assertThat(list).toString();
-  }
+//  @Test
+//  @DisplayName("게시글 목록")
+//  void PostList() {
+//    Post post = new Post();
+//    post.setPtype('n');
+//
+//    List<Post> list = postDAO.postList();
+//    System.out.println(list);
+//    Assertions.assertThat(list).toString();
+//  }
   //게시글 작성
 //  @Test
 //  @DisplayName("게시글 작성")

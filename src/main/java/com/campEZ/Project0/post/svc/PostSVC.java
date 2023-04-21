@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostSVC {
-  List<Post> postList();
+  List<Post> postList(int Page, char ptype);
   int postSave(Post post);
   int postUpdate(int pnumber, Post post);
   int postDelete(int pnumber);
   Optional<Post> postDetail(int pnumber);
+  int Count(char ptype);
 }
