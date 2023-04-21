@@ -1,10 +1,10 @@
 package com.campEZ.Project0.web;
 
-import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Members;
 import com.campEZ.Project0.entity.Orders;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.orders.svc.OrdersSVC;
+import com.campEZ.Project0.web.form.myPage.MembersForm;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class MyPageCommonController {
         System.out.println(loginId);
         if (type.equals("n") && memberId.equals(loginId)) {
             try {
-                Members membersForm = new Members();
+                MembersForm membersForm = new MembersForm();
 
                 membersForm.setBusinessnumber(members.getBusinessnumber());
                 membersForm.setPw(members.getPw());
@@ -69,8 +69,9 @@ public class MyPageCommonController {
 //    회원 정보 수정 처리하기
     @PostMapping("/{mid}/common")
     public String commonEdit(
-            @ModelAttribute Members membersForm, RedirectAttributes redirectAttributes,
+            @ModelAttribute MembersForm membersForm, RedirectAttributes redirectAttributes,
             @PathVariable String mid) {
+
         Members members = new Members();
 
         members.setPw(membersForm.getPw());

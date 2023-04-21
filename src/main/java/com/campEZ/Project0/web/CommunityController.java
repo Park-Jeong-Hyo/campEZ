@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,7 +59,7 @@ public class CommunityController {
       model.addAttribute("postSaveForm",postSaveForm);
       return "community/bulletinBoardPosting";
     } catch (Exception e) {
-      return "error/404";
+      return "errorPage/BadAccess";
     }
   }
 
@@ -99,37 +98,41 @@ public class CommunityController {
       Model model,
       HttpSession session
   ){
-    // 데이터 객체에 담기
-    Optional<Post> findedPost = postSVC.postDetail(pnumber);
-    Post post = findedPost.orElseThrow();
+    try {
+      // 데이터 객체에 담기
+      Optional<Post> findedPost = postSVC.postDetail(pnumber);
+      Post post = findedPost.orElseThrow();
 
-    // 로그인 객체
-    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+      // 로그인 객체
+      LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    // 객체 닉네임 String 타입 변수로 저장
-    String postNickname = String.valueOf(post.getNickname());
-    String loginNickname = String.valueOf(loginMembers.getNickname());
+      // 객체 닉네임 String 타입 변수로 저장
+      String postNickname = String.valueOf(post.getNickname());
+      String loginNickname = String.valueOf(loginMembers.getNickname());
 
-    // equals로 저장한 변수 비교 true 값일 시 수정페이지로 이동
-    if (postNickname.equals(loginNickname)) {
+      // equals로 저장한 변수 비교 true 값일 시 수정페이지로 이동
+      if (postNickname.equals(loginNickname)) {
 
-      PostUpdateForm postUpdateForm = new PostUpdateForm();
-      postUpdateForm.setPnumber(post.getPnumber());
-      postUpdateForm.setNickname(post.getNickname());
-      postUpdateForm.setPtitle(post.getPtitle());
-      postUpdateForm.setPtext(post.getPtext());
-      postUpdateForm.setPtype(post.getPtype());
-      postUpdateForm.setUdate(post.getUdate());
+        PostUpdateForm postUpdateForm = new PostUpdateForm();
+        postUpdateForm.setPnumber(post.getPnumber());
+        postUpdateForm.setNickname(post.getNickname());
+        postUpdateForm.setPtitle(post.getPtitle());
+        postUpdateForm.setPtext(post.getPtext());
+        postUpdateForm.setPtype(post.getPtype());
+        postUpdateForm.setUdate(post.getUdate());
 
-      model.addAttribute("postUpdateForm", postUpdateForm);
-      log.info("postUpdateForm={}", postUpdateForm);
-      return "community/updateBPost";
-    } else {
-      return "redirect:/community/bulletinBoard";
+        model.addAttribute("postUpdateForm", postUpdateForm);
+        log.info("postUpdateForm={}", postUpdateForm);
+        return "community/updateBPost";
+      } else {
+        return "redirect:/community/bulletinBoard";
+      }
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
     }
   }
 
-  // 자유 게시글 수정
+  // 자유 게시글 수정처리
   @PostMapping("/{id}/b_edit")
   public String b_update(
       @PathVariable("id") int pnumber,
@@ -149,7 +152,7 @@ public class CommunityController {
     return "redirect:/community/{id}/b_read";
   }
 
-  // 게시글 삭제
+  // 자유 게시글 삭제
   @GetMapping("/{id}/b_del")
   public String b_deleteById(
       @PathVariable("id") int pnumber,
@@ -157,23 +160,27 @@ public class CommunityController {
       HttpSession session
   ){
 
-    // 데이터 객체에 담기
-    Optional<Post> findedPost = postSVC.postDetail(pnumber);
-    Post post = findedPost.orElseThrow();
+    try {
+      // 데이터 객체에 담기
+      Optional<Post> findedPost = postSVC.postDetail(pnumber);
+      Post post = findedPost.orElseThrow();
 
-    // 로그인 객체
-    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+      // 로그인 객체
+      LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    // 객체 닉네임 String 타입 변수로 저장
-    String postNickname = String.valueOf(post.getNickname());
-    String loginNickname = String.valueOf(loginMembers.getNickname());
+      // 객체 닉네임 String 타입 변수로 저장
+      String postNickname = String.valueOf(post.getNickname());
+      String loginNickname = String.valueOf(loginMembers.getNickname());
 
-    if ( postNickname.equals(loginNickname) ) {
-      postSVC.postDelete(pnumber);
+      if ( postNickname.equals(loginNickname) ) {
+        postSVC.postDelete(pnumber);
 
-      return "redirect:/community/bulletinBoard";
-    } else {
-      return "redirect:/community/bulletinBoard";
+        return "redirect:/community/bulletinBoard";
+      } else {
+        return "redirect:/community/bulletinBoard";
+      }
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
     }
   }
 
@@ -229,13 +236,16 @@ public class CommunityController {
       Model model,
       HttpSession session
   ) {
+    try {
+      LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-    PostSaveForm postSaveForm = new PostSaveForm();
-    postSaveForm.setNickname(loginMembers.getNickname());
-    model.addAttribute("postSaveForm",postSaveForm);
-    return "community/QuestionPosting";
+      PostSaveForm postSaveForm = new PostSaveForm();
+      postSaveForm.setNickname(loginMembers.getNickname());
+      model.addAttribute("postSaveForm",postSaveForm);
+      return "community/QuestionPosting";
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
+    }
   }
 
   // 질문 게시글 작성처리
@@ -273,36 +283,40 @@ public class CommunityController {
       Model model,
       HttpSession session
   ) {
-    // 데이터 객체에 담기
-    Optional<Post> findedPost = postSVC.postDetail(pnumber);
-    Post post = findedPost.orElseThrow();
+    try {
+      // 데이터 객체에 담기
+      Optional<Post> findedPost = postSVC.postDetail(pnumber);
+      Post post = findedPost.orElseThrow();
 
-    // 로그인 객체
-    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+      // 로그인 객체
+      LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    // 객체 닉네임 String 타입 변수로 저장
-    String postNickname = String.valueOf(post.getNickname());
-    String loginNickname = String.valueOf(loginMembers.getNickname());
+      // 객체 닉네임 String 타입 변수로 저장
+      String postNickname = String.valueOf(post.getNickname());
+      String loginNickname = String.valueOf(loginMembers.getNickname());
 
-    // equals로 저장한 변수 비교 true 값일 시 수정페이지로 이동
-    if (postNickname.equals(loginNickname)) {
+      // equals로 저장한 변수 비교 true 값일 시 수정페이지로 이동
+      if (postNickname.equals(loginNickname)) {
 
-      PostUpdateForm postUpdateForm = new PostUpdateForm();
-      postUpdateForm.setPnumber(post.getPnumber());
-      postUpdateForm.setNickname(post.getNickname());
-      postUpdateForm.setPtitle(post.getPtitle());
-      postUpdateForm.setPtext(post.getPtext());
-      postUpdateForm.setPtype(post.getPtype());
-      postUpdateForm.setUdate(post.getUdate());
+        PostUpdateForm postUpdateForm = new PostUpdateForm();
+        postUpdateForm.setPnumber(post.getPnumber());
+        postUpdateForm.setNickname(post.getNickname());
+        postUpdateForm.setPtitle(post.getPtitle());
+        postUpdateForm.setPtext(post.getPtext());
+        postUpdateForm.setPtype(post.getPtype());
+        postUpdateForm.setUdate(post.getUdate());
 
-      model.addAttribute("postUpdateForm", postUpdateForm);
-      log.info("postUpdateForm={}", postUpdateForm);
-      return "community/updateQPost";
-    } else {
-      return "redirect:/community/question";
+        model.addAttribute("postUpdateForm", postUpdateForm);
+        log.info("postUpdateForm={}", postUpdateForm);
+        return "community/updateQPost";
+      } else {
+        return "redirect:/community/question";
+      }
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
     }
   }
-  // 질문 게시글 수정
+  // 질문 게시글 수정처리
   @PostMapping("/{id}/q_edit")
   public String update(
       @PathVariable("id") int pnumber,
@@ -329,24 +343,27 @@ public class CommunityController {
       Model model,
       HttpSession session
   ){
+    try {
+      // 데이터 객체에 담기
+      Optional<Post> findedPost = postSVC.postDetail(pnumber);
+      Post post = findedPost.orElseThrow();
 
-    // 데이터 객체에 담기
-    Optional<Post> findedPost = postSVC.postDetail(pnumber);
-    Post post = findedPost.orElseThrow();
+      // 로그인 객체
+      LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-    // 로그인 객체
-    LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+      // 객체 닉네임 String 타입 변수로 저장
+      String postNickname = String.valueOf(post.getNickname());
+      String loginNickname = String.valueOf(loginMembers.getNickname());
 
-    // 객체 닉네임 String 타입 변수로 저장
-    String postNickname = String.valueOf(post.getNickname());
-    String loginNickname = String.valueOf(loginMembers.getNickname());
+      if ( postNickname.equals(loginNickname) ) {
+        postSVC.postDelete(pnumber);
 
-    if ( postNickname.equals(loginNickname) ) {
-      postSVC.postDelete(pnumber);
-
-      return "redirect:/community/question";
-    } else {
-      return "redirect:/community/question";
+        return "redirect:/community/question";
+      } else {
+        return "redirect:/community/question";
+      }
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
     }
   }
 
@@ -381,7 +398,7 @@ public class CommunityController {
     return "community/qPost";
   }
 
-  // 댓글 작성
+  // 자유게시글 댓글 작성
   @PostMapping("/{id}/b_read")
   public String BcommentAdd(
       @PathVariable("id") int pnumber,
@@ -407,7 +424,7 @@ public class CommunityController {
     return "redirect:/community/{id}/b_read";
   }
 
-  // 댓글 작성
+  // 질문 게시글 댓글 작성
   @PostMapping("/{id}/q_read")
   public String QcommentAdd(
       @PathVariable("id") int pnumber,
@@ -433,7 +450,7 @@ public class CommunityController {
     return "redirect:/community/{id}/q_read";
   }
 
-  // 댓글 삭제
+  // 게시글(자유,질문 포함) 댓글 삭제
   @GetMapping("/{id}/comment/del")
   public String commentDelete(
       @PathVariable("id") int conumber,
@@ -441,7 +458,11 @@ public class CommunityController {
       Model model,
       RedirectAttributes redirectAttributes
   ) {
+    try {
 
+    } catch ( Exception e ) {
+      return "errorPage/BadAccess";
+    }
     // 데이터 객체에 담기
     Optional<Comments> findedComments = commentsSVC.commentsDetail(conumber);
     Comments comments = findedComments.orElseThrow();
