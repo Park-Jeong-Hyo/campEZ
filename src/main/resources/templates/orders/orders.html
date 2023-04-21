@@ -22,9 +22,15 @@
 
       <!-- 최상단 메뉴(UPPERMOST) -->
       <div class="up">
-        <a href="/EZMain.html" class="up__link">HOME</a>
-        <a href="/SignUp.html" class="up__link">회원가입</a>
-        <a href="/LogIn.html" class="up__link">로그인</a>
+        <a href="/EZMain.html" th:href="@{/}" class="up__link">HOME</a>
+        <th:block th:if="${!session.isEmpty()}">
+          <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+          <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
+        </th:block>
+        <th:block th:if="${session.isEmpty()}">
+          <a href="/SignUp.html" th:href="@{/signup}" class="up__link">회원가입</a>
+          <a href="/LogIn.html" th:href="@{/login}" class="up__link">로그인</a>
+        </th:block>
       </div>
 
       <div class="up-r"></div>
@@ -34,13 +40,12 @@
       <!-- 헤더 (HEADER) -->
       <header class="hd">
         <div class="hd__menu-item">
-          <a href="" class="link">검색ez</a>
-          <a href="" class="link">광장ez</a>
-          <a href="" class="link">ez가이드</a>
-          <a href="" class="link">사이트맵</a>
+          <a href="" th:href="@{/search}" class="link">검색ez</a>
+          <a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a>
+          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
         </div>
         <div class="hd__logo-item">
-          <a href="" class="link">
+          <a href="" th:href="@{/}" class="link">
             <i class="hd__logo fa-solid fa-house"></i>
             <h2>캠핑EZ</h2>
           </a>
@@ -55,13 +60,12 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" class="gnb__depth link">공지사항</a></div>
-          <div><a href="" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
-        <div><a href="" class="link">검색ez</a></div>
-        <div><a href="" class="link">광장ez</a></div>
-        <div><a href="" class="link">ez가이드</a></div>
+        <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
 
       <div class="gnb-r"></div>

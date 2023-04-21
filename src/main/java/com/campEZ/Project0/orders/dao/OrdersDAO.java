@@ -20,4 +20,7 @@ public interface OrdersDAO {
 
   //캠핑테이블에서 캠핑장번호로 소개글 가져오기
   String campingCtext(int cnumber);
+
+  //캠핑테이블에서 캠핑장번호로 이름 가져오기
+  String campingCname(int cnumber);
 }

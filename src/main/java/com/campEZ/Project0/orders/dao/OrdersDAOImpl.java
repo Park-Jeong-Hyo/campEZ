@@ -77,4 +77,16 @@ public class OrdersDAOImpl implements OrdersDAO{
 
     return camping;
   }
+
+  //캠핑테이블에서 캠핑장번호로 이름 가져오기
+  public String campingCname(int cnumber){
+    StringBuffer sql = new StringBuffer();
+    sql.append("select cname from camping ");
+    sql.append("where cnumber = :cnumber ");
+
+    Map<String, Integer> param = Map.of("cnumber", cnumber);
+    String camping = template.queryForObject(sql.toString(), param, String.class);
+
+    return camping;
+  }
 }

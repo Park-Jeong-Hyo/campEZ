@@ -2,12 +2,7 @@
 @import 'color.css';
 @import 'font.css';
 
-/* .tag {
-    display:inline-block;
-    padding:3px;
-    background-color:var(--bg-color-darkgray-transparent);
-    border-radius:5%
-} */
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr minmax(700px, 3fr) 1fr;
@@ -79,7 +74,7 @@
 .gnb:hover .gnb__gwangjang-submenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-items: center;
   position: absolute;
   top: 50px;

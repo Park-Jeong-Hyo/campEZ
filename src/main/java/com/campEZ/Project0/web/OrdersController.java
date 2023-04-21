@@ -74,7 +74,9 @@ public class OrdersController {
   public String order(
       @Valid @ModelAttribute("ordersForm") OrdersForm ordersForm,
       BindingResult bindingResult,
-      RedirectAttributes redirectAttributes
+      RedirectAttributes redirectAttributes,
+      Model model,
+      @PathVariable("cnumber") Integer cnumber
   ){
     //등록
     Orders orders = new Orders();
@@ -91,6 +93,10 @@ public class OrdersController {
     redirectAttributes.addAttribute("id", onumber);
 
     log.info("redirectAttributes={}",redirectAttributes);
+
+    //캠핑테이블에서 캠핑장번호로 이름 가져오기
+    String campingCname = ordersSVC.campingCname(cnumber);
+    model.addAttribute("campingCname",campingCname);
 
     return "orders/ordersCheck";
   }

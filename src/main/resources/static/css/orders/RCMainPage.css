@@ -27,6 +27,7 @@
 }
 .mn__button:active{
   background-color: var(--theme-color);
+  color: var(--main-font-color);
 }
 *{
   text-decoration: none;
