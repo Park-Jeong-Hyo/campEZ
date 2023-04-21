@@ -17,6 +17,10 @@ public interface UploadFileDAO {
 
   Optional<UploadFile> findFileByUploadFileId(int uploadfileId);
 
+  List<UploadFile> findFilesByRid(int rid);
+
+  int deleteFileByRid(int rid);
+
   int deleteFileByUploadFileId(int uploadfileId);
 
   int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid);

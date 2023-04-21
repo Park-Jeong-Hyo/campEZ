@@ -28,7 +28,8 @@ public class AppConfig implements WebMvcConfigurer {
                     "/img/**",
                     "/error/**",
                     "/errorPage/**",
-                    "/api/members/**"
+                    "/api/members/**",
+                    "/sitemap/**"
             );
   }
 }

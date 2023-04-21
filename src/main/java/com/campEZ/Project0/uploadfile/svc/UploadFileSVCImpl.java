@@ -1,6 +1,7 @@
 package com.campEZ.Project0.uploadfile.svc;
 
 import com.campEZ.Project0.entity.UploadFile;
+import com.campEZ.Project0.uploadfile.UploadFileDAO;
 import com.campEZ.Project0.web.AttachFileType;
 import com.campEZ.Project0.web.exception.BizException;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +24,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadFileSVC {
 
+  private final UploadFileDAO uploadFileDAO;
+
   @Value("${attach.root_dir}") // d:/attach/
   private String ROOT_DIR;
-
-  private final com.campEZ.Project0.uploadfile.UploadFileDAO uploadFileDAO;
 
   @Override
   public Long addFile(UploadFile uploadFile) {
@@ -48,10 +49,15 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
     return uploadFileDAO.findFilesByCodeWithRid(attachFileType, rid);
   }
 
+  public List<UploadFile> findFilesByRid(int rid){
+    return uploadFileDAO.findFilesByRid(rid);
+  }
+
   @Override
   public Optional<UploadFile> findFileByUploadFileId(int uploadfileId) {
     return uploadFileDAO.findFileByUploadFileId(uploadfileId);
   }
+
 
   @Override
   public int deleteFileByUploadFileId(int uploadfileId) {
@@ -146,6 +152,30 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
     return isDeleted;
   }
 
+  // 해당 캠핑장 관련 물리파일 삭제 -단건
+  @Override
+  public boolean deleteCampFile(String sfname) {
+
+    boolean isDeleted = false;
+
+    File file1 = new File(getStoreFilename(AttachFileType.A01,sfname));
+    File file2 = new File(getStoreFilename(AttachFileType.A02,sfname));
+
+    if(file1.exists()) {
+      if(file1.delete()) {
+        isDeleted = true;
+      }
+    }
+
+    if(file2.exists()) {
+      if(file2.delete()) {
+        isDeleted = true;
+      }
+    }
+
+    return isDeleted;
+  }
+
   @Override
   public boolean deleteFiles(AttachFileType attachFileType, List<String> sfnames ) {
 
@@ -155,7 +185,25 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
     for(String sfname : sfnames) {
       if(deleteFile(attachFileType, sfname)) {
         deletedFileCount++;
-      };
+      }
+    }
+
+    if(deletedFileCount == sfnames.size()) isDeleted = true;
+
+    return isDeleted;
+  }
+
+  // 해당 캠핑장 관련 물리파일 삭제
+  @Override
+  public boolean deleteCampFiles(List<String> sfnames) {
+
+    boolean isDeleted = false;
+    int deletedFileCount = 0;
+
+    for(String sfname : sfnames) {
+      if(deleteCampFile(sfname)) {
+        deletedFileCount++;
+      }
     }
 
     if(deletedFileCount == sfnames.size()) isDeleted = true;

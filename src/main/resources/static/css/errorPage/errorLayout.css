@@ -66,7 +66,7 @@ html {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  top: 140px;
+  position: relative;
   background-color: var(--theme-color);
   color: var(--main-font-color);
 }
@@ -76,14 +76,13 @@ html {
 .gnb:hover .gnb__gwangjang-submenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   justify-items: center;
   position: absolute;
-  top: 190px;
-  width: 60%;
+  top: 50px;
+  width: 100%;
   background-color: var(--bg-color-lightgray);
   font-size: var(--font-size-small);
-  z-index: 1;
   border-radius: 5px;
 }
 .gnb__depth {

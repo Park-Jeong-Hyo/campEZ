@@ -5,6 +5,7 @@ import com.campEZ.Project0.camping.svc.CampingSVC;
 import com.campEZ.Project0.entity.Camparea;
 import com.campEZ.Project0.entity.Camping;
 import com.campEZ.Project0.entity.UploadFile;
+import com.campEZ.Project0.uploadfile.UploadFileDAO;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
 import com.campEZ.Project0.web.form.camping.CampingSaveForm;
 import com.campEZ.Project0.web.form.camping.CampingSearchForm;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -32,6 +34,8 @@ public class CampingController {
 
   private final UploadFileSVC uploadFileSVC;
 
+  private final UploadFileDAO uploadFileDAO;
+
   // 캠핑장 화면 연결
   @GetMapping
   public String campingForm(@ModelAttribute("campingSearchForm") CampingSearchForm campingForm) {
@@ -41,10 +45,10 @@ public class CampingController {
   //캠핑장 검색
   @PostMapping
   public String campingSearch(
-          @Valid @ModelAttribute CampingSearchForm campingSearchForm,
-          BindingResult bindingResult,
-          RedirectAttributes redirectAttributes,
-          Model model
+      @Valid @ModelAttribute CampingSearchForm campingSearchForm,
+      BindingResult bindingResult,
+      RedirectAttributes redirectAttributes,
+      Model model
   ) {
     List<Camping> list = null;
     // valid 검사
@@ -95,11 +99,11 @@ public class CampingController {
   //캠핑장 조회
   @GetMapping("{id}/{areaNumber}/detail")
   public String campingDetail(
-          @PathVariable("id") int cnumber,
-          @PathVariable("areaNumber") int areaNumber,
-          Model model,
-          HttpSession session,
-          RedirectAttributes redirectAttributes
+      @PathVariable("id") int cnumber,
+      @PathVariable("areaNumber") int areaNumber,
+      Model model,
+      HttpSession session,
+      RedirectAttributes redirectAttributes
   ) {
     LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
     CampingSaveForm campingSaveForm = new CampingSaveForm();
@@ -250,10 +254,10 @@ public class CampingController {
   //캠핑장 등록
   @PostMapping("/save")
   public String campingSave(
-          @Valid @ModelAttribute CampingSaveForm campingSaveForm,
-          BindingResult bindingResult,
-          HttpSession session,
-          RedirectAttributes redirectAttributes
+      @Valid @ModelAttribute CampingSaveForm campingSaveForm,
+      BindingResult bindingResult,
+      HttpSession session,
+      RedirectAttributes redirectAttributes
   ) {
     //유효성 검사
     if(bindingResult.hasErrors()) {
@@ -280,22 +284,20 @@ public class CampingController {
     camping.setMart(campingSaveForm.getMart());
 
     //파일첨부에 대한 메타정보추출 & 물리파일 저장
-//    UploadFile imageFile = uploadFileSVC.convert(campingSaveForm.getImageFile(), AttachFileType.A01);
-//    List<UploadFile> imageFiles = uploadFileSVC.convert(campingSaveForm.getImageFiles(), AttachFileType.A02);
-//    System.out.println(imageFiles);
-//    if(imageFile != null) imageFiles.add(imageFile);
+    UploadFile imageFile = uploadFileSVC.convert(campingSaveForm.getImageFile(), AttachFileType.A01);
+    List<UploadFile> imageFiles = uploadFileSVC.convert(campingSaveForm.getImageFiles(), AttachFileType.A02);
+    System.out.println(imageFiles);
+    if(imageFile != null) imageFiles.add(imageFile);
 
     //camparea에 들어갈 cnumber를 가져오기 위함
-    Camping result = campingSVC.campingSave(camping) ;
+    Camping result;
 
-    //오류가 나서 잠깐 꺼둠
     //캠핑장 저장
-//    if(imageFiles.isEmpty()){
-//      result = campingSVC.campingSave(camping);
-//    }else{
-//      result = campingSVC.campingSave(camping, imageFiles);
-//    }
-
+    if(imageFiles.isEmpty()){
+      result = campingSVC.campingSave(camping);
+    }else{
+      result = campingSVC.campingSave(camping, imageFiles);
+    }
 
     //캠핑장 구역 정보 입력 로직
     camparea.setCnumber(result.getCnumber());
@@ -359,10 +361,10 @@ public class CampingController {
   //캠핑장 수정화면
   @GetMapping("/{id}/{areaNumber}/update")
   public String campingUpdateForm(
-          Model model,
-          @PathVariable("id") int cnumber,
-          @PathVariable("areaNumber") int areaNumber,
-          HttpSession session) {
+      Model model,
+      @PathVariable("id") int cnumber,
+      @PathVariable("areaNumber") int areaNumber,
+      HttpSession session) {
     LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
     Optional<Camping> detail = campingSVC.campingDetail(cnumber);
     Camping camping = detail.orElseThrow();
@@ -395,6 +397,17 @@ public class CampingController {
     campingSaveForm.setAreaNumber(areaNumber);
     Optional<List<Camparea>> list = campingSVC.campareaDetail(camping.getCnumber());
     List<Camparea> campareaList = list.orElseThrow();
+
+    //파일첨부조회
+    List<UploadFile> imagedFile = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, cnumber);
+    List<UploadFile> imagedFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02, cnumber);
+
+    if(!imagedFile.isEmpty()){
+      campingSaveForm.setImagedFile(imagedFile.get(0));
+    }
+    if(!imagedFiles.isEmpty()){
+      campingSaveForm.setImagedFiles(imagedFiles);
+    }
 
     // area 값은 해당 캠핑장이 가진 구역의 갯수를 뜻하고, 같은 cnumber를 공유하는 list객체의 경우 area의 값은 동일함.
     //따라서 임의의 값인 0~10사이의 아무 값이나 넣어 줘도 된다.
@@ -480,10 +493,10 @@ public class CampingController {
   //캠핑장 수정
   @PostMapping("/update")
   public String campingUpdate(
-          @Valid @ModelAttribute CampingSaveForm campingSaveForm,
-          BindingResult bindingResult,
-          RedirectAttributes redirectAttributes,
-          HttpSession session
+      @Valid @ModelAttribute CampingSaveForm campingSaveForm,
+      BindingResult bindingResult,
+      RedirectAttributes redirectAttributes,
+      HttpSession session
   ) {
     //마이페이지로 redirect하기 위함
     LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -511,6 +524,25 @@ public class CampingController {
     log.info("cnumber={}", cnumber);
     camparea.setCnumber(cnumber);
     camparea.setArea(campingSaveForm.getArea());
+
+    // 기존 이미지 물리파일 삭제
+    List<UploadFile> uploadFiles = uploadFileSVC.findFilesByRid(cnumber);
+    List<String> files = uploadFiles.stream().map(file -> file.getStorename()).collect(Collectors.toList());
+    uploadFileSVC.deleteCampFiles(files);
+
+    // 메타정보삭제
+    uploadFileDAO.deleteFileByRid(cnumber);
+
+    // 파일첨부에 대한 메타정보추출 & 물리파일 저장
+    UploadFile imageFile = uploadFileSVC.convert(campingSaveForm.getImageFile(), AttachFileType.A01);
+    List<UploadFile> imageFiles = uploadFileSVC.convert(campingSaveForm.getImageFiles(), AttachFileType.A02);
+    System.out.println(imageFiles);
+    if(imageFile != null) imageFiles.add(imageFile);
+
+    // 첨부파일 메타정보 저장
+    if(!(imageFiles.isEmpty())) {
+      uploadFileDAO.addFiles(imageFiles);
+    }
 
     //캠핑장 구역 정보 입력 로직
     //수정된 값(maxListNumber)

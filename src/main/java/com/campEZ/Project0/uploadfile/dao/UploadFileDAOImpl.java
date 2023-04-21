@@ -126,6 +126,19 @@ public class UploadFileDAOImpl implements com.campEZ.Project0.uploadfile.UploadF
         BeanPropertyRowMapper.newInstance(UploadFile.class));
   }
 
+  // 첨부파일 참고번호로 조회
+  public List<UploadFile> findFilesByRid(int rid){
+    StringBuffer sb = new StringBuffer();
+    sb.append(" select * ");
+    sb.append(" from uploadfile ");
+    sb.append(" where rid = :rid ");
+
+    return template.query(
+        sb.toString(),
+        Map.of("rid",rid),
+        BeanPropertyRowMapper.newInstance(UploadFile.class));
+  }
+
   //첨부파일 조회
   @Override
   public Optional<UploadFile> findFileByUploadFileId(int upnumber) {
@@ -142,6 +155,16 @@ public class UploadFileDAOImpl implements com.campEZ.Project0.uploadfile.UploadF
     }catch (EmptyResultDataAccessException e){
       return Optional.empty();
     }
+  }
+
+  // 첨부파일 삭제 by rid
+  @Override
+  public int deleteFileByRid(int rid){
+    StringBuffer sb = new StringBuffer();
+    sb.append("delete from uploadfile ");
+    sb.append(" where rid = :rid ");
+
+    return template.update(sb.toString(), Map.of("rid",rid));
   }
 
   // 첨부파일 삭제 by uplaodfileId
