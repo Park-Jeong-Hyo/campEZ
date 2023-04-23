@@ -147,13 +147,13 @@
   top: 0;
   width: 150px;
   height: 40px;
-  box-shadow: 1px 1px 1px;
-  background-color: var(--mn__tag-label);
+  background-color: var(--theme-color-thin);
   margin: 10px;
 }
 .reservBtn .submitBtn:active,
 .reservBtn .cancelBtn:active {
-  background-color: var(--button-color-clicked);
+  background-color: var(--theme-color);
+  color: var(--main-font-color);
 }
 
 /* 내가 구현한 영역 끝 */

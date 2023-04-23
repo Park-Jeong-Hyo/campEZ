@@ -275,6 +275,15 @@
 
   <!--  스크립트에서 ${} 값 받을 때 오류 줄여줌  -->
   <script th:inline="javascript">
+    const $reserBtn = document.getElementById('reserBtn');
+
+    const $cnumber = document.getElementById('cnumber');
+    const cnumber = $cnumber.dataset.cnumber;
+
+    const reserBtn_h = e => location.href = `/orders/${cnumber}`;
+    $reserBtn.addEventListener('click',reserBtn_h,false);
+
+    //지도API
     const $campingTitle = document.getElementById('camping-title');
     const $campingAddress = document.getElementById('camping-address');
 
@@ -337,13 +346,6 @@
       });
     }
 
-    const $reserBtn = document.getElementById('reserBtn');
-
-    const $cnumber = document.getElementById('cnumber');
-    const cnumber = $cnumber.dataset.cnumber;
-
-    const reserBtn_h = e => location.href = `/orders/${cnumber}`;
-    $reserBtn.addEventListener('click',reserBtn_h,false);
   </script>
 </body>
 

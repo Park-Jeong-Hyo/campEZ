@@ -97,18 +97,8 @@
         <div class="reservTable">
 
         <table>
-            <tr>
-              <td class="title">캠핑장 번호</td>
-              <td class="content">
-                <input type="text" th:field="*{cnumber}" readonly>
-              </td>
-            </tr>
-            <tr>
-              <td class="title">아이디</td>
-              <td class="content">
-                <input type="text" th:value="*{mid}" th:field="*{mid}" readonly>
-              </td>
-            </tr>
+          <input type="hidden" th:field="*{cnumber}" readonly>
+          <input type="hidden" th:value="*{mid}" th:field="*{mid}" readonly>
             <tr>
               <td class="title">연락처</td>
               <td class="content">
