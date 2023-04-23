@@ -3,7 +3,7 @@ package com.campEZ.Project0.web;
 import com.campEZ.Project0.entity.UploadFile;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
-import com.campEZ.Project0.web.form.uploadfile.HomeUpload;
+import com.campEZ.Project0.web.form.home.HomeUpload;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

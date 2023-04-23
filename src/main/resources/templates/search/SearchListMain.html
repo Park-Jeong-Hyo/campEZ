@@ -9,157 +9,157 @@
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="up-l"></div>
+  <div class="wrapper">
+    <div class="up-l"></div>
 
-      <!-- 최상단 메뉴(UPPERMOST) -->
-      <div class="up">
-        <a href="" th:href="@{/}" class="up__link">HOME</a>
-        <th:block th:if="${!session.isEmpty()}">
-          <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
-          <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
-        </th:block>
-        <th:block th:if="${session.isEmpty()}">
-          <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
-          <a href="" th:href="@{/login}" class="up__link">로그인</a>
-        </th:block>
-      </div>
-      <div class="up-r"></div>
-
-      <div class="hd-l"></div>
-
-      <!-- 헤더 (HEADER) -->
-      <header class="hd">
-        <div class="hd__menu-item">
-          <a href="" th:href="@{/search}" class="link">검색ez</a>
-          <a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a>
-          <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
-        </div>
-        <div class="hd__logo-item">
-          <a href="" th:href="@{/}" class="link">
-            <i class="hd__logo fa-solid fa-house"></i>
-            <h2>캠핑EZ</h2>
-          </a>
-        </div>
-        <div class="hd__empty-item"></div>
-      </header>
-
-      <div class="hd-r"></div>
-
-      <div class="gnb-l"></div>
-
-      <!-- gnb영역 -->
-      <nav class="gnb">
-        <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
-        </div>
-        <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><p class="link">광장ez</p></div>
-        <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
-      </nav>
-
-      <div class="gnb-r"></div>
-
-      <div class="mn-l"></div>
-
-      <!-- 메인영역(MAIN) -->
-      <main class="mn">
-        <div class="mn__img">
-          <!-- 검색영역(SEARCHBOX) -->
-          <form class="img__searchBox" th:method="post" th:object="${campingSearchForm}">
-            <div class="img__searchBox-options">
-              <select th:field="${campingSearchForm.ctype}" id="img__searchBox-options-select" required>
-                <option th:value="g">글램핑</option>
-                <option th:value="a">오토캠핑</option>
-                <!--                <option th:value="">카라반</option>-->
-              </select>
-              <select th:field="${campingSearchForm.caddress}" id="" required>
-                <option th:value="서울">서울</option>
-                <option th:value="경기도">경기도</option>
-                <option th:value="강원도">강원도</option>
-                <option th:value="충청남도">충청남도</option>
-                <option th:value="충청북도">충청북도</option>
-                <option th:value="전라남도">전라남도</option>
-                <option th:value="전라북도">전라북도</option>
-                <option th:value="경상남도">경상남도</option>
-                <option th:value="경상북도">경상북도</option>
-                <option th:value="제주도">제주도</option>
-                <option th:value="부산">부산</option>
-                <option th:value="대구">대구</option>
-                <option th:value="인천">인천</option>
-                <option th:value="광주">광주</option>
-                <option th:value="대전">대전</option>
-                <option th:value="울산">울산</option>
-              </select>
-            </div>
-            <div class="img__searchBox-r">
-              <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력하시오." th:field="${campingSearchForm.cname}" required/>
-              <button class="img__searchBox-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
-          </form>
-        </div>
-
-        <!-- 메인 제목 -->
-        <div class="mn__title" th:if="${completeList} != null">
-          <h3 class="mn__title-first">
-            <i class="fa-solid fa-tree"></i>
-            등록된 캠핑장
-          </h3>
-        </div>
-        <!-- 메인 캠핑장 등록 -->
-        <th:block th:if="${completeList != null  && completeList.size() < 1}">
-          <div class="mn__no-list">
-            <p>검색결과가 없습니다.</p>
-          </div>
-        </th:block>
-        <section class="mn__main" th:if="${completeList != null && completeList.size() >= 1}">
-          <th:block th:each="item : ${completeList}">
-            <div class="mn__main-empty1-l"></div>
-            <div class="mn__main-photo">
-              <a href="" class="link"><img src="https://picsum.photos/200" alt="" /></a>
-            </div>
-            <div class="mn__main-write">
-              <p class="mn__main-name link">
-                <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
-              </p>
-              <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
-              <p th:text="${item.getCamptel()}">000-0000-0000</p>
-              <div class="mn__main-tag">
-                <p class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</p>
-                <p class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</p>
-              </div>
-            </div>
-            <div class="mn__main-empty1-r"></div>
-          </th:block>
-        </section>
-      </main>
-
-      <div class="mn-r"></div>
-
-      <div class="ft-l"></div>
-
-      <!-- 푸터영역(FOOTER)-->
-      <footer class="ft">
-        <div class="ft__logo-cell">
-          <h2>캠핑EZ</h2>
-        </div>
-        <div class="ft__info-cell">
-          <div class="ft__links">
-            <a href="" class="link">개인정보취급방침</a>
-            <a href="" class="link">홈페이지이용약관</a>
-            <a href="" class="link">광고및제휴문의</a>
-          </div>
-          <div class="ft__others">
-            <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
-            <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
-            <p>E-MAIL : webmaster@testmail.com</p>
-          </div>
-        </div>
-        <div class="ft__empty-cell"></div>
-      </footer>
-
-      <div class="ft-r"></div>
+    <!-- 최상단 메뉴(UPPERMOST) -->
+    <div class="up">
+      <a href="" th:href="@{/}" class="up__link">HOME</a>
+      <th:block th:if="${!session.isEmpty()}">
+        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+        <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
+      </th:block>
+      <th:block th:if="${session.isEmpty()}">
+        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+        <a href="" th:href="@{/login}" class="up__link">로그인</a>
+      </th:block>
     </div>
+    <div class="up-r"></div>
+
+    <div class="hd-l"></div>
+
+    <!-- 헤더 (HEADER) -->
+    <header class="hd">
+      <div class="hd__menu-item">
+        <a href="" th:href="@{/search}" class="link">검색ez</a>
+        <a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a>
+        <a href="" th:href="@{/sitemap}" class="link">사이트맵</a>
+      </div>
+      <div class="hd__logo-item">
+        <a href="" th:href="@{/}" class="link">
+          <i class="hd__logo fa-solid fa-house"></i>
+          <h2>캠핑EZ</h2>
+        </a>
+      </div>
+      <div class="hd__empty-item"></div>
+    </header>
+
+    <div class="hd-r"></div>
+
+    <div class="gnb-l"></div>
+
+    <!-- gnb영역 -->
+    <nav class="gnb">
+      <div class="gnb__gwangjang-submenu">
+        <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+        <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
+      </div>
+      <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+      <div><p class="link">광장ez</p></div>
+      <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
+    </nav>
+
+    <div class="gnb-r"></div>
+
+    <div class="mn-l"></div>
+
+    <!-- 메인영역(MAIN) -->
+    <main class="mn">
+      <div class="mn__img">
+        <!-- 검색영역(SEARCHBOX) -->
+        <form class="img__searchBox" th:method="post" th:object="${campingSearchForm}">
+          <div class="img__searchBox-options">
+            <select th:field="${campingSearchForm.ctype}" id="img__searchBox-options-select" required>
+              <option th:value="g">글램핑</option>
+              <option th:value="a">오토캠핑</option>
+              <!--                <option th:value="">카라반</option>-->
+            </select>
+            <select th:field="${campingSearchForm.caddress}" id="" required>
+              <option th:value="서울">서울</option>
+              <option th:value="경기도">경기도</option>
+              <option th:value="강원도">강원도</option>
+              <option th:value="충청남도">충청남도</option>
+              <option th:value="충청북도">충청북도</option>
+              <option th:value="전라남도">전라남도</option>
+              <option th:value="전라북도">전라북도</option>
+              <option th:value="경상남도">경상남도</option>
+              <option th:value="경상북도">경상북도</option>
+              <option th:value="제주도">제주도</option>
+              <option th:value="부산">부산</option>
+              <option th:value="대구">대구</option>
+              <option th:value="인천">인천</option>
+              <option th:value="광주">광주</option>
+              <option th:value="대전">대전</option>
+              <option th:value="울산">울산</option>
+            </select>
+          </div>
+          <div class="img__searchBox-r">
+            <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력하시오." th:field="${campingSearchForm.cname}" required/>
+            <button class="img__searchBox-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 메인 제목 -->
+      <div class="mn__title" th:if="${completeList} != null">
+        <h3 class="mn__title-first">
+          <i class="fa-solid fa-tree"></i>
+          등록된 캠핑장
+        </h3>
+      </div>
+      <!-- 메인 캠핑장 등록 -->
+      <th:block th:if="${completeList != null  && completeList.size() < 1}">
+        <div class="mn__no-list">
+          <p>검색결과가 없습니다.</p>
+        </div>
+      </th:block>
+      <section class="mn__main" th:if="${completeList != null && completeList.size() >= 1}">
+        <th:block th:each="item : ${completeList}">
+          <div class="mn__main-empty1-l"></div>
+          <div class="mn__main-photo">
+            <a href="" class="link"><img th:src="@{|/attach/view/${item.imagedFile.upnumber}|}" alt="" /></a>
+          </div>
+          <div class="mn__main-write">
+            <p class="mn__main-name link">
+              <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
+            </p>
+            <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
+            <p th:text="${item.getCamptel()}">000-0000-0000</p>
+            <div class="mn__main-tag">
+              <p class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</p>
+              <p class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</p>
+            </div>
+          </div>
+          <div class="mn__main-empty1-r"></div>
+        </th:block>
+      </section>
+    </main>
+
+    <div class="mn-r"></div>
+
+    <div class="ft-l"></div>
+
+    <!-- 푸터영역(FOOTER)-->
+    <footer class="ft">
+      <div class="ft__logo-cell">
+        <h2>캠핑EZ</h2>
+      </div>
+      <div class="ft__info-cell">
+        <div class="ft__links">
+          <a href="" class="link">개인정보취급방침</a>
+          <a href="" class="link">홈페이지이용약관</a>
+          <a href="" class="link">광고및제휴문의</a>
+        </div>
+        <div class="ft__others">
+          <p>Copyrights(c) 2023 www.campingez.com. ALL RIGHTS RESERVED.</p>
+          <p>TEL 010-1234-5678 (상담시간: 평일 10:00~18:00)</p>
+          <p>E-MAIL : webmaster@testmail.com</p>
+        </div>
+      </div>
+      <div class="ft__empty-cell"></div>
+    </footer>
+
+    <div class="ft-r"></div>
+  </div>
   </body>
 </html>

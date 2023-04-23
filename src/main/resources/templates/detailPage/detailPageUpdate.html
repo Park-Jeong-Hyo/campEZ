@@ -17,272 +17,282 @@
 </head>
 
 <body>
-  <form class="wrapper" th:method="POST" th:action="@{/search/update}">
-    <!-- 최상단 메뉴(UPPERMOST) -->
-    <div class="up-l"></div>
+<form class="wrapper" th:method="POST" th:action="@{/search/update}" th:object="${campingUpdateForm}" enctype="multipart/form-data">
+  <!-- 최상단 메뉴(UPPERMOST) -->
+  <div class="up-l"></div>
 
-    <div class="up">
-      <a href="" th:href="@{/}" class="up__link">HOME</a>
-      <th:block th:if="${!session.isEmpty()}">
-        <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
-        <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
-      </th:block>
-      <th:block th:if="${session.isEmpty()}">
-        <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
-        <a href="" th:href="@{/login}" class="up__link">로그인</a>
-      </th:block>
+  <div class="up">
+    <a href="" th:href="@{/}" class="up__link">HOME</a>
+    <th:block th:if="${!session.isEmpty()}">
+      <a href="" th:href="@{/mypage}" class="up__link">마이페이지</a>
+      <a href="" th:href="@{/login/logout}" class="up__link">로그아웃</a>
+    </th:block>
+    <th:block th:if="${session.isEmpty()}">
+      <a href="" th:href="@{/signup}" class="up__link">회원가입</a>
+      <a href="" th:href="@{/login}" class="up__link">로그인</a>
+    </th:block>
+  </div>
+
+  <div class="up-r"></div>
+
+  <!-- 헤더 (HEADER) -->
+  <div class="hd-l"></div>
+
+  <header class="hd">
+    <div class="hd__menu-item">
+      <a href="" th:href="@{/search}" class="link">검색ez</a>
+      <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
+      <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
     </div>
+    <div class="hd__logo-item">
+      <a href="" th:href="@{/}" class="link">
+        <i class="hd__logo fa-solid fa-house"></i>
+        <h2>캠핑EZ</h2>
+      </a>
+    </div>
+    <div class="hd__empty-item"></div>
+  </header>
 
-    <div class="up-r"></div>
+  <div class="hd-r"></div>
 
-    <!-- 헤더 (HEADER) -->
-    <div class="hd-l"></div>
+  <!-- gnb영역 -->
+  <nav class="gnb">
+    <div class="gnb__gwangjang-submenu">
+      <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+      <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
+    </div>
+    <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
+    <div><p class="link">광장ez</p></div>
+    <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
+  </nav>
+  <!-- 내가 구현한 영역 시작 -->
 
-    <header class="hd">
-      <div class="hd__menu-item">
-        <a href="" th:href="@{/search}" class="link">검색ez</a>
-        <a href="" th:href="@{/preparing}" class="link">ez가이드</a>
-        <a href="" th:href="@{/preparing}" class="link">사이트맵</a>
+  <!-- 1.topTitle -->
+  <div class="topTitle">
+    <div>
+      <input style="font-size: 1.6rem;" type="text" th:field="*{cname}" placeholder="캠핑장 이름을 입력하시오"
+             required>
+    </div>
+  </div>
+
+  <!-- 2.mnFace -->
+  <!--  <div class="mnFace">-->
+  <div class="mnFace">
+    <section class="mnFace-l">
+      <div class="title-image">
+        <img class="title-image-img" th:src="@{|/attach/view/*{imagedFile.upnumber}|}" alt="캠핑장 대표 이미지" >
       </div>
-      <div class="hd__logo-item">
-        <a href="" th:href="@{/}" class="link">
-          <i class="hd__logo fa-solid fa-house"></i>
-          <h2>캠핑EZ</h2>
-        </a>
+      <div class="attach-title-image">
+        <input class="attach-title-image-upload" type="file" th:field="*{imageFile}">
       </div>
-      <div class="hd__empty-item"></div>
-    </header>
-
-    <div class="hd-r"></div>
-
-    <!-- gnb영역 -->
-    <nav class="gnb">
-      <div class="gnb__gwangjang-submenu">
-        <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
-        <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
+    </section>
+    <section class="mnFace-r">
+      <table>
+        <tr>
+          <td class="title">* 주소</td>
+          <td class="content">
+            <input type="hidden" th:field="*{cnumber}" readonly>
+            <input type="text" th:field="*{caddress}" pattern="^[가-힣]{2,4}\s[가-힣]{2,4}\s[가-힣]{2,6}$" required>
+            <span class="warning">* 예시: 서울 종로구, 경기도 평택시</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="title">* 문의처</td>
+          <td class="content">
+            <input type="tel" th:field="*{camptel}" pattern="^\d{3}-(\d{3,}|\d{4,})-(\d{3,}|\d{4,})$"
+                   required>
+            <span class="warning">* -를 포함하여 입력해 주세요</span>
+          </td>
+        </tr>
+        <tr>
+          <!--입력받은 ctype를 o나 x로 변환시키는 로직이 필요함., 아무것도 입력하지 않았을 때의 경우도 필요함.-->
+          <td class="title">* 캠핑장 유형</td>
+          <td class="content">
+            <select th:field="*{ctype}" id="img__searchBox-options-select" required>
+              <option th:value='g'>글램핑</option>
+              <option th:value='a'>오토캠핑</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="title">* 운영시간</td>
+          <td class="content">
+            <input type="text" th:field="*{operdate}"
+                   pattern="^([01][0-9]|2[0-3]):[0-5][0-9]~([01][0-9]|2[0-3]):[0-5][0-9]$" required>
+            <span class="warning">* 예시: 09:00~23:00</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="title">홈페이지</td>
+          <td class="content">
+            <input type="text" th:field="*{homepage}">
+          </td>
+        </tr>
+        <tr>
+          <td class="title">화장실<br />마켓 유무</td>
+          <td class="content">
+            <span>화장실</span>
+            <input type="checkbox" th:value="o" th:field="*{toilet}">
+            <span>마켓</span>
+            <input type="checkbox" th:value="o" th:field="*{mart}">
+          </td>
+        </tr>
+      </table>
+      <div class="reserv">
+        <button class="reservBtn">수정</button>
       </div>
-      <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-      <div><p class="link">광장ez</p></div>
-      <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
-    </nav>
-    <!-- 내가 구현한 영역 시작 -->
+    </section>
+  </div>
+  <!--  </div>-->
 
-    <!-- 1.topTitle -->
-    <div class="topTitle">
+  <!-- 3.menuBtn -->
+  <div class="menuBtn">
+    <div class="tab1_content tc">
+      <!-- tab1 내용 시작 -->
+      <div class="menuBtn-wrapper-tab1">
+        <hr />
+        <!-- 3.1-1.intro -->
+        <div class="intro">
+          <h3>
+            <i class="fa-solid fa-thumbtack"></i>
+            캠핑장 소개
+            <hr />
+          </h3>
+          <textarea style="width:100%" rows="20" cols="150" th:field="*{ctext}"
+                    placeholder="여기에 본문을 입력해주시기 바랍니다." required></textarea>
+        </div>
+      </div>
+      <!-- 3.2-1.이용안내 -->
+      <div class="operation-guide">
+        <section class="operation-guide__title">
+          <h3>
+            <i class="fa-solid fa-thumbtack"></i>
+            이용안내
+            <hr />
+          </h3>
+        </section>
+        <div class="operation-guide__content">
+          <table>
+            <tr>
+              <td class="jujung-jumal" colspan="2">* 가격</td>
+            </tr>
+            <tr>
+              <td>주중</td>
+              <td>주말</td>
+            </tr>
+            <tr>
+              <td class="content-text">
+                <input class="content-text" placeholder="주중 가격을 입력해주세요" type="number" min="10000" max="1000000"
+                       th:field="*{priceweekday}" required>
+              </td>
+              <td class="content-text">
+                <input class="content-text" placeholder="주말 가격을 입력해주세요" type="number" min="10000" max="1000000"
+                       th:field="*{priceweekend}" required>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!--캠핑 구역, 인원 설정 창-->
       <div>
-        <input style="font-size: 1.6rem;" type="text" th:field="${campingSaveForm.cname}" placeholder="캠핑장 이름을 입력하시오"
-          required>
-      </div>
-    </div>
-
-    <!-- 2.mnFace -->
-    <!--  <div class="mnFace">-->
-    <div class="mnFace">
-      <section class="mnFace-l">
-        <img src="http://placeimg.com/640/480/nature" alt="mnFace-l img" />
-      </section>
-      <section class="mnFace-r">
-        <table>
-          <tr>
-            <td class="title">* 주소</td>
-            <td class="content">
-              <input type="hidden" th:field="${campingSaveForm.cnumber}" readonly>
-              <input type="text" th:field="${campingSaveForm.caddress}" pattern="^[가-힣]{2,4}\s[가-힣]{2,4}\s[가-힣]{2,6}$" required>
-              <span class="warning">* 예시: 서울 종로구, 경기도 평택시</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">* 문의처</td>
-            <td class="content">
-              <input type="tel" th:field="${campingSaveForm.camptel}" pattern="^\d{3}-(\d{3,}|\d{4,})-(\d{3,}|\d{4,})$"
-                required>
-              <span class="warning">* -를 포함하여 입력해 주세요</span>
-            </td>
-          </tr>
-          <tr>
-            <!--입력받은 ctype를 o나 x로 변환시키는 로직이 필요함., 아무것도 입력하지 않았을 때의 경우도 필요함.-->
-            <td class="title">* 캠핑장 유형</td>
-            <td class="content">
-              <select th:field="${campingSaveForm.ctype}" id="img__searchBox-options-select" required>
-                <option th:value='g'>글램핑</option>
-                <option th:value='a'>오토캠핑</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">* 운영시간</td>
-            <td class="content">
-              <input type="text" th:field="${campingSaveForm.operdate}"
-                pattern="^([01][0-9]|2[0-3]):[0-5][0-9]~([01][0-9]|2[0-3]):[0-5][0-9]$" required>
-              <span class="warning">* 예시: 09:00~23:00</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="title">홈페이지</td>
-            <td class="content">
-              <input type="text" th:field="${campingSaveForm.homepage}">
-            </td>
-          </tr>
-          <tr>
-            <td class="title">화장실<br />마켓 유무</td>
-            <td class="content">
-              <span>화장실</span>
-              <input type="checkbox" th:value="o" th:field="${campingSaveForm.toilet}">
-              <span>마켓</span>
-              <input type="checkbox" th:value="o" th:field="${campingSaveForm.mart}">
-            </td>
-          </tr>
-        </table>
-        <div class="reserv">
-          <button class="reservBtn">수정</button>
-        </div>
-      </section>
-    </div>
-    <!--  </div>-->
-
-    <!-- 3.menuBtn -->
-    <div class="menuBtn">
-      <div class="tab1_content tc">
-        <!-- tab1 내용 시작 -->
-        <div class="menuBtn-wrapper-tab1">
+        <h3>
+          <i class="fa-solid fa-thumbtack"></i>
+          캠핑장 구역 및 인원
           <hr />
-          <!-- 3.1-1.intro -->
-          <div class="intro">
-            <h3>
-              <i class="fa-solid fa-thumbtack"></i>
-              캠핑장 소개
-              <hr />
-            </h3>
-            <textarea style="width:100%" rows="20" cols="150" th:field="${campingSaveForm.ctext}"
-              placeholder="여기에 본문을 입력해주시기 바랍니다." required></textarea>
-          </div>
-        </div>
-        <!-- 3.2-1.이용안내 -->
-        <div class="operation-guide">
-          <section class="operation-guide__title">
-            <h3>
-              <i class="fa-solid fa-thumbtack"></i>
-              이용안내
-              <hr />
-            </h3>
-          </section>
-          <div class="operation-guide__content">
-            <table>
-              <tr>
-                <td class="jujung-jumal" colspan="2">* 가격</td>
-              </tr>
-              <tr>
-                <td>주중</td>
-                <td>주말</td>
-              </tr>
-              <tr>
-                <td class="content-text">
-                  <input class="content-text" placeholder="주중 가격을 입력해주세요" type="number" min="10000" max="1000000"
-                    th:field="${campingSaveForm.priceweekday}" required>
-                </td>
-                <td class="content-text">
-                  <input class="content-text" placeholder="주말 가격을 입력해주세요" type="number" min="10000" max="1000000"
-                    th:field="${campingSaveForm.priceweekend}" required>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <!--캠핑 구역, 인원 설정 창-->
-        <div>
-          <h3>
-            <i class="fa-solid fa-thumbtack"></i>
-            캠핑장 구역 및 인원
-            <hr />
-          </h3>
-          <div class="camparea-item">
-            <div></div>
-            <div class="camparea-view">
-              <div class="camparea-set-title">
-                <span>* 캠핑장 구역 설정(2 ~ 9) </span>
-              </div>
-              <div class="camparea-btn-view">
-                <input type="number" min="2" max="9" id="camparea-count" th:field="${campingSaveForm.area}"
-                  oninput="changeValue(this)" required>
-                <input type="hidden" min="2" max="9" th:field="${campingSaveForm.areaNumber}">
-              </div>
+        </h3>
+        <div class="camparea-item">
+          <div></div>
+          <div class="camparea-view">
+            <div class="camparea-set-title">
+              <span>* 캠핑장 구역 설정(2 ~ 9) </span>
             </div>
-            <div></div>
-          </div>
-        </div>
-        <div>
-          <div class="camparea-set">
-            <div id="camparea-room1" class="hide">
-              <p>1번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys1}">
-            </div>
-            <div id="camparea-room2" class="hide">
-              <p>2번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys2}">
-            </div>
-            <div id="camparea-room3" class="hide">
-              <p>3번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys3}">
-            </div>
-            <div id="camparea-room4" class="hide">
-              <p>4번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys4}">
-            </div>
-            <div id="camparea-room5" class="hide">
-              <p>5번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys5}">
-            </div>
-            <div id="camparea-room6" class="hide">
-              <p>6번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys6}">
-            </div>
-            <div id="camparea-room7" class="hide">
-              <p>7번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys7}">
-            </div>
-            <div id="camparea-room8" class="hide">
-              <p>8번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys8}">
-            </div>
-            <div id="camparea-room9" class="hide">
-              <p>9번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys9}">
-            </div>
-            <div id="camparea-room10" class="hide">
-              <p>10번 구역</p>
-              <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
-                th:field="${campingSaveForm.capacitys10}">
+            <div class="camparea-btn-view">
+              <input type="number" min="2" max="9" id="camparea-count" th:field="*{area}"
+                     oninput="changeValue(this)" required>
+              <input type="hidden" min="2" max="9" th:field="*{areaNumber}">
             </div>
           </div>
+          <div></div>
         </div>
-        <!-- 3.2-3.안전시설 및 배치도 -->
-        <div class="safety-guide">
-          <h3>
-            <i class="fa-solid fa-thumbtack"></i>
-            오시는 길
-            <hr />
-          </h3>
-          <img src="http://placeimg.com/640/480/nature" alt="safety-guide img" />
-        </div>
-        <!-- tab1 내용 끝 -->
       </div>
-
-      <div class="tab2_content tc">
-        <div class="menuBtn-wrapper-tab2">
-          <!-- tab2 내용 시작 -->
-          <!-- tab2 내용 끝 -->
+      <div>
+        <div class="camparea-set">
+          <div id="camparea-room1" class="hide">
+            <p>1번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys1}">
+          </div>
+          <div id="camparea-room2" class="hide">
+            <p>2번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys2}">
+          </div>
+          <div id="camparea-room3" class="hide">
+            <p>3번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys3}">
+          </div>
+          <div id="camparea-room4" class="hide">
+            <p>4번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys4}">
+          </div>
+          <div id="camparea-room5" class="hide">
+            <p>5번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys5}">
+          </div>
+          <div id="camparea-room6" class="hide">
+            <p>6번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys6}">
+          </div>
+          <div id="camparea-room7" class="hide">
+            <p>7번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys7}">
+          </div>
+          <div id="camparea-room8" class="hide">
+            <p>8번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys8}">
+          </div>
+          <div id="camparea-room9" class="hide">
+            <p>9번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys9}">
+          </div>
+          <div id="camparea-room10" class="hide">
+            <p>10번 구역</p>
+            <input class="camparea-input" type="number" placeholder="최대5명" min="1" max="5"
+                   th:field="*{capacitys10}">
+          </div>
         </div>
+      </div>
+      <!--3.2-3. 캠핑장 시설 소개--->
+      <div class="facility-image">
+        <h3>
+          <i class="fa-solid fa-thumbtack"></i>
+          캠핑장 시설 이미지
+          <hr />
+        </h3>
+        <div th:each="file : *{imagedFiles}">
+          <img src="" th:src="@{|/attach/view/${file.upnumber}|}" alt="캠핑장 시설 이미지">
+        </div>
+        <div class="facility-image-upload">
+          <input type="file" th:field="*{imageFiles}" multiple>
+        </div>
+      </div>
+      <!-- tab1 내용 끝 -->
+    </div>
+
+    <div class="tab2_content tc">
+      <div class="menuBtn-wrapper-tab2">
+        <!-- tab2 내용 시작 -->
+        <!-- tab2 내용 끝 -->
       </div>
     </div>
+  </div>
 
     <!-- 내가 구현한 영역 끝 -->
 

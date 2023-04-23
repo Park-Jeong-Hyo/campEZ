@@ -1,4 +1,4 @@
-package com.campEZ.Project0.web.form.uploadfile;
+package com.campEZ.Project0.web.form.home;
 
 import com.campEZ.Project0.entity.UploadFile;
 import lombok.Data;

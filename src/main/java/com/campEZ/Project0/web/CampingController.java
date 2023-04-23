@@ -88,6 +88,12 @@ public class CampingController {
       CampingSearchForm campingSearchForm1 = new CampingSearchForm();
       //camping 객체의 필드를, campingSearchForm에 있는 같은 이름의 필드에 복사하는 BeanUtils.copyProperties
       BeanUtils.copyProperties(camping, campingSearchForm1);
+
+      // 이미지 파일 첨부
+      int rid = camping.getCnumber();
+      UploadFile imagedFile = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, rid).get(0);
+      campingSearchForm1.setImagedFile(imagedFile);
+
       //List<CampSearchForm>에 저장
       completeList.add(campingSearchForm1);
     }

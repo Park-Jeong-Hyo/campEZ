@@ -1,5 +1,6 @@
 package com.campEZ.Project0.web.form.camping;
 
+import com.campEZ.Project0.entity.UploadFile;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,4 +18,6 @@ public class CampingSearchForm {
   private String camptel;   //캠핑장 전화번호
 
   private int area; //캠핑장 구역의 최대값
+
+  private UploadFile imagedFile;  //캠핑장 대표 이미지 불러오기
 }

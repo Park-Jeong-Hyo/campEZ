@@ -135,8 +135,12 @@
     justify-content: center;
     align-items: center;
     width: 99%;
-    height: 88%;
+    height: 260px;
     border: 1px dotted #bbb
+}
+.title-image .title-image-img {
+    height: 260px;
+    object-fit : contain;
 }
 .attach-title-image {
     text-align: center;
@@ -153,7 +157,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit : contain;
 }
 
 /* 2-2.mnFace-r */
