@@ -63,7 +63,8 @@
 
 .sign-btn {
   display: flex;
-  margin-bottom: 30px;
+  justify-content: center;
+  margin-top: 30px;
   gap: 10px;
 }
 .in-btn {

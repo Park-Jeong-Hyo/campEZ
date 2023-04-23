@@ -80,7 +80,7 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 아이디</label>
             <div>
-              <input type="text" class="input" th:field="*{mid}" />
+              <input type="text" class="input" th:field="*{mid}"/>
               <p class="input-caution">대소문자를 구분하지 않는 영문자와 숫자를 포함한 20자 이내</p>
             </div>
             <input type="button" id="chkIdBtn" value="중복확인" class="dup-btn" />
@@ -89,14 +89,14 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호</label>
             <div>
-              <input type="text" class="input" th:field="*{pw}" />
+              <input type="text" class="input" th:field="*{pw}"/>
               <p class="input-caution">영문자(대소문자 구분), 숫자, 특수문자를 조합하여 8~16자 이내</p>
             </div>
           </div>
           <hr class="form-line" />
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호 확인</label>
-            <input type="text" class="input" th:field="*{pwchk}" />
+            <input type="text" class="input" th:field="*{pwchk}"/>
           </div>
           <hr class="form-line" />
           <div class="input-form">
@@ -131,14 +131,11 @@
             <input type="text" class="input" th:field="*{maddress}" />
           </div>
           <hr class="form-line" />
-        </form>
-        <div>
           <div class="sign-btn">
             <button class="in-btn" id="btnAdd" type="submit">가입</button>
             <button class="cel-btn" type="reset">취소</button>
           </div>
-        </div>
-
+        </form>
         <hr class="line" />
       </main>
 
