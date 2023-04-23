@@ -52,6 +52,15 @@
   justify-content: flex-end;
   align-items: center;
 }
+.commun__list-btn {
+  width: 22px;
+  border:1px solid #ccc;
+  border-radius:100%;
+  background: var(--theme-color-thin);
+}
+.commun__list-btn:active {
+  background: #777;
+}
 
 /*게시글 */
 /*게시글 조회*/
@@ -190,4 +199,13 @@
   border: 0;
   outline: none;
   padding-left: 10px;
+}
+/*버튼 색*/
+.theme-btn {
+    background:var(--theme-color-thin);
+    width: 80px;
+    border: 1px solid #aaa;
+}
+.theme-btn:active {
+    background:#999;
 }

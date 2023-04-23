@@ -42,11 +42,21 @@ public class MyPageManagerController {
             HttpSession session
     ) {
         LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        Members members = membersSVC.memFindN(mid);
 
+        //사업자 회원인지 확인하는 로직
+        try {
+            if(loginMembers.getMid().equalsIgnoreCase("b"))
+            log.info("사업자 회원입니다.");
+        } catch (NullPointerException e) {
+            log.info("사업자 회원이 아닙니다.");
+            return "redirect:/";
+        }
+
+        Members members = membersSVC.memFindN(mid);
         String type = String.valueOf(members.getMtype());
         String memberId = String.valueOf(members.getMid());
         String loginId = String.valueOf(loginMembers.getMid());
+
         if (type.equals("b") && memberId.equals(loginId)) {
             try {
                 Members membersForm = new Members();
@@ -98,8 +108,11 @@ public class MyPageManagerController {
     //    회원 수정 처리
     @PostMapping("/{mid}/manager")
     public String managerEdit(
-            @ModelAttribute Members membersForm, RedirectAttributes redirectAttributes,
-            @PathVariable String mid) {
+            @ModelAttribute Members membersForm,
+            RedirectAttributes redirectAttributes,
+            @PathVariable String mid
+    ) {
+
         Members members = new Members();
 
         members.setPw(membersForm.getPw());
@@ -124,14 +137,16 @@ public class MyPageManagerController {
         @PathVariable("mid") String mid,
         RedirectAttributes redirectAttributes
     ) {
+        log.info("캠핑장 삭제 실행됨");
         if(bindingResult.hasErrors()) {
             log.info("bindingResult={}", bindingResult);
         }
         int cnumber = item.getCnumber();
         log.info("cnumber={}", cnumber);
-        campingSVC.campingDelete(cnumber);
         campingSVC.campareaDelete(cnumber);
-        log.info("삭제됨");
+        log.info("에어리어삭제됨");
+        campingSVC.campingDelete(cnumber);
+        log.info("캠핑장삭제됨");
         redirectAttributes.addAttribute("mid", mid);
         return "redirect:/mypage/{mid}/manager";
     }

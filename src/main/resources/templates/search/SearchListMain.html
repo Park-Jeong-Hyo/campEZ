@@ -51,11 +51,11 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><p class="link">광장ez</p></div>
         <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
 
@@ -68,8 +68,6 @@
         <div class="mn__img">
           <!-- 검색영역(SEARCHBOX) -->
           <form class="img__searchBox" th:method="post" th:object="${campingSearchForm}">
-            <button class="img__searchBox-search" type="submit">검색</button>
-            <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력해주세요." th:field="${campingSearchForm.cname}" />
             <div class="img__searchBox-options">
               <select th:field="${campingSearchForm.ctype}" id="img__searchBox-options-select" required>
                 <option th:value="g">글램핑</option>
@@ -95,6 +93,10 @@
                 <option th:value="울산">울산</option>
               </select>
             </div>
+            <div class="img__searchBox-r">
+              <input type="search" class="img__searchBox-bar" placeholder="캠핑장 이름을 입력하시오." th:field="${campingSearchForm.cname}" required/>
+              <button class="img__searchBox-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
           </form>
         </div>
 
@@ -106,7 +108,12 @@
           </h3>
         </div>
         <!-- 메인 캠핑장 등록 -->
-        <section class="mn__main" th:if="${completeList} != null">
+        <th:block th:if="${completeList != null  && completeList.size() < 1}">
+          <div class="mn__no-list">
+            <p>검색결과가 없습니다.</p>
+          </div>
+        </th:block>
+        <section class="mn__main" th:if="${completeList != null && completeList.size() >= 1}">
           <th:block th:each="item : ${completeList}">
             <div class="mn__main-empty1-l"></div>
             <div class="mn__main-photo">
@@ -117,11 +124,11 @@
                 <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.getCname()}">태화산 신선 계곡 캠핑장</a>
               </p>
               <p class="mn__main-address" th:text="${item.getCaddress()}">울산광역시 남구 dj동</p>
-              <p th:text="${item.getCamptel}">000-0000-0000</p>
-              <p class="mn__main-tag">
-                <div class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</div>
-                <div class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</div>
-              </p>
+              <p th:text="${item.getCamptel()}">000-0000-0000</p>
+              <div class="mn__main-tag">
+                <p class="mn__main-tag-detail}" th:if="${item.getCtype() == 'a'}">#오토캠핑</p>
+                <p class="mn__main-tag-detail" th:if="${item.getCtype() == 'g'}">#글램핑</p>
+              </div>
             </div>
             <div class="mn__main-empty1-r"></div>
           </th:block>

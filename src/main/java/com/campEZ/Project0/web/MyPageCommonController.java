@@ -32,6 +32,15 @@ public class MyPageCommonController {
         HttpSession session
         ){
         LoginMembers loginMembers = (LoginMembers) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        //일반 회원인지 확인하는 로직
+        try {
+            if(loginMembers.getMid().equalsIgnoreCase("n"))
+                log.info("일반 회원입니다.");
+        } catch (NullPointerException e) {
+            log.info("일반회원이 아닙니다.");
+            return "redirect:/";
+        }
+
         Members members = membersSVC.memFindN(mid);
         log.info("members={}", members);
         String type = String.valueOf(members.getMtype());

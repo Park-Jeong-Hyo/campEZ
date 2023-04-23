@@ -120,11 +120,11 @@ public class CampingDAOImpl implements CampingDAO{
 
   //캠핑장 구역 삭제
   @Override
-  public int campareaDelete(int area) {
+  public int campareaDelete(int cnumber) {
     StringBuffer sql = new StringBuffer();
     sql.append("DELETE FROM CAMPAREA ");
-    sql.append("WHERE area = :area ");
-    Map<String, Integer> param = Map.of("area", area);
+    sql.append("WHERE cnumber = :cnumber ");
+    Map<String, Integer> param = Map.of("cnumber", cnumber);
     return template.update(sql.toString(), param);
   }
   //캠핑장 조회
@@ -176,7 +176,7 @@ public class CampingDAOImpl implements CampingDAO{
   @Override
   public List<Camping> campingSearch(CampingFilterCondition campingFilterCondition) {
     StringBuffer sql = new StringBuffer();
-    sql.append("SELECT cnumber, ctype, caddress, cname ");
+    sql.append("SELECT cnumber, ctype, caddress, camptel, cname ");
     sql.append("FROM CAMPING ");
     sql.append("WHERE ");
     //동적 쿼리

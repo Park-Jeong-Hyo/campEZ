@@ -51,11 +51,11 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><p class="link">광장ez</p></div>
         <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
       <div class="gnb-r"></div>
@@ -89,22 +89,34 @@
           <div class="tab1__1__content">
             <hr />
             <!-- 상단 타이틀 -->
-            <div class="reserv__title">
-              <p>예약번호</p>
-              <p>입실일</p>
-              <p>퇴실일</p>
-              <p></p>
-            </div>
-            <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" th:each=" item : ${myOrders}">
-              <div class="reserv__campName">
-                <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+            <table class="reserv__table">
+              <thead>
+              <tr class="reserv__title">
+                <th class="reserv__th">예약번호</th>
+                <th>입실일</th>
+                <th>퇴실일</th>
+                <th></th>
+              </tr>
+              </thead>
+              <!-- 예약 아이템, 4개까지 들어감 -->
+              <tbody class="reserv__item" th:each=" item : ${myOrders}">
+                <tr>
+                  <td class="reserv__campName">
+                    <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+                  </td>
+                  <td class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</td>
+                  <td class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</td>
+                  <td>
+                    <button class="reserv__btn theme-btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <th:block th:if="${myOrders == null || myOrders.size < 1}">
+              <div class="reserv__no-list">
+                <p>현재 예약하신 캠핑장이 없습니다.</p>
               </div>
-              <div class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</div>
-              <div class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</div>
-
-              <button class="reserv__btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
-            </div>
+            </th:block>
             <!-- 예약 관리에서 페이지 버튼 -->
             <!--            <div class="reserv__page">-->
             <!--              <button class="reserv__pageBtn"><<</button>-->
@@ -118,49 +130,56 @@
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
-            <form action="" th:object="${members}" method="post">
+            <form class="member__form" action="" th:object="${members}" method="post">
               <div class="member__item">
                 <div class="member__title">이름</div>
-                <input class="member__main" type="text" th:field="*{mname}" readonly />
+                <input type="hidden" th:field="*{mname}" readonly/>
+                <p class="member__main" th:text="*{mname}"></p>
               </div>
               <div class="member__item">
                 <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:field="*{mid}" readonly />
+                <input type="hidden" th:field="*{mid}" readonly />
+                <p class="member__main" th:text="*{mid}"></p>
               </div>
               <div class="member__item">
-                <div class="member__title">비밀번호</div>
-                <input class="member__main" type="text" th:field="*{pw}" />
+                <div class="member__title">* 비밀번호</div>
+                <input class="member__main" type="password" th:field="*{pw}" min="8" max="16" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+-={}[]\|:;'<>,.?/])[a-zA-Z\d~!@#$%^&*()_+\-={}[\]\\|:;'<>,.?/]{8,16}$" required/>
+                <p class="member__patterns">* 대문자, 특수문자, 8자리 이상</p>
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
-                <input class="member__main" type="text" th:field="*{email}" />
+                <input class="member__main" type="email" th:field="*{email}" />
               </div>
               <div class="member__item">
                 <div class="member__title">주소</div>
                 <input class="member__main" type="text" th:field="*{maddress}" />
               </div>
               <div class="member__item">
-                <div class="member__title">닉네임</div>
-                <input class="member__main" type="text" th:field="*{nickname}" />
+                <div class="member__title">* 닉네임</div>
+                <input class="member__main" type="text" th:field="*{nickname}" required/>
               </div>
               <div class="member__item">
-                <div class="member__title">폰번호</div>
-                <input class="member__main" type="text" th:field="*{phone}" />
+                <div class="member__title">연락처</div>
+                <input class="member__main" type="text" th:field="*{phone}" pattern="^\d{3}-(\d{3,}|\d{4,})-(\d{3,}|\d{4,})$"/>
+                <p class="member__patterns">* '-' 포함</p>
               </div>
               <div class="member__item">
-                <div class="member__title">타입</div>
-                <input class="member__main" type="text" th:field="*{mtype}" readonly />
+                <div class="member__title">회원분류</div>
+                <input type="hidden" th:field="*{mtype}" readonly />
+                <p class="member__main">사업자</p>
               </div>
               <div class="member__item">
                 <div class="member__title">회사이름</div>
-                <input class="member__main" type="text" th:field="*{companyname}" readonly />
+                <input type="hidden" th:field="*{companyname}" readonly />
+                <p class="member__main" th:text="*{companyname}"></p>
               </div>
               <div class="member__item">
                 <div class="member__title">사업자번호</div>
-                <input class="member__main" type="text" th:field="*{businessnumber}" readonly />
+                <input type="hidden" th:field="*{businessnumber}" readonly />
+                <p class="member__main" th:text="*{businessnumber}"></p>
               </div>
-              <div class="member__item">
-                <input class="member__btn" type="submit" value="수정하기" />
+              <div class="member__modify-btn">
+                <input class=" theme-btn" type="submit" value="수정하기" />
               </div>
             </form>
           </div>
@@ -168,20 +187,34 @@
           <div class="tab1__3__content">
             <!-- 회원 탈퇴 재확인 모달 창 -->
             <div class="member__modal">
-              <h2>정말 탈퇴하시겠습니까?</h2>
-              <br />
-              <br />
-              <!-- 회원 탈퇴 모달 창 버튼 -->
-              <input type="button" value="확인" id="member__modalYBTN" />
-              <input type="button" value="취소" id="member__modalNBTN" />
+              <div class="member__modal-inner">
+                <h2>정말 탈퇴하시겠습니까?</h2>
+                <!-- 회원 탈퇴 모달 창 버튼 -->
+                <div class="member__modal-btns">
+                  <input class="theme-btn" type="button" value="확인" id="member__modalYBTN" />
+                  <input class="theme-btn" type="button" value="취소" id="member__modalNBTN" />
+                </div>
+              </div>
             </div>
             <hr />
-            <h1>회원 탈퇴를 하시겠습니까?</h1>
+            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>
             <br />
-            <h5>탈퇴하시려면 비밀 번호를 다시 입력해주세요.</h5>
-            <input class="member__wthdr" type="text" />
-            <!-- 회원 탈퇴 버튼 -->
-            <input id="member__wthdrBTN" type="button" value="확인" />
+            <div class="member__leave-message">
+              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
+              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
+              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
+            </div>
+            <div class="member__leave-modal">
+              <div></div>
+              <div class="member__leave-password">
+                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>
+                <input class="member__wthdr" type="text" required/>
+                <div class="member__wthdrBTN-item">
+                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />
+                </div>
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
         <!-- 탭2, 관리자 계정이 보게 될 화면 -->
@@ -190,8 +223,8 @@
           <div class="tab2__1__content">
             <hr />
             <div class="myCamp__saveBtnItem">
-              <button class="myCamp__saveBtn"><a href="link" th:href="@{/search/save}">캠핑장 등록</a></button>
-              <button type="button" class="myCamp__reserv btns">예약 내역</button>
+              <button class="myCamp__saveBtn theme-btn"><a href="link" th:href="@{/search/save}">캠핑장 등록</a></button>
+              <button type="button" class="myCamp__reserv theme-btn">예약 내역</button>
             </div>
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item" th:each="item : ${myCamp}">
@@ -200,10 +233,15 @@
                 <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
               </div>
               <div>
-                <button type="submit" id="myCamp__delBtn" class="myCamp__del btns">삭제</button>
+                <button type="submit" id="myCamp__delBtn" class="myCamp__delBtn theme-btn">삭제</button>
                 <input type="hidden" th:name="cnumber" th:value="${item.getCnumber()}" readonly />
               </div>
             </form>
+            <th:block th:if="${myCamp == null || myCamp.size < 1}">
+              <div class="myCamp__no-list">
+                <p>현재 등록하신 캠핑장이 없습니다.</p>
+              </div>
+            </th:block>
             <!-- 페이지 버튼 -->
             <!--            <div class="myCamp__page">-->
             <!--              <button class="myCamp__pageBtn"><<</button>-->
@@ -218,26 +256,37 @@
           <div class="tab2__2__content">
             <hr />
             <!-- 내 캠핑장 예약 내역 타이틀 -->
-            <div class="managerRev__title">
-              <p>캠프번호</p>
-              <p>이름</p>
-              <p>예약인ID</p>
-              <p>인원</p>
-              <p>구역</p>
-              <p>입실일 &nbsp &nbsp &nbsp &nbsp &nbsp</p>
-              <p>퇴실일 &nbsp &nbsp &nbsp &nbsp &nbsp</p>
-            </div>
-            <div class="managerRev__item" th:each="item : ${OrdersNameForm}">
-              <div class="managerRev__num" th:text="${item.cnumber}">01</div>
-              <div class="managerRev__campName">
-                <a href="" th:text="${item.cname}">캠핑장 이름</a>
+              <table class="managerRev__table">
+                <thead>
+                <tr class="managerRev__title">
+                  <th class="managerRev__th">캠프번호</th>
+                  <th>이름</th>
+                  <th>예약인ID</th>
+                  <th>인원</th>
+                  <th>구역</th>
+                  <th>입실일</th>
+                  <th>퇴실일</th>
+                </tr>
+                </thead>
+                <tbody th:each="item : ${OrdersNameForm}">
+                <tr class="managerRev__item">
+                  <td class="managerRev__num" th:text="${item.cnumber}">01</td>
+                  <td class="managerRev__campName">
+                    <a href="" th:text="${item.cname}">캠핑장 이름</a>
+                  </td>
+                  <td class="managerRev__revID" th:text="${item.mid}">2832753</td>
+                  <td class="managerRev__revNum" th:text="${item.headcount}">2832753</td>
+                  <td class="managerRev__zone" th:text="${item.area}">2-9d</td>
+                  <td class="managerRev__inDate" th:text="${item.checkin}">22.22</td>
+                  <td class="managerRev__outDate" th:text="${item.checkout}">22.22</td>
+                </tr>
+                </tbody>
+              </table>
+            <th:block th:if="${OrdersNameForm == null || OrdersNameForm.size < 1}">
+              <div class="managerRev__no-list">
+                <p>현재 예약이 없습니다.</p>
               </div>
-              <div class="managerRev__revID" th:text="${item.mid}">2832753</div>
-              <div class="managerRev__revNum" th:text="${item.headcount}">2832753</div>
-              <div class="managerRev__zone" th:text="${item.area}">2-9d</div>
-              <div class="managerRev__inDate" th:text="${item.checkin}">22.22</div>
-              <div class="managerRev__outDate" th:text="${item.checkout}">22.22</div>
-            </div>
+            </th:block>
             <!--            <div class="managerRev__page">-->
             <!--              <button class="managerRev__pageBtn"><<</button>-->
             <!--              <button class="managerRev__pageBtn">1</button>-->
@@ -335,12 +384,11 @@
     $member__modalNBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
     });
-
-    const deleteBtn = document.querySelectorAll('.myCamp__delBtn');
-    deleteBtn.addEventListener('click', e => {
-      if (confirm('삭제하시겠습니까?') == false) {
-        e.preventDefault();
-      }
-    });
+<!--    const deleteBtn = document.querySelector('.myCamp__delBtn');-->
+<!--    deleteBtn.addEventListener('click', e => {-->
+<!--      if (confirm('삭제하시겠습니까?') == false) {-->
+<!--        e.preventDefault();-->
+<!--      }-->
+<!--    });-->
   </script>
 </html>

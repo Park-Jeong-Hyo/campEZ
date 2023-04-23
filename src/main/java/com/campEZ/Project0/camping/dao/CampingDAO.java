@@ -19,7 +19,7 @@ public interface CampingDAO {
   //캠핑장 삭제
   int campingDelete(int cnumber);
   //캠핑장구역 삭제
-  int campareaDelete(int area);
+  int campareaDelete(int cnumber);
   //캠핑장 조회
   Optional<Camping> campingDetail(int cnumber);
   //캠핑장 구역 조회

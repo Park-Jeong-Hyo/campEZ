@@ -53,11 +53,11 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><p class="link">광장ez</p></div>
         <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
       <div class="gnb-r"></div>
@@ -81,65 +81,81 @@
           <div class="tab1__1__content">
             <hr />
             <!-- 상단 타이틀 -->
-            <div class="reserv__title">
-              <p>예약번호</p>
-              <p>입실일</p>
-              <p>퇴실일</p>
-              <p></p>
-            </div>
-            <!-- 예약 아이템, 4개까지 들어감 -->
-            <div class="reserv__item" th:each=" item : ${myOrders}">
-              <div class="reserv__campName">
-                <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+            <table class="reserv__table">
+              <thead>
+              <tr class="reserv__title">
+                <th class="reserv__th">예약번호</th>
+                <th>입실일</th>
+                <th>퇴실일</th>
+                <th></th>
+              </tr>
+              </thead>
+              <!-- 예약 아이템, 4개까지 들어감 -->
+              <tbody class="reserv__item" th:each=" item : ${myOrders}">
+              <tr>
+                <td class="reserv__campName">
+                  <a href="" th:text="${item.onumber}">캠핑장 이름</a>
+                </td>
+                <td class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</td>
+                <td class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</td>
+                <td>
+                  <button class="reserv__btn theme-btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <th:block th:if="${myOrders == null || myOrders.size < 1}">
+              <div class="reserv__no-list">
+                <p>현재 예약하신 캠핑장이 없습니다.</p>
               </div>
-              <div class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</div>
-              <div class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</div>
-              <button class="reserv__btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/common/del(onumber=${item.onumber})}'|">취소</button>
-            </div>
+            </th:block>
             <!-- 예약 관리에서 페이지 버튼 -->
-            <div class="reserv__page">
-              <button class="reserv__pageBtn"><<</button>
-              <button class="reserv__pageBtn">1</button>
-              <button class="reserv__pageBtn">2</button>
-              <button class="reserv__pageBtn">3</button>
-              <button class="reserv__pageBtn">4</button>
-              <button class="reserv__pageBtn">>></button>
-            </div>
+<!--            <div class="reserv__page">-->
+<!--              <button class="reserv__pageBtn"><<</button>-->
+<!--              <button class="reserv__pageBtn">1</button>-->
+<!--              <button class="reserv__pageBtn">2</button>-->
+<!--              <button class="reserv__pageBtn">3</button>-->
+<!--              <button class="reserv__pageBtn">4</button>-->
+<!--              <button class="reserv__pageBtn">>></button>-->
+<!--            </div>-->
           </div>
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
             <hr />
-            <form action="" th:object="${members}" method="post">
+            <form class="member__form" action="" th:object="${members}" method="post">
               <div class="member__item">
                 <div class="member__title">이름</div>
-                <input class="member__main" type="text" th:field="*{mname}" readonly />
+                <input type="hidden" th:field="*{mname}"/>
+                <p class="member__main" th:text="*{mname}"></p>
               </div>
               <div class="member__item">
                 <div class="member__title">아이디</div>
-                <input class="member__main" type="text" th:field="*{mid}" readonly />
+                <input class="member__main" type="hidden" th:field="*{mid}" readonly />
               </div>
               <div class="member__item">
-                <div class="member__title">비밀번호</div>
-                <input class="member__main" type="text" th:field="*{pw}" />
+                <div class="member__title">* 비밀번호</div>
+                <input class="member__main" type="password" th:field="*{pw}" min="8" max="16" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+-={}[]\|:;'<>,.?/])[a-zA-Z\d~!@#$%^&*()_+\-={}[\]\\|:;'<>,.?/]{8,16}$" required/>
+                <p class="member__patterns">* 대문자, 특수문자, 8자리 이상</p>
               </div>
               <div class="member__item">
                 <div class="member__title">메일</div>
-                <input class="member__main" type="text" th:field="*{email}" />
+                <input class="member__main" type="text" th:field="*{email}" required />
               </div>
               <div class="member__item">
                 <div class="member__title">주소</div>
-                <input class="member__main" type="text" th:field="*{maddress}" />
+                <input class="member__main" type="text" th:field="*{maddress}"  />
               </div>
               <div class="member__item">
-                <div class="member__title">닉네임</div>
-                <input class="member__main" type="text" th:field="*{nickname}" />
+                <div class="member__title">* 닉네임</div>
+                <input class="member__main" type="text" th:field="*{nickname}" required />
               </div>
               <div class="member__item">
-                <div class="member__title">폰번호</div>
-                <input class="member__main" type="text" th:field="*{phone}" />
+                <div class="member__title">연락처</div>
+                <input class="member__main" type="text" th:field="*{phone}" pattern="^\d{3}-(\d{3,}|\d{4,})-(\d{3,}|\d{4,})$"/>
+                <p class="member__patterns">* '-' 포함</p>
               </div>
-              <div class="member__item">
-                <input class="member__btn" type="submit" value="수정하기" />
+              <div class="member__modify-btn">
+                <input class="theme-btn" type="submit" value="수정하기" />
               </div>
             </form>
             >
@@ -148,20 +164,34 @@
           <div class="tab1__3__content">
             <!-- 회원 탈퇴 재확인 모달 창 -->
             <div class="member__modal">
-              <h2>정말 탈퇴하시겠습니까?</h2>
-              <br />
-              <br />
-              <!-- 회원 탈퇴 모달 창 버튼 -->
-              <input type="button" value="확인" id="member__modalYBTN" />
-              <input type="button" value="취소" id="member__modalNBTN" />
+              <div class="member__modal-inner">
+                <h2>정말 탈퇴하시겠습니까?</h2>
+                <!-- 회원 탈퇴 모달 창 버튼 -->
+                <div class="member__modal-btns">
+                  <input class="theme-btn" type="button" value="확인" id="member__modalYBTN" />
+                  <input class="theme-btn" type="button" value="취소" id="member__modalNBTN" />
+                </div>
+              </div>
             </div>
             <hr />
-            <h1>회원 탈퇴를 하시겠습니까?</h1>
+            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>
             <br />
-            <h5>탈퇴하시려면 비밀 번호를 다시 입력해주세요.</h5>
-            <input class="member__wthdr" type="text" />
-            <!-- 회원 탈퇴 버튼 -->
-            <input id="member__wthdrBTN" type="button" value="확인" />
+            <div class="member__leave-message">
+              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
+              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
+              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
+            </div>
+            <div class="member__leave-modal">
+              <div></div>
+              <div class="member__leave-password">
+                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>
+                <input class="member__wthdr" type="text" required/>
+                <div class="member__wthdrBTN-item">
+                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />
+                </div>
+              </div>
+              <div></div>
+            </div>
           </div>
         </div>
       </main>

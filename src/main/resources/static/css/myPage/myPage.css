@@ -12,15 +12,16 @@
 .tab2 input:nth-of-type(1):checked ~ tabBtn--label > label[for='tab2__1'],
 .tab2 input:nth-of-type(2):checked ~ tabBtn--label > label[for='tab2__2'],
 .tab2 input:nth-of-type(3):checked ~ tabBtn--label > label[for='tab2__3'] {
-  padding: 0.5%;
+  padding: 0.75%;
   background: var(--theme-color);
   color: var(--main-font-color);
+  border-radius: 5%;
 }
 .tab1,
 .tab2 {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  margin: 1rem;
 }
 tabBtn--label {
   display: flex;
@@ -43,20 +44,34 @@ tabBtn--label {
   width: 200%;
 }
 
+/* 예약 관리 테이블 */
+.reserv__table {
+  width: 100%;
+}
 /* 예약 관리 타이틀 */
 .reserv__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 9vh;
   background-color: rgb(218, 218, 218);
+    border-bottom: 1px solid #222;
+}
+/* 예약 관리 테이블 hd*/
+.reserv__th {
+  padding:15px;
+}
+/* 예약 관리 테이블 td */
+.reserv__campName {
+  padding:15px;
+}
+/* 예약 내역이 없을때 */
+.reserv__no-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
 }
 /* 예약 관리 내용물 -- 총 5개, 관리자 */
 .reserv__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 10vh;
+  text-align: center;
+  border-bottom: 1px solid #bbb;
 }
 /* 예약 관리 페이지 버튼 칸 */
 .reserv__page {
@@ -70,14 +85,29 @@ tabBtn--label {
   margin: 0.5vw;
   padding: 0.5vh;
 }
+/*회원 정보 폼*/
+.member__form {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
 /* 회원 정보 칸 */
 .member__item {
   display: flex;
   justify-content: flex-start;
+  width: 85%;
   height: 2.03vh;
-  margin: 1rem;
   padding: 1rem;
-  outline: 3px solid rgb(218, 218, 218);
+  border-bottom: 1px solid #bbb;
+}
+/*회원 수정 버튼*/
+.member__modify-btn {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: 60%;
+  height: 2.03vh;
+  padding: 3rem;
 }
 /* 회원 정보 제목 */
 .member__title {
@@ -86,20 +116,34 @@ tabBtn--label {
 /* 회원 정보 내용 */
 .member__main {
   width: 50%;
-  margin: 0 6%;
+  margin: 0 5%;
+  font-size: 0.95rem;
+  height: 17px;
+}
+/* 회원수정 제약조건 알림 */
+.member__patterns {
+  font-size: 0.7rem;
 }
 /* 회원 탈퇴 */
 .tab1__3__content {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  line-height: 4rem;
   position: relative;
 }
-/* 회원 탈퇴 비밀번호 입력 칸 */
+/*회원 탈퇴 입력 버튼 아이템*/
+.member__wthdrBTN-item {
+   padding-top: 15px;
+}
+/* 회원 탈퇴 비밀번호 입력 버튼 */
 .member__wthdr {
-  flex-direction: column;
-  width: 35%;
+  width: 80%;
+}
+/* 회원탈퇴 확인 버튼*/
+#member__wthdrBTN {
+  width: 10vw;
+  background:var(--theme-color-thin);
+  border: 1px solid #aaa;
 }
 /* 회원 탈퇴 모달 창 */
 .member__modal {
@@ -109,7 +153,50 @@ tabBtn--label {
   height: 100%;
   width: 100%;
   background-color: white;
-  outline: 0.2rem solid black;
+}
+/*회원탈퇴 모달 창 안쪽*/
+.member__modal-inner {
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  padding:150px;
+  outline:1px solid #bbb;
+}
+/* 멤버 모달 버튼창 */
+.member__modal-btns {
+  display:flex;
+  justify-content: center;
+  gap:20px;
+}
+
+/* 회원탈퇴 확인 */
+.member__leave-confirm {
+  text-align: center;
+  padding: 60px;
+}
+/*탈퇴 메세지 출력 창*/
+.member__leave-message {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  font-size:0.9rem;
+}
+/*탈퇴 패스워드 입력*/
+.member__leave-modal {
+    display:flex;
+    justify-content:center;
+    padding:50px;
+    text-align:center;
+    line-height:30px;
+}
+/*비밀번호 입력*/
+.member__leave-password {
+    padding:30px;
+    outline-color:#999;
+    border-width:1px;
+    outline-style:double;
 }
 /* 내 캠핑장 */
 .tab2__1__content {
@@ -136,11 +223,23 @@ tabBtn--label {
   align-items: center;
   justify-content: space-around;
   height: 18vh;
+  padding: 25px;
+  border-bottom: 1px solid #bbb;
 }
 /* 내 캠핑장 사진 */
 .myCamp__Photo {
   object-fit: cover;
   height: 14vh;
+  padding: 5px;
+  outline-style: double;
+  outline-color: #bbb;
+}
+/* 등록한 캠핑장이 없을 때 나오는 창 */
+.myCamp__no-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
 }
 /* 내 캠핑장 페이지 버튼 칸 */
 .myCamp__page {
@@ -153,21 +252,34 @@ tabBtn--label {
   margin: 0.5vw;
   padding: 0.5vh;
 }
+/* 예약관리 테이블 */
+.managerRev__table {
+  width: 100%
+}
 /* 예약 관리 타이틀 */
 .managerRev__title {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  height: 9vh;
   background-color: rgb(218, 218, 218);
+  border-bottom: 1px solid #222;
+}
+/* 예약관리 테이블 hd*/
+.managerRev__th {
+  padding:15px;
+}
+/* 예약 내역 관리에 들어온 예약이 없을 때*/
+.managerRev__no-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
 }
 /* 예약 관리 내용물 -- 총 4개 */
 .managerRev__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 10vh;
+  text-align: center;
+  border-bottom:1px solid #bbb;
+}
+/* 예약 관리 테이블 td */
+.managerRev__num {
+  padding: 15px;
 }
 /* 예약 관리 페이지 버튼 칸 */
 .managerRev__page {
@@ -184,4 +296,14 @@ tabBtn--label {
 /* 첫 시작 화면 */
 .tab1__2__content {
   display: block;
+}
+
+/*버튼 색*/
+.theme-btn {
+    background:var(--theme-color-thin);
+    width: 80px;
+    border: 1px solid #aaa;
+}
+.theme-btn:active {
+    background:#999;
 }

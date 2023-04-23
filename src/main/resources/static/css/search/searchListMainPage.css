@@ -4,41 +4,46 @@
 
 /* SEARCHBOX */
 .img__searchBox {
-  background-color: var(--search-box-color);
+  background-color: var(--bg-color-darkgray-transparent);
   display: flex;
   justify-content: center;
   align-items: center;
+  gap:20px;
   width: 500px;
-  height: 250px;
+  height: 100px;
   position: relative;
   border-radius: 15px;
   box-shadow: 3px 3px 1px var(--search-box-shadow-color);
 }
-.img__searchBox-search {
-  position: absolute;
-  top: 60px;
-  left: 90px;
-  width: 80px;
-  height: 30px;
+.img__searchBox-r {
+  display:flex;
+  gap:3px;
 }
+
+.img__searchBox-search {
+  width: 30px;
+  height: 36px;
+  font-size: 1.05rem;
+  box-sizing: content-box;
+  outline:1px solid #bbb;
+  border:none;
+}
+.img__searchBox-search:active {
+  background: #bbb;
+}
+
 .img__searchBox-bar {
-  position: absolute;
-  top: 60px;
-  left: 200px;
-  width: 230px;
-  height: 30px;
+  width: 240px;
+  height: 40px;
+  font-size:20px;
 }
 .img__searchBox-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 50px;
-  position: absolute;
-  top: 150px;
-  left: 90px;
+  display: flex;
+  column-gap: 10px;
 }
 #img__searchBox-options-select {
-  width: 80px;
-  height: 30px;
+  width: 70px;
+  height: 40px;
 }
 
 /* MAIN */
@@ -81,6 +86,12 @@
   overflow: hidden;
   outline: solid 1px var(--bg-color-lightgray);
 }
+.mn__main-photo {
+    padding:10px;
+    outline:1px solid, #444;
+    box-shadow: 1px 1px 5px #888;
+}
+
 .mn__main-photo img {
   width: 100%;
   height: 100%;
@@ -97,13 +108,26 @@
 }
 .mn__main-tag {
   display: flex;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
+  gap:10px;
 }
 .mn__main-tag-detail {
+  padding:4px;
   background-color: var(--mn__tag-label);
   border-radius: 10%;
   outline: solid 1px var(--search-box-shadow-color);
+}
+.mn__main-tag-detail:hover {
+  font-size:1.1rem;
+  cursor: pointer;
+}
+.mn__no-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  outline: 1px solid #bbb;
 }
 * {
   text-decoration: none;

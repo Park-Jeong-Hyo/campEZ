@@ -68,8 +68,8 @@ public class CampingSVCImpl implements CampingSVC{
   }
 
   @Override
-  public int campareaDelete(int area) {
-    return campingDAO.campareaDelete(area);
+  public int campareaDelete(int cnumber) {
+    return campingDAO.campareaDelete(cnumber);
   }
 
   @Override

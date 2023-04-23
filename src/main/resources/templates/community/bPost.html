@@ -52,11 +52,11 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
+        <div><p class="link">광장ez</p></div>
         <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
 
@@ -143,7 +143,7 @@
         }
       };
       const btnAll_h = e => {
-        globalThis.location.href = `/community/bulletinBoard`;
+        globalThis.location.href = `/community/bulletinBoard/1`;
       };
       const btnUpdate_h = e => {
         globalThis.location.href = `/community/${$pnumber.value}/b_edit`;
