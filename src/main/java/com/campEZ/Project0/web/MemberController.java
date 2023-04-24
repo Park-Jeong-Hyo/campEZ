@@ -15,8 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -48,13 +51,52 @@ public class MemberController {
   @PostMapping("/signup/gen")
   public String genJoin(
       @Valid @ModelAttribute JoinForm joinForm,
-      BindingResult bindingResult
+      BindingResult bindingResult,
+      Model model
   ){
-
     log.info("joinForm={}",joinForm);
-
     log.info("joinForm.getPw()={}",joinForm.getPw());
     log.info("joinForm.getPwchk()={}",joinForm.getPwchk());
+
+    if (bindingResult.hasErrors()) {
+      List<ObjectError> allErrors = bindingResult.getAllErrors();
+      for (ObjectError error : allErrors) {
+        if (error.getObjectName().equals("joinForm") && error instanceof FieldError) {
+          FieldError fieldError = (FieldError) error;
+          if (fieldError.getField().equals("mid")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("midMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("midMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserGen";
+          }
+          if (fieldError.getField().equals("pw")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("pwMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("pwMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserGen";
+          }
+          if (fieldError.getField().equals("nickname")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("nickMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("nickMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserGen";
+          }
+          if (fieldError.getField().equals("email")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("emailMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("emailMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserGen";
+          }
+          if (fieldError.getField().equals("phone")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("phoneMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("phoneMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserGen";
+          }
+        }
+      }
+    }
+
 
     //비밀번호 체크
     if(!joinForm.getPw().equals(joinForm.getPwchk())) {
@@ -93,6 +135,7 @@ public class MemberController {
     JoinForm joinForm = new JoinForm();
     model.addAttribute("joinForm", joinForm);
     log.info("joinForm={}",joinForm);
+
     return "member/SignUpUserCamp";
   }
 
@@ -114,17 +157,52 @@ public class MemberController {
   @PostMapping("/signup/camp")
   public String campJoin(
       @Valid @ModelAttribute JoinForm joinForm,
-      BindingResult bindingResult
+      BindingResult bindingResult,
+      Model model
   ){
 
     log.info("joinForm={}",joinForm);
-    if(bindingResult.hasErrors()){
-      log.info("bindingResult={}",bindingResult);
-      return "member/SignUpUserCamp";
-    }
-
     log.info("joinForm.getPw()={}",joinForm.getPw());
     log.info("joinForm.getPwchk()={}",joinForm.getPwchk());
+
+    if (bindingResult.hasErrors()) {
+      List<ObjectError> allErrors = bindingResult.getAllErrors();
+      for (ObjectError error : allErrors) {
+        if (error.getObjectName().equals("joinForm") && error instanceof FieldError) {
+          FieldError fieldError = (FieldError) error;
+          if (fieldError.getField().equals("mid")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("midMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("midMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserCamp";
+          }
+          if (fieldError.getField().equals("pw")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("pwMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("pwMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserCamp";
+          }
+          if (fieldError.getField().equals("nickname")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("nickMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("nickMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserCamp";
+          }
+          if (fieldError.getField().equals("email")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("emailMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("emailMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserCamp";
+          }
+          if (fieldError.getField().equals("phone")) {
+            String midMessage = error.getDefaultMessage();
+            log.error("phoneMessage : {}", allErrors.get(0).getDefaultMessage());
+            model.addAttribute("phoneMessage", allErrors.get(0).getDefaultMessage());
+            return "member/SignUpUserCamp";
+          }
+        }
+      }
+    }
 
     //비밀번호 체크
     if(!joinForm.getPw().equals(joinForm.getPwchk())) {
