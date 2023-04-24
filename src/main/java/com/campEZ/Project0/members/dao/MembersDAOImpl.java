@@ -201,6 +201,19 @@ public class MembersDAOImpl implements MembersDAO {
     return isExist;
   }
 
+  // 이메일 중복확인
+  @Override
+  public boolean mailIsExist(String email) {
+    boolean isExist = false;
+    String sql = "select count(email) from members where email = :email ";
+
+    Map<String, String> param = Map.of("email", email);
+    log.info("param={}",param);
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+    isExist = (cnt > 0) ? true : false;
+    return isExist;
+  }
+
   // 사업자 중복체크
   @Override
   public boolean bizIsExist(String businessnumber) {

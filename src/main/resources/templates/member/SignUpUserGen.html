@@ -53,11 +53,11 @@
       <!-- gnb영역 -->
       <nav class="gnb">
         <div class="gnb__gwangjang-submenu">
-          <div><a href="" th:href="@{/community/bulletinBoard/1}" class="gnb__depth link">자유게시판</a></div>
-          <div><a href="" th:href="@{/community/question/1}" class="gnb__depth link">질문게시판</a></div>
+          <div><a href="" th:href="@{/community/bulletinBoard}" class="gnb__depth link">자유게시판</a></div>
+          <div><a href="" th:href="@{/community/question}" class="gnb__depth link">질문게시판</a></div>
         </div>
         <div><a href="" th:href="@{/search}" class="link">검색ez</a></div>
-        <div><p class="link">광장ez</p></div>
+        <div><a href="" th:href="@{/preparing}" class="link">광장ez</a></div>
         <div><a href="https://www.gocamping.or.kr/lms/" class="link">안전교육</a></div>
       </nav>
 
@@ -80,7 +80,7 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 아이디</label>
             <div>
-              <input type="text" class="input" th:field="*{mid}"/>
+              <input type="text" class="input" th:field="*{mid}" />
               <p class="input-caution">대소문자를 구분하지 않는 영문자와 숫자를 포함한 20자 이내</p>
             </div>
             <input type="button" id="chkIdBtn" value="중복확인" class="dup-btn" />
@@ -89,14 +89,15 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호</label>
             <div>
-              <input type="text" class="input" th:field="*{pw}"/>
+              <input type="text" class="input" th:field="*{pw}" />
               <p class="input-caution">영문자(대소문자 구분), 숫자, 특수문자를 조합하여 8~16자 이내</p>
+              <!-- <p th:if="${#fields.hasglobalErrors()}" th:text="#{Notmatch}"></p> -->
             </div>
           </div>
           <hr class="form-line" />
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호 확인</label>
-            <input type="text" class="input" th:field="*{pwchk}"/>
+            <input type="text" class="input" th:field="*{pwchk}" />
           </div>
           <hr class="form-line" />
           <div class="input-form">
@@ -119,6 +120,7 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 이메일</label>
             <input type="email" class="input" th:field="*{email}" />
+            <input type="button" id="chkEmBtn" value="중복확인" class="dup-btn" />
           </div>
           <hr class="form-line" />
           <div class="input-form">
@@ -131,11 +133,14 @@
             <input type="text" class="input" th:field="*{maddress}" />
           </div>
           <hr class="form-line" />
+        </form>
+        <div>
           <div class="sign-btn">
             <button class="in-btn" id="btnAdd" type="submit">가입</button>
             <button class="cel-btn" type="reset">취소</button>
           </div>
-        </form>
+        </div>
+
         <hr class="line" />
       </main>
 
@@ -169,10 +174,12 @@
       import { ajax } from '/js/common.js';
       let chk_id = null;
       let chk_nn = null;
+      let chk_em = null;
       const $mid = document.getElementById('mid');
       const $nickname = document.getElementById('nickname');
       const $chkIdBtn = document.getElementById('chkIdBtn');
       const $chkNnBtn = document.getElementById('chkNnBtn');
+      const $chkEmBtn = document.getElementById('chkEmBtn');
       const $btnAdd = document.getElementById('btnAdd');
       const $pw = document.getElementById('pw');
       const $pwchk = document.getElementById('pwchk');
@@ -206,6 +213,7 @@
       const nnchk = res => {
         if (res.header.rtcd == '00') {
           alert('사용 가능한 닉네임 입니다.');
+          console.log('클릭');
           chk_nn = $nickname.value;
         } else {
           alert('이미 사용 중인 닉네임 입니다.');
@@ -224,12 +232,35 @@
           .then(nnchk); //.then(res => add(res))
       };
 
+      // 이메일 체크
+      const emchk = res => {
+        if (res.header.rtcd == '00') {
+          alert('사용 가능한 이메일 입니다.');
+          chk_em = $email.value;
+        } else {
+          alert('이미 사용 중인 이메일 입니다.');
+          throw new Error(`${res.header.rtmsg}`);
+        }
+      };
+      const emchk_h = e => {
+        const url = `http://localhost:9080/api/members/emchk/${$email.value}`;
+        const payload = {
+          email: $email.value,
+        };
+        //유효성체크
+        ajax
+          .post(url, payload)
+          .then(res => res.json())
+          .then(emchk); //.then(res => add(res))
+      };
+
       const add_h = e => {
         const chk1 = $mid.value;
         const chk2 = $nickname.value;
         const chk_pw = $pw.value;
         const chk_pwchk = $pwchk.value;
-        if (chk_id == chk1 && chk_nn == chk2) {
+        const chk_emailchk = $email.value;
+        if (chk_id == chk1 && chk_nn == chk2 && chk_em == chk_emailchk) {
           if (chk_pw == chk_pwchk) {
             if ($email.value != '' && $mname.value != '' && $phone.value != '') {
               frm.submit();
@@ -247,6 +278,7 @@
       $btnAdd.addEventListener('click', add_h, false);
       $chkIdBtn.addEventListener('click', chk_h, false);
       $chkNnBtn.addEventListener('click', nnchk_h, false);
+      $chkEmBtn.addEventListener('click', emchk_h, false);
     </script>
   </body>
 </html>

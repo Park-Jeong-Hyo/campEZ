@@ -118,6 +118,7 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 이메일</label>
             <input type="email" class="input" th:field="*{email}" />
+            <input type="button" id="chkEmBtn" value="중복확인" class="dup-btn" />
           </div>
           <hr class="form-line" />
           <div class="input-form">
@@ -154,11 +155,11 @@
             <input type="text" placeholder="yyyymmdd" class="input" id="startDt" />
           </div>
           <hr class="form-line" />
-          <div class="sign-btn">
-            <button class="in-btn" id="btnAdd" type="submit">가입</button>
-            <button class="cel-btn">취소</button>
-          </div>
         </form>
+        <div class="sign-btn">
+          <button class="in-btn" id="btnAdd" type="submit">가입</button>
+          <button class="cel-btn">취소</button>
+        </div>
         <hr class="line" />
       </main>
 
@@ -194,12 +195,14 @@
       let chk_nn = null;
       let chk_biz = null;
       let chk_biz2 = null;
+      let chk_em = null;
       const $mid = document.getElementById('mid');
       const $biznum = document.getElementById('businessnumber');
       const $nickname = document.getElementById('nickname');
       const $chkIdBtn = document.getElementById('chkIdBtn');
       const $chkNnBtn = document.getElementById('chkNnBtn');
       const $chkBizBtn = document.getElementById('chkBizBtn');
+      const $chkEmBtn = document.getElementById('chkEmBtn');
       const $btnAdd = document.getElementById('btnAdd');
       const $pw = document.getElementById('pw');
       const $pwchk = document.getElementById('pwchk');
@@ -257,6 +260,28 @@
           .post(url, payload)
           .then(res => res.json())
           .then(nnchk); //.then(res => add(res))
+      };
+
+      // 이메일 체크
+      const emchk = res => {
+        if (res.header.rtcd == '00') {
+          alert('사용 가능한 이메일 입니다.');
+          chk_em = $email.value;
+        } else {
+          alert('이미 사용 중인 이메일 입니다.');
+          throw new Error(`${res.header.rtmsg}`);
+        }
+      };
+      const emchk_h = e => {
+        const url = `http://localhost:9080/api/members/emchk/${$email.value}`;
+        const payload = {
+          email: $email.value,
+        };
+        //유효성체크
+        ajax
+          .post(url, payload)
+          .then(res => res.json())
+          .then(emchk); //.then(res => add(res))
       };
 
       // 사업자 체크
@@ -326,7 +351,8 @@
         const chk4 = $bno.value;
         const chk_pw = $pw.value;
         const chk_pwchk = $pwchk.value;
-        if (chk_id == chk1 && chk_nn == chk2 && chk_biz == chk3 && chk_biz2 == chk4) {
+        const chk_emailchk = $email.value;
+        if (chk_id == chk1 && chk_nn == chk2 && chk_biz == chk3 && chk_biz2 == chk4 && chk_em == chk_emailchk) {
           if (chk_pw == chk_pwchk) {
             if ($email.value != '' && $mname.value != '' && $phone.value != '' && $cname.value != '') {
               frm.submit();
@@ -346,6 +372,7 @@
       $chkIdBtn.addEventListener('click', chk_h, false);
       $chkNnBtn.addEventListener('click', nnchk_h, false);
       $chkBizBtn.addEventListener('click', bizchk_h, false);
+      $chkEmBtn.addEventListener('click', emchk_h, false);
     </script>
   </body>
 </html>

@@ -47,6 +47,22 @@ public class ApiMemberController {
     return res;
   }
 
+  // 이메일 중복확인
+  @PostMapping("/emchk/{emil}")
+  public Response<Object> emilChk(
+      @PathVariable("emil") String emil
+  ) {
+    Response<Object> res = null;
+    boolean emilChk = membersSVC.mailIsExist(emil);
+    log.info("emilChk={}",emilChk);
+    if (emilChk == false) {
+      res =  Response.createRestResponse  ("00", "사용 가능한 이메일", emilChk);
+    } else {
+      res =  Response.createRestResponse("99", "이미 사용 중인 이메일", emilChk);
+    }
+    return res;
+  }
+
   // 사업자 중복 체크
   @PostMapping("/bizchk/{biznum}")
   public Response<Object> bizChk(

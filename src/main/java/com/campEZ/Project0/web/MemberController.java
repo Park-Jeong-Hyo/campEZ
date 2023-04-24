@@ -52,10 +52,6 @@ public class MemberController {
   ){
 
     log.info("joinForm={}",joinForm);
-    if(bindingResult.hasErrors()){
-      log.info("bindingResult={}",bindingResult);
-      return "member/SignUpUserGen";
-    }
 
     log.info("joinForm.getPw()={}",joinForm.getPw());
     log.info("joinForm.getPwchk()={}",joinForm.getPwchk());

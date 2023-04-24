@@ -42,6 +42,8 @@ public interface MembersDAO {
   // 닉네임 중복체크
   boolean nnIsExist(String nickname);
 
+  boolean mailIsExist(String email);
+
   // 사업자번호 중복체크
   boolean bizIsExist(String businessnumber);
   //로그인

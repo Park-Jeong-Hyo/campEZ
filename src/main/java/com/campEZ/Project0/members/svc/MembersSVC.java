@@ -41,6 +41,9 @@ public interface MembersSVC {
   // 닉네임 중복체크
   boolean nnIsExist(String nickname);
 
+  // 이메일 중복체크
+  boolean mailIsExist(String email);
+
   // 사업자 중복체크
   boolean bizIsExist(String businessnumber);
 
