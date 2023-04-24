@@ -70,36 +70,49 @@
         </section>
         <!--게시글 정보-->
         <section class="post__info">
-          <input class="post__writer hidden" name="pnumber" th:field="*{pnumber}" />
-          <p class="post__writer" th:text="*{nickname}">글쓴이 : 홍길동</p>
-          <p class="post__date" th:text="*{udate}">작성일 : 23.03.21</p>
+          <div class="post__name-date">
+            <input class="post__writer hidden" name="pnumber" th:field="*{pnumber}" />
+            <p class="post__writer" th:text="|작성자 : *{nickname}|">글쓴이 : 홍길동</p>
+            <!--작성일시가 00으로 나타나서 일시적으로 삭제해둠.-->
+            <p class="post__date" th:text="|작성일 : ${#strings.substring(postDetailForm.udate,2,10)}|">작성일 : 23.03.21</p>
+          </div>
+          <div class="post__buttons">
+            <th:block th:if="${!session.isEmpty()}" >
+              <button th:if="${login.nickname} == ${postDetailForm.nickname}" id="btnUpdate" class="theme-btn">수정</button>
+              <button th:if="${login.nickname} == ${postDetailForm.nickname}" id="btnDelete" class="theme-btn">삭제</button>
+            </th:block>
+            <button id="btnFindAll" class="theme-btn">목록</button>
+          </div>
         </section>
         <!--게시글 섹션-->
         <section class="post__context">
           <p class="post__main-content" th:text="*{ptext}"></p>
         </section>
-        <div class="post__buttons">
-          <button id="btnUpdate">수정</button>
-          <button id="btnDelete">삭제</button>
-          <button id="btnFindAll">목록</button>
-        </div>
         <hr />
         <div class="reply-box">
           <div class="reply" th:each="reply : ${replys}">
-            <p class="reply-name" th:text="${reply.nickname}">세번째 댓글 작성자</p>
-            <span th:text="${reply.udate}"></span>
-            <p class="reply-text" th:text="${reply.cotext}">세번째 댓글</p>
-            <div class="del-btn">
-              <a href="" th:href="@{/community/{id}/comment/del(id=${reply.conumber})}">삭제</a>
+            <div class="reply-title">
+              <p class="reply-name" th:text="${reply.nickname}">세번째 댓글 작성자</p>
+              <p class="reply-date" th:text="|작성일 : ${#strings.substring(reply.udate,2,10)}|"></p>
             </div>
+            <p class="reply-text" th:text="${reply.cotext}">세번째 댓글</p>
+            <th:block th:if="${!session.isEmpty()}">
+              <div class="del-btn" th:if="${login.nickname} == ${reply.nickname}">
+                <a href="" th:href="@{/community/{id}/comment/del(id=${reply.conumber})}">삭제</a>
+              </div>
+            </th:block>
           </div>
         </div>
         <div>
           <th:block th:if="${!session.isEmpty()}">
             <form action="" method="post" class="comment-form" th:object="${commentForm}">
-              <p class="comment-name" th:object="${login}" th:text="${login.nickname}"></p>
-              <input class="comment-text" type="text" th:field="*{cotext}" />
-              <p><button type="submit" id="addCommnet">댓글 작성</button></p>
+              <div class="comment-title">
+                <p class="comment-name" th:object="${login}" th:text="${login.nickname}"></p>
+              </div>
+              <input placeholder="댓글을 입력해 주시기 바랍니다." class="comment-text" type="text" th:field="*{cotext}" />
+              <div class="comment-submit">
+                <button class="theme-btn" type="submit" id="addCommnet">댓글 작성</button>
+              </div>
             </form>
           </th:block>
           <th:block th:if="${session.isEmpty()}">

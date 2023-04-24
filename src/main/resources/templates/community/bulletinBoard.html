@@ -82,7 +82,7 @@
               <td th:text="${post.pnumber}">2</td>
               <td><a clss="link" href="" th:href="@{/community/{id}/b_read(id=${post.pnumber})}" th:text="${post.ptitle}">안녕하세요</a></td>
               <td th:text="${post.nickname}">홍길동</td>
-              <td th:text="${post.udate}">23.03.23</td>
+              <td th:text="${#strings.substring(post.udate,2,10)}">23.03.23</td>
             </tr>
           </tbody>
         </table>

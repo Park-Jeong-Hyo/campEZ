@@ -22,14 +22,14 @@
 }
 .commun__header {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr 2fr;
   box-sizing: content-box;
   background-color: #ddd;
   padding: 5px;
 }
 .commun__list {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 4fr 1fr 2fr;
   box-sizing: content-box;
   padding: 5px;
   border-bottom: 1px dotted #ccc;
@@ -59,7 +59,7 @@
   background: var(--theme-color-thin);
 }
 .commun__list-btn:active {
-  background: #777;
+  background: var(--theme-color);
 }
 
 /*게시글 */
@@ -80,6 +80,14 @@
   box-sizing: content;
   border-bottom: 1px solid #ccc;
 }
+.post__info {
+  display:flex;
+  justify-content: space-between;
+}
+.post__name-date {
+  display:flex;
+  gap:20px
+}
 
 .post__buttons {
   display: flex;
@@ -88,11 +96,13 @@
 .post__info {
   display: flex;
   gap: 10px;
-  padding: 10px;
+  padding: 20px;
   font-size: var(--font-size-little);
 }
 .post__main-content {
   padding: 30px;
+  margin-bottom: 10px;
+  height: 50vh;
   font-size: var(--font-size-small);
   line-height: 20px;
   outline: 1px solid #ccc;
@@ -128,6 +138,13 @@
 }
 .posting {
   margin-bottom: 50px;
+}
+.chk-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  font-size: var(--font-size-small);
 }
 /*글쓰기*/
 .posting__upper {
@@ -166,46 +183,60 @@
 .reply {
   display: flex;
   flex-direction: column;
-  outline: 1px solid lightgray;
+  border-bottom: 1px dashed #bbb;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+}
+.reply-title {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding:0 5px;
+  font-size:var(--font-size-little);
 }
 .del-btn {
-  font-size: 10px;
-  padding: 5px 10px;
+  display: flex;
+  justify-content: end;
+  font-size: 12px;
+  padding: 10px 15px;
 }
-.reply-name {
-  padding: 5px 10px;
-  background-color: lightgray;
-}
-
 .reply-text {
-  padding: 5px 10px;
+  padding: 20px 5px;
+  height: 4vh;
   font-size: 15px;
 }
-
 .comment-form {
-  outline: 1px solid lightgray;
+  margin-top: 50px;
+  outline: 1px solid #999;
 }
-
-.comment-name {
-  padding: 5px 10px;
+.comment-title {
   background-color: lightgray;
+  padding: 5px 20px;
+  font-size: var(--font-size-small);
 }
 .comment-text {
   width: 99.9%;
-  height: 50px;
-  font-size: 15px;
+  height: 80px;
+  font-size: var(--font-size-small);
   border: 0;
   outline: none;
   padding-left: 10px;
+  padding-right: 10px;
+}
+.comment-submit {
+  display:flex;
+  justify-content:end;
+  align-items:center;
+  padding:10px;
 }
 /*버튼 색*/
 .theme-btn {
     background:var(--theme-color-thin);
     width: 80px;
-    border: 1px solid #aaa;
+    border-radius: 5%;
+    border: 1px solid #ccc;
 }
 .theme-btn:active {
-    background:#999;
+    background:var(--theme-color);
+    color:var(--main-font-color);
 }

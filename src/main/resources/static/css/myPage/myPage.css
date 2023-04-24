@@ -302,8 +302,10 @@ tabBtn--label {
 .theme-btn {
     background:var(--theme-color-thin);
     width: 80px;
-    border: 1px solid #aaa;
+    border-radius: 5%;
+    border: 1px solid #ccc;
 }
 .theme-btn:active {
-    background:#999;
+    background:var(--theme-color);
+    color:var(--main-font-color);
 }
