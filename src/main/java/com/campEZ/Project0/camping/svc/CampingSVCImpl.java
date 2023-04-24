@@ -52,13 +52,13 @@ public class CampingSVCImpl implements CampingSVC{
   }
 
   public int campingDelete(int cnumber) {
-    //1) 상품정보 삭제
-    int cno = campingDAO.campingDelete(cnumber);
-
-    //2) 물리파일 삭제
+    //1) 물리파일 삭제
     List<UploadFile> uploadFiles = uploadFileSVC.findFilesByRid(cnumber);
     List<String> files = uploadFiles.stream().map(file -> file.getStorename()).collect(Collectors.toList());
     uploadFileSVC.deleteCampFiles(files);
+
+    //2) 상품정보 삭제
+    int cno = campingDAO.campingDelete(cnumber);
 
 //    for (UploadFile uploadFile : uploadFiles) {
 //      multipartFileToUploadFile.deleteFile(attachFileType, uploadFile.getStore_filename());

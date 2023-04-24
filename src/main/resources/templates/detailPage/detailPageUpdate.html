@@ -80,7 +80,9 @@
   <div class="mnFace">
     <section class="mnFace-l">
       <div class="title-image">
-        <img class="title-image-img" th:src="@{|/attach/view/*{imagedFile.upnumber}|}" alt="캠핑장 대표 이미지" >
+        <th:block th:unless="${campingUpdateForm?.imagedFile?.upnumber} == null">
+          <img class="title-image-img" th:src="@{|/attach/view/*{imagedFile.upnumber}|}" alt="캠핑장 대표 이미지" >
+        </th:block>
       </div>
       <div class="attach-title-image">
         <input class="attach-title-image-upload" type="file" th:field="*{imageFile}">
@@ -276,8 +278,8 @@
           캠핑장 시설 이미지
           <hr />
         </h3>
-        <div th:each="file : *{imagedFiles}">
-          <img src="" th:src="@{|/attach/view/${file.upnumber}|}" alt="캠핑장 시설 이미지">
+        <div class="facility-image-div" th:each="file : *{imagedFiles}">
+          <img class="facility-image-img" src="" th:src="@{|/attach/view/${file.upnumber}|}" alt="캠핑장 시설 이미지">
         </div>
         <div class="facility-image-upload">
           <input type="file" th:field="*{imageFiles}" multiple>

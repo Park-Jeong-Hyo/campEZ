@@ -229,8 +229,8 @@
             캠핑장 시설 이미지
             <hr />
           </h3>
-          <div th:each="file : ${campingDetailForm.imagedFiles}">
-            <img src="" th:src="@{|/attach/view/${file.upnumber}|}" alt="캠핑장 시설 이미지">
+          <div class="facility-image-div" th:each="file : ${campingDetailForm.imagedFiles}">
+            <img class="facility-image-img" src="" th:src="@{|/attach/view/${file.upnumber}|}" alt="캠핑장 시설 이미지">
           </div>
         </div>
         <!-- 3.2-3.오시는 길 -->

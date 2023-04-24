@@ -73,7 +73,7 @@ public class UploadFileSVCImpl implements com.campEZ.Project0.uploadfile.UploadF
   }
 
   @Override
-  public int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid) {
+  public int deleteFileByCodeWithRid(AttachFileType attachFileType, int rid) {
 
     return uploadFileDAO.deleteFileByCodeWithRid(attachFileType, rid);
   }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -501,7 +502,7 @@ public class CampingController {
   //캠핑장 수정
   @PostMapping("/update")
   public String campingUpdate(
-      @Valid @ModelAttribute CampingSaveForm campingSaveForm,
+      @Valid @ModelAttribute CampingUpdateForm campingUpdateForm,
       BindingResult bindingResult,
       RedirectAttributes redirectAttributes,
       HttpSession session
@@ -510,42 +511,59 @@ public class CampingController {
     LoginMembers loginMembers = (LoginMembers)session.getAttribute(SessionConst.LOGIN_MEMBER);
     String mid = loginMembers.getMid();
 
-    int cnumber = campingSaveForm.getCnumber();
+    int cnumber = campingUpdateForm.getCnumber();
     if(bindingResult.hasErrors()) {
       log.info("bindingResult={}", bindingResult);
     }
     Camping camping = new Camping();
     Camparea camparea = new Camparea();
-    camping.setCname(campingSaveForm.getCname());
-    camping.setCaddress(campingSaveForm.getCaddress());
-    camping.setCamptel(campingSaveForm.getCamptel());
-    camping.setCtype(campingSaveForm.getCtype());
-    camping.setOperdate(campingSaveForm.getOperdate());
-    camping.setHomepage(campingSaveForm.getHomepage());
-    camping.setCtext(campingSaveForm.getCtext());
-    camping.setPriceweekday(campingSaveForm.getPriceweekday());
-    camping.setPriceweekend(campingSaveForm.getPriceweekend());
-    camping.setToilet(campingSaveForm.getToilet());
-    camping.setMart(campingSaveForm.getMart());
+    camping.setCname(campingUpdateForm.getCname());
+    camping.setCaddress(campingUpdateForm.getCaddress());
+    camping.setCamptel(campingUpdateForm.getCamptel());
+    camping.setCtype(campingUpdateForm.getCtype());
+    camping.setOperdate(campingUpdateForm.getOperdate());
+    camping.setHomepage(campingUpdateForm.getHomepage());
+    camping.setCtext(campingUpdateForm.getCtext());
+    camping.setPriceweekday(campingUpdateForm.getPriceweekday());
+    camping.setPriceweekend(campingUpdateForm.getPriceweekend());
+    camping.setToilet(campingUpdateForm.getToilet());
+    camping.setMart(campingUpdateForm.getMart());
     campingSVC.campingUpdate(camping, cnumber);
 
     log.info("cnumber={}", cnumber);
     camparea.setCnumber(cnumber);
-    camparea.setArea(campingSaveForm.getArea());
+    camparea.setArea(campingUpdateForm.getArea());
 
-    // 기존 이미지 물리파일 삭제
-    List<UploadFile> uploadFiles = uploadFileSVC.findFilesByRid(cnumber);
-    List<String> files = uploadFiles.stream().map(file -> file.getStorename()).collect(Collectors.toList());
-    uploadFileSVC.deleteCampFiles(files);
+    MultipartFile cam = campingUpdateForm.getImageFile();
+    log.info("cam={}",cam);
+    List<MultipartFile> cams = campingUpdateForm.getImageFiles();
+    log.info("cams={}",cams);
 
-    // 메타정보삭제
-    uploadFileDAO.deleteFileByRid(cnumber);
+    if (!campingUpdateForm.getImageFile().isEmpty()) {
+      // 기존 이미지 물리파일 삭제
+      List<UploadFile> uploadFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01,cnumber);
+      List<String> files = uploadFiles.stream().map(file -> file.getStorename()).collect(Collectors.toList());
+      uploadFileSVC.deleteFiles(AttachFileType.A01,files);
+      // 메타정보삭제
+      uploadFileDAO.deleteFileByCodeWithRid(AttachFileType.A01, cnumber);
+    }
+
+    if (!campingUpdateForm.getImageFiles().get(0).isEmpty()) {
+      // 기존 이미지 물리파일 삭제
+      List<UploadFile> uploadFiles = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A02,cnumber);
+      List<String> files = uploadFiles.stream().map(file -> file.getStorename()).collect(Collectors.toList());
+      uploadFileSVC.deleteFiles(AttachFileType.A02,files);
+      // 메타정보삭제
+      uploadFileDAO.deleteFileByCodeWithRid(AttachFileType.A02, cnumber);
+    }
 
     // 파일첨부에 대한 메타정보추출 & 물리파일 저장
-    UploadFile imageFile = uploadFileSVC.convert(campingSaveForm.getImageFile(), AttachFileType.A01);
-    List<UploadFile> imageFiles = uploadFileSVC.convert(campingSaveForm.getImageFiles(), AttachFileType.A02);
-    System.out.println(imageFiles);
+    UploadFile imageFile = uploadFileSVC.convert(campingUpdateForm.getImageFile(), AttachFileType.A01);
+    List<UploadFile> imageFiles = uploadFileSVC.convert(campingUpdateForm.getImageFiles(), AttachFileType.A02);
     if(imageFile != null) imageFiles.add(imageFile);
+    if (imageFiles.size() > 0) {
+      imageFiles.stream().forEach(file->file.setRid(cnumber));
+    }
 
     // 첨부파일 메타정보 저장
     if(!(imageFiles.isEmpty())) {
@@ -554,9 +572,9 @@ public class CampingController {
 
     //캠핑장 구역 정보 입력 로직
     //수정된 값(maxListNumber)
-    int maxListNumber = campingSaveForm.getArea();
+    int maxListNumber = campingUpdateForm.getArea();
     //이전의 캠핑장 구역 갯수
-    int areaNumber = campingSaveForm.getAreaNumber();
+    int areaNumber = campingUpdateForm.getAreaNumber();
     // 수정된 maxListNumber(area) 보다 큰 값을 제거
     for(int i = 10 ; i > maxListNumber ; i--) {
       campingSVC.campareaDelete(i);
@@ -572,34 +590,34 @@ public class CampingController {
     for(int i = 0; i < maxListNumber ; i++) {
       switch(i) {
         case 0 :
-          capacitysList.add(campingSaveForm.getCapacitys1());
+          capacitysList.add(campingUpdateForm.getCapacitys1());
           break;
         case 1 :
-          capacitysList.add(campingSaveForm.getCapacitys2());
+          capacitysList.add(campingUpdateForm.getCapacitys2());
           break;
         case 2 :
-          capacitysList.add(campingSaveForm.getCapacitys3());
+          capacitysList.add(campingUpdateForm.getCapacitys3());
           break;
         case 3 :
-          capacitysList.add(campingSaveForm.getCapacitys4());
+          capacitysList.add(campingUpdateForm.getCapacitys4());
           break;
         case 4 :
-          capacitysList.add(campingSaveForm.getCapacitys5());
+          capacitysList.add(campingUpdateForm.getCapacitys5());
           break;
         case 5 :
-          capacitysList.add(campingSaveForm.getCapacitys6());
+          capacitysList.add(campingUpdateForm.getCapacitys6());
           break;
         case 6 :
-          capacitysList.add(campingSaveForm.getCapacitys7());
+          capacitysList.add(campingUpdateForm.getCapacitys7());
           break;
         case 7 :
-          capacitysList.add(campingSaveForm.getCapacitys8());
+          capacitysList.add(campingUpdateForm.getCapacitys8());
           break;
         case 8 :
-          capacitysList.add(campingSaveForm.getCapacitys9());
+          capacitysList.add(campingUpdateForm.getCapacitys9());
           break;
         case 9 :
-          capacitysList.add(campingSaveForm.getCapacitys10());
+          capacitysList.add(campingUpdateForm.getCapacitys10());
           break;
       }
     }
