@@ -179,7 +179,7 @@ public class UploadFileDAOImpl implements com.campEZ.Project0.uploadfile.UploadF
 
   // 첨부파일 삭제 by code, rid
   @Override
-  public int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid) {
+  public int deleteFileByCodeWithRid(AttachFileType attachFileType, int rid) {
     StringBuffer sql = new StringBuffer();
     sql.append("delete from uploadfile ");
     sql.append(" where code = :code ");

@@ -23,5 +23,5 @@ public interface UploadFileDAO {
 
   int deleteFileByUploadFileId(int uploadfileId);
 
-  int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid);
+  int deleteFileByCodeWithRid(AttachFileType attachFileType, int rid);
 }

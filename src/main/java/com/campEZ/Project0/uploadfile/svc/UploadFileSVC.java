@@ -49,7 +49,7 @@ public interface UploadFileSVC {
    * @param rid 첨부파일아이디
    * @return 삭제한 레코드수
    */
-  int deleteFileByCodeWithRid(AttachFileType attachFileType, Long rid);
+  int deleteFileByCodeWithRid(AttachFileType attachFileType, int rid);
 
   /**
    *  물리 파일 저장 경로
