@@ -68,22 +68,13 @@
             <h4 class="posting__title">글쓰기</h4>
           </section>
           <section class="posting__main">
-            <select class="posting__select-where" name="" id="">
-              <option value="" selected>자유게시판</option>
-            </select>
+              <h4 class="posting__type">자유게시판</h4>
             <input class="hidden" type="text" th:field="*{nickname}" />
             <input class="posting__input-title" type="text" th:field="*{ptitle}" placeholder="제목을 입력해 주시기 바랍니다." />
-            <section class="posting__buttons">
-              <button type="button">글꼴</button>
-              <button type="button">글꼴 크기</button>
-              <button type="button">밑줄</button>
-              <button type="button">굵기</button>
-            </section>
             <textarea class="posting__context" rows="30" th:field="*{ptext}" placeholder="여기에 본문을 입력해주시기 바랍니다."></textarea>
-            <input type="file" />
           </section>
           <div class="posting__buttons">
-            <button id="btnAdd">작성</button>
+            <button class="posting__submit theme-btn" id="btnAdd">작성</button>
           </div>
         </form>
       </main>

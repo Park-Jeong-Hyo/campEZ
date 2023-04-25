@@ -148,6 +148,7 @@
       const $btnDelete = document.getElementById('btnDelete');
       const $btnFindAll = document.getElementById('btnFindAll');
       const $btnUpdate = document.getElementById('btnUpdate');
+
       // 게시글 번호
       const $pnumber = document.getElementById('pnumber');
 
@@ -162,9 +163,8 @@
       const btnUpdate_h = e => {
         globalThis.location.href = `/community/${$pnumber.value}/b_edit`;
       };
-
-      $btnUpdate.addEventListener('click', btnUpdate_h, false);
       $btnFindAll.addEventListener('click', btnAll_h, false);
+      $btnUpdate.addEventListener('click', btnUpdate_h, false);
       $btnDelete.addEventListener('click', btnDelete_h, false);
     </script>
   </body>

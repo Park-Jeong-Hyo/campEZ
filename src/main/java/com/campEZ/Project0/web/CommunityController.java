@@ -125,7 +125,7 @@ public class CommunityController {
         log.info("postUpdateForm={}", postUpdateForm);
         return "community/updateBPost";
       } else {
-        return "redirect:/community/bulletinBoard";
+        return "redirect:/community/bulletinBoard/1";
       }
     } catch ( Exception e ) {
       return "errorPage/BadAccess";
@@ -175,9 +175,9 @@ public class CommunityController {
       if ( postNickname.equals(loginNickname) ) {
         postSVC.postDelete(pnumber);
 
-        return "redirect:/community/bulletinBoard";
+        return "redirect:/community/bulletinBoard/1";
       } else {
-        return "redirect:/community/bulletinBoard";
+        return "redirect:/community/bulletinBoard/1";
       }
     } catch ( Exception e ) {
       return "errorPage/BadAccess";
@@ -310,7 +310,7 @@ public class CommunityController {
         log.info("postUpdateForm={}", postUpdateForm);
         return "community/updateQPost";
       } else {
-        return "redirect:/community/question";
+        return "redirect:/community/question/1";
       }
     } catch ( Exception e ) {
       return "errorPage/BadAccess";
@@ -358,9 +358,9 @@ public class CommunityController {
       if ( postNickname.equals(loginNickname) ) {
         postSVC.postDelete(pnumber);
 
-        return "redirect:/community/question";
+        return "redirect:/community/question/1";
       } else {
-        return "redirect:/community/question";
+        return "redirect:/community/question/1";
       }
     } catch ( Exception e ) {
       return "errorPage/BadAccess";

@@ -66,25 +66,16 @@
         <!--폼태그 글쓰기, 상단 부분과 본문부분으로 나누어짐-->
         <form action="" method="post" th:object="${postUpdateForm}">
           <section class="posting__upper">
-            <h4 class="posting__title">글쓰기</h4>
+            <h4 class="posting__title">글수정</h4>
           </section>
           <section class="posting__main">
-            <select class="posting__select-where" name="" id="">
-              <option value="" selected>질문게시판</option>
-            </select>
+            <h4 class="posting__type">질문게시판</h4>
             <input class="hidden" type="text" th:field="*{nickname}"/>
             <input class="posting__input-title" type="text" th:field="*{ptitle}" placeholder="제목을 입력해 주시기 바랍니다." />
-            <section class="posting__buttons">
-              <button type="button">글꼴</button>
-              <button type="button">글꼴 크기</button>
-              <button type="button">밑줄</button>
-              <button type="button">굵기</button>
-            </section>
             <textarea class="posting__context" rows="30" th:field="*{ptext}" placeholder="여기에 본문을 입력해주시기 바랍니다."></textarea>
-            <input type="file" />
           </section>
           <div class="posting__buttons">
-            <button id="btnModify">수정</button>
+            <button class="theme-btn" id="btnModify">수정</button>
           </div>
         </form>
       </main>
