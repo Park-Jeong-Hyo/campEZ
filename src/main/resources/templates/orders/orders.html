@@ -103,6 +103,7 @@
               <td class="title">연락처</td>
               <td class="content">
                 <input type="text" th:field="*{phone}" size="15" placeholder="-포함" required>
+                <span  th:errors="*{phone}"></span>
               </td>
             </tr>
             <tr>
@@ -112,9 +113,10 @@
               </td>
             </tr>
             <tr>
-              <td class="title">나갈날짜</td>
+              <td class="title">퇴실일자</td>
               <td class="content">
                 <input name="reservDate" type="date" th:field="*{checkout}" required>
+                <span th:text="${dateEr}"></span>
               </td>
             </tr>
             <tr>

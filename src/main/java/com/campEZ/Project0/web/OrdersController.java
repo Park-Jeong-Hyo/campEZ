@@ -78,6 +78,24 @@ public class OrdersController {
       Model model,
       @PathVariable("cnumber") Integer cnumber
   ){
+
+    //유효성 검사
+    if(bindingResult.hasErrors()){
+      log.info("bindingResult={}",bindingResult);
+      return "/orders/orders";
+    }
+
+    //입실일이 퇴실일보다 클 때 제약조건 정의
+    if(ordersForm.getCheckin().compareTo(ordersForm.getCheckout()) == 1){
+      model.addAttribute("dateEr","퇴실일이 입실일보다 커야 합니다");
+      return "/orders/orders";
+    }
+
+    if(bindingResult.hasErrors()){
+      log.info("bindingResult={}",bindingResult);
+      return "/orders/orders";
+    }
+
     //등록
     Orders orders = new Orders();
     orders.setCnumber(ordersForm.getCnumber());
