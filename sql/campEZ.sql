@@ -67,6 +67,7 @@ create table orders(
 --    where c.cnumber = o.cnumber  and c.area = o.area)),
     checkin varchar2(15) not null,
     checkout varchar2(15) not null,
+    otype char(1) DEFAULT 'n' check(otype in('n','y')) not null,
     primary key(onumber),
     foreign key (cnumber,area) REFERENCES camparea(cnumber,area),
     foreign key (mid) REFERENCES members(mid)
@@ -173,6 +174,3 @@ select  *  from comments;
 
 
 
-
--- 임시값, orders에 otype 추가하기
-ALTER TABLE orders ADD otype VARCHAR(1) DEFAULT 'n' NOT NULL;
