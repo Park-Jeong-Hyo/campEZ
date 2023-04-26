@@ -50,4 +50,7 @@ public class OrdersSVCImpl implements OrdersSVC{
   public String campingCname(int cnumber){
     return ordersDAO.campingCname(cnumber);
   }
+  // 예약 번호로 예약 확정하기
+  @Override
+  public int campingChk(int onumber){return ordersDAO.campingChk(onumber);}
 }

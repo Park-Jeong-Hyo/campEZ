@@ -114,7 +114,7 @@ public class MembersDAOImpl implements MembersDAO {
   @Override
   public List<OrdersNameForm> orderFindB(String mid){
     StringBuffer sb = new StringBuffer();
-    sb.append("select t2.cname, onumber, t1.cnumber, area, t1.mid, phone, headcount, checkin, checkout ");
+    sb.append("select t2.cname, onumber, t1.cnumber, area, t1.mid, phone, headcount, checkin, checkout, otype ");
     sb.append(" from orders t1, camping t2 ");
     sb.append(" where t1.cnumber = t2.cnumber and ");
     sb.append(" t2.mid = :mid ");

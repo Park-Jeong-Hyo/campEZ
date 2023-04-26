@@ -154,9 +154,14 @@ public class MyPageManagerController {
 //     예약 취소
     @GetMapping("/{onumber}/manager/del")
     public String OrderDelete(
-        @PathVariable("onumber") Integer onumber,
-        Model model){
+        @PathVariable("onumber") Integer onumber){
         ordersSVC.orDelete(onumber);
+        return "redirect:/";
+    };
+    @GetMapping("/{onumber}/manager/chk")
+    public String campingChk(
+        @PathVariable("onumber") Integer onumber){
+        ordersSVC.campingChk(onumber);
         return "redirect:/";
     };
     // 사업자 회원 탈퇴

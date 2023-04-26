@@ -170,3 +170,9 @@ select  *  from camparea;
 select  *  from orders;
 select  *  from post;
 select  *  from comments;
+
+
+
+
+-- 임시값, orders에 otype 추가하기
+ALTER TABLE orders ADD otype VARCHAR(1) DEFAULT 'n' NOT NULL;

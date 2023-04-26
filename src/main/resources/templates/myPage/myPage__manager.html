@@ -106,6 +106,8 @@
                   </td>
                   <td class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</td>
                   <td class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</td>
+                  <td class="reserv__status" th:if="${item.otype}=='y'" >확정</td>
+                  <td class="reserv__status" th:if="${item.otype}=='n'" >대기</td>
                   <td>
                     <button class="reserv__btn theme-btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
                   </td>
@@ -117,15 +119,6 @@
                 <p>현재 예약하신 캠핑장이 없습니다.</p>
               </div>
             </th:block>
-            <!-- 예약 관리에서 페이지 버튼 -->
-            <!--            <div class="reserv__page">-->
-            <!--              <button class="reserv__pageBtn"><<</button>-->
-            <!--              <button class="reserv__pageBtn">1</button>-->
-            <!--              <button class="reserv__pageBtn">2</button>-->
-            <!--              <button class="reserv__pageBtn">3</button>-->
-            <!--              <button class="reserv__pageBtn">4</button>-->
-            <!--              <button class="reserv__pageBtn">>></button>-->
-            <!--            </div>-->
           </div>
           <!-- 탭1__2, 사용자 계정 정보 -->
           <div class="tab1__2__content">
@@ -242,15 +235,6 @@
                 <p>현재 등록하신 캠핑장이 없습니다.</p>
               </div>
             </th:block>
-            <!-- 페이지 버튼 -->
-            <!--            <div class="myCamp__page">-->
-            <!--              <button class="myCamp__pageBtn"><<</button>-->
-            <!--              <button class="myCamp__pageBtn">1</button>-->
-            <!--              <button class="myCamp__pageBtn">2</button>-->
-            <!--              <button class="myCamp__pageBtn">3</button>-->
-            <!--              <button class="myCamp__pageBtn">4</button>-->
-            <!--              <button class="myCamp__pageBtn">>></button>-->
-            <!--            </div>-->
           </div>
           <!-- 탭2__2, 내 캠핑장 예약 내역 -->
           <div class="tab2__2__content">
@@ -266,10 +250,13 @@
                   <th>구역</th>
                   <th>입실일</th>
                   <th>퇴실일</th>
+                  <th>상태</th>
                 </tr>
                 </thead>
                 <tbody th:each="item : ${OrdersNameForm}">
                 <tr class="managerRev__item">
+                  <button class="managerRev__ChkBtn" th:attr="data-onumber=${item.onumber}"
+                          th:onclick="|location.href='@{/mypage/{onumber}/manager/chk(onumber=${item.onumber})}'|">예약 확정</button>
                   <td class="managerRev__num" th:text="${item.cnumber}">01</td>
                   <td class="managerRev__campName">
                     <a href="" th:text="${item.cname}">캠핑장 이름</a>
@@ -279,6 +266,8 @@
                   <td class="managerRev__zone" th:text="${item.area}">2-9d</td>
                   <td class="managerRev__inDate" th:text="${item.checkin}">22.22</td>
                   <td class="managerRev__outDate" th:text="${item.checkout}">22.22</td>
+                  <td class="managerRev__status" th:if="${item.otype}=='y'" >확정</td>
+                  <td class="managerRev__status" th:if="${item.otype}=='n'" >대기</td>
                 </tr>
                 </tbody>
               </table>
@@ -384,11 +373,5 @@
     $member__modalNBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
     });
-<!--    const deleteBtn = document.querySelector('.myCamp__delBtn');-->
-<!--    deleteBtn.addEventListener('click', e => {-->
-<!--      if (confirm('삭제하시겠습니까?') == false) {-->
-<!--        e.preventDefault();-->
-<!--      }-->
-<!--    });-->
   </script>
 </html>

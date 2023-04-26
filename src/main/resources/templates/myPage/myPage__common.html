@@ -98,6 +98,8 @@
                 </td>
                 <td class="reserv__inDate" th:text="${item.checkin}">22.22.22~22.22.22</td>
                 <td class="reserv__outDate" th:text="${item.checkout}">22.22.22~22.22.22</td>
+                <td class="reserv__status" th:if="${item.otype}=='y'" >확정</td>
+                <td class="reserv__status" th:if="${item.otype}=='n'" >대기</td>
                 <td>
                   <button class="reserv__btn theme-btn" th:attr="data-onumber=${item.onumber}" th:onclick="|location.href='@{/mypage/{onumber}/manager/del(onumber=${item.onumber})}'|">취소</button>
                 </td>

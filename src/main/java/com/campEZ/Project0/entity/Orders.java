@@ -16,4 +16,5 @@ public class Orders{
   private int headcount;
   private String checkin;
   private String checkout;
+  private String otype;
 }

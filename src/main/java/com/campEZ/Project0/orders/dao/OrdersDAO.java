@@ -23,4 +23,6 @@ public interface OrdersDAO {
 
   //캠핑테이블에서 캠핑장번호로 이름 가져오기
   String campingCname(int cnumber);
+  // 예약 번호로 예약 확정하기
+  int campingChk(int onumber);
 }
