@@ -470,3 +470,12 @@
 .safety-guide img {
   margin: 20px;
 }
+/* 회원정보 수정 성공 창*/
+.mn__success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100%;
+}

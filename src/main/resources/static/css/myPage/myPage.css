@@ -29,8 +29,8 @@ tabBtn--label {
   align-items: center;
   justify-content: space-evenly;
 }
-.tab1__contant,
-.tab2__contant {
+.tab1__content,
+.tab2__content {
   display: flex;
   justify-content: center;
 }
@@ -147,8 +147,8 @@ tabBtn--label {
 }
 /* 회원 탈퇴 모달 창 */
 .member__modal {
-  display: none;
-  position: absolute;
+  display: block;
+  margin-: 20px 0px;
   text-align: center;
   height: 100%;
   width: 100%;
@@ -160,6 +160,7 @@ tabBtn--label {
   flex-direction:column;
   gap:30px;
   padding:150px;
+  margin:20px 0px;
   outline:1px solid #bbb;
 }
 /* 멤버 모달 버튼창 */
@@ -293,11 +294,31 @@ tabBtn--label {
   margin: 0.5vw;
   padding: 0.5vh;
 }
+/* 예약 확정 버튼 */
+.managerRev__chk {
+  display: flex;
+  padding: 10px;
+}
+
 /* 첫 시작 화면 */
 .tab1__2__content {
   display: block;
+  width:100%;
 }
 
+/* 회원정보 수정 성공 창*/
+.mn__success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100%;
+}
+/*성공 확인 버튼*/
+.mn__button {
+  text-align:center;
+}
 /*버튼 색*/
 .theme-btn {
     background:var(--theme-color-thin);

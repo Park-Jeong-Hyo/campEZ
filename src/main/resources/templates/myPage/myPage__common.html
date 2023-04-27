@@ -87,6 +87,7 @@
                 <th class="reserv__th">예약번호</th>
                 <th>입실일</th>
                 <th>퇴실일</th>
+                <th>상태</th>
                 <th></th>
               </tr>
               </thead>
@@ -157,10 +158,9 @@
                 <p class="member__patterns">* '-' 포함</p>
               </div>
               <div class="member__modify-btn">
-                <input class="theme-btn" type="submit" value="수정하기" />
+                <button class="theme-btn" type="submit" />수정</button>
               </div>
             </form>
-            >
           </div>
           <!-- 탭1__3, 회원 탈퇴 -->
           <div class="tab1__3__content">
@@ -168,6 +168,11 @@
             <div class="member__modal">
               <div class="member__modal-inner">
                 <h2>정말 탈퇴하시겠습니까?</h2>
+                <div class="member__leave-message">
+                  <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
+                  <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
+                  <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
+                </div>
                 <!-- 회원 탈퇴 모달 창 버튼 -->
                 <div class="member__modal-btns">
                   <input class="theme-btn" type="button" value="확인" id="member__modalYBTN" />
@@ -175,25 +180,25 @@
                 </div>
               </div>
             </div>
-            <hr />
-            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>
-            <br />
-            <div class="member__leave-message">
-              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
-              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
-              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
-            </div>
-            <div class="member__leave-modal">
-              <div></div>
-              <div class="member__leave-password">
-                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>
-                <input class="member__wthdr" type="text" required/>
-                <div class="member__wthdrBTN-item">
-                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />
-                </div>
-              </div>
-              <div></div>
-            </div>
+<!--            <hr />-->
+<!--            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>-->
+<!--            <br />-->
+<!--            <div class="member__leave-message">-->
+<!--              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>-->
+<!--              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>-->
+<!--              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>-->
+<!--            </div>-->
+<!--            <div class="member__leave-modal">-->
+<!--              <div></div>-->
+<!--              <div class="member__leave-password">-->
+<!--                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>-->
+<!--                <input class="member__wthdr" type="text" required/>-->
+<!--                <div class="member__wthdrBTN-item">-->
+<!--                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div></div>-->
+<!--            </div>-->
           </div>
         </div>
       </main>
@@ -247,9 +252,9 @@
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
-    $wthdrBTN.addEventListener('click', () => {
-      document.querySelector('.member__modal').style.display = 'block';
-    });
+<!--    $wthdrBTN.addEventListener('click', () => {-->
+<!--      document.querySelector('.member__modal').style.display = 'block';-->
+<!--    });-->
     $member__modalYBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
       globalThis.location.href = `/mypage/${$mid.value}/gen/del`;

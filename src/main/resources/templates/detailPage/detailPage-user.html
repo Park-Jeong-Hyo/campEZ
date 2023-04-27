@@ -92,8 +92,8 @@
           </tr>
           <tr>
             <td class="title">캠핑장 유형</td>
-            <td class="content" th:if="${campingDetailForm == 'a'}">오토캠핑</td>
-            <td class="content" th:if="${campingDetailForm == 'g'}">글램핑</td>
+            <td class="content" th:if="${campingDetailForm.ctype == 'a'}">오토캠핑</td>
+            <td class="content" th:if="${campingDetailForm.ctype == 'g'}">글램핑</td>
           </tr>
           <tr>
             <td class="title">운영시간</td>

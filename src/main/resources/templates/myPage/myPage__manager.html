@@ -84,7 +84,7 @@
         </div>
 
         <!-- 탭1, 일반 이용자가 보게 될 화면 -->
-        <div class="tab1__contant">
+        <div class="tab1__content">
           <!-- 탭1__1__1, 예약 현황  -->
           <div class="tab1__1__content">
             <hr />
@@ -95,11 +95,12 @@
                 <th class="reserv__th">예약번호</th>
                 <th>입실일</th>
                 <th>퇴실일</th>
+                <th>상태</th>
                 <th></th>
               </tr>
               </thead>
               <!-- 예약 아이템, 4개까지 들어감 -->
-              <tbody class="reserv__item" th:each=" item : ${myOrders}">
+              <tbody class="reserv__item" th:if="${!myOrder.isEmpty()}" th:each=" item : ${myOrders}">
                 <tr>
                   <td class="reserv__campName">
                     <a href="" th:text="${item.onumber}">캠핑장 이름</a>
@@ -172,7 +173,7 @@
                 <p class="member__main" th:text="*{businessnumber}"></p>
               </div>
               <div class="member__modify-btn">
-                <input class=" theme-btn" type="submit" value="수정하기" />
+                <button class="theme-btn" type="submit" />수정</button>
               </div>
             </form>
           </div>
@@ -182,6 +183,11 @@
             <div class="member__modal">
               <div class="member__modal-inner">
                 <h2>정말 탈퇴하시겠습니까?</h2>
+                <div class="member__leave-message">
+                  <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
+                  <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
+                  <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
+                </div>
                 <!-- 회원 탈퇴 모달 창 버튼 -->
                 <div class="member__modal-btns">
                   <input class="theme-btn" type="button" value="확인" id="member__modalYBTN" />
@@ -189,29 +195,29 @@
                 </div>
               </div>
             </div>
-            <hr />
-            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>
-            <br />
-            <div class="member__leave-message">
-              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>
-              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>
-              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>
-            </div>
-            <div class="member__leave-modal">
-              <div></div>
-              <div class="member__leave-password">
-                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>
-                <input class="member__wthdr" type="text" required/>
-                <div class="member__wthdrBTN-item">
-                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />
-                </div>
-              </div>
-              <div></div>
-            </div>
+<!--            <hr />-->
+<!--            <h2 class="member__leave-confirm">회원탈퇴를 하시겠습니까?</h2>-->
+<!--            <br />-->
+<!--            <div class="member__leave-message">-->
+<!--              <p>* 회원을 탈퇴하실 경우 다시 복구하실 수 없습니다.</p>-->
+<!--              <p>* 탈퇴후 모든 개인정보는 삭제되며 삭제된 데이터는 복구할 수 없습니다.</p>-->
+<!--              <p>* 탈퇴후에도 등록하신 게시글 및 댓글은 그대로 남습니다.</p>-->
+<!--            </div>-->
+<!--            <div class="member__leave-modal">-->
+<!--              <div></div>-->
+<!--              <div class="member__leave-password">-->
+<!--                <p class="">탈퇴하시려면 비밀 번호를 다시 입력해주세요.</p>-->
+<!--                <input class="member__wthdr" type="text" required/>-->
+<!--                <div class="member__wthdrBTN-item">-->
+<!--                  <input class="theme-btn" id="member__wthdrBTN" type="button" value="확인" />-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div></div>-->
+<!--            </div>-->
           </div>
         </div>
         <!-- 탭2, 관리자 계정이 보게 될 화면 -->
-        <div class="tab2__contant">
+        <div class="tab2__content">
           <!-- 탭2__1, 내가 관리 중인 캠핑장 -->
           <div class="tab2__1__content">
             <hr />
@@ -222,11 +228,11 @@
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item" th:each="item : ${myCamp}">
               <img class="myCamp__Photo" src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg" alt="이미지 없음" />
-              <div class="myCamp__campName">
-                <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
-              </div>
-              <div>
-                <button type="submit" id="myCamp__delBtn" class="myCamp__delBtn theme-btn">삭제</button>
+                <div class="myCamp__campName">
+                  <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
+                </div>
+                <div>
+                  <button type="submit" class="myCamp__delBtn theme-btn">삭제</button>
                 <input type="hidden" th:name="cnumber" th:value="${item.getCnumber()}" readonly />
               </div>
             </form>
@@ -251,12 +257,11 @@
                   <th>입실일</th>
                   <th>퇴실일</th>
                   <th>상태</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody th:each="item : ${OrdersNameForm}">
                 <tr class="managerRev__item">
-                  <button class="managerRev__ChkBtn" th:attr="data-onumber=${item.onumber}"
-                          th:onclick="|location.href='@{/mypage/{onumber}/manager/chk(onumber=${item.onumber})}'|">예약 확정</button>
                   <td class="managerRev__num" th:text="${item.cnumber}">01</td>
                   <td class="managerRev__campName">
                     <a href="" th:text="${item.cname}">캠핑장 이름</a>
@@ -268,6 +273,15 @@
                   <td class="managerRev__outDate" th:text="${item.checkout}">22.22</td>
                   <td class="managerRev__status" th:if="${item.otype}=='y'" >확정</td>
                   <td class="managerRev__status" th:if="${item.otype}=='n'" >대기</td>
+                  <th:block th:if="${item.otype == 'n'}">
+                    <td>
+                      <button class="managerRev__ChkBtn theme-btn" th:attr="data-onumber=${item.onumber}"
+                              th:onclick="|location.href='@{/mypage/{onumber}/manager/chk(onumber=${item.onumber})}'|">
+                        예약확정
+                      </button>
+                    </td>
+                  </th:block>
+                  </button>
                 </tr>
                 </tbody>
               </table>
@@ -322,50 +336,52 @@
     $member__modalYBTN = document.getElementById('member__modalYBTN');
     $member__modalNBTN = document.getElementById('member__modalNBTN');
     $tab1__1.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
-      document.querySelector('.tab1__contant').style.display = 'flex';
+      document.querySelector('.tab2__content').style.display = 'none';
+      document.querySelector('.tab1__content').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'block';
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'none';
     };
     $tab1__2.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
-      document.querySelector('.tab1__contant').style.display = 'flex';
+      document.querySelector('.tab2__content').style.display = 'none';
+      document.querySelector('.tab1__content').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'none';
       document.querySelector('.tab1__2__content').style.display = 'block';
       document.querySelector('.tab1__3__content').style.display = 'none';
     };
     $tab1__3.onclick = function () {
-      document.querySelector('.tab2__contant').style.display = 'none';
-      document.querySelector('.tab1__contant').style.display = 'flex';
+      document.querySelector('.tab2__content').style.display = 'none';
+      document.querySelector('.tab1__content').style.display = 'flex';
       document.querySelector('.tab1__1__content').style.display = 'none';
       document.querySelector('.tab1__2__content').style.display = 'none';
       document.querySelector('.tab1__3__content').style.display = 'block';
     };
     $tab2__1.onclick = function () {
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'flex';
+      document.querySelector('.tab1__content').style.display = 'none';
+      document.querySelector('.tab2__content').style.display = 'flex';
       document.querySelector('.tab2__1__content').style.display = 'block';
       document.querySelector('.tab2__2__content').style.display = 'none';
+      console.log('캠핑장 등록 활성화')
     };
     $tab2__2.onclick = function () {
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'flex';
+      document.querySelector('.tab1__content').style.display = 'none';
+      document.querySelector('.tab2__content').style.display = 'flex';
       document.querySelector('.tab2__1__content').style.display = 'none';
       document.querySelector('.tab2__2__content').style.display = 'block';
+            console.log('캠핑장 예약내역 활성화')
     };
 
     document.querySelector('.myCamp__reserv').addEventListener('click', function () {
       document.querySelector('#tab2__2').checked = true;
-      document.querySelector('.tab1__contant').style.display = 'none';
-      document.querySelector('.tab2__contant').style.display = 'flex';
+      document.querySelector('.tab1__content').style.display = 'none';
+      document.querySelector('.tab2__content').style.display = 'flex';
       document.querySelector('.tab2__1__content').style.display = 'none';
       document.querySelector('.tab2__2__content').style.display = 'block';
     });
 
-    $wthdrBTN.addEventListener('click', () => {
-      document.querySelector('.member__modal').style.display = 'block';
-    });
+<!--    $wthdrBTN.addEventListener('click', () => {-->
+<!--      document.querySelector('.member__modal').style.display = 'block';-->
+<!--    });-->
     $member__modalYBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
       globalThis.location.href = `/mypage/${$mid.value}/camp/del`;

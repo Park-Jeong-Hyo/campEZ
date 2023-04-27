@@ -265,8 +265,7 @@ public class CampingController {
   public String campingSave(
       @Valid @ModelAttribute CampingSaveForm campingSaveForm,
       BindingResult bindingResult,
-      HttpSession session,
-      RedirectAttributes redirectAttributes
+      HttpSession session
   ) {
     //유효성 검사
     if(bindingResult.hasErrors()) {
@@ -363,8 +362,7 @@ public class CampingController {
         campingSVC.campareaSave(camparea);
       }
     }
-    redirectAttributes.addAttribute("mid", mid);
-    return "redirect:/mypage/{mid}/manager";
+    return "myPage/myPageSaveSuccess";
   }
 
   //캠핑장 수정화면
@@ -504,7 +502,6 @@ public class CampingController {
   public String campingUpdate(
       @Valid @ModelAttribute CampingUpdateForm campingUpdateForm,
       BindingResult bindingResult,
-      RedirectAttributes redirectAttributes,
       HttpSession session
   ) {
     //마이페이지로 redirect하기 위함
@@ -658,9 +655,6 @@ public class CampingController {
     }
     //코드의 통일성을 위해 id에 할당
     int id = cnumber;
-    //완료후 리다이렉트
-    //areaNumber을 수정된 값(maxListNumber)로 업데이트
-    redirectAttributes.addAttribute("mid", mid);
-    return "redirect:/mypage/{mid}/manager";
+    return "myPage/myPageUpdateSuccess";
   }
 }

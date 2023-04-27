@@ -109,7 +109,6 @@ public class MyPageManagerController {
     @PostMapping("/{mid}/manager")
     public String managerEdit(
             @ModelAttribute Members membersForm,
-            RedirectAttributes redirectAttributes,
             @PathVariable String mid
     ) {
 
@@ -126,8 +125,7 @@ public class MyPageManagerController {
         members.setPhone(membersForm.getPhone());
 
         membersSVC.memUpdate(mid, members);
-        redirectAttributes.addAttribute("mid", members.getMid());
-        return "redirect:/mypage/{mid}/manager";
+        return "myPage/myPageInfoSuccess";
     }
     //캠핑장 삭제
     @GetMapping("/{mid}/manager/campingDelete")
@@ -148,7 +146,7 @@ public class MyPageManagerController {
         campingSVC.campingDelete(cnumber);
         log.info("캠핑장삭제됨");
         redirectAttributes.addAttribute("mid", mid);
-        return "redirect:/mypage/{mid}/manager";
+        return "myPage/myPageDelSuccess";
     }
 
 //     예약 취소
@@ -156,13 +154,14 @@ public class MyPageManagerController {
     public String OrderDelete(
         @PathVariable("onumber") Integer onumber){
         ordersSVC.orDelete(onumber);
-        return "redirect:/";
+        return "myPage/myPageCancelSuccess";
     };
+    // 예약 승인
     @GetMapping("/{onumber}/manager/chk")
     public String campingChk(
         @PathVariable("onumber") Integer onumber){
         ordersSVC.campingChk(onumber);
-        return "redirect:/";
+        return "myPage/myPageApproveSuccess";
     };
     // 사업자 회원 탈퇴
     @GetMapping("/{id}/camp/del")
@@ -189,7 +188,7 @@ public class MyPageManagerController {
                 return "redirect:/unknown";
             }
             session.invalidate();
-            return "redirect:/";
+            return "myPage/myPageResignSuccess";
         } else {
             return "redirect:/preparing";
         }

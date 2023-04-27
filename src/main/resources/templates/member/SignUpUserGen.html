@@ -89,14 +89,14 @@
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호</label>
             <div>
-              <input type="text" class="input" th:field="*{pw}" placeholder="영문자(대소문자 구분), 숫자, 특수문자를 조합하여 8~16자 이내" />
+              <input type="password" class="input" th:field="*{pw}" placeholder="영문자(대소문자 구분), 숫자, 특수문자를 조합하여 8~16자 이내" />
               <p class="input-caution" th:text="${pwMessage}" style="color:red"></p>
             </div>
           </div>
           <hr class="form-line" />
           <div class="input-form">
             <label for="" class="form-label"><span style="color: red">*</span> 비밀번호 확인</label>
-            <input type="text" class="input" th:field="*{pwchk}" />
+            <input type="password" class="input" th:field="*{pwchk}" />
           </div>
           <hr class="form-line" />
           <div class="input-form">

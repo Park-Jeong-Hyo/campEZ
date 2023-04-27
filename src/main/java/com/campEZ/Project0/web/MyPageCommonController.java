@@ -12,7 +12,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -66,9 +65,11 @@ public class MyPageCommonController {
 
                 model.addAttribute("members", membersForm);
             //            예약 현황 보기
-            List<Orders> myOrders = membersSVC.orderFind(mid);
-            model.addAttribute("myOrders", myOrders);
-            }catch (EmptyResultDataAccessException e){return "/mypage/myPage__common";}
+                List<Orders> myOrders = membersSVC.orderFind(mid);
+                model.addAttribute("myOrders", myOrders);
+            } catch (EmptyResultDataAccessException e){
+                return "/mypage/myPage__common";
+            }
             return "/mypage/myPage__common";
         } else {
             System.out.println("타입이 아님");
@@ -78,7 +79,7 @@ public class MyPageCommonController {
 //    회원 정보 수정 처리하기
     @PostMapping("/{mid}/common")
     public String commonEdit(
-            @ModelAttribute MembersForm membersForm, RedirectAttributes redirectAttributes,
+            @ModelAttribute MembersForm membersForm,
             @PathVariable String mid) {
 
         Members members = new Members();
@@ -94,8 +95,7 @@ public class MyPageCommonController {
         members.setPhone(membersForm.getPhone());
 
        membersSVC.memUpdate(mid, members);
-        redirectAttributes.addAttribute("mid",members.getMid());
-        return "redirect:/mypage/{mid}/common";
+        return "myPage/myPageInfoSuccess";
         }
     //     예약 취소
     @GetMapping("/{onumber}/common/del")
@@ -103,7 +103,7 @@ public class MyPageCommonController {
         @PathVariable("onumber") Integer onumber,
         Model model){
         ordersSVC.orDelete(onumber);
-        return "redirect:/";
+        return "myPage/myPageCancelSuccess";
     };
     // 일반회원 탈퇴
     @GetMapping("/{id}/gen/del")
@@ -131,7 +131,7 @@ public class MyPageCommonController {
                 return "redirect:/unknown";
             }
             session.invalidate();
-            return "redirect:/";
+            return "myPage/myPageResignSuccess";
         } else {
             return "redirect:/preparing";
         }
