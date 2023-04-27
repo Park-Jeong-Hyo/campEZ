@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -87,7 +88,20 @@ public class OrdersController {
 
     //입실일이 퇴실일보다 클 때 제약조건 정의
     if(ordersForm.getCheckin().compareTo(ordersForm.getCheckout()) == 1){
-      model.addAttribute("dateEr","퇴실일이 입실일보다 커야 합니다");
+      model.addAttribute("dateEr1","퇴실일이 입실일보다 커야 합니다");
+      return "/orders/orders";
+    }
+
+    LocalDate now = LocalDate.now();
+    //입실일이 과거 날짜보다 작을때 제약조건 정의
+    if(ordersForm.getCheckin().compareTo(String.valueOf(now)) == -1 ){
+      model.addAttribute("dateEr2","현재 날짜나 과거 날짜에 예약 불가능 합니다");
+      return "/orders/orders";
+    }
+
+    //입실일이 현재 날짜와 같을때 제약조건 정의
+    if(ordersForm.getCheckin().compareTo(String.valueOf(now)) == 0 ) {
+      model.addAttribute("dateEr3", "현재 날짜나 과거 날짜에 예약 불가능 합니다");
       return "/orders/orders";
     }
 
