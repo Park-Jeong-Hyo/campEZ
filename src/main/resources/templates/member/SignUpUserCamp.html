@@ -232,7 +232,7 @@
         }
       };
       const chk_h = e => {
-        const url = `http://localhost:9080/api/members/idchk/${$mid.value}`;
+        const url = `http://localhost:9070/api/members/idchk/${$mid.value}`;
         const payload = {
           mid: $mid.value,
         };
@@ -254,7 +254,7 @@
         }
       };
       const nnchk_h = e => {
-        const url = `http://localhost:9080/api/members/nnchk/${$nickname.value}`;
+        const url = `http://localhost:9070/api/members/nnchk/${$nickname.value}`;
         const payload = {
           nickname: $nickname.value,
         };
@@ -276,7 +276,7 @@
         }
       };
       const emchk_h = e => {
-        const url = `http://localhost:9080/api/members/emchk/${$email.value}`;
+        const url = `http://localhost:9070/api/members/emchk/${$email.value}`;
         const payload = {
           email: $email.value,
         };
@@ -298,7 +298,7 @@
         }
       };
       const bizchk_h = e => {
-        const url = `http://localhost:9080/api/members/bizchk/${$biznum.value}`;
+        const url = `http://localhost:9070/api/members/bizchk/${$biznum.value}`;
         const payload = {
           businessnumber: $biznum.value,
         };

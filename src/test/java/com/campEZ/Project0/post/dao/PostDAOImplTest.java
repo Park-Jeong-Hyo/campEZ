@@ -26,20 +26,19 @@ public class PostDAOImplTest {
 //    Assertions.assertThat(list).toString();
 //  }
   //게시글 작성
-//  @Test
-//  @DisplayName("게시글 작성")
-//  void postSave() {
-//    Post post = new Post();
-//    post.setNickname("홍길");
-//    post.setPtitle("테스트");
-//    post.setPtext("반갑습니다221.");
-//    post.setPtype('n');
-//    Post result = postDAO.postSave(post);
-//    int pnumber = result.getPnumber();
-//    System.out.println(pnumber);
-//    System.out.println(post);
-//    Assertions.assertThat(pnumber).isPositive();
-//  }
+  @Test
+  @DisplayName("게시글 작성")
+  void postSave() {
+    Post post = new Post();
+    post.setNickname("홍길");
+    post.setPtitle("테스트");
+    post.setPtext("반갑습니다221.");
+    post.setPtype('n');
+    int pnumber = postDAO.postSave(post);
+    System.out.println(pnumber);
+    System.out.println(post);
+    Assertions.assertThat(pnumber).isPositive();
+  }
   //게시글 수정
   //postUpdate의 결과값 row가 1이 반환되면 성공
   @Test

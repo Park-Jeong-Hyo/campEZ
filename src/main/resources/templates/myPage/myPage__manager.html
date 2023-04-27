@@ -100,7 +100,7 @@
               </tr>
               </thead>
               <!-- 예약 아이템, 4개까지 들어감 -->
-              <tbody class="reserv__item" th:if="${!myOrder.isEmpty()}" th:each=" item : ${myOrders}">
+              <tbody class="reserv__item" th:if="${!myOrders.isEmpty()}" th:each=" item : ${myOrders}">
                 <tr>
                   <td class="reserv__campName">
                     <a href="" th:text="${item.onumber}">캠핑장 이름</a>
