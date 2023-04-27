@@ -1,10 +1,7 @@
 package com.campEZ.Project0.web;
 
 import com.campEZ.Project0.camping.svc.CampingSVC;
-import com.campEZ.Project0.entity.Camparea;
-import com.campEZ.Project0.entity.Camping;
-import com.campEZ.Project0.entity.Members;
-import com.campEZ.Project0.entity.Orders;
+import com.campEZ.Project0.entity.*;
 import com.campEZ.Project0.members.svc.MembersSVC;
 import com.campEZ.Project0.orders.svc.OrdersSVC;
 import com.campEZ.Project0.uploadfile.UploadFileSVC;
@@ -80,6 +77,14 @@ public class MyPageManagerController {
                 int maxNumber = 0;
                 for(int i = 0; i < myCamp.size() ; i++) {
                     List<Camparea> compareList = campingSVC.campareaDetail(myCamp.get(i).getCnumber()).orElseThrow();
+                    if(myCamp.get(i).getImagedFile() == null) {
+                        int rid = myCamp.get(i).getCnumber();
+                        if(!(uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, rid).isEmpty())) {
+                            UploadFile imagedFile = uploadFileSVC.findFilesByCodeWithRid(AttachFileType.A01, rid).get(0);
+                            log.info("imagedFile={}", imagedFile);
+                            myCamp.get(i).setImagedFile(imagedFile);
+                        }
+                    }
                     for(int j = 0; j < compareList.size() ; j++ ) {
                         if(maxNumber < compareList.get(j).getArea()) {
                             maxNumber = compareList.get(j).getArea();

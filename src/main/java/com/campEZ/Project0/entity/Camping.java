@@ -22,4 +22,5 @@ public class Camping {
   private String toilet;
   private String mart;
   private String udate;
+  private UploadFile imagedFile;
 }

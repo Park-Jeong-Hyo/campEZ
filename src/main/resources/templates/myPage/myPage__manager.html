@@ -227,7 +227,11 @@
             </div>
             <!-- 내 캠핑장, 3개까지 들어감 -->
             <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item" th:each="item : ${myCamp}">
-              <img class="myCamp__Photo" src="https://cdn.crowdpic.net/list-thumb/thumb_l_CDD94CBD46425E4EDBD18A7A17C199E7.jpg" alt="이미지 없음" />
+              <div>
+                <th:block th:unless="${item?.imagedFile?.upnumber} == null">
+                  <img class="myCamp__Photo" th:src="@{|/attach/view/${item.imagedFile.upnumber}|}" alt="이미지 없음" />
+                </th:block>
+              </div>
                 <div class="myCamp__campName">
                   <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
                 </div>
