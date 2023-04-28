@@ -174,7 +174,7 @@
                 <p class="member__main" th:text="*{businessnumber}"></p>
               </div>
               <div class="member__modify-btn">
-                <button class="theme-btn" type="submit" />수정</button>
+                <button class="theme-btn" type="submit">수정</button>
               </div>
             </form>
           </div>
@@ -227,7 +227,7 @@
               <button type="button" class="myCamp__reserv theme-btn">예약 내역</button>
             </div>
             <!-- 내 캠핑장, 3개까지 들어감 -->
-            <form th:action="@{/mypage/{mid}/manager/campingDelete(mid=${item.mid})}" th:method="GET" class="myCamp__item" th:each="item : ${myCamp}">
+            <form action="" class="myCamp__item" th:each="item : ${myCamp}">
               <div>
                 <th:block th:unless="${item?.imagedFile?.upnumber} == null">
                   <img class="myCamp__Photo" th:src="@{|/attach/view/${item.imagedFile.upnumber}|}" alt="이미지 없음" />
@@ -237,8 +237,7 @@
                   <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
                 </div>
                 <div>
-                  <button type="button" class="myCamp__delBtn theme-btn" id="delCamp">삭제</button>
-                <input type="hidden" id="cnumberChk" th:name="cnumber" th:value="${item.getCnumber()}" readonly />
+                  <button type="button" class="myCamp__delBtn theme-btn" th:value="${item.cnumber}">삭제</button>
               </div>
             </form>
             <th:block th:if="${myCamp == null || myCamp.size < 1}">
@@ -331,8 +330,14 @@
     </div>
   </body>
     <script type="module">
-      import { ajax } from '/js/common.js';
-            const $cnumberChk = document.getElementById('cnumberChk');
+    import { ajax } from '/js/common.js';
+    const $delBtn = document.querySelectorAll('.myCamp__delBtn');
+    for ( let i=0; i < $delBtn.length; i++ ) {
+      $delBtn[i].addEventListener('click', (e) => {
+        const no = e.target.value;
+        orderchk_h(e, no);
+      })
+    }
     const $mid = document.getElementById('mid');
     const $tab1__1 = document.getElementById('tab1__1');
     const $tab1__2 = document.getElementById('tab1__2');
@@ -370,6 +375,7 @@
       document.querySelector('.tab2__1__content').style.display = 'block';
       document.querySelector('.tab2__2__content').style.display = 'none';
       console.log('캠핑장 등록 활성화')
+          console.log($delBtn);
     };
     $tab2__2.onclick = function () {
       document.querySelector('.tab1__content').style.display = 'none';
@@ -390,13 +396,16 @@
     // 예약 체크
       const orderchk = res => {
         if (res.header.rtcd == '00') {
+          alert('삭제되었습니다.');
+          globalThis.location.href = `/mypage/${$mid.value}/manager`;
         } else {
           alert('예약이 있습니다');
           throw new Error(`${res.header.rtmsg}`);
         }
       };
-      const orderchk_h = e => {
-        const $cno = $cnumberChk.value;
+      const orderchk_h = (e, no) => {
+        console.log('클릭됨')
+        const $cno = no;
         const url = `http://localhost:9080/api/orders/del/${$cno}`;
         //유효성체크
         ajax
@@ -406,7 +415,7 @@
       };
 
 
-    $delCamp.addEventListener('click',orderchk_h);
+    // $delCamp.addEventListener('click',orderchk_h);
     // $wthdrBTN.addEventListener('click', () => {
     //  document.querySelector('.member__modal').style.display = 'block';
     // });
