@@ -14,6 +14,7 @@ public class AppConfig implements WebMvcConfigurer {
             .addPathPatterns("/**") // /**이하의 모든 경로를 인터셉터에 포함
             .excludePathPatterns(
                     "/",      //초기화면
+                    "/attach/**",
                     "/community/bulletinBoard/1", //자유게시판
                     "/community/question/1",  //질문게시판
                     "/community/{id}/b_read",  //조회
