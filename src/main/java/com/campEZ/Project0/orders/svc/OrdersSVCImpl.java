@@ -53,4 +53,9 @@ public class OrdersSVCImpl implements OrdersSVC{
   // 예약 번호로 예약 확정하기
   @Override
   public int campingChk(int onumber){return ordersDAO.campingChk(onumber);}
+
+  @Override
+  public boolean orderIsExist(int cnumber) {
+    return ordersDAO.orderIsExist(cnumber);
+  }
 }

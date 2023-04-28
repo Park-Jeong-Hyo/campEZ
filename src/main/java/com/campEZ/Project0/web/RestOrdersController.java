@@ -31,4 +31,18 @@ public class RestOrdersController {
 
     return response;
   }
+
+  @GetMapping("/del/{cnumber}")
+  public Response<Object> delOrders(
+      @PathVariable("cnumber") int cnumber
+  ) {
+    Response<Object> res = null;
+    boolean orderchk = ordersSVC.orderIsExist(cnumber);
+    if (orderchk == false) {
+      res =  Response.createRestResponse  ("00", "삭제 가능", orderchk);
+    } else {
+      res =  Response.createRestResponse("99", "삭제 불가능", orderchk);
+    }
+    return res;
+  }
 }

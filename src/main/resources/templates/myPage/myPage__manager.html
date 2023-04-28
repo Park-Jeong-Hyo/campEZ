@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="" th:href="@{/css/myPage/myPage.css}" />
     <title>$Title$</title>
     <script src="https://kit.fontawesome.com/4fab4e86c9.js" crossorigin="anonymous"></script>
+    <script type="module" src="./common.js" th:src="@{/js/common.js}"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -236,8 +237,8 @@
                   <a href="" th:href="@{/search/{cnumber}/{areaNumber}/detail(cnumber=${item.getCnumber()}, areaNumber=${areaForm.getArea()})}" th:text="${item.cname}">캠핑장 이름</a>
                 </div>
                 <div>
-                  <button type="submit" class="myCamp__delBtn theme-btn">삭제</button>
-                <input type="hidden" th:name="cnumber" th:value="${item.getCnumber()}" readonly />
+                  <button type="button" class="myCamp__delBtn theme-btn" id="delCamp">삭제</button>
+                <input type="hidden" id="cnumberChk" th:name="cnumber" th:value="${item.getCnumber()}" readonly />
               </div>
             </form>
             <th:block th:if="${myCamp == null || myCamp.size < 1}">
@@ -329,16 +330,19 @@
       <div class="ft-r"></div>
     </div>
   </body>
-  <script>
+    <script type="module">
+      import { ajax } from '/js/common.js';
+            const $cnumberChk = document.getElementById('cnumberChk');
     const $mid = document.getElementById('mid');
-    $tab1__1 = document.getElementById('tab1__1');
-    $tab1__2 = document.getElementById('tab1__2');
-    $tab1__3 = document.getElementById('tab1__3');
-    $tab2__1 = document.getElementById('tab2__1');
-    $tab2__2 = document.getElementById('tab2__2');
-    $wthdrBTN = document.getElementById('member__wthdrBTN');
-    $member__modalYBTN = document.getElementById('member__modalYBTN');
-    $member__modalNBTN = document.getElementById('member__modalNBTN');
+    const $tab1__1 = document.getElementById('tab1__1');
+    const $tab1__2 = document.getElementById('tab1__2');
+    const $tab1__3 = document.getElementById('tab1__3');
+    const $tab2__1 = document.getElementById('tab2__1');
+    const $tab2__2 = document.getElementById('tab2__2');
+    const $delCamp = document.getElementById('delCamp');
+    // $wthdrBTN = document.getElementById('member__wthdrBTN');
+    const $member__modalYBTN = document.getElementById('member__modalYBTN');
+    const $member__modalNBTN = document.getElementById('member__modalNBTN');
     $tab1__1.onclick = function () {
       document.querySelector('.tab2__content').style.display = 'none';
       document.querySelector('.tab1__content').style.display = 'flex';
@@ -383,9 +387,29 @@
       document.querySelector('.tab2__2__content').style.display = 'block';
     });
 
-<!--    $wthdrBTN.addEventListener('click', () => {-->
-<!--      document.querySelector('.member__modal').style.display = 'block';-->
-<!--    });-->
+    // 예약 체크
+      const orderchk = res => {
+        if (res.header.rtcd == '00') {
+        } else {
+          alert('예약이 있습니다');
+          throw new Error(`${res.header.rtmsg}`);
+        }
+      };
+      const orderchk_h = e => {
+        const $cno = $cnumberChk.value;
+        const url = `http://localhost:9080/api/orders/del/${$cno}`;
+        //유효성체크
+        ajax
+          .get(url)
+          .then(res => res.json())
+          .then(orderchk); //.then(res => add(res))
+      };
+
+
+    $delCamp.addEventListener('click',orderchk_h);
+    // $wthdrBTN.addEventListener('click', () => {
+    //  document.querySelector('.member__modal').style.display = 'block';
+    // });
     $member__modalYBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
       globalThis.location.href = `/mypage/${$mid.value}/camp/del`;
@@ -393,5 +417,6 @@
     $member__modalNBTN.addEventListener('click', () => {
       document.querySelector('.member__modal').style.display = 'none';
     });
+    
   </script>
 </html>

@@ -25,4 +25,6 @@ public interface OrdersSVC {
 //  예약 번호로 예약 확정짓기
   int campingChk (int onumber);
 
+  // 예약 존재 확인
+  boolean orderIsExist(int cnumber);
 }

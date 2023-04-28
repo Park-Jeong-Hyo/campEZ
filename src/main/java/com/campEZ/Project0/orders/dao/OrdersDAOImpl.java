@@ -98,4 +98,18 @@ public class OrdersDAOImpl implements OrdersDAO {
     Map<String, Integer> param = Map.of("onumber", onumber);
     return template.update(sql.toString(), param);
   }
+
+  // 예약 존재하는지 확인
+  @Override
+  public boolean orderIsExist(int cnumber) {
+    boolean isExist = false;
+    String sql = "select count(onumber) from orders where cnumber = :cnumber ";
+
+    Map<String, Integer> param = Map.of("cnumber", cnumber);
+    log.info("param={}",param);
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+    isExist = (cnt > 0) ? true : false;
+    return isExist;
+  }
+
 }
